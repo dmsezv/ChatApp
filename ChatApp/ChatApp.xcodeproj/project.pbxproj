@@ -14,6 +14,7 @@
 		4D49ADC925D7F800000F0BBB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4D49ADC725D7F800000F0BBB /* LaunchScreen.storyboard */; };
 		4DD6E8CE25DC549600EF5039 /* DLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD6E8CD25DC549600EF5039 /* DLogger.swift */; };
 		4DD6E8D725DC5CA300EF5039 /* Extension+VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD6E8D625DC5CA300EF5039 /* Extension+VC.swift */; };
+		4DD6E8E125DC60EC00EF5039 /* Extension+AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD6E8E025DC60EC00EF5039 /* Extension+AppDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		4D49ADCA25D7F800000F0BBB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4DD6E8CD25DC549600EF5039 /* DLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DLogger.swift; sourceTree = "<group>"; };
 		4DD6E8D625DC5CA300EF5039 /* Extension+VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+VC.swift"; sourceTree = "<group>"; };
+		4DD6E8E025DC60EC00EF5039 /* Extension+AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+AppDelegate.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,32 +60,49 @@
 		4D49ADBB25D7F7FE000F0BBB /* ChatApp */ = {
 			isa = PBXGroup;
 			children = (
+				4DD6E8DE25DC607F00EF5039 /* Storyboards */,
+				4DD6E8DC25DC602100EF5039 /* Resourses */,
 				4DD6E8D525DC5C8700EF5039 /* Extensions */,
-				4DD6E8CC25DC548800EF5039 /* Utilites */,
+				4DD6E8CC25DC548800EF5039 /* Utils */,
 				4D49ADBC25D7F7FE000F0BBB /* AppDelegate.swift */,
 				4D49ADC025D7F7FE000F0BBB /* ViewController.swift */,
-				4D49ADC225D7F7FE000F0BBB /* Main.storyboard */,
-				4D49ADC525D7F800000F0BBB /* Assets.xcassets */,
-				4D49ADC725D7F800000F0BBB /* LaunchScreen.storyboard */,
 				4D49ADCA25D7F800000F0BBB /* Info.plist */,
 			);
 			path = ChatApp;
 			sourceTree = "<group>";
 		};
-		4DD6E8CC25DC548800EF5039 /* Utilites */ = {
+		4DD6E8CC25DC548800EF5039 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
 				4DD6E8CD25DC549600EF5039 /* DLogger.swift */,
 			);
-			path = Utilites;
+			path = Utils;
 			sourceTree = "<group>";
 		};
 		4DD6E8D525DC5C8700EF5039 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
 				4DD6E8D625DC5CA300EF5039 /* Extension+VC.swift */,
+				4DD6E8E025DC60EC00EF5039 /* Extension+AppDelegate.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		4DD6E8DC25DC602100EF5039 /* Resourses */ = {
+			isa = PBXGroup;
+			children = (
+				4D49ADC525D7F800000F0BBB /* Assets.xcassets */,
+			);
+			path = Resourses;
+			sourceTree = "<group>";
+		};
+		4DD6E8DE25DC607F00EF5039 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				4D49ADC225D7F7FE000F0BBB /* Main.storyboard */,
+				4D49ADC725D7F800000F0BBB /* LaunchScreen.storyboard */,
+			);
+			path = Storyboards;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -156,6 +175,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4DD6E8E125DC60EC00EF5039 /* Extension+AppDelegate.swift in Sources */,
 				4DD6E8CE25DC549600EF5039 /* DLogger.swift in Sources */,
 				4D49ADC125D7F7FE000F0BBB /* ViewController.swift in Sources */,
 				4DD6E8D725DC5CA300EF5039 /* Extension+VC.swift in Sources */,

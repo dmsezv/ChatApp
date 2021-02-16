@@ -13,6 +13,10 @@ extension DLogging {
     func log(_ message: String) {
         DLogger.shared.log(message)
     }
+    
+    func log(_ function: String, from: String, to: String) {
+        DLogger.shared.log("Application moved from \(from) to \(to): \(function)")
+    }
 }
 
 fileprivate final class DLogger {
