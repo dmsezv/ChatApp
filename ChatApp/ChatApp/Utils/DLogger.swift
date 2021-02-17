@@ -15,8 +15,8 @@ extension DLogging {
         DLogger.shared.log(message)
     }
     
-    func logLyfeCycleWith(_ nameFunction: String) {
-        DLogger.shared.logLC(nameFunction)
+    func log(_ nameFunction: String, in state: UIApplication.State) {
+        DLogger.shared.logLC(nameFunction, state)
     }
 }
 
@@ -37,8 +37,8 @@ fileprivate final class DLogger {
     private var fromState: String = "not running"
     private var toState: String = ""
     
-    func logLC(_ nameFunction: String) {
-        switch UIApplication.shared.applicationState {
+    func logLC(_ nameFunction: String, _ state: UIApplication.State) {
+        switch state {
         case .active:
             toState = "active"
         case .background:
@@ -49,9 +49,7 @@ fileprivate final class DLogger {
             break
         }
         
-        #if DEBUG_PRINT_ENABLE
-        print("Application moved from \(fromState) to \(toState): \(nameFunction)")
-        #endif
+        log("Application moved from \(fromState) to \(toState): \(nameFunction)")
         
         fromState = toState
     }
