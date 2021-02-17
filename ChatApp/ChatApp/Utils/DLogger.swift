@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 protocol DLogging {}
 
@@ -14,8 +15,21 @@ extension DLogging {
         DLogger.shared.log(message)
     }
     
-    func log(_ function: String, from: String, to: String) {
-        DLogger.shared.log("Application moved from \(from) to \(to): \(function)")
+    func logLC(_ function: String) {
+        var fromState = ""
+        var toState = ""
+        switch UIApplication.shared.applicationState {
+        case .active:
+            toState = "active"
+        case .background:
+            toState = "background"
+        case .inactive:
+            toState = "background"
+        @unknown default:
+            break
+        }
+        
+        DLogger.shared.log("Application moved from ??? to \(toState): \(function)")
     }
 }
 
