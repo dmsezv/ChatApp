@@ -15,21 +15,8 @@ extension DLogging {
         DLogger.shared.log(message)
     }
     
-    func logLC(_ function: String) {
-        var fromState = ""
-        var toState = ""
-        switch UIApplication.shared.applicationState {
-        case .active:
-            toState = "active"
-        case .background:
-            toState = "background"
-        case .inactive:
-            toState = "background"
-        @unknown default:
-            break
-        }
-        
-        DLogger.shared.log("Application moved from ??? to \(toState): \(function)")
+    func logLyfeCycleWith(_ nameFunction: String) {
+        DLogger.shared.logLC(nameFunction)
     }
 }
 
@@ -42,5 +29,30 @@ fileprivate final class DLogger {
         #if DEBUG_PRINT_ENABLE
         print(message)
         #endif
+    }
+    
+    
+    //MARK: - log life cycle
+    
+    private var fromState: String = "not running"
+    private var toState: String = ""
+    
+    func logLC(_ nameFunction: String) {
+        switch UIApplication.shared.applicationState {
+        case .active:
+            toState = "active"
+        case .background:
+            toState = "background"
+        case .inactive:
+            toState = "inactive"
+        @unknown default:
+            break
+        }
+        
+        #if DEBUG_PRINT_ENABLE
+        print("Application moved from \(fromState) to \(toState): \(nameFunction)")
+        #endif
+        
+        fromState = toState
     }
 }
