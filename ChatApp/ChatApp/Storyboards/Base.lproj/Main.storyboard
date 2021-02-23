@@ -31,20 +31,42 @@
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1aV-tZ-eHb">
                                 <rect key="frame" x="67.5" y="8" width="240" height="240"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="M" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j51-ZT-JdR">
+                                        <rect key="frame" x="0.0" y="0.0" width="132" height="240"/>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="100"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="D" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZQL-dk-Fej">
+                                        <rect key="frame" x="132" y="0.0" width="108" height="240"/>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="100"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
                                 <color key="backgroundColor" name="def_avat_yellow"/>
                                 <constraints>
+                                    <constraint firstItem="j51-ZT-JdR" firstAttribute="top" secondItem="1aV-tZ-eHb" secondAttribute="top" id="KQC-b6-RLL"/>
+                                    <constraint firstAttribute="bottom" secondItem="j51-ZT-JdR" secondAttribute="bottom" id="NWu-aP-NCa"/>
                                     <constraint firstAttribute="height" constant="240" id="OX3-Vl-2LC"/>
+                                    <constraint firstAttribute="trailing" secondItem="ZQL-dk-Fej" secondAttribute="trailing" id="RTU-hp-Z2E"/>
+                                    <constraint firstItem="j51-ZT-JdR" firstAttribute="leading" secondItem="1aV-tZ-eHb" secondAttribute="leading" id="acb-sb-Ll2"/>
+                                    <constraint firstItem="ZQL-dk-Fej" firstAttribute="top" secondItem="1aV-tZ-eHb" secondAttribute="top" id="ik5-a5-dFI"/>
+                                    <constraint firstAttribute="bottom" secondItem="ZQL-dk-Fej" secondAttribute="bottom" id="lmV-g0-Z9n"/>
+                                    <constraint firstItem="j51-ZT-JdR" firstAttribute="width" secondItem="ZQL-dk-Fej" secondAttribute="width" multiplier="1.22464" id="nih-fp-31G"/>
+                                    <constraint firstItem="ZQL-dk-Fej" firstAttribute="leading" secondItem="j51-ZT-JdR" secondAttribute="trailing" id="raq-8L-wyE"/>
                                     <constraint firstAttribute="width" constant="240" id="urc-zR-3gt"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Marina Dudarenko" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K3v-sd-y5H">
-                                <rect key="frame" x="88.5" y="280" width="198.5" height="29"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Marina Dudarenko" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.75" translatesAutoresizingMaskIntoConstraints="NO" id="K3v-sd-y5H">
+                                <rect key="frame" x="73.5" y="280" width="228" height="29"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="24"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xlj-pX-AZJ">
-                                <rect key="frame" x="67.5" y="341" width="240" height="38.5"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" minimumScaleFactor="0.75" translatesAutoresizingMaskIntoConstraints="NO" id="Xlj-pX-AZJ">
+                                <rect key="frame" x="73.5" y="341" width="228" height="38.5"/>
                                 <string key="text">UX/UI designer, web-designer
 Moscow, Russia</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
@@ -55,14 +77,15 @@ Moscow, Russia</string>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="Xlj-pX-AZJ" firstAttribute="leading" secondItem="1aV-tZ-eHb" secondAttribute="leading" id="4pt-JU-g4V"/>
                             <constraint firstItem="1aV-tZ-eHb" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="6oA-QP-qEP"/>
-                            <constraint firstItem="Xlj-pX-AZJ" firstAttribute="top" secondItem="K3v-sd-y5H" secondAttribute="bottom" constant="32" id="6vs-Ra-NRF"/>
-                            <constraint firstItem="Xlj-pX-AZJ" firstAttribute="trailing" secondItem="1aV-tZ-eHb" secondAttribute="trailing" id="95p-ki-5dp"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="URJ-u1-9Jf" secondAttribute="bottom" constant="30" id="AK9-3h-xxs"/>
+                            <constraint firstItem="Xlj-pX-AZJ" firstAttribute="width" secondItem="1aV-tZ-eHb" secondAttribute="width" multiplier="0.95" id="BGd-Up-Vdm"/>
                             <constraint firstItem="URJ-u1-9Jf" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="55" id="DaC-pG-bUr"/>
+                            <constraint firstItem="K3v-sd-y5H" firstAttribute="width" secondItem="1aV-tZ-eHb" secondAttribute="width" multiplier="0.95" id="UwK-av-cZE"/>
+                            <constraint firstItem="Xlj-pX-AZJ" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="X8p-eB-ooe"/>
                             <constraint firstItem="K3v-sd-y5H" firstAttribute="centerX" secondItem="1aV-tZ-eHb" secondAttribute="centerX" id="daI-hF-PVr"/>
                             <constraint firstItem="K3v-sd-y5H" firstAttribute="top" secondItem="1aV-tZ-eHb" secondAttribute="bottom" constant="32" id="onZ-vP-nBn"/>
+                            <constraint firstItem="Xlj-pX-AZJ" firstAttribute="top" secondItem="K3v-sd-y5H" secondAttribute="bottom" constant="32" id="s9g-bG-lEn"/>
                             <constraint firstItem="1aV-tZ-eHb" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="8" id="yQt-ac-gLU"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="URJ-u1-9Jf" secondAttribute="trailing" constant="55" id="zQK-EJ-nkO"/>
                         </constraints>

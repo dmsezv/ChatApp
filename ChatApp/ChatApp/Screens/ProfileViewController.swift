@@ -14,10 +14,43 @@ class ProfileViewController: UIViewController {
     
     let cornRadBtn: CGFloat = 14
     
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        
+        //btnEdit is nil because
+        if let btnEdit = btnEdit {
+            log("\(btnEdit.frame)")
+        }
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        
+        if let btnEdit = btnEdit {
+            log("\(btnEdit.frame)")
+        }
+    }
+    
+    override func loadView() {
+        super.loadView()
+        
+        setupView()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        setupView()
+        
+        if let btnEdit = btnEdit {
+            log("\(#function) btnEdit.frame = \(btnEdit.frame)")
+        }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        if let btnEdit = btnEdit {
+            log("\(#function) btnEdit.frame = \(btnEdit.frame)")
+        }
     }
     
     private func setupView() {
