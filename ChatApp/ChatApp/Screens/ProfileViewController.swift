@@ -8,7 +8,7 @@
 import UIKit
 
 class ProfileViewController: UIViewController {
-
+    
     @IBOutlet weak var labelInitials: UILabel!
     @IBOutlet weak var btnEdit: UIButton!
     @IBOutlet weak var viewAvatar: UIView!
@@ -33,14 +33,10 @@ class ProfileViewController: UIViewController {
         }
     }
     
-    override func loadView() {
-        super.loadView()
-        
-        setupView()
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        setupView()
         
         if let btnEdit = btnEdit {
             log("\(#function) btnEdit.frame = \(btnEdit.frame)")
@@ -62,7 +58,9 @@ class ProfileViewController: UIViewController {
         
         if let viewAvatar = viewAvatar {
             viewAvatar.clipsToBounds = true
-            viewAvatar.layer.cornerRadius = viewAvatar.bounds.height / 2
+            viewAvatar.layer.cornerRadius = viewAvatar.bounds.width / 2
+            let tap = UITapGestureRecognizer(target: self, action: #selector(addAvatar(_ : )))
+            viewAvatar.addGestureRecognizer(tap)
         }
         
         if let btnEdit = btnEdit {
@@ -71,15 +69,72 @@ class ProfileViewController: UIViewController {
         }
     }
     
-
+    
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destination.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
 }
+
+
+//MARK: - UIImagePickerControllerDelegate
+
+extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func camera() {
+        if UIImagePickerController.isSourceTypeAvailable(.camera) {
+            let pickerAlbumController = UIImagePickerController()
+            pickerAlbumController.delegate = self
+            pickerAlbumController.sourceType = .camera
+            pickerAlbumController.cameraCaptureMode = .photo
+            pickerAlbumController.modalPresentationStyle = .fullScreen
+            self.present(pickerAlbumController, animated: true, completion: nil)
+        } else {
+            print("camere not avaliable")
+            //self.alertError(title: "Ошибка", message: "Камера не доступна")
+        }
+    }
+    
+    func media() {
+        if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
+            DispatchQueue.main.async {
+                let pickerAlbumController = UIImagePickerController()
+                pickerAlbumController.delegate = self
+                pickerAlbumController.sourceType = .photoLibrary
+                pickerAlbumController.mediaTypes = ["public.image"]
+                self.present(pickerAlbumController, animated: true, completion: nil)
+            }
+        } else {
+            print("media not avaliable")
+            //self.alertError(title: "Ошибка", message: "Медиатека не доступна")
+        }
+    }
+}
+
+
+//MARK: - Gesture funcs
+
+extension ProfileViewController {
+    @objc fileprivate func addAvatar(_ sender: UITapGestureRecognizer) {
+        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        alertController.addAction(UIAlertAction(title: "Установить из галлереи", style: .default, handler: { (action) in
+            
+        }))
+        
+        alertController.addAction(UIAlertAction(title: "Сделать фото", style: .default, handler: { (action) in
+            
+        }))
+        
+        alertController.addAction(UIAlertAction(title: "Отменить", style: .cancel, handler: nil))
+        
+        DispatchQueue.main.async {
+            self.present(alertController, animated: true, completion: nil)
+        }
+    }
+}
+
