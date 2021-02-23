@@ -9,10 +9,12 @@ import UIKit
 
 class ProfileViewController: UIViewController {
 
+    @IBOutlet weak var labelInitials: UILabel!
     @IBOutlet weak var btnEdit: UIButton!
     @IBOutlet weak var viewAvatar: UIView!
     
-    let cornRadBtn: CGFloat = 14
+    let cornRadBtn: CGFloat = 14.0
+    let charSpacing: Double = -25.0
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -54,6 +56,10 @@ class ProfileViewController: UIViewController {
     }
     
     private func setupView() {
+        if let labelInitials = labelInitials {
+            labelInitials.addCharacterSpacing(kernValue: charSpacing)
+        }
+        
         if let viewAvatar = viewAvatar {
             viewAvatar.clipsToBounds = true
             viewAvatar.layer.cornerRadius = viewAvatar.bounds.height / 2

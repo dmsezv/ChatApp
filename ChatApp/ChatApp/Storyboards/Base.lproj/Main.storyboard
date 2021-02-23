@@ -32,31 +32,21 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1aV-tZ-eHb">
                                 <rect key="frame" x="67.5" y="8" width="240" height="240"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="M" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j51-ZT-JdR">
-                                        <rect key="frame" x="0.0" y="0.0" width="132" height="240"/>
-                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="100"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="D" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZQL-dk-Fej">
-                                        <rect key="frame" x="132" y="0.0" width="108" height="240"/>
-                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="100"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MD" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rsr-nU-fwx">
+                                        <rect key="frame" x="0.0" y="0.0" width="240" height="240"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="130"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
                                 <color key="backgroundColor" name="def_avat_yellow"/>
                                 <constraints>
-                                    <constraint firstItem="j51-ZT-JdR" firstAttribute="top" secondItem="1aV-tZ-eHb" secondAttribute="top" id="KQC-b6-RLL"/>
-                                    <constraint firstAttribute="bottom" secondItem="j51-ZT-JdR" secondAttribute="bottom" id="NWu-aP-NCa"/>
+                                    <constraint firstItem="rsr-nU-fwx" firstAttribute="top" secondItem="1aV-tZ-eHb" secondAttribute="top" id="MEG-RZ-7le"/>
                                     <constraint firstAttribute="height" constant="240" id="OX3-Vl-2LC"/>
-                                    <constraint firstAttribute="trailing" secondItem="ZQL-dk-Fej" secondAttribute="trailing" id="RTU-hp-Z2E"/>
-                                    <constraint firstItem="j51-ZT-JdR" firstAttribute="leading" secondItem="1aV-tZ-eHb" secondAttribute="leading" id="acb-sb-Ll2"/>
-                                    <constraint firstItem="ZQL-dk-Fej" firstAttribute="top" secondItem="1aV-tZ-eHb" secondAttribute="top" id="ik5-a5-dFI"/>
-                                    <constraint firstAttribute="bottom" secondItem="ZQL-dk-Fej" secondAttribute="bottom" id="lmV-g0-Z9n"/>
-                                    <constraint firstItem="j51-ZT-JdR" firstAttribute="width" secondItem="ZQL-dk-Fej" secondAttribute="width" multiplier="1.22464" id="nih-fp-31G"/>
-                                    <constraint firstItem="ZQL-dk-Fej" firstAttribute="leading" secondItem="j51-ZT-JdR" secondAttribute="trailing" id="raq-8L-wyE"/>
+                                    <constraint firstAttribute="trailing" secondItem="rsr-nU-fwx" secondAttribute="trailing" id="bIi-s0-7R0"/>
+                                    <constraint firstItem="rsr-nU-fwx" firstAttribute="leading" secondItem="1aV-tZ-eHb" secondAttribute="leading" id="fPE-gk-auT"/>
                                     <constraint firstAttribute="width" constant="240" id="urc-zR-3gt"/>
+                                    <constraint firstAttribute="bottom" secondItem="rsr-nU-fwx" secondAttribute="bottom" id="zOw-lc-I3F"/>
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Marina Dudarenko" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.75" translatesAutoresizingMaskIntoConstraints="NO" id="K3v-sd-y5H">
@@ -92,6 +82,7 @@ Moscow, Russia</string>
                     </view>
                     <connections>
                         <outlet property="btnEdit" destination="URJ-u1-9Jf" id="FpN-ao-Q7F"/>
+                        <outlet property="labelInitials" destination="rsr-nU-fwx" id="XCp-Mf-t1D"/>
                         <outlet property="viewAvatar" destination="1aV-tZ-eHb" id="KyJ-bS-aKe"/>
                     </connections>
                 </viewController>
