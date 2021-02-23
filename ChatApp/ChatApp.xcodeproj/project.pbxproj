@@ -7,8 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4D2AFD7425E4198100706ACE /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4D2AFD7325E4198100706ACE /* Colors.xcassets */; };
+		4D2AFD7925E41B3200706ACE /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D2AFD7825E41B3200706ACE /* ProfileViewController.swift */; };
 		4D49ADBD25D7F7FE000F0BBB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D49ADBC25D7F7FE000F0BBB /* AppDelegate.swift */; };
-		4D49ADC125D7F7FE000F0BBB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D49ADC025D7F7FE000F0BBB /* ViewController.swift */; };
 		4D49ADC425D7F7FE000F0BBB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4D49ADC225D7F7FE000F0BBB /* Main.storyboard */; };
 		4D49ADC625D7F800000F0BBB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4D49ADC525D7F800000F0BBB /* Assets.xcassets */; };
 		4D49ADC925D7F800000F0BBB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4D49ADC725D7F800000F0BBB /* LaunchScreen.storyboard */; };
@@ -18,9 +19,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4D2AFD7325E4198100706ACE /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
+		4D2AFD7825E41B3200706ACE /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		4D49ADB925D7F7FE000F0BBB /* ChatApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChatApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4D49ADBC25D7F7FE000F0BBB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		4D49ADC025D7F7FE000F0BBB /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		4D49ADC325D7F7FE000F0BBB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		4D49ADC525D7F800000F0BBB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4D49ADC825D7F800000F0BBB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -41,6 +43,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4D2AFD6F25E4110900706ACE /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				4D2AFD7825E41B3200706ACE /* ProfileViewController.swift */,
+			);
+			path = Screens;
+			sourceTree = "<group>";
+		};
 		4D49ADB025D7F7FE000F0BBB = {
 			isa = PBXGroup;
 			children = (
@@ -60,12 +70,12 @@
 		4D49ADBB25D7F7FE000F0BBB /* ChatApp */ = {
 			isa = PBXGroup;
 			children = (
+				4D2AFD6F25E4110900706ACE /* Screens */,
 				4DD6E8DE25DC607F00EF5039 /* Storyboards */,
 				4DD6E8DC25DC602100EF5039 /* Resourses */,
 				4DD6E8D525DC5C8700EF5039 /* Extensions */,
 				4DD6E8CC25DC548800EF5039 /* Utils */,
 				4D49ADBC25D7F7FE000F0BBB /* AppDelegate.swift */,
-				4D49ADC025D7F7FE000F0BBB /* ViewController.swift */,
 				4D49ADCA25D7F800000F0BBB /* Info.plist */,
 			);
 			path = ChatApp;
@@ -92,6 +102,7 @@
 			isa = PBXGroup;
 			children = (
 				4D49ADC525D7F800000F0BBB /* Assets.xcassets */,
+				4D2AFD7325E4198100706ACE /* Colors.xcassets */,
 			);
 			path = Resourses;
 			sourceTree = "<group>";
@@ -163,6 +174,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4D49ADC925D7F800000F0BBB /* LaunchScreen.storyboard in Resources */,
+				4D2AFD7425E4198100706ACE /* Colors.xcassets in Resources */,
 				4D49ADC625D7F800000F0BBB /* Assets.xcassets in Resources */,
 				4D49ADC425D7F7FE000F0BBB /* Main.storyboard in Resources */,
 			);
@@ -177,7 +189,7 @@
 			files = (
 				4DD6E8E125DC60EC00EF5039 /* Extension+AppDelegate.swift in Sources */,
 				4DD6E8CE25DC549600EF5039 /* DLogger.swift in Sources */,
-				4D49ADC125D7F7FE000F0BBB /* ViewController.swift in Sources */,
+				4D2AFD7925E41B3200706ACE /* ProfileViewController.swift in Sources */,
 				4DD6E8D725DC5CA300EF5039 /* Extension+VC.swift in Sources */,
 				4D49ADBD25D7F7FE000F0BBB /* AppDelegate.swift in Sources */,
 			);
@@ -261,7 +273,7 @@
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG DEBUG_PRINT_ENABLE";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
