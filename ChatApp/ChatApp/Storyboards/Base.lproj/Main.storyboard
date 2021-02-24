@@ -61,30 +61,49 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" minimumScaleFactor="0.75" translatesAutoresizingMaskIntoConstraints="NO" id="Xlj-pX-AZJ">
-                                <rect key="frame" x="78.5" y="330" width="218" height="38.5"/>
-                                <string key="text">UX/UI designer, web-designer
-Moscow, Russia</string>
-                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cdI-io-SB4">
+                                <rect key="frame" x="78.5" y="330" width="218" height="39"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="UX/UI designer, web-designer" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ihB-7V-bgu">
+                                        <rect key="frame" x="0.0" y="0.0" width="218" height="19.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Moscow, Russia" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aoM-Fs-5z1">
+                                        <rect key="frame" x="0.0" y="19.5" width="218" height="19.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="aoM-Fs-5z1" secondAttribute="bottom" id="74b-5o-l6l"/>
+                                    <constraint firstItem="aoM-Fs-5z1" firstAttribute="top" secondItem="ihB-7V-bgu" secondAttribute="bottom" id="BJd-hg-tS2"/>
+                                    <constraint firstItem="aoM-Fs-5z1" firstAttribute="leading" secondItem="cdI-io-SB4" secondAttribute="leading" id="FCj-mF-gYd"/>
+                                    <constraint firstAttribute="trailing" secondItem="ihB-7V-bgu" secondAttribute="trailing" id="SUk-T3-uxx"/>
+                                    <constraint firstItem="ihB-7V-bgu" firstAttribute="leading" secondItem="cdI-io-SB4" secondAttribute="leading" id="c1s-dZ-4Fb"/>
+                                    <constraint firstItem="ihB-7V-bgu" firstAttribute="top" secondItem="cdI-io-SB4" secondAttribute="top" id="dTX-f5-eog"/>
+                                    <constraint firstAttribute="trailing" secondItem="aoM-Fs-5z1" secondAttribute="trailing" id="ykc-QN-Bcs"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="cdI-io-SB4" firstAttribute="width" secondItem="1aV-tZ-eHb" secondAttribute="width" multiplier="0.95" id="2Bx-Ia-nue"/>
                             <constraint firstItem="1aV-tZ-eHb" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="6oA-QP-qEP"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="URJ-u1-9Jf" secondAttribute="bottom" constant="30" id="AK9-3h-xxs"/>
-                            <constraint firstItem="Xlj-pX-AZJ" firstAttribute="width" secondItem="1aV-tZ-eHb" secondAttribute="width" multiplier="0.95" id="BGd-Up-Vdm"/>
                             <constraint firstItem="URJ-u1-9Jf" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="55" id="DaC-pG-bUr"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="1aV-tZ-eHb" secondAttribute="trailing" constant="73" id="MJT-n2-UoY"/>
                             <constraint firstItem="K3v-sd-y5H" firstAttribute="width" secondItem="1aV-tZ-eHb" secondAttribute="width" multiplier="0.95" id="UwK-av-cZE"/>
-                            <constraint firstItem="Xlj-pX-AZJ" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="X8p-eB-ooe"/>
+                            <constraint firstItem="cdI-io-SB4" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Y7h-pB-kBP"/>
                             <constraint firstItem="K3v-sd-y5H" firstAttribute="centerX" secondItem="1aV-tZ-eHb" secondAttribute="centerX" id="daI-hF-PVr"/>
                             <constraint firstItem="1aV-tZ-eHb" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="73" id="nmM-yu-Lee"/>
                             <constraint firstItem="K3v-sd-y5H" firstAttribute="top" secondItem="1aV-tZ-eHb" secondAttribute="bottom" constant="32" id="onZ-vP-nBn"/>
-                            <constraint firstItem="Xlj-pX-AZJ" firstAttribute="top" secondItem="K3v-sd-y5H" secondAttribute="bottom" constant="32" id="s9g-bG-lEn"/>
                             <constraint firstItem="1aV-tZ-eHb" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="8" id="yQt-ac-gLU"/>
+                            <constraint firstItem="cdI-io-SB4" firstAttribute="top" secondItem="K3v-sd-y5H" secondAttribute="bottom" constant="32" id="z3r-g2-5bt"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="URJ-u1-9Jf" secondAttribute="trailing" constant="55" id="zQK-EJ-nkO"/>
                         </constraints>
                     </view>
@@ -96,7 +115,7 @@ Moscow, Russia</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="112" y="94"/>
+            <point key="canvasLocation" x="111.2" y="93.103448275862078"/>
         </scene>
     </scenes>
     <resources>
@@ -104,7 +123,7 @@ Moscow, Russia</string>
             <color red="0.9649999737739563" green="0.9649999737739563" blue="0.9649999737739563" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="def_avat_yellow">
-            <color red="0.89411764705882346" green="0.90980392156862744" blue="0.16862745098039217" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.89399999380111694" green="0.9100000262260437" blue="0.16899999976158142" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
