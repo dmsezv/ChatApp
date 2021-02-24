@@ -12,6 +12,7 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var labelInitials: UILabel!
     @IBOutlet weak var btnEdit: UIButton!
     @IBOutlet weak var viewAvatar: UIView!
+    @IBOutlet weak var imageAvatar: UIImageView!
     
     let cornRadBtn: CGFloat = 14.0
     let charSpacing: Double = -25.0
@@ -52,20 +53,16 @@ class ProfileViewController: UIViewController {
     }
     
     private func setupView() {
-        if let labelInitials = labelInitials {
-            labelInitials.addCharacterSpacing(kernValue: charSpacing)
-        }
+        labelInitials?.addCharacterSpacing(kernValue: charSpacing)
+        
+        btnEdit?.clipsToBounds = true
+        btnEdit?.layer.cornerRadius = cornRadBtn
         
         if let viewAvatar = viewAvatar {
             viewAvatar.clipsToBounds = true
             viewAvatar.layer.cornerRadius = viewAvatar.bounds.width / 2
             let tap = UITapGestureRecognizer(target: self, action: #selector(addAvatar(_ : )))
             viewAvatar.addGestureRecognizer(tap)
-        }
-        
-        if let btnEdit = btnEdit {
-            btnEdit.clipsToBounds = true
-            btnEdit.layer.cornerRadius = cornRadBtn
         }
     }
     
@@ -86,32 +83,66 @@ class ProfileViewController: UIViewController {
 //MARK: - UIImagePickerControllerDelegate
 
 extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-    func camera() {
-        if UIImagePickerController.isSourceTypeAvailable(.camera) {
-            let pickerAlbumController = UIImagePickerController()
-            pickerAlbumController.delegate = self
-            pickerAlbumController.sourceType = .camera
-            pickerAlbumController.cameraCaptureMode = .photo
-            pickerAlbumController.modalPresentationStyle = .fullScreen
-            self.present(pickerAlbumController, animated: true, completion: nil)
-        } else {
-            print("camere not avaliable")
-            //self.alertError(title: "Ошибка", message: "Камера не доступна")
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        
+        if let editedImage = info[UIImagePickerController.InfoKey(rawValue: "UIImagePickerControllerEditedImage")] as? UIImage {
+            imageAvatar.image = editedImage.withRenderingMode(.alwaysOriginal)
+        } else if let originalImage = info[UIImagePickerController.InfoKey(rawValue: "UIImagePickerControllerOriginalImage")] as? UIImage {
+            imageAvatar.image = originalImage.withRenderingMode(.alwaysOriginal)
+        }
+        
+        labelInitials?.isHidden = true
+        
+        picker.dismiss(animated: true, completion: nil)
+    }
+    
+    func imagePickerGetAvatarFrom(_ type: UIImagePickerController.SourceType) {
+        if !UIImagePickerController.isSourceTypeAvailable(type) {
+            switch type {
+            case .camera:
+                alertError("Камера недоступна")
+            case .photoLibrary:
+                alertError("Галерея недоступна")
+            default:
+                alertError("Источник недоступен")
+            }
+            
+            return
+        }
+        
+        let picker = UIImagePickerController()
+        picker.delegate = self
+        picker.allowsEditing = true
+        picker.sourceType = type
+        
+        picker.modalPresentationStyle = .fullScreen
+        
+        
+        switch type {
+        case .camera:
+            picker.cameraCaptureMode = .photo
+        case .photoLibrary:
+            picker.mediaTypes = ["public.image"]
+        default:
+            return
+        }
+        
+        
+        DispatchQueue.main.async {
+            self.present(picker, animated: true, completion: nil)
         }
     }
     
-    func media() {
-        if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
-            DispatchQueue.main.async {
-                let pickerAlbumController = UIImagePickerController()
-                pickerAlbumController.delegate = self
-                pickerAlbumController.sourceType = .photoLibrary
-                pickerAlbumController.mediaTypes = ["public.image"]
-                self.present(pickerAlbumController, animated: true, completion: nil)
-            }
-        } else {
-            print("media not avaliable")
-            //self.alertError(title: "Ошибка", message: "Медиатека не доступна")
+    func alertError(_ message: String) {
+        let alertController = UIAlertController(title: "Ошибка", message: message, preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "Хорошо", style: .default, handler: nil))
+        
+        DispatchQueue.main.async {
+            self.present(alertController, animated: true, completion: nil)
         }
     }
 }
@@ -123,11 +154,11 @@ extension ProfileViewController {
     @objc fileprivate func addAvatar(_ sender: UITapGestureRecognizer) {
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         alertController.addAction(UIAlertAction(title: "Установить из галлереи", style: .default, handler: { (action) in
-            
+            self.imagePickerGetAvatarFrom(.photoLibrary)
         }))
         
         alertController.addAction(UIAlertAction(title: "Сделать фото", style: .default, handler: { (action) in
-            
+            self.imagePickerGetAvatarFrom(.camera)
         }))
         
         alertController.addAction(UIAlertAction(title: "Отменить", style: .cancel, handler: nil))

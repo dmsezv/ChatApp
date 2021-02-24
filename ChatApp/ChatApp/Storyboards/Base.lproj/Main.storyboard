@@ -109,6 +109,7 @@
                     </view>
                     <connections>
                         <outlet property="btnEdit" destination="URJ-u1-9Jf" id="FpN-ao-Q7F"/>
+                        <outlet property="imageAvatar" destination="Nfk-c6-GCw" id="cP9-vB-rU7"/>
                         <outlet property="labelInitials" destination="rsr-nU-fwx" id="XCp-Mf-t1D"/>
                         <outlet property="viewAvatar" destination="1aV-tZ-eHb" id="KyJ-bS-aKe"/>
                     </connections>
