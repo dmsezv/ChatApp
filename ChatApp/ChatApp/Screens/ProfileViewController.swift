@@ -9,13 +9,19 @@ import UIKit
 
 class ProfileViewController: UIViewController {
     
+    //MARK: - IBOutlets
+    
     @IBOutlet weak var labelInitials: UILabel!
     @IBOutlet weak var btnEdit: UIButton!
     @IBOutlet weak var viewAvatar: UIView!
     @IBOutlet weak var imageAvatar: UIImageView!
     
-    let cornRadBtn: CGFloat = 14.0
-    let charSpacing: Double = -25.0
+    
+    // MARK: - Drawing Constants
+    
+    private let cornRadBtn: CGFloat = 14.0
+    private let charSpacing: Double = -25.0
+    
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -38,11 +44,13 @@ class ProfileViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        setupView()
+        setupLayout()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        setupView()
         
         //на данном этапе frame некорректный, тк autolayout еще не посчитан
         if let btnEdit = btnEdit {
@@ -65,6 +73,11 @@ class ProfileViewController: UIViewController {
         btnEdit?.clipsToBounds = true
         btnEdit?.layer.cornerRadius = cornRadBtn
         
+        let tap = UITapGestureRecognizer(target: self, action: #selector(addAvatar(_ : )))
+        viewAvatar?.addGestureRecognizer(tap)
+    }
+    
+    private func setupLayout() {
         if let viewAvatar = viewAvatar {
             viewAvatar.clipsToBounds = true
             viewAvatar.layer.cornerRadius = viewAvatar.bounds.width / 2
@@ -73,23 +86,19 @@ class ProfileViewController: UIViewController {
         }
     }
     
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destination.
-     // Pass the selected object to the new view controller.
-     }
-     */
-    
+    private func alertError(_ message: String) {
+        let alertController = UIAlertController(title: "Ошибка", message: message, preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "Хорошо", style: .default, handler: nil))
+        
+        present(alertController, animated: true, completion: nil)
+    }
 }
 
 
-//MARK: - UIImagePickerControllerDelegate
+//MARK: - UIImage Picker
 
 extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         picker.dismiss(animated: true)
     }
@@ -121,11 +130,8 @@ extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationCo
             return
         }
         
-        let picker = UIImagePickerController()
-        picker.delegate = self
-        picker.allowsEditing = true
+        let picker = setupCommonProfileVCPicker()
         picker.sourceType = type
-        picker.modalPresentationStyle = .fullScreen
         
         switch type {
         case .camera:
@@ -137,18 +143,16 @@ extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationCo
         }
         
         
-        DispatchQueue.main.async {
-            self.present(picker, animated: true, completion: nil)
-        }
+        self.present(picker, animated: true, completion: nil)
     }
     
-    func alertError(_ message: String) {
-        let alertController = UIAlertController(title: "Ошибка", message: message, preferredStyle: .alert)
-        alertController.addAction(UIAlertAction(title: "Хорошо", style: .default, handler: nil))
+    private func setupCommonProfileVCPicker() -> UIImagePickerController {
+        let picker = UIImagePickerController()
+        picker.delegate = self
+        picker.allowsEditing = true
+        picker.modalPresentationStyle = .fullScreen
         
-        DispatchQueue.main.async {
-            self.present(alertController, animated: true, completion: nil)
-        }
+        return picker
     }
 }
 
@@ -168,9 +172,7 @@ extension ProfileViewController {
         
         alertController.addAction(UIAlertAction(title: "Отменить", style: .cancel, handler: nil))
         
-        DispatchQueue.main.async {
-            self.present(alertController, animated: true, completion: nil)
-        }
+        present(alertController, animated: true, completion: nil)
     }
 }
 
