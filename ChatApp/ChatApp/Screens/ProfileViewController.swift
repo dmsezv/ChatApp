@@ -52,7 +52,9 @@ class ProfileViewController: UIViewController {
         
         setupView()
         
-        //на данном этапе frame некорректный, тк autolayout еще не посчитан
+        //здесь вьюхи проинициализированны, но их значения взяты из IB.
+        //по заданию устройство в IB и в симуляторе разных размеров отсюда и разные фреймы
+        //окончательно все размеры посчитаются во viewDidLayoutSubviews
         if let btnEdit = btnEdit {
             log("\(#function) btnEdit.frame = \(btnEdit.frame)")
         }
@@ -61,7 +63,8 @@ class ProfileViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        //на данном этапе frame корректный, уже все constraints посчитаны и вьюхи стоят правильно
+        //на данном этапе frame корректный, уже все размеры посчитаны и вьюхи стоят правильно
+        //тк до этого метода уже вызвался viewDidLayoutSubviews
         if let btnEdit = btnEdit {
             log("\(#function) btnEdit.frame = \(btnEdit.frame)")
         }
