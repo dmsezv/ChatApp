@@ -20,7 +20,7 @@ class ProfileViewController: UIViewController {
     // MARK: - Drawing Constants
     
     private let cornRadBtn: CGFloat = 14.0
-    private let charSpacing: Double = -25.0
+    private let charSpacing: Double = -22.0
     
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
