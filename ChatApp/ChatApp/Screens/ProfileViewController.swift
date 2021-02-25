@@ -20,7 +20,7 @@ class ProfileViewController: UIViewController {
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         
-        //btnEdit is nil because
+        //на данном этапе вьюхи еще не инициализированны
         if let btnEdit = btnEdit {
             log("\(btnEdit.frame)")
         }
@@ -29,16 +29,22 @@ class ProfileViewController: UIViewController {
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         
+        //на данном этапе вьюхи еще не инициализированны
         if let btnEdit = btnEdit {
             log("\(btnEdit.frame)")
         }
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        setupView()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setupView()
-        
+        //на данном этапе frame некорректный, тк autolayout еще не посчитан
         if let btnEdit = btnEdit {
             log("\(#function) btnEdit.frame = \(btnEdit.frame)")
         }
@@ -47,6 +53,7 @@ class ProfileViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
+        //на данном этапе frame корректный, уже все constraints посчитаны и вьюхи стоят правильно
         if let btnEdit = btnEdit {
             log("\(#function) btnEdit.frame = \(btnEdit.frame)")
         }
@@ -118,9 +125,7 @@ extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationCo
         picker.delegate = self
         picker.allowsEditing = true
         picker.sourceType = type
-        
         picker.modalPresentationStyle = .fullScreen
-        
         
         switch type {
         case .camera:
