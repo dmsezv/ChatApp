@@ -75,14 +75,12 @@ class ProfileViewController: UIViewController {
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(addAvatar(_ : )))
         viewAvatar?.addGestureRecognizer(tap)
+        viewAvatar?.clipsToBounds = true
     }
     
     private func setupLayout() {
         if let viewAvatar = viewAvatar {
-            viewAvatar.clipsToBounds = true
             viewAvatar.layer.cornerRadius = viewAvatar.bounds.width / 2
-            let tap = UITapGestureRecognizer(target: self, action: #selector(addAvatar(_ : )))
-            viewAvatar.addGestureRecognizer(tap)
         }
     }
     
@@ -161,18 +159,27 @@ extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationCo
 
 extension ProfileViewController {
     @objc fileprivate func addAvatar(_ sender: UITapGestureRecognizer) {
-        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        alertController.addAction(UIAlertAction(title: "Установить из галлереи", style: .default, handler: { (action) in
-            self.imagePickerGetAvatarFrom(.photoLibrary)
-        }))
+        guard let viewAvatar = viewAvatar else {
+            return
+        }
         
-        alertController.addAction(UIAlertAction(title: "Сделать фото", style: .default, handler: { (action) in
-            self.imagePickerGetAvatarFrom(.camera)
-        }))
+        let locationTap = sender.location(in: viewAvatar)
+        let path = UIBezierPath.init(ovalIn: viewAvatar.bounds)
         
-        alertController.addAction(UIAlertAction(title: "Отменить", style: .cancel, handler: nil))
-        
-        present(alertController, animated: true, completion: nil)
+        if path.contains(locationTap) {
+            let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+            alertController.addAction(UIAlertAction(title: "Установить из галлереи", style: .default, handler: { (action) in
+                self.imagePickerGetAvatarFrom(.photoLibrary)
+            }))
+            
+            alertController.addAction(UIAlertAction(title: "Сделать фото", style: .default, handler: { (action) in
+                self.imagePickerGetAvatarFrom(.camera)
+            }))
+            
+            alertController.addAction(UIAlertAction(title: "Отменить", style: .cancel, handler: nil))
+            
+            present(alertController, animated: true, completion: nil)
+        }
     }
 }
 
