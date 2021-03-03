@@ -7,8 +7,8 @@
 
 import UIKit
 
-class ConversationListTableViewCell: UITableViewCell {
-
+class ConversationListCell: UITableViewCell {
+    
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var messageLabel: UILabel!
@@ -25,7 +25,7 @@ class ConversationListTableViewCell: UITableViewCell {
     }
     
     func configure(with model: ConversationCellConfiguration) {
-        nameLabel.text = model.name
+        nameLabel.text = model.name ?? "Unknown user"
         nameLabel.font = .boldSystemFont(ofSize: fontSize)
         
         if let message = model.message {
@@ -33,6 +33,9 @@ class ConversationListTableViewCell: UITableViewCell {
             messageLabel.font = model.hasUnreadMessages
                 ? .boldSystemFont(ofSize: fontSize)
                 : .systemFont(ofSize: fontSize)
+        } else {
+            messageLabel.text = "No messages yet"
+            messageLabel.font = .italicSystemFont(ofSize: fontSize)
         }
         
         if let date = model.date {
@@ -42,7 +45,7 @@ class ConversationListTableViewCell: UITableViewCell {
         }
         
         backgroundColor = model.online
-            ? .blue
+            ? .systemYellow
             : .white
     }
     

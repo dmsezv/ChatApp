@@ -18,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="9Nd-eA-gmH">
-                                <rect key="frame" x="0.0" y="140" width="414" height="673"/>
+                                <rect key="frame" x="0.0" y="140" width="414" height="722"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <connections>
                                     <outlet property="dataSource" destination="7Xq-hJ-Tgi" id="zQg-tj-IEN"/>
@@ -35,19 +35,70 @@
                             <constraint firstItem="9Nd-eA-gmH" firstAttribute="leading" secondItem="znw-cI-st9" secondAttribute="leading" id="lDB-hK-fse"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Tinkoff Chat" largeTitleDisplayMode="always" id="8VE-Vm-7dE"/>
+                    <navigationItem key="navigationItem" title="Tinkoff Chat" id="8VE-Vm-7dE">
+                        <barButtonItem key="rightBarButtonItem" style="plain" id="0kX-NT-tRT">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="wNG-HP-Bex">
+                                <rect key="frame" x="302" y="7" width="92" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                            </button>
+                            <connections>
+                                <segue destination="n50-7x-0ux" kind="presentation" id="ktl-DD-d1N"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="9Nd-eA-gmH" id="qos-GI-GTG"/>
+                        <segue destination="Zoi-tU-2HO" kind="show" identifier="showChat" id="w9b-3E-TF7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oED-fh-faG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1060.8695652173915" y="108.48214285714285"/>
         </scene>
+        <!--Conversation View Controller-->
+        <scene sceneID="086-f6-ZIM">
+            <objects>
+                <viewController storyboardIdentifier="ConversationViewController" id="Zoi-tU-2HO" customClass="ConversationViewController" customModule="ChatApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Vhs-m0-Qfp">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="gjd-E1-2gp">
+                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="sN9-Gp-Cyq"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="sN9-Gp-Cyq" firstAttribute="bottom" secondItem="gjd-E1-2gp" secondAttribute="bottom" id="ByF-OX-JqS"/>
+                            <constraint firstItem="gjd-E1-2gp" firstAttribute="top" secondItem="sN9-Gp-Cyq" secondAttribute="top" id="Jfp-fh-yzR"/>
+                            <constraint firstItem="sN9-Gp-Cyq" firstAttribute="trailing" secondItem="gjd-E1-2gp" secondAttribute="trailing" id="dWt-1D-0hg"/>
+                            <constraint firstItem="gjd-E1-2gp" firstAttribute="leading" secondItem="sN9-Gp-Cyq" secondAttribute="leading" id="m1p-QZ-OC3"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="uYk-GS-POL"/>
+                    <connections>
+                        <outlet property="tableView" destination="gjd-E1-2gp" id="Kcu-4V-YNi"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Xrh-Zj-F6g" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2041" y="108"/>
+        </scene>
+        <!--Profile-->
+        <scene sceneID="JSk-4M-lpW">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Profile" id="n50-7x-0ux" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="I6D-mf-HZr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1654" y="-323"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="Gkx-KB-Ecm">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" toolbarHidden="NO" id="sUk-cH-Enl" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="sUk-cH-Enl" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="C4W-57-tWY">
                         <rect key="frame" x="0.0" y="44" width="414" height="96"/>
