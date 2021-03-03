@@ -12,6 +12,8 @@ class ConversationListCell: UITableViewCell {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var messageLabel: UILabel!
+    @IBOutlet weak var nameLetterView: UIView!
+    @IBOutlet weak var nameLetterLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -47,6 +49,9 @@ class ConversationListCell: UITableViewCell {
         backgroundColor = model.online
             ? .systemYellow
             : .white
+        
+        nameLetterView.layer.cornerRadius = nameLetterView.bounds.size.width / 2
+        nameLetterLabel.text = model.name?.first?.uppercased() ?? "U"
     }
     
     

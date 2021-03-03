@@ -47,6 +47,7 @@ final class ConversationsListViewController: UIViewController {
 //MARK: - UITableViewDelegate, UITableViewDataSource
 
 extension ConversationsListViewController: UITableViewDelegate, UITableViewDataSource {
+    
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         TableSection.allCases[section].rawValue
     }
@@ -69,6 +70,7 @@ extension ConversationsListViewController: UITableViewDelegate, UITableViewDataS
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
         performSegue(withIdentifier: "showChatSegue", sender: model[indexPath.row].name)
     }
 }

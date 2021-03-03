@@ -15,6 +15,10 @@ class ConversationViewController: UIViewController {
     private let cellIncomingIdentifier = String(describing: ConversationMessageIncomingViewCell.self)
     private var model = MessageModel.mockMessages()
     
+    @IBAction func touchButtonBack(_ sender: Any) {
+        navigationController?.popViewController(animated: true)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

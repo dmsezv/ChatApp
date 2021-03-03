@@ -78,7 +78,13 @@
                             <constraint firstItem="gjd-E1-2gp" firstAttribute="leading" secondItem="sN9-Gp-Cyq" secondAttribute="leading" id="m1p-QZ-OC3"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="uYk-GS-POL"/>
+                    <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="uYk-GS-POL">
+                        <barButtonItem key="leftBarButtonItem" image="leftArrayBlue" id="3Lp-UZ-sJo">
+                            <connections>
+                                <action selector="touchButtonBack:" destination="Zoi-tU-2HO" id="iw2-WM-cl1"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="gjd-E1-2gp" id="Kcu-4V-YNi"/>
                     </connections>
@@ -115,6 +121,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="leftArrayBlue" width="12" height="21"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
