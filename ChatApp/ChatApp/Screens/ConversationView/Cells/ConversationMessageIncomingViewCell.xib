@@ -19,10 +19,10 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QxL-43-DhJ">
-                        <rect key="frame" x="8" y="12" width="57.5" height="71"/>
+                        <rect key="frame" x="8" y="8" width="57.5" height="79"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O0o-bQ-T1E">
-                                <rect key="frame" x="8" y="8" width="41.5" height="55"/>
+                                <rect key="frame" x="8" y="8" width="41.5" height="63"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -38,9 +38,9 @@
                     </view>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="QxL-43-DhJ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="12" id="Ois-DO-cC0"/>
+                    <constraint firstItem="QxL-43-DhJ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="Ois-DO-cC0"/>
                     <constraint firstItem="QxL-43-DhJ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="bIu-Vr-fE8"/>
-                    <constraint firstAttribute="bottom" secondItem="QxL-43-DhJ" secondAttribute="bottom" constant="12" id="eTn-vO-DZx"/>
+                    <constraint firstAttribute="bottom" secondItem="QxL-43-DhJ" secondAttribute="bottom" constant="8" id="eTn-vO-DZx"/>
                     <constraint firstItem="QxL-43-DhJ" firstAttribute="width" relation="lessThanOrEqual" secondItem="H2p-sc-9uM" secondAttribute="width" multiplier="0.75" id="yXT-mQ-pRZ"/>
                 </constraints>
             </tableViewCellContentView>

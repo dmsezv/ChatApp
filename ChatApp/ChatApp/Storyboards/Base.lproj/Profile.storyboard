@@ -30,7 +30,7 @@
                                 </state>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1aV-tZ-eHb">
-                                <rect key="frame" x="75" y="52" width="240" height="240"/>
+                                <rect key="frame" x="75" y="62" width="240" height="240"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Nfk-c6-GCw">
                                         <rect key="frame" x="0.0" y="0.0" width="240" height="240"/>
@@ -56,13 +56,13 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Marina Dudarenko" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.75" translatesAutoresizingMaskIntoConstraints="NO" id="K3v-sd-y5H">
-                                <rect key="frame" x="75" y="324" width="240" height="28.666666666666686"/>
+                                <rect key="frame" x="75" y="334" width="240" height="28.666666666666686"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cdI-io-SB4">
-                                <rect key="frame" x="86.333333333333329" y="384.66666666666669" width="217.33333333333337" height="38.666666666666686"/>
+                                <rect key="frame" x="86.333333333333329" y="394.66666666666669" width="217.33333333333337" height="38.666666666666686"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="UX/UI designer, web-designer" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ihB-7V-bgu">
                                         <rect key="frame" x="0.0" y="0.0" width="217.33333333333334" height="19.333333333333332"/>
@@ -88,6 +88,17 @@
                                     <constraint firstAttribute="trailing" secondItem="aoM-Fs-5z1" secondAttribute="trailing" id="ykc-QN-Bcs"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AD8-Mi-JiU">
+                                <rect key="frame" x="340" y="62" width="32" height="32"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="32" id="nto-Cb-S5H"/>
+                                    <constraint firstAttribute="width" constant="32" id="w9h-Hp-xLf"/>
+                                </constraints>
+                                <state key="normal" image="buttonClose"/>
+                                <connections>
+                                    <action selector="touchButtonClose:" destination="BYZ-38-t0r" eventType="touchUpInside" id="m7w-yS-ZqP"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -99,9 +110,11 @@
                             <constraint firstItem="K3v-sd-y5H" firstAttribute="width" secondItem="1aV-tZ-eHb" secondAttribute="width" id="UwK-av-cZE"/>
                             <constraint firstItem="cdI-io-SB4" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Y7h-pB-kBP"/>
                             <constraint firstItem="K3v-sd-y5H" firstAttribute="centerX" secondItem="1aV-tZ-eHb" secondAttribute="centerX" id="daI-hF-PVr"/>
+                            <constraint firstItem="AD8-Mi-JiU" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="18" id="mwe-E2-7kO"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="AD8-Mi-JiU" secondAttribute="trailing" constant="18" id="mwe-Es-vhA"/>
                             <constraint firstItem="1aV-tZ-eHb" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="75" id="nmM-yu-Lee"/>
                             <constraint firstItem="K3v-sd-y5H" firstAttribute="top" secondItem="1aV-tZ-eHb" secondAttribute="bottom" constant="32" id="onZ-vP-nBn"/>
-                            <constraint firstItem="1aV-tZ-eHb" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="8" id="yQt-ac-gLU"/>
+                            <constraint firstItem="1aV-tZ-eHb" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="18" id="yQt-ac-gLU"/>
                             <constraint firstItem="cdI-io-SB4" firstAttribute="top" secondItem="K3v-sd-y5H" secondAttribute="bottom" constant="32" id="z3r-g2-5bt"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="URJ-u1-9Jf" secondAttribute="trailing" constant="55" id="zQK-EJ-nkO"/>
                         </constraints>
@@ -119,6 +132,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="buttonClose" width="42" height="42"/>
         <namedColor name="btn_light_gray">
             <color red="0.9649999737739563" green="0.9649999737739563" blue="0.9649999737739563" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

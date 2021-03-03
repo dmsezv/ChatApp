@@ -1,6 +1,7 @@
 {
-  "colors" : [
+  "images" : [
     {
+      "filename" : "buttonClose.pdf",
       "idiom" : "universal"
     }
   ],

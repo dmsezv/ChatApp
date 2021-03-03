@@ -41,15 +41,15 @@
                                 <rect key="frame" x="302" y="7" width="92" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
+                                <connections>
+                                    <segue destination="n50-7x-0ux" kind="presentation" id="YB5-qp-mCy"/>
+                                </connections>
                             </button>
-                            <connections>
-                                <segue destination="n50-7x-0ux" kind="presentation" id="ktl-DD-d1N"/>
-                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="9Nd-eA-gmH" id="qos-GI-GTG"/>
-                        <segue destination="Zoi-tU-2HO" kind="show" identifier="showChat" id="w9b-3E-TF7"/>
+                        <segue destination="Zoi-tU-2HO" kind="show" identifier="showChatSegue" id="w9b-3E-TF7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oED-fh-faG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

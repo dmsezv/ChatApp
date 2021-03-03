@@ -13,7 +13,6 @@ final class ConversationsListViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     private let cellIdentifier = String(describing: ConversationListCell.self)
-    
     private enum TableSection: String, CaseIterable {
         case online = "Online"
         case history = "History"
@@ -32,6 +31,15 @@ final class ConversationsListViewController: UIViewController {
         tableView.register(UINib(nibName: cellIdentifier, bundle: nil), forCellReuseIdentifier: cellIdentifier)
         tableView.delegate = self
         tableView.dataSource = self
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showChatSegue" {
+            if let destinationVC = segue.destination as? ConversationViewController,
+               let nameTitle = sender as? String? {
+                destinationVC.title = nameTitle
+            }
+        }
     }
 }
 
@@ -61,6 +69,6 @@ extension ConversationsListViewController: UITableViewDelegate, UITableViewDataS
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "showChat", sender: nil)
+        performSegue(withIdentifier: "showChatSegue", sender: model[indexPath.row].name)
     }
 }

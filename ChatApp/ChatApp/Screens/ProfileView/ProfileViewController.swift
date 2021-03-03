@@ -16,6 +16,9 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var viewAvatar: UIView!
     @IBOutlet weak var imageAvatar: UIImageView!
     
+    @IBAction func touchButtonClose(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
     
     // MARK: - Drawing Constants
     

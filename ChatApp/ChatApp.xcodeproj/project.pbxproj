@@ -112,9 +112,9 @@
 		4D92DF6325ED714C0093FA2A /* ConversationList */ = {
 			isa = PBXGroup;
 			children = (
+				4DCD0B0525EFE0F00096F893 /* ViewControllers */,
 				4D92DF7425EE14410093FA2A /* Cells */,
 				4D92DF7325EE13FF0093FA2A /* Models */,
-				4D92DF5F25ED67B90093FA2A /* ConversationsListViewController.swift */,
 			);
 			path = ConversationList;
 			sourceTree = "<group>";
@@ -147,9 +147,9 @@
 		4D92DF8225EEF1C00093FA2A /* ConversationView */ = {
 			isa = PBXGroup;
 			children = (
+				4DCD0B0725EFE1070096F893 /* ViewControllers */,
+				4DCD0B0625EFE0FE0096F893 /* Models */,
 				4DCD0AF725EFB0370096F893 /* Cells */,
-				4D92DF8325EEF1EF0093FA2A /* ConversationViewController.swift */,
-				4D92DF8725EEF2400093FA2A /* MessageModel.swift */,
 			);
 			path = ConversationView;
 			sourceTree = "<group>";
@@ -163,6 +163,30 @@
 				4DCD0B0125EFBC280096F893 /* ConversationMessageIncomingViewCell.xib */,
 			);
 			path = Cells;
+			sourceTree = "<group>";
+		};
+		4DCD0B0525EFE0F00096F893 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				4D92DF5F25ED67B90093FA2A /* ConversationsListViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		4DCD0B0625EFE0FE0096F893 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				4D92DF8725EEF2400093FA2A /* MessageModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		4DCD0B0725EFE1070096F893 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				4D92DF8325EEF1EF0093FA2A /* ConversationViewController.swift */,
+			);
+			path = ViewControllers;
 			sourceTree = "<group>";
 		};
 		4DD6E8CC25DC548800EF5039 /* Utils */ = {

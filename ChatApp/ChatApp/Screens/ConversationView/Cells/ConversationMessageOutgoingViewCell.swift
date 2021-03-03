@@ -24,5 +24,16 @@ class ConversationMessageOutgoingViewCell: UITableViewCell {
     
     func configure(with model: MessageModel) {
         messageLabel.text = model.text
+        messageView.layer.cornerRadius = cornerRadius
+        messageView.layer.maskedCorners = maskedCorners
     }
+    
+    // MARK: - Drawing Constants
+    
+    let cornerRadius: CGFloat = 10
+    let maskedCorners: CACornerMask = [
+        .layerMaxXMinYCorner,
+        .layerMinXMaxYCorner,
+        .layerMinXMinYCorner
+    ]
 }
