@@ -26,7 +26,7 @@ fileprivate final class DLogger {
     private init() {}
     
     func log(_ message: String) {
-        #if DEBUG_PRINT_ENABLE
+        #if DEBUG
         print(message)
         #endif
     }
