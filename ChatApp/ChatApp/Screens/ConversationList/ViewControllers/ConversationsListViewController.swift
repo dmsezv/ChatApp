@@ -14,6 +14,8 @@ final class ConversationsListViewController: UIViewController {
     @IBOutlet weak var profileButton: UIBarButtonItem!
     
     private let cellIdentifier = String(describing: ConversationListCell.self)
+    
+    //знаю, что это все плохо и некрасиво, обязательно поправлю в сл домашке.
     private enum TableSection: String, CaseIterable {
         case online = "Online"
         case history = "History"
@@ -34,6 +36,8 @@ final class ConversationsListViewController: UIViewController {
         }
     }
     
+    //знаю, что это все плохо и некрасиво, обязательно поправлю в сл домашке.
+    //нужен какойнить interactor, чтоб за датой ходить в репы, например
     private lazy var modelOnline = ConversationModel.mockConversationsOnline()
     private lazy var modelHistory = ConversationModel.mockConversationsHistory()
     
@@ -70,6 +74,7 @@ extension ConversationsListViewController: UITableViewDelegate, UITableViewDataS
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
+        //здесь, конечно, нужен router
         switch indexPath.section {
         case TableSection.history.getSectionIndex():
             performSegue(withIdentifier: "showChatSegue", sender: modelHistory[indexPath.row].name)
@@ -80,11 +85,11 @@ extension ConversationsListViewController: UITableViewDelegate, UITableViewDataS
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        TableSection.allCases[section].rawValue
+        TableSection.getSectionTitleBy(index: section)
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return TableSection.allCases.count
+        TableSection.allCases.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

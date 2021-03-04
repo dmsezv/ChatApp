@@ -13,7 +13,8 @@ class ConversationViewController: UIViewController {
     
     private let cellOutgoingIdentifier = String(describing: ConversationMessageOutgoingViewCell.self)
     private let cellIncomingIdentifier = String(describing: ConversationMessageIncomingViewCell.self)
-    private var model = MessageModel.mockMessages()
+    
+    private lazy var model = MessageModel.mockMessages()
     
     @IBAction func touchButtonBack(_ sender: Any) {
         navigationController?.popViewController(animated: true)

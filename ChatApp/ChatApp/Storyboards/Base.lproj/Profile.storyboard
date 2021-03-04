@@ -30,13 +30,13 @@
                                 </state>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1aV-tZ-eHb">
-                                <rect key="frame" x="75" y="62" width="240" height="240"/>
+                                <rect key="frame" x="93.000000000000014" y="62.000000000000014" width="204.33333333333337" height="204.33333333333337"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Nfk-c6-GCw">
-                                        <rect key="frame" x="0.0" y="0.0" width="240" height="240"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="204.33333333333334" height="204.33333333333334"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MD" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="rsr-nU-fwx">
-                                        <rect key="frame" x="18" y="18" width="204" height="204"/>
+                                        <rect key="frame" x="18" y="18" width="168.33333333333334" height="168.33333333333334"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="110"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -56,13 +56,13 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Marina Dudarenko" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.75" translatesAutoresizingMaskIntoConstraints="NO" id="K3v-sd-y5H">
-                                <rect key="frame" x="75" y="334" width="240" height="28.666666666666686"/>
+                                <rect key="frame" x="93.000000000000014" y="298.33333333333331" width="204.33333333333337" height="28.666666666666686"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cdI-io-SB4">
-                                <rect key="frame" x="86.333333333333329" y="394.66666666666669" width="217.33333333333337" height="38.666666666666686"/>
+                                <rect key="frame" x="86.333333333333329" y="359" width="217.33333333333337" height="38.666666666666686"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="UX/UI designer, web-designer" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ihB-7V-bgu">
                                         <rect key="frame" x="0.0" y="0.0" width="217.33333333333334" height="19.333333333333332"/>
@@ -103,7 +103,6 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="cdI-io-SB4" firstAttribute="width" relation="lessThanOrEqual" secondItem="1aV-tZ-eHb" secondAttribute="width" id="2Bx-Ia-nue"/>
                             <constraint firstItem="1aV-tZ-eHb" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="6oA-QP-qEP"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="URJ-u1-9Jf" secondAttribute="bottom" constant="30" id="AK9-3h-xxs"/>
                             <constraint firstItem="URJ-u1-9Jf" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="55" id="DaC-pG-bUr"/>
@@ -112,7 +111,6 @@
                             <constraint firstItem="K3v-sd-y5H" firstAttribute="centerX" secondItem="1aV-tZ-eHb" secondAttribute="centerX" id="daI-hF-PVr"/>
                             <constraint firstItem="AD8-Mi-JiU" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="18" id="mwe-E2-7kO"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="AD8-Mi-JiU" secondAttribute="trailing" constant="18" id="mwe-Es-vhA"/>
-                            <constraint firstItem="1aV-tZ-eHb" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="75" id="nmM-yu-Lee"/>
                             <constraint firstItem="K3v-sd-y5H" firstAttribute="top" secondItem="1aV-tZ-eHb" secondAttribute="bottom" constant="32" id="onZ-vP-nBn"/>
                             <constraint firstItem="1aV-tZ-eHb" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="18" id="yQt-ac-gLU"/>
                             <constraint firstItem="cdI-io-SB4" firstAttribute="top" secondItem="K3v-sd-y5H" secondAttribute="bottom" constant="32" id="z3r-g2-5bt"/>
