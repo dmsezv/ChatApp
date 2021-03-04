@@ -17,10 +17,25 @@ final class ConversationsListViewController: UIViewController {
     private enum TableSection: String, CaseIterable {
         case online = "Online"
         case history = "History"
+        
+        func getSectionIndex() -> Int {
+            switch self {
+            case .online: return 0
+            case .history: return 1
+            }
+        }
+        
+        static func getSectionTitleBy(index: Int) -> String? {
+            switch index {
+            case 0: return TableSection.online.rawValue
+            case 1: return TableSection.history.rawValue
+            default: return nil
+            }
+        }
     }
     
-    let model = ConversationModel.mockConversationsOnline()
-    let modelHistory = ConversationModel.mockConversationsHistory()
+    private lazy var modelOnline = ConversationModel.mockConversationsOnline()
+    private lazy var modelHistory = ConversationModel.mockConversationsHistory()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,6 +67,17 @@ final class ConversationsListViewController: UIViewController {
 //MARK: - UITableViewDelegate, UITableViewDataSource
 
 extension ConversationsListViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        switch indexPath.section {
+        case TableSection.history.getSectionIndex():
+            performSegue(withIdentifier: "showChatSegue", sender: modelHistory[indexPath.row].name)
+        case TableSection.online.getSectionIndex():
+            performSegue(withIdentifier: "showChatSegue", sender: modelOnline[indexPath.row].name)
+        default: break
+        }
+    }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         TableSection.allCases[section].rawValue
@@ -63,19 +89,25 @@ extension ConversationsListViewController: UITableViewDelegate, UITableViewDataS
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch TableSection.allCases[section] {
-        case .history:  return model.count
+        case .history:  return modelOnline.count
         case .online:   return modelHistory.count
         }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! ConversationListCell
-        cell.configure(with: model[indexPath.row])
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? ConversationListCell else {
+            return UITableViewCell()
+        }
+        
+        switch indexPath.section {
+        case TableSection.history.getSectionIndex():
+            cell.configure(with: modelHistory[indexPath.row])
+        case TableSection.online.getSectionIndex():
+            cell.configure(with: modelOnline[indexPath.row])
+        default:
+            return UITableViewCell()
+        }
+        
         return cell
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-        performSegue(withIdentifier: "showChatSegue", sender: modelHistory[indexPath.row].name)
     }
 }
