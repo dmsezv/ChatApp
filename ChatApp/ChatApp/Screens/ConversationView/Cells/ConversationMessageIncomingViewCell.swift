@@ -11,7 +11,7 @@ class ConversationMessageIncomingViewCell: UITableViewCell {
     @IBOutlet weak var messageLabel: UILabel!
     @IBOutlet weak var messageView: UIView!
     
-    func configure(with model: MessageModel) {
+    func configure(with model: MessageCellConfiguration) {
         messageLabel.text = model.text
         messageView.layer.cornerRadius = cornerRadius
         messageView.layer.maskedCorners = maskedCorners

@@ -15,16 +15,6 @@ class ConversationListCell: UITableViewCell {
     @IBOutlet weak var nameLetterView: UIView!
     @IBOutlet weak var nameLetterLabel: UILabel!
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
     
     func configure(with model: ConversationCellConfiguration) {
         nameLabel.text = model.name ?? "Unknown user"

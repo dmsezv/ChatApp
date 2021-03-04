@@ -7,70 +7,99 @@
 
 import UIKit
 
-class ConversationViewController: UIViewController {
+final class ConversationViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
     private let cellOutgoingIdentifier = String(describing: ConversationMessageOutgoingViewCell.self)
     private let cellIncomingIdentifier = String(describing: ConversationMessageIncomingViewCell.self)
     
-    private lazy var model = MessageModel.mockMessages()
-    
     @IBAction func touchButtonBack(_ sender: Any) {
         navigationController?.popViewController(animated: true)
     }
     
+    private var viewModelMessages: ConversationViewController.ViewModel?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         setupView()
-        model.reverse()
+        loadData()
     }
     
     private func setupView() {
-        tableView.delegate = self
         tableView.dataSource = self
         tableView.register(UINib(nibName: cellOutgoingIdentifier, bundle: nil), forCellReuseIdentifier: cellOutgoingIdentifier)
         tableView.register(UINib(nibName: cellIncomingIdentifier, bundle: nil), forCellReuseIdentifier: cellIncomingIdentifier)
         tableView.transform = CGAffineTransform(scaleX: 1, y: -1)
     }
+    
+    private func loadData() {
+        //TODO: поставить потом интерактор, чтоб ходить за данными в репы и в нем их приводить впорядок
+        var msgs = DataProvider.getMockMessages()
+        msgs.reverse()
+        
+        viewModelMessages = ConversationViewController.ViewModel(messages: msgs)
+    }
 }
 
 
-//MARK: - UITableViewDelegate, UITableViewDataSource
+//MARK: - UITableViewDataSource
 
-extension ConversationViewController: UITableViewDelegate, UITableViewDataSource {
+extension ConversationViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        model.count
+        guard let vm = viewModelMessages else {
+            return 0
+        }
+        
+        return vm.messages.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if model[indexPath.row].isIncoming {
-            return setupIncomingCell(tableView, cellForRowAt: indexPath)
+        guard let vm = viewModelMessages else {
+            return UITableViewCell()
+        }
+        
+        
+        let model = vm.messages[indexPath.row]
+        if model.isIncoming {
+            return setupIncomingCell(with: model, tableView, indexPath)
         } else {
-            return setupOutgoingCell(tableView, cellForRowAt: indexPath)
+            return setupOutgoingCell(with: model, tableView, indexPath)
         }
     }
-    
-    private func setupIncomingCell(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+}
+
+
+//MARK: - Setup Cells
+
+extension ConversationViewController {
+    private func setupIncomingCell(with model: MessageCellConfiguration, _ tableView: UITableView, _ indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIncomingIdentifier, for: indexPath) as? ConversationMessageIncomingViewCell else {
             return UITableViewCell()
         }
         
-        cell.configure(with: model[indexPath.row])
+        cell.configure(with: model)
         cell.contentView.transform = CGAffineTransform(scaleX: 1, y: -1)
-
+        
         return cell
     }
     
-    private func setupOutgoingCell(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    private func setupOutgoingCell(with model: MessageCellConfiguration, _ tableView: UITableView, _ indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: cellOutgoingIdentifier, for: indexPath) as? ConversationMessageOutgoingViewCell else {
             return UITableViewCell()
         }
         
-        cell.configure(with: model[indexPath.row])
+        cell.configure(with: model)
         cell.contentView.transform = CGAffineTransform(scaleX: 1, y: -1)
-
+        
         return cell
+    }
+}
+
+
+extension ConversationViewController {
+    private struct ViewModel {
+        var messages: [MessageModel]
     }
 }
