@@ -42,12 +42,12 @@ class ConversationListCell: UITableViewCell {
         
         if let date = model.date {
             dateLabel.text = Calendar.current.isDateInToday(date)
-                ? date.toString(format: "HH:mm")
+                ? "Today \(date.toString(format: "HH:mm"))"
                 : date.toString(format: "dd MMM")
         }
         
         backgroundColor = model.online
-            ? .systemYellow
+            ? .bananaHalf
             : .white
         
         nameLetterView.layer.cornerRadius = nameLetterView.bounds.size.width / 2

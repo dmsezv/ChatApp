@@ -11,6 +11,7 @@ import UIKit
 final class ConversationsListViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var profileButton: UIBarButtonItem!
     
     private let cellIdentifier = String(describing: ConversationListCell.self)
     private enum TableSection: String, CaseIterable {
@@ -18,13 +19,17 @@ final class ConversationsListViewController: UIViewController {
         case history = "History"
     }
     
-    let model = ConversationModel.mockConversations()
+    let model = ConversationModel.mockConversationsOnline()
     let modelHistory = ConversationModel.mockConversationsHistory()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupView()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
     }
     
     private func setupView() {
@@ -71,6 +76,6 @@ extension ConversationsListViewController: UITableViewDelegate, UITableViewDataS
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        performSegue(withIdentifier: "showChatSegue", sender: model[indexPath.row].name)
+        performSegue(withIdentifier: "showChatSegue", sender: modelHistory[indexPath.row].name)
     }
 }
