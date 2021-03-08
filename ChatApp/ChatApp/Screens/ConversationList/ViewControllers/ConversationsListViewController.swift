@@ -18,8 +18,8 @@ final class ConversationsListViewController: UIViewController {
     
     // MARK: - Drawing Constants
     
-    private let profileButtonFrame: CGRect      = CGRect(x: 0, y: 0, width: 40, height: 40)
-    private let kernLetterNameValue: Double     = -4
+    private let profileButtonFrame: CGRect = CGRect(x: 0, y: 0, width: 40, height: 40)
+    private let kernLetterNameValue: Double = -4
     
     
     //MARK: - View life cycle

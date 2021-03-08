@@ -29,6 +29,8 @@
 		4DAFEC7725F6497600CE1BEA /* ProfileIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DAFEC7625F6497600CE1BEA /* ProfileIconView.swift */; };
 		4DAFEC7B25F6498000CE1BEA /* ProfileIconView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4DAFEC7A25F6498000CE1BEA /* ProfileIconView.xib */; };
 		4DAFEC7E25F64C9800CE1BEA /* Extension+UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DAFEC7D25F64C9700CE1BEA /* Extension+UIButton.swift */; };
+		4DAFEC8225F6680400CE1BEA /* ChooseThemeButtonView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4DAFEC8125F6680400CE1BEA /* ChooseThemeButtonView.xib */; };
+		4DAFEC8525F6681400CE1BEA /* ChooseThemeButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DAFEC8425F6681400CE1BEA /* ChooseThemeButtonView.swift */; };
 		4DCD0AFA25EFB0530096F893 /* ConversationMessageOutgoingViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DCD0AF825EFB0530096F893 /* ConversationMessageOutgoingViewCell.swift */; };
 		4DCD0AFB25EFB0530096F893 /* ConversationMessageOutgoingViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4DCD0AF925EFB0530096F893 /* ConversationMessageOutgoingViewCell.xib */; };
 		4DCD0B0225EFBC280096F893 /* ConversationMessageIncomingViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DCD0B0025EFBC280096F893 /* ConversationMessageIncomingViewCell.swift */; };
@@ -63,6 +65,8 @@
 		4DAFEC7625F6497600CE1BEA /* ProfileIconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileIconView.swift; sourceTree = "<group>"; };
 		4DAFEC7A25F6498000CE1BEA /* ProfileIconView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileIconView.xib; sourceTree = "<group>"; };
 		4DAFEC7D25F64C9700CE1BEA /* Extension+UIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIButton.swift"; sourceTree = "<group>"; };
+		4DAFEC8125F6680400CE1BEA /* ChooseThemeButtonView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChooseThemeButtonView.xib; sourceTree = "<group>"; };
+		4DAFEC8425F6681400CE1BEA /* ChooseThemeButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseThemeButtonView.swift; sourceTree = "<group>"; };
 		4DCD0AF825EFB0530096F893 /* ConversationMessageOutgoingViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationMessageOutgoingViewCell.swift; sourceTree = "<group>"; };
 		4DCD0AF925EFB0530096F893 /* ConversationMessageOutgoingViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ConversationMessageOutgoingViewCell.xib; sourceTree = "<group>"; };
 		4DCD0B0025EFBC280096F893 /* ConversationMessageIncomingViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationMessageIncomingViewCell.swift; sourceTree = "<group>"; };
@@ -173,6 +177,7 @@
 		4DAFEC6F25F6444300CE1BEA /* ThemeSetting */ = {
 			isa = PBXGroup;
 			children = (
+				4DAFEC8025F667D900CE1BEA /* Views */,
 				4DAFEC7025F6445900CE1BEA /* ViewControllers */,
 			);
 			path = ThemeSetting;
@@ -191,6 +196,15 @@
 			children = (
 				4DAFEC7625F6497600CE1BEA /* ProfileIconView.swift */,
 				4DAFEC7A25F6498000CE1BEA /* ProfileIconView.xib */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		4DAFEC8025F667D900CE1BEA /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				4DAFEC8125F6680400CE1BEA /* ChooseThemeButtonView.xib */,
+				4DAFEC8425F6681400CE1BEA /* ChooseThemeButtonView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -339,6 +353,7 @@
 				4DAFEC7B25F6498000CE1BEA /* ProfileIconView.xib in Resources */,
 				4DCD0AFB25EFB0530096F893 /* ConversationMessageOutgoingViewCell.xib in Resources */,
 				4DCD0B0325EFBC280096F893 /* ConversationMessageIncomingViewCell.xib in Resources */,
+				4DAFEC8225F6680400CE1BEA /* ChooseThemeButtonView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -358,6 +373,7 @@
 				4DAFEC7E25F64C9800CE1BEA /* Extension+UIButton.swift in Sources */,
 				4DD6E8CE25DC549600EF5039 /* DLogger.swift in Sources */,
 				4D92DF7625EE14720093FA2A /* ConversationModel.swift in Sources */,
+				4DAFEC8525F6681400CE1BEA /* ChooseThemeButtonView.swift in Sources */,
 				4D2AFD7925E41B3200706ACE /* ProfileViewController.swift in Sources */,
 				4DCD0B0225EFBC280096F893 /* ConversationMessageIncomingViewCell.swift in Sources */,
 				4DD6E8D725DC5CA300EF5039 /* Extension+VC.swift in Sources */,
