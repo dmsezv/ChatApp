@@ -10,8 +10,19 @@ import UIKit
 
 final class ConversationsListViewController: UIViewController {
     
+    //MARK: - IBOutlets
+    
+    @IBOutlet weak var profileButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var profileButton: UIBarButtonItem!
+    
+    
+    // MARK: - Drawing Constants
+    
+    private let profileButtonFrame: CGRect      = CGRect(x: 0, y: 0, width: 40, height: 40)
+    private let kernLetterNameValue: Double     = -4
+    
+    
+    //MARK: - View life cycle
     
     private let cellIdentifier = String(describing: ConversationListCell.self)
     private var viewModelMessages: ConversationsListViewController.ViewModel?
@@ -42,6 +53,17 @@ final class ConversationsListViewController: UIViewController {
         viewModelMessages = ConversationsListViewController.ViewModel(
             historyMessages: historyMessages,
             onlineMessages: onlineMessages)
+        
+        if let view = ProfileIconView.instanceFromNib() {
+            view.lettersNameLabel.text = "MD"
+            view.lettersNameLabel.addCharacterSpacing(kernValue: kernLetterNameValue)
+            
+            profileButton.frame = profileButtonFrame
+            profileButton.layer.cornerRadius = profileButtonFrame.height / 2
+            profileButton.clipsToBounds = true
+            profileButton.setTitle(nil, for: .normal)
+            profileButton.setBackground(view)
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
