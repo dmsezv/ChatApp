@@ -9,6 +9,12 @@ import UIKit
 
 class ThemesViewController: UIViewController {
     
+    enum ThemeTypes: Int {
+        case day = 0
+        case night = 1
+        case classic = 2
+    }
+    
     //MARK: - IBOutlet
     
     @IBOutlet weak var themeClassicView: UIView!
@@ -34,8 +40,6 @@ class ThemesViewController: UIViewController {
         super.viewDidLoad()
         
         title = "Settings"
-        
-        
     }
     
     override func viewDidLayoutSubviews() {
@@ -44,42 +48,90 @@ class ThemesViewController: UIViewController {
         setupView()
     }
     
-    private func setupView() {
+    private func setupView() {        
         setupThemeClassicView()
         setupThemeNightView()
         setupThemeDayView()
     }
     
     private func setupThemeNightView() {
-        if let chooseThemeButtonView = ChooseThemeButtonView.inctanceFromNib() {
-            chooseThemeButtonView.frame = themeNightView.bounds
-            chooseThemeButtonView.configureThemeButtonView(type: .night)
+        if let chooseThemeButtonView = ChooseThemeButtonView.instanceFromNib() {
+            chooseThemeButtonView.configureThemeButtonView(.night,  parentBounds: themeDayView.bounds)
             themeNightView.addSubview(chooseThemeButtonView)
-            themeNightView.layer.cornerRadius = cornerRadiusThemeView
-            themeNightView.clipsToBounds = true
+            configureTheme(themeNightView)
+
             themeNightLabel.text = "Night"
+            themeNightLabel.tag = ThemeTypes.night.rawValue
+            configureTheme(themeClassicLabel)
         }
     }
     
     private func setupThemeDayView() {
-        if let chooseThemeButtonView = ChooseThemeButtonView.inctanceFromNib() {
-            chooseThemeButtonView.frame = themeDayView.bounds
-            chooseThemeButtonView.configureThemeButtonView(type: .day)
+        if let chooseThemeButtonView = ChooseThemeButtonView.instanceFromNib() {
+            chooseThemeButtonView.configureThemeButtonView(.day, parentBounds: themeDayView.bounds)
             themeDayView.addSubview(chooseThemeButtonView)
-            themeDayView.layer.cornerRadius = cornerRadiusThemeView
-            themeDayView.clipsToBounds = true
+            configureTheme(themeDayView)
+
             themeDayLabel.text = "Day"
+            themeDayLabel.tag = ThemeTypes.day.rawValue
+            configureTheme(themeClassicLabel)
         }
     }
     
     private func setupThemeClassicView()  {
-        if let chooseThemeButtonView = ChooseThemeButtonView.inctanceFromNib() {
-            chooseThemeButtonView.frame = themeClassicView.bounds
-            chooseThemeButtonView.configureThemeButtonView(type: .classic)
+        if let chooseThemeButtonView = ChooseThemeButtonView.instanceFromNib() {
+            chooseThemeButtonView.configureThemeButtonView(.classic,  parentBounds: themeDayView.bounds)
             themeClassicView.addSubview(chooseThemeButtonView)
-            themeClassicView.layer.cornerRadius = cornerRadiusThemeView
-            themeClassicView.clipsToBounds = true
+            configureTheme(themeClassicView)
+            
             themeClassicLabel.text = "Classic"
+            themeClassicLabel.tag = ThemeTypes.classic.rawValue
+            configureTheme(themeClassicLabel)
+        }
+    }
+    
+    private func configureTheme(_ view: UIView) {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(touchThemeView(_ : )))
+        view.addGestureRecognizer(tap)
+        view.layer.borderWidth = 0
+        view.layer.borderColor = UIColor.blueStroke.cgColor
+        view.layer.cornerRadius = cornerRadiusThemeView
+        view.clipsToBounds = true
+    }
+    
+    private func configureTheme(_ label: UILabel) {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(touchThemeLabel(_ : )))
+        label.addGestureRecognizer(tap)
+        label.isUserInteractionEnabled = true
+    }
+    
+    private func select(_ view: UIView) {
+        themeClassicView.layer.borderWidth = 0
+        themeDayView.layer.borderWidth = 0
+        themeNightView.layer.borderWidth = 0
+        
+        view.layer.borderWidth = 2
+    }
+}
+
+
+//MARK: - Touches
+
+extension ThemesViewController {
+    @objc private func touchThemeView(_ sender: UITapGestureRecognizer) {
+        if let view = sender.view {
+            select(view)
+        }
+    }
+    
+    @objc private func touchThemeLabel(_ sender: UITapGestureRecognizer) {
+        if let label = sender.view as? UILabel {
+            switch label.tag {
+            case ThemeTypes.classic.rawValue: select(themeClassicView)
+            case ThemeTypes.day.rawValue: select(themeDayView)
+            case ThemeTypes.night.rawValue: select(themeNightView)
+            default: break
+            }
         }
     }
 }

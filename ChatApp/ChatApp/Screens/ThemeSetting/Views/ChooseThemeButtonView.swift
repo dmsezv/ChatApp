@@ -32,7 +32,7 @@ class ChooseThemeButtonView: UIView {
     ]
 
     
-    func configureThemeButtonView(type: ChooseThemeButtonViewType) {
+    func configureThemeButtonView(_ type: ChooseThemeButtonViewType) {
         leftView.layer.cornerRadius = cornerRadiusViewDialog
         leftView.layer.maskedCorners = maskedCornersLeftView
         rightView.layer.cornerRadius = cornerRadiusViewDialog
@@ -44,6 +44,12 @@ class ChooseThemeButtonView: UIView {
         case .night: configureNight()
         }
     }
+    
+    func configureThemeButtonView(_ type: ChooseThemeButtonViewType, parentBounds: CGRect) {
+        configureThemeButtonView(type)
+        frame = parentBounds
+    }
+
     
     private func configureClassic() {
         backgroundColor = ThemeColors.Classic.mainViewColorWhite
@@ -70,7 +76,7 @@ extension ChooseThemeButtonView {
         case classic, day, night
     }
     
-    static func inctanceFromNib() -> ChooseThemeButtonView? {
+    static func instanceFromNib() -> ChooseThemeButtonView? {
         return UINib(nibName: String(describing: ChooseThemeButtonView.self), bundle: nil).instantiate(withOwner: nil, options: nil)[0] as? ChooseThemeButtonView
     }
 }
