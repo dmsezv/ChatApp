@@ -31,6 +31,8 @@
 		4DAFEC7E25F64C9800CE1BEA /* Extension+UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DAFEC7D25F64C9700CE1BEA /* Extension+UIButton.swift */; };
 		4DAFEC8225F6680400CE1BEA /* ChooseThemeButtonView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4DAFEC8125F6680400CE1BEA /* ChooseThemeButtonView.xib */; };
 		4DAFEC8525F6681400CE1BEA /* ChooseThemeButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DAFEC8425F6681400CE1BEA /* ChooseThemeButtonView.swift */; };
+		4DAFEC8A25F805CE00CE1BEA /* ProfileBarButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DAFEC8925F805CD00CE1BEA /* ProfileBarButtonView.swift */; };
+		4DAFEC8E25F80A8800CE1BEA /* ConversationListRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DAFEC8D25F80A8800CE1BEA /* ConversationListRouter.swift */; };
 		4DCD0AFA25EFB0530096F893 /* ConversationMessageOutgoingViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DCD0AF825EFB0530096F893 /* ConversationMessageOutgoingViewCell.swift */; };
 		4DCD0AFB25EFB0530096F893 /* ConversationMessageOutgoingViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4DCD0AF925EFB0530096F893 /* ConversationMessageOutgoingViewCell.xib */; };
 		4DCD0B0225EFBC280096F893 /* ConversationMessageIncomingViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DCD0B0025EFBC280096F893 /* ConversationMessageIncomingViewCell.swift */; };
@@ -67,6 +69,8 @@
 		4DAFEC7D25F64C9700CE1BEA /* Extension+UIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIButton.swift"; sourceTree = "<group>"; };
 		4DAFEC8125F6680400CE1BEA /* ChooseThemeButtonView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChooseThemeButtonView.xib; sourceTree = "<group>"; };
 		4DAFEC8425F6681400CE1BEA /* ChooseThemeButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseThemeButtonView.swift; sourceTree = "<group>"; };
+		4DAFEC8925F805CD00CE1BEA /* ProfileBarButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileBarButtonView.swift; sourceTree = "<group>"; };
+		4DAFEC8D25F80A8800CE1BEA /* ConversationListRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationListRouter.swift; sourceTree = "<group>"; };
 		4DCD0AF825EFB0530096F893 /* ConversationMessageOutgoingViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationMessageOutgoingViewCell.swift; sourceTree = "<group>"; };
 		4DCD0AF925EFB0530096F893 /* ConversationMessageOutgoingViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ConversationMessageOutgoingViewCell.xib; sourceTree = "<group>"; };
 		4DCD0B0025EFBC280096F893 /* ConversationMessageIncomingViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationMessageIncomingViewCell.swift; sourceTree = "<group>"; };
@@ -131,6 +135,7 @@
 		4D92DF6325ED714C0093FA2A /* ConversationList */ = {
 			isa = PBXGroup;
 			children = (
+				4DAFEC8C25F80A7600CE1BEA /* Router */,
 				4DAFEC7525F6494700CE1BEA /* Views */,
 				4DCD0B0525EFE0F00096F893 /* ViewControllers */,
 				4D92DF7425EE14410093FA2A /* Cells */,
@@ -196,6 +201,7 @@
 			children = (
 				4DAFEC7625F6497600CE1BEA /* ProfileIconView.swift */,
 				4DAFEC7A25F6498000CE1BEA /* ProfileIconView.xib */,
+				4DAFEC8925F805CD00CE1BEA /* ProfileBarButtonView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -207,6 +213,14 @@
 				4DAFEC8425F6681400CE1BEA /* ChooseThemeButtonView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		4DAFEC8C25F80A7600CE1BEA /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				4DAFEC8D25F80A8800CE1BEA /* ConversationListRouter.swift */,
+			);
+			path = Router;
 			sourceTree = "<group>";
 		};
 		4DCD0AF725EFB0370096F893 /* Cells */ = {
@@ -368,6 +382,7 @@
 				4DAFEC7225F6448200CE1BEA /* ThemesViewController.swift in Sources */,
 				4D92DF6A25ED74420093FA2A /* ConversationListCell.swift in Sources */,
 				4DAFEC5D25F15D9D00CE1BEA /* DataProvider.swift in Sources */,
+				4DAFEC8A25F805CE00CE1BEA /* ProfileBarButtonView.swift in Sources */,
 				4D2AFD7C25E576E500706ACE /* Extension+UILabel.swift in Sources */,
 				4DD6E8E125DC60EC00EF5039 /* Extension+AppDelegate.swift in Sources */,
 				4DAFEC7E25F64C9800CE1BEA /* Extension+UIButton.swift in Sources */,
@@ -375,6 +390,7 @@
 				4D92DF7625EE14720093FA2A /* ConversationModel.swift in Sources */,
 				4DAFEC8525F6681400CE1BEA /* ChooseThemeButtonView.swift in Sources */,
 				4D2AFD7925E41B3200706ACE /* ProfileViewController.swift in Sources */,
+				4DAFEC8E25F80A8800CE1BEA /* ConversationListRouter.swift in Sources */,
 				4DCD0B0225EFBC280096F893 /* ConversationMessageIncomingViewCell.swift in Sources */,
 				4DD6E8D725DC5CA300EF5039 /* Extension+VC.swift in Sources */,
 				4D92DF8825EEF2400093FA2A /* MessageModel.swift in Sources */,

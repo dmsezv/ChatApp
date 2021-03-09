@@ -10,6 +10,8 @@ import UIKit
 
 final class ConversationsListViewController: UIViewController {
     
+    var router: ConversationListRoutingLogic?
+    
     //MARK: - IBOutlets
     
     @IBOutlet weak var profileButton: UIButton!
@@ -20,6 +22,26 @@ final class ConversationsListViewController: UIViewController {
     
     private let profileButtonFrame: CGRect = CGRect(x: 0, y: 0, width: 40, height: 40)
     private let kernLetterNameValue: Double = -4
+    
+    
+    //MARK: - Setup
+    
+    private func setup() {
+        let viewController = self
+        let router = ConversationListRouter()
+        viewController.router = router
+        router.viewController = viewController
+    }
+    
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        setup()
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        setup()
+    }
     
     
     //MARK: - View life cycle
@@ -57,12 +79,9 @@ final class ConversationsListViewController: UIViewController {
         if let view = ProfileIconView.instanceFromNib() {
             view.lettersNameLabel.text = "MD"
             view.lettersNameLabel.addCharacterSpacing(kernValue: kernLetterNameValue)
-            
-            profileButton.frame = profileButtonFrame
-            profileButton.layer.cornerRadius = profileButtonFrame.height / 2
-            profileButton.clipsToBounds = true
-            profileButton.setTitle(nil, for: .normal)
-            profileButton.setBackground(view)
+            view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(touchRightBarButton(_:))))
+            let rightBarButton = UIBarButtonItem(customView: view)
+            navigationItem.rightBarButtonItem = rightBarButton
         }
     }
     
@@ -163,5 +182,14 @@ extension ConversationsListViewController {
     private struct ViewModel {
         var historyMessages: [ConversationModel]
         var onlineMessages: [ConversationModel]
+    }
+}
+
+
+//MARK: - Touches
+
+extension ConversationsListViewController {
+    @objc private func touchRightBarButton(_ sender: UITapGestureRecognizer) {
+        router?.routeToProfile()
     }
 }

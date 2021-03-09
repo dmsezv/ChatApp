@@ -14,8 +14,8 @@
             <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MD" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="LaK-ao-Ooz">
-                    <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MD" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="1" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LaK-ao-Ooz">
+                    <rect key="frame" x="5" y="5" width="30" height="30"/>
                     <fontDescription key="fontDescription" type="system" pointSize="19"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
@@ -23,10 +23,10 @@
             </subviews>
             <color key="backgroundColor" name="def_avat_yellow"/>
             <constraints>
-                <constraint firstItem="LaK-ao-Ooz" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="aQm-zY-eE0"/>
-                <constraint firstAttribute="trailing" secondItem="LaK-ao-Ooz" secondAttribute="trailing" id="d5v-ZZ-yZc"/>
-                <constraint firstAttribute="bottom" secondItem="LaK-ao-Ooz" secondAttribute="bottom" id="dW1-BB-A43"/>
-                <constraint firstItem="LaK-ao-Ooz" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="lqq-ls-lXE"/>
+                <constraint firstItem="LaK-ao-Ooz" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="5" id="BBk-z3-z0C"/>
+                <constraint firstAttribute="bottom" secondItem="LaK-ao-Ooz" secondAttribute="bottom" constant="5" id="Jnr-Dl-tmt"/>
+                <constraint firstItem="LaK-ao-Ooz" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="5" id="Zd8-mf-2W2"/>
+                <constraint firstAttribute="trailing" secondItem="LaK-ao-Ooz" secondAttribute="trailing" constant="5" id="l03-ae-w6T"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>

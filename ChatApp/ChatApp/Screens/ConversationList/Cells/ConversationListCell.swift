@@ -15,6 +15,10 @@ class ConversationListCell: UITableViewCell {
     @IBOutlet weak var nameLetterView: UIView!
     @IBOutlet weak var nameLetterLabel: UILabel!
     
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+    }
     
     func configure(with model: ConversationCellConfiguration) {
         nameLabel.text = model.name ?? "Unknown user"
