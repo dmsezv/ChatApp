@@ -9,7 +9,8 @@ import UIKit
 
 protocol ConversationListRoutingLogic {
     func routeToProfile()
-    func routeToShowChat()
+    func routeToSettings()
+    func routeToShowChat(title: String?)
 }
 
 class ConversationListRouter: ConversationListRoutingLogic {
@@ -17,12 +18,22 @@ class ConversationListRouter: ConversationListRoutingLogic {
     
     func routeToProfile() {
         let SB = UIStoryboard(name: "Profile", bundle: nil)
-        if let destinationController = SB.instantiateInitialViewController() as? ProfileViewController {
-            viewController?.present(destinationController, animated: true)
+        if let destinationVC = SB.instantiateInitialViewController() as? ProfileViewController {
+            viewController?.present(destinationVC, animated: true)
         }
     }
     
-    func routeToShowChat() {
-        
+    func routeToShowChat(title: String?) {
+        if let destinationVC = viewController?.storyboard?.instantiateViewController(withIdentifier: String(describing: ConversationViewController.self)) as? ConversationViewController {
+            destinationVC.title = title ?? "Unknown user"
+            viewController?.show(destinationVC, sender: nil)
+        }
+    }
+    
+    func routeToSettings() {
+        let SB = UIStoryboard(name: "ThemesSetting", bundle: nil)
+        if let destinationVC = SB.instantiateInitialViewController() as? ThemesViewController {
+            viewController?.show(destinationVC, sender: nil)
+        }
     }
 }

@@ -41,9 +41,6 @@
                                 <rect key="frame" x="20" y="9.5" width="25" height="25"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="settingsLogo"/>
-                                <connections>
-                                    <segue destination="3f8-Oq-6iG" kind="show" id="zdO-dh-S5s"/>
-                                </connections>
                             </button>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" style="plain" id="PuO-so-Xeh">
@@ -59,6 +56,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="profileButton" destination="RdM-8D-ubc" id="lhT-0d-Rjc"/>
+                        <outlet property="settingsButton" destination="zFL-qd-xBB" id="9dX-au-YT5"/>
                         <outlet property="tableView" destination="9Nd-eA-gmH" id="qos-GI-GTG"/>
                         <segue destination="Zoi-tU-2HO" kind="show" identifier="showChatSegue" id="w9b-3E-TF7"/>
                     </connections>
@@ -103,16 +101,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Xrh-Zj-F6g" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2041" y="108"/>
-        </scene>
-        <!--ThemesSetting-->
-        <scene sceneID="1Pc-KV-LfA">
-            <objects>
-                <viewControllerPlaceholder storyboardName="ThemesSetting" id="3f8-Oq-6iG" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" id="h2M-rD-smJ"/>
-                </viewControllerPlaceholder>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Ne0-6q-mzB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1616" y="-385"/>
         </scene>
         <!--Profile-->
         <scene sceneID="JSk-4M-lpW">

@@ -16,6 +16,7 @@ final class ConversationsListViewController: UIViewController {
     
     @IBOutlet weak var profileButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var settingsButton: UIButton!
     
     
     // MARK: - Drawing Constants
@@ -64,6 +65,16 @@ final class ConversationsListViewController: UIViewController {
         tableView.register(UINib(nibName: cellIdentifier, bundle: nil), forCellReuseIdentifier: cellIdentifier)
         tableView.delegate = self
         tableView.dataSource = self
+        
+        settingsButton.addTarget(self, action: #selector(touchSettingsButton(_:)), for: .touchUpInside)
+        
+        if let view = ProfileIconView.instanceFromNib() {
+            view.lettersNameLabel.text = "MD"
+            view.lettersNameLabel.addCharacterSpacing(kernValue: kernLetterNameValue)
+            view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(touchRightBarButton(_:))))
+            let rightBarButton = UIBarButtonItem(customView: view)
+            navigationItem.rightBarButtonItem = rightBarButton
+        }
     }
     
     private func loadData() {
@@ -75,14 +86,6 @@ final class ConversationsListViewController: UIViewController {
         viewModelMessages = ConversationsListViewController.ViewModel(
             historyMessages: historyMessages,
             onlineMessages: onlineMessages)
-        
-        if let view = ProfileIconView.instanceFromNib() {
-            view.lettersNameLabel.text = "MD"
-            view.lettersNameLabel.addCharacterSpacing(kernValue: kernLetterNameValue)
-            view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(touchRightBarButton(_:))))
-            let rightBarButton = UIBarButtonItem(customView: view)
-            navigationItem.rightBarButtonItem = rightBarButton
-        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -110,9 +113,9 @@ extension ConversationsListViewController: UITableViewDelegate, UITableViewDataS
         //TODO: нужен router
         switch indexPath.section {
         case TableSection.history.getSectionIndex():
-            performSegue(withIdentifier: "showChatSegue", sender: vm.historyMessages[indexPath.row].name)
+            router?.routeToShowChat(title: vm.historyMessages[indexPath.row].name)
         case TableSection.online.getSectionIndex():
-            performSegue(withIdentifier: "showChatSegue", sender: vm.onlineMessages[indexPath.row].name)
+            router?.routeToShowChat(title: vm.onlineMessages[indexPath.row].name)
         default: break
         }
     }
@@ -191,5 +194,9 @@ extension ConversationsListViewController {
 extension ConversationsListViewController {
     @objc private func touchRightBarButton(_ sender: UITapGestureRecognizer) {
         router?.routeToProfile()
+    }
+    
+    @objc private func touchSettingsButton(_ sender: UIButton) {
+        router?.routeToSettings()
     }
 }
