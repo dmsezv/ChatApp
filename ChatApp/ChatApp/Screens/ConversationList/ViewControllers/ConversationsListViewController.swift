@@ -8,6 +8,10 @@
 import Foundation
 import UIKit
 
+protocol ConversationsListVCDelegate {
+    func change(theme: ColorTheme)
+}
+
 final class ConversationsListViewController: UIViewController {
     
     var router: ConversationListRoutingLogic?
@@ -198,5 +202,21 @@ extension ConversationsListViewController {
     
     @objc private func touchSettingsButton(_ sender: UIButton) {
         router?.routeToSettings()
+    }
+}
+
+
+//MARK: - Delegate
+
+extension ConversationsListViewController: ConversationsListVCDelegate {
+    func change(theme: ColorTheme) {
+        switch theme {
+        case .classic:
+            tableView.backgroundColor = .white
+        case .day:
+            tableView.backgroundColor = .blue
+        case .night:
+            tableView.backgroundColor = .black
+        }
     }
 }

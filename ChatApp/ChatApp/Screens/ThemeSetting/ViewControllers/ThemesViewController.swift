@@ -9,13 +9,9 @@ import UIKit
 
 class ThemesViewController: UIViewController {
     
-    enum ThemeTypes: Int {
-        case day = 0
-        case night = 1
-        case classic = 2
-    }
-    
     //MARK: - IBOutlet
+    
+    @IBOutlet weak var contentView: UIView!
     
     @IBOutlet weak var themeClassicView: UIView!
     @IBOutlet weak var themeClassicLabel: UILabel!
@@ -30,6 +26,12 @@ class ThemesViewController: UIViewController {
         navigationController?.popViewController(animated: true)
     }
     
+    
+    //MARK: Properties
+    
+    var delegate: ConversationsListVCDelegate?
+    var changeThemeCallback: ((ThemeColors) -> Void)?
+    let colorTheme: ColorTheme = .classic
     
     //MARK: - Drawing Constants
     
@@ -52,17 +54,19 @@ class ThemesViewController: UIViewController {
         setupThemeClassicView()
         setupThemeNightView()
         setupThemeDayView()
+        
+        change(colorTheme)
     }
     
     private func setupThemeNightView() {
         if let chooseThemeButtonView = ChooseThemeButtonView.instanceFromNib() {
             chooseThemeButtonView.configureThemeButtonView(.night,  parentBounds: themeDayView.bounds)
             themeNightView.addSubview(chooseThemeButtonView)
-            themeNightView.tag = ThemeTypes.night.rawValue
+            themeNightView.tag = ColorTheme.night.rawValue
             configureTheme(themeNightView)
 
             themeNightLabel.text = "Night"
-            themeNightLabel.tag = ThemeTypes.night.rawValue
+            themeNightLabel.tag = ColorTheme.night.rawValue
             configureTheme(themeNightLabel)
         }
     }
@@ -71,11 +75,11 @@ class ThemesViewController: UIViewController {
         if let chooseThemeButtonView = ChooseThemeButtonView.instanceFromNib() {
             chooseThemeButtonView.configureThemeButtonView(.day, parentBounds: themeDayView.bounds)
             themeDayView.addSubview(chooseThemeButtonView)
-            themeDayView.tag = ThemeTypes.day.rawValue
+            themeDayView.tag = ColorTheme.day.rawValue
             configureTheme(themeDayView)
 
             themeDayLabel.text = "Day"
-            themeDayLabel.tag = ThemeTypes.day.rawValue
+            themeDayLabel.tag = ColorTheme.day.rawValue
             configureTheme(themeDayLabel)
         }
     }
@@ -84,11 +88,11 @@ class ThemesViewController: UIViewController {
         if let chooseThemeButtonView = ChooseThemeButtonView.instanceFromNib() {
             chooseThemeButtonView.configureThemeButtonView(.classic,  parentBounds: themeDayView.bounds)
             themeClassicView.addSubview(chooseThemeButtonView)
-            themeClassicView.tag = ThemeTypes.classic.rawValue
+            themeClassicView.tag = ColorTheme.classic.rawValue
             configureTheme(themeClassicView)
             
             themeClassicLabel.text = "Classic"
-            themeClassicLabel.tag = ThemeTypes.classic.rawValue
+            themeClassicLabel.tag = ColorTheme.classic.rawValue
             configureTheme(themeClassicLabel)
         }
     }
@@ -108,16 +112,30 @@ class ThemesViewController: UIViewController {
         label.isUserInteractionEnabled = true
     }
     
-    private func select(_ view: UIView) {
+    private func change(_ theme: ColorTheme) {
         themeClassicView.layer.borderWidth = 0
         themeDayView.layer.borderWidth = 0
         themeNightView.layer.borderWidth = 0
         
-        view.layer.borderWidth = 2
+        switch theme {
+        case .classic:
+            contentView.backgroundColor = UIColor.ChooseThemeButtonView.Classic.rightViewColorGreen
+            themeClassicView.layer.borderWidth = 2
+        case .day:
+            contentView.backgroundColor = UIColor.ChooseThemeButtonView.Day.rightViewColorBlue
+            themeDayView.layer.borderWidth = 2
+        case .night:
+            contentView.backgroundColor = UIColor.ChooseThemeButtonView.Night.rightViewColorGray
+            themeNightView.layer.borderWidth = 2
+        }
+        
+        changeInApplication(theme)
     }
     
-    private func changeTheme(type: ThemeTypes) {
-        
+    private func changeInApplication(_ theme: ColorTheme) {
+        if let delegate = delegate {
+            delegate.change(theme: theme)
+        }
     }
 }
 
@@ -126,28 +144,16 @@ class ThemesViewController: UIViewController {
 
 extension ThemesViewController {
     @objc private func touchThemeView(_ sender: UITapGestureRecognizer) {
-        if let view = sender.view {
-            select(view)
+        if let view = sender.view,
+           let theme = ColorTheme(rawValue: view.tag) {
+            change(theme)
         }
     }
     
     @objc private func touchThemeLabel(_ sender: UITapGestureRecognizer) {
-        if let label = sender.view as? UILabel {
-            switch label.tag {
-            case ThemeTypes.classic.rawValue:
-                if let view = themeClassicView {
-                    select(view)
-                }
-            case ThemeTypes.day.rawValue:
-                if let view = themeDayView {
-                    select(view)
-                }
-            case ThemeTypes.night.rawValue:
-                if let view = themeNightView {
-                    select(view)
-                }
-            default: break
-            }
+        if let label = sender.view as? UILabel,
+           let theme = ColorTheme(rawValue: label.tag) {
+            change(theme)
         }
     }
 }

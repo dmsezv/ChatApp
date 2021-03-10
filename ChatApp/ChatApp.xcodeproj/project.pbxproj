@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4D0C0B9F25F9652500781A47 /* ColorTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D0C0B9E25F9652500781A47 /* ColorTheme.swift */; };
 		4D26AEBA25F0437B00C0B8C6 /* Extension+UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D26AEB925F0437B00C0B8C6 /* Extension+UIColor.swift */; };
 		4D2AFD7425E4198100706ACE /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4D2AFD7325E4198100706ACE /* Colors.xcassets */; };
 		4D2AFD7925E41B3200706ACE /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D2AFD7825E41B3200706ACE /* ProfileViewController.swift */; };
@@ -43,6 +44,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4D0C0B9E25F9652500781A47 /* ColorTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorTheme.swift; sourceTree = "<group>"; };
 		4D26AEB925F0437B00C0B8C6 /* Extension+UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIColor.swift"; sourceTree = "<group>"; };
 		4D2AFD7325E4198100706ACE /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		4D2AFD7825E41B3200706ACE /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
@@ -263,6 +265,7 @@
 			children = (
 				4DD6E8CD25DC549600EF5039 /* DLogger.swift */,
 				4DAFEC5C25F15D9D00CE1BEA /* DataProvider.swift */,
+				4D0C0B9E25F9652500781A47 /* ColorTheme.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -398,6 +401,7 @@
 				4D26AEBA25F0437B00C0B8C6 /* Extension+UIColor.swift in Sources */,
 				4D49ADBD25D7F7FE000F0BBB /* AppDelegate.swift in Sources */,
 				4DAFEC7725F6497600CE1BEA /* ProfileIconView.swift in Sources */,
+				4D0C0B9F25F9652500781A47 /* ColorTheme.swift in Sources */,
 				4D92DF8425EEF1EF0093FA2A /* ConversationViewController.swift in Sources */,
 				4D92DF7125ED7CE60093FA2A /* Extension+Date.swift in Sources */,
 			);
