@@ -11,23 +11,6 @@ protocol ThemePickerDelegate: class {
     func changeThemeTo(_ type: ThemePicker.ThemeType)
 }
 
-//final class ThemePicker: ThemePickerDelegate {
-//    func changeThemeTo(_ type: Theme.ThemeType) {
-//        switch type {
-//        case .classic:
-//            Theme.current = ClassicTheme()
-//        case .day:
-//            Theme.current = DayTheme()
-//        case .night:
-//            Theme.current = NightTheme()
-//        }
-//    }
-//
-//    var changeThemeCallback = {
-//
-//    }
-//}
-
 
 
 final class ThemePicker: ThemePickerDelegate {
@@ -53,12 +36,35 @@ final class ThemePicker: ThemePickerDelegate {
         let theme = ThemePicker.shared.getTheme(type)
         
         UITableView.appearance().backgroundColor = theme.backgroundColor
-
+      
+        UINavigationBar.appearance().tintColor = theme.textColor
+        UINavigationBar.appearance().barTintColor = theme.backgroundColor
+        UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: theme.textColor]
+        
+        if #available(iOS 13.0, *) {
+            guard let window = UIApplication.shared.windows.first(where: { $0.isKeyWindow }) else { return }
+            window.overrideUserInterfaceStyle = theme.userInterfaceStyle
+            window.subviews.forEach { view in
+                view.removeFromSuperview()
+                window.addSubview(view)
+            }
+        } else {
+            let window = UIApplication.shared.keyWindow
+            window?.rootViewController?.setNeedsStatusBarAppearanceUpdate()
+            window?.subviews.forEach { view in
+                view.removeFromSuperview()
+                window?.addSubview(view)
+            }
+        }
         
         currentTheme = theme
     }
     
     func changeThemeTo(_ type: ThemePicker.ThemeType) {
         setupTheme(type)
+    }
+    
+    lazy var callbackChangeTheme = { [weak self] (type: ThemePicker.ThemeType) in
+        self?.setupTheme(type)
     }
 }

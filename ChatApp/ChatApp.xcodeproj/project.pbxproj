@@ -12,6 +12,7 @@
 		4D0C0BAA25F96F5A00781A47 /* NightTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D0C0BA925F96F5A00781A47 /* NightTheme.swift */; };
 		4D0C0BAD25F96F7B00781A47 /* DayTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D0C0BAC25F96F7B00781A47 /* DayTheme.swift */; };
 		4D0C0BB125F96FE100781A47 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D0C0BB025F96FE100781A47 /* Theme.swift */; };
+		4D0C0BBD25FA26C000781A47 /* ConversationListNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D0C0BBC25FA26C000781A47 /* ConversationListNavigationController.swift */; };
 		4D26AEBA25F0437B00C0B8C6 /* Extension+UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D26AEB925F0437B00C0B8C6 /* Extension+UIColor.swift */; };
 		4D2AFD7425E4198100706ACE /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4D2AFD7325E4198100706ACE /* Colors.xcassets */; };
 		4D2AFD7925E41B3200706ACE /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D2AFD7825E41B3200706ACE /* ProfileViewController.swift */; };
@@ -53,6 +54,7 @@
 		4D0C0BA925F96F5A00781A47 /* NightTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NightTheme.swift; sourceTree = "<group>"; };
 		4D0C0BAC25F96F7B00781A47 /* DayTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayTheme.swift; sourceTree = "<group>"; };
 		4D0C0BB025F96FE100781A47 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+		4D0C0BBC25FA26C000781A47 /* ConversationListNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationListNavigationController.swift; sourceTree = "<group>"; };
 		4D26AEB925F0437B00C0B8C6 /* Extension+UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIColor.swift"; sourceTree = "<group>"; };
 		4D2AFD7325E4198100706ACE /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		4D2AFD7825E41B3200706ACE /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
@@ -268,6 +270,7 @@
 			isa = PBXGroup;
 			children = (
 				4D92DF5F25ED67B90093FA2A /* ConversationsListViewController.swift */,
+				4D0C0BBC25FA26C000781A47 /* ConversationListNavigationController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -425,6 +428,7 @@
 				4D0C0BB125F96FE100781A47 /* Theme.swift in Sources */,
 				4D92DF7625EE14720093FA2A /* ConversationModel.swift in Sources */,
 				4DAFEC8525F6681400CE1BEA /* ChooseThemeButtonView.swift in Sources */,
+				4D0C0BBD25FA26C000781A47 /* ConversationListNavigationController.swift in Sources */,
 				4D2AFD7925E41B3200706ACE /* ProfileViewController.swift in Sources */,
 				4DAFEC8E25F80A8800CE1BEA /* ConversationListRouter.swift in Sources */,
 				4DCD0B0225EFBC280096F893 /* ConversationMessageIncomingViewCell.swift in Sources */,

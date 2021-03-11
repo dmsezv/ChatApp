@@ -12,4 +12,5 @@ struct ClassicTheme: ThemeProtocol {
     var backgroundColor: UIColor = .white
     var textColor: UIColor = .black
     var userInterfaceStyle: UIUserInterfaceStyle = .light
+    var statusBarStyle: UIStatusBarStyle = .default
 }

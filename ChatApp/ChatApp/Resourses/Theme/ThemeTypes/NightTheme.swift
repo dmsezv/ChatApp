@@ -12,4 +12,5 @@ struct NightTheme: ThemeProtocol {
     var backgroundColor: UIColor = .black
     var textColor: UIColor = .white
     var userInterfaceStyle: UIUserInterfaceStyle = .dark
+    var statusBarStyle: UIStatusBarStyle = .lightContent
 }
