@@ -7,6 +7,7 @@
 
 import UIKit
 
+
 class ConversationListCell: UITableViewCell {
     
     @IBOutlet weak var nameLabel: UILabel!
@@ -14,10 +15,12 @@ class ConversationListCell: UITableViewCell {
     @IBOutlet weak var messageLabel: UILabel!
     @IBOutlet weak var nameLetterView: UIView!
     @IBOutlet weak var nameLetterLabel: UILabel!
-    
+        
     override func layoutSubviews() {
         super.layoutSubviews()
         
+        backgroundColor = ThemePicker.shared.currentTheme.backgroundColor
+        nameLabel.textColor = ThemePicker.shared.currentTheme.textColor
     }
     
     func configure(with model: ConversationCellConfiguration) {

@@ -33,7 +33,7 @@ class ConversationListRouter: ConversationListRoutingLogic {
     func routeToSettings() {
         let SB = UIStoryboard(name: "ThemesSetting", bundle: nil)
         if let destinationVC = SB.instantiateInitialViewController() as? ThemesViewController {
-            destinationVC.delegate = viewController
+            //destinationVC.themePickerDelegate = Theme.c
             viewController?.show(destinationVC, sender: nil)
         }
     }

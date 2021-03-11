@@ -8,9 +8,6 @@
 import Foundation
 import UIKit
 
-protocol ConversationsListVCDelegate {
-    func change(theme: ColorTheme)
-}
 
 final class ConversationsListViewController: UIViewController {
     
@@ -69,6 +66,7 @@ final class ConversationsListViewController: UIViewController {
         tableView.register(UINib(nibName: cellIdentifier, bundle: nil), forCellReuseIdentifier: cellIdentifier)
         tableView.delegate = self
         tableView.dataSource = self
+        
         
         settingsButton.addTarget(self, action: #selector(touchSettingsButton(_:)), for: .touchUpInside)
         
@@ -158,6 +156,7 @@ extension ConversationsListViewController: UITableViewDelegate, UITableViewDataS
             return UITableViewCell()
         }
         
+        
         return cell
     }
 }
@@ -201,22 +200,23 @@ extension ConversationsListViewController {
     }
     
     @objc private func touchSettingsButton(_ sender: UIButton) {
-        router?.routeToSettings()
-    }
-}
-
-
-//MARK: - Delegate
-
-extension ConversationsListViewController: ConversationsListVCDelegate {
-    func change(theme: ColorTheme) {
-        switch theme {
-        case .classic:
-            tableView.backgroundColor = .white
-        case .day:
-            tableView.backgroundColor = .blue
-        case .night:
-            tableView.backgroundColor = .black
+        //router?.routeToSettings()
+        
+        let SB = UIStoryboard(name: "ThemesSetting", bundle: nil)
+        if let destinationVC = SB.instantiateInitialViewController() as? ThemesViewController {
+            destinationVC.themePickerDelegate = ThemePicker.shared
+//            destinationVC.themePickerCallback = { (type) in
+//                switch type {
+//                case .classic:
+//                    Theme.current = ClassicTheme()
+//                case .day:
+//                    Theme.current = DayTheme()
+//                case .night:
+//                    Theme.current = NightTheme()
+//                }
+//            }
+            navigationController?.pushViewController(destinationVC, animated: true)
+            //show(destinationVC, sender: nil)
         }
     }
 }
