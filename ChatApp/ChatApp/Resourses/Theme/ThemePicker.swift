@@ -40,6 +40,7 @@ final class ThemePicker: ThemePickerDelegate {
         UINavigationBar.appearance().tintColor = theme.textColor
         UINavigationBar.appearance().barTintColor = theme.backgroundColor
         UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: theme.textColor]
+        UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: theme.textColor]
         
         if #available(iOS 13.0, *) {
             guard let window = UIApplication.shared.windows.first(where: { $0.isKeyWindow }) else { return }
@@ -57,6 +58,8 @@ final class ThemePicker: ThemePickerDelegate {
             }
         }
         
+        //TODO: сохрянение id темы например в UserDefaults
+        
         currentTheme = theme
     }
     
@@ -64,8 +67,6 @@ final class ThemePicker: ThemePickerDelegate {
         setupTheme(type)
     }
     
-    //я решил использовать singleton, поэтому здесь weak не нужен, тк класс не будет освобожден
-    //но в другом случае weak помог бы избежать утечки памяти тк не итерировал бы счетчик ссылок
     lazy var callbackChangeTheme: ((ThemePicker.ThemeType) -> Void)? = { [weak self] (type: ThemePicker.ThemeType) in
         self?.setupTheme(type)
     }

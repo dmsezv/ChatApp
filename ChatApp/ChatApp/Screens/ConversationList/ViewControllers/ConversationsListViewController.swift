@@ -78,6 +78,7 @@ final class ConversationsListViewController: UIViewController {
         
         if let view = ProfileIconView.instanceFromNib() {
             view.lettersNameLabel.text = "MD"
+            view.lettersNameLabel.textColor = .black
             view.lettersNameLabel.addCharacterSpacing(kernValue: kernLetterNameValue)
             view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(touchRightBarButton(_:))))
             let rightBarButton = UIBarButtonItem(customView: view)
@@ -116,10 +117,6 @@ extension ConversationsListViewController: UITableViewDelegate, UITableViewDataS
         default: break
         }
     }
-    
-//    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-//        TableSection.getSectionTitleBy(index: section)
-//    }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let viewHeader = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: titleViewHeight))

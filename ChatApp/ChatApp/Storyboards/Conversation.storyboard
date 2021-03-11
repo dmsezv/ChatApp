@@ -36,14 +36,14 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Tinkoff Chat" id="8VE-Vm-7dE">
-                        <barButtonItem key="leftBarButtonItem" title="Item" style="plain" id="bsx-CZ-nYM">
+                        <barButtonItem key="leftBarButtonItem" title="Item" id="bsx-CZ-nYM">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="zFL-qd-xBB">
                                 <rect key="frame" x="20" y="9.5" width="25" height="25"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="settingsLogo"/>
                             </button>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" style="plain" id="PuO-so-Xeh">
+                        <barButtonItem key="rightBarButtonItem" id="PuO-so-Xeh">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="RdM-8D-ubc">
                                 <rect key="frame" x="302" y="7" width="92" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>

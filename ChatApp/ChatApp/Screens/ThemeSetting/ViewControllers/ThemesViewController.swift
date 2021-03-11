@@ -29,7 +29,9 @@ class ThemesViewController: UIViewController {
     
     
     //MARK: Delegate & Callback
-    
+    //я решил использовать singleton, поэтому здесь weak не нужен, тк класс не будет освобожден
+    //но в другом случае weak помог бы избежать утечки памяти тк не итерировал бы счетчик ссылок
+    //и благодаря тому, что он optional мы могли бы безопасно стучать в делегат
     var themePickerDelegate: ThemePickerDelegate?
     var themePickerCallback: ((ThemePicker.ThemeType) -> Void)?
 

@@ -75,6 +75,7 @@ class ProfileViewController: UIViewController {
     
     private func setupView() {
         labelInitials?.addCharacterSpacing(kernValue: charSpacing)
+        labelInitials?.textColor = .black
         
         btnEdit?.clipsToBounds = true
         btnEdit?.layer.cornerRadius = cornRadBtn

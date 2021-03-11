@@ -19,24 +19,8 @@ class ConversationListCell: UITableViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        
-    }
-    
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
         backgroundColor = ThemePicker.shared.currentTheme.backgroundColor
         nameLabel.textColor = ThemePicker.shared.currentTheme.textColor
-    }
-    
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-    }
-    
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        
-        backgroundColor = nil
     }
     
     func configure(with model: ConversationCellConfiguration) {

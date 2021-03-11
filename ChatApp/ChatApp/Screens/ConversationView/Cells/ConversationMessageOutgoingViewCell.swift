@@ -11,15 +11,10 @@ class ConversationMessageOutgoingViewCell: UITableViewCell {
     @IBOutlet weak var messageView: UIView!
     @IBOutlet weak var messageLabel: UILabel!
     
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
+    override func layoutSubviews() {
+        super.layoutSubviews()
         
         contentView.backgroundColor = ThemePicker.shared.currentTheme.backgroundColor
-    }
-    
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-
     }
     
     func configure(with model: MessageCellConfiguration) {
