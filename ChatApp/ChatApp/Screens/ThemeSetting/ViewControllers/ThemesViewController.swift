@@ -7,7 +7,6 @@
 
 import UIKit
 
-typealias Theme = ThemePicker.ThemeType
 
 class ThemesViewController: UIViewController {
     
@@ -29,9 +28,10 @@ class ThemesViewController: UIViewController {
     }
     
     
-    //MARK: Properties
+    //MARK: Delegate & Callback
+    
     var themePickerDelegate: ThemePickerDelegate?
-    //weak var themePickerCallback: ((Theme.ThemeType) -> Void)?
+    var themePickerCallback: ((ThemePicker.ThemeType) -> Void)?
 
     
     //MARK: - Drawing Constants
@@ -63,11 +63,11 @@ class ThemesViewController: UIViewController {
         if let chooseThemeButtonView = ChooseThemeButtonView.instanceFromNib() {
             chooseThemeButtonView.configureThemeButtonView(.night,  parentBounds: themeDayView.bounds)
             themeNightView.addSubview(chooseThemeButtonView)
-            themeNightView.tag = Theme.night.rawValue
+            themeNightView.tag = ThemePicker.ThemeType.night.rawValue
             configureTheme(themeNightView)
 
             themeNightLabel.text = "Night"
-            themeNightLabel.tag = Theme.night.rawValue
+            themeNightLabel.tag = ThemePicker.ThemeType.night.rawValue
             configureTheme(themeNightLabel)
         }
     }
@@ -76,11 +76,11 @@ class ThemesViewController: UIViewController {
         if let chooseThemeButtonView = ChooseThemeButtonView.instanceFromNib() {
             chooseThemeButtonView.configureThemeButtonView(.day, parentBounds: themeDayView.bounds)
             themeDayView.addSubview(chooseThemeButtonView)
-            themeDayView.tag = Theme.day.rawValue
+            themeDayView.tag = ThemePicker.ThemeType.day.rawValue
             configureTheme(themeDayView)
 
             themeDayLabel.text = "Day"
-            themeDayLabel.tag = Theme.day.rawValue
+            themeDayLabel.tag = ThemePicker.ThemeType.day.rawValue
             configureTheme(themeDayLabel)
         }
     }
@@ -133,13 +133,13 @@ class ThemesViewController: UIViewController {
         changeInApplication(theme)
     }
     
-    private func changeInApplication(_ themeType: Theme) {
+    private func changeInApplication(_ themeType: ThemePicker.ThemeType) {
         if let delegate = themePickerDelegate {
             delegate.changeThemeTo(themeType)
         }
-//        else if let callback = themePickerCallback {
-//            callback(themeType)
-//        }
+        else if let callback = themePickerCallback {
+            callback(themeType)
+        }
     }
 }
 
@@ -149,14 +149,14 @@ class ThemesViewController: UIViewController {
 extension ThemesViewController {
     @objc private func touchThemeView(_ sender: UITapGestureRecognizer) {
         if let view = sender.view,
-           let theme = Theme(rawValue: view.tag) {
+           let theme = ThemePicker.ThemeType(rawValue: view.tag) {
             change(theme)
         }
     }
     
     @objc private func touchThemeLabel(_ sender: UITapGestureRecognizer) {
         if let label = sender.view as? UILabel,
-           let theme = Theme(rawValue: label.tag) {
+           let theme = ThemePicker.ThemeType(rawValue: label.tag) {
             change(theme)
         }
     }

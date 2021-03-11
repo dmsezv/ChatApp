@@ -64,7 +64,7 @@ final class ThemePicker: ThemePickerDelegate {
         setupTheme(type)
     }
     
-    lazy var callbackChangeTheme = { [weak self] (type: ThemePicker.ThemeType) in
+    lazy var callbackChangeTheme: ((ThemePicker.ThemeType) -> Void)? = { [weak self] (type: ThemePicker.ThemeType) in
         self?.setupTheme(type)
     }
 }
