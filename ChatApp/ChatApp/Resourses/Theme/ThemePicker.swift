@@ -64,6 +64,8 @@ final class ThemePicker: ThemePickerDelegate {
         setupTheme(type)
     }
     
+    //я решил использовать singleton, поэтому здесь weak не нужен, тк класс не будет освобожден
+    //но в другом случае weak помог бы избежать утечки памяти тк не итерировал бы счетчик ссылок
     lazy var callbackChangeTheme: ((ThemePicker.ThemeType) -> Void)? = { [weak self] (type: ThemePicker.ThemeType) in
         self?.setupTheme(type)
     }

@@ -24,6 +24,10 @@ final class ConversationsListViewController: UIViewController {
     
     private let profileButtonFrame: CGRect = CGRect(x: 0, y: 0, width: 40, height: 40)
     private let kernLetterNameValue: Double = -4
+    private let titleViewHeight: CGFloat = 40
+    private let titleLabelPaddingX: CGFloat = 10
+    private let titleLabelPaddingY: CGFloat = -5
+    private let titleLableFontSize: CGFloat = 15
     
     
     //MARK: - Setup
@@ -58,8 +62,10 @@ final class ConversationsListViewController: UIViewController {
         loadData()
     }
     
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        tableView.reloadData()
     }
     
     private func setupView() {
@@ -89,16 +95,6 @@ final class ConversationsListViewController: UIViewController {
             historyMessages: historyMessages,
             onlineMessages: onlineMessages)
     }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        //TODO: нужен router
-        if segue.identifier == "showChatSegue" {
-            if let destinationVC = segue.destination as? ConversationViewController,
-               let nameTitle = sender as? String? {
-                destinationVC.title = nameTitle ?? "Unknown User"
-            }
-        }
-    }
 }
 
 
@@ -112,7 +108,6 @@ extension ConversationsListViewController: UITableViewDelegate, UITableViewDataS
             return
         }
         
-        //TODO: нужен router
         switch indexPath.section {
         case TableSection.history.getSectionIndex():
             router?.routeToShowChat(title: vm.historyMessages[indexPath.row].name)
@@ -122,8 +117,21 @@ extension ConversationsListViewController: UITableViewDelegate, UITableViewDataS
         }
     }
     
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        TableSection.getSectionTitleBy(index: section)
+//    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+//        TableSection.getSectionTitleBy(index: section)
+//    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let viewHeader = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: titleViewHeight))
+        viewHeader.backgroundColor = ThemePicker.shared.currentTheme.backgroundColor
+        
+        let label = UILabel(frame: CGRect(x: titleLabelPaddingX, y: titleLabelPaddingY, width: viewHeader.frame.width, height: viewHeader.frame.height))
+        label.text = TableSection.getSectionTitleBy(index: section)
+        label.textColor = ThemePicker.shared.currentTheme.textColor
+        label.font = .boldSystemFont(ofSize: titleLableFontSize)
+        
+        viewHeader.addSubview(label)
+        return viewHeader
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {

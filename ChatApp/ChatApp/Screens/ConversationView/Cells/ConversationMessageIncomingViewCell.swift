@@ -11,6 +11,16 @@ class ConversationMessageIncomingViewCell: UITableViewCell {
     @IBOutlet weak var messageLabel: UILabel!
     @IBOutlet weak var messageView: UIView!
     
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        
+        contentView.backgroundColor = ThemePicker.shared.currentTheme.backgroundColor
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+    }
+    
     func configure(with model: MessageCellConfiguration) {
         messageLabel.text = model.text
         messageView.layer.cornerRadius = cornerRadius
