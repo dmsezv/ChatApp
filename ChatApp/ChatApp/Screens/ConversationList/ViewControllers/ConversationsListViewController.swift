@@ -200,23 +200,6 @@ extension ConversationsListViewController {
     }
     
     @objc private func touchSettingsButton(_ sender: UIButton) {
-        //router?.routeToSettings()
-        
-        let SB = UIStoryboard(name: "ThemesSetting", bundle: nil)
-        if let destinationVC = SB.instantiateInitialViewController() as? ThemesViewController {
-            destinationVC.themePickerDelegate = ThemePicker.shared
-//            destinationVC.themePickerCallback = { (type) in
-//                switch type {
-//                case .classic:
-//                    Theme.current = ClassicTheme()
-//                case .day:
-//                    Theme.current = DayTheme()
-//                case .night:
-//                    Theme.current = NightTheme()
-//                }
-//            }
-            navigationController?.pushViewController(destinationVC, animated: true)
-            //show(destinationVC, sender: nil)
-        }
+        router?.routeToSettings()
     }
 }

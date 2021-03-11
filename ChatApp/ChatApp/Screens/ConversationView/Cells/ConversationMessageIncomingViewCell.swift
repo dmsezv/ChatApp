@@ -15,6 +15,9 @@ class ConversationMessageIncomingViewCell: UITableViewCell {
         messageLabel.text = model.text
         messageView.layer.cornerRadius = cornerRadius
         messageView.layer.maskedCorners = maskedCorners
+        
+        messageView.backgroundColor = ThemePicker.shared.currentTheme.cellIncomingBackground
+        messageLabel.textColor = ThemePicker.shared.currentTheme.cellIncomingTextColor
     }
     
     
