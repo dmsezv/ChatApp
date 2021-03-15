@@ -43,6 +43,9 @@
 		4DCD0AFB25EFB0530096F893 /* ConversationMessageOutgoingViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4DCD0AF925EFB0530096F893 /* ConversationMessageOutgoingViewCell.xib */; };
 		4DCD0B0225EFBC280096F893 /* ConversationMessageIncomingViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DCD0B0025EFBC280096F893 /* ConversationMessageIncomingViewCell.swift */; };
 		4DCD0B0325EFBC280096F893 /* ConversationMessageIncomingViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4DCD0B0125EFBC280096F893 /* ConversationMessageIncomingViewCell.xib */; };
+		4DD6A56C2600080300CB4517 /* SaverGCD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD6A56B2600080300CB4517 /* SaverGCD.swift */; };
+		4DD6A5702600081300CB4517 /* SavedOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD6A56F2600081300CB4517 /* SavedOperations.swift */; };
+		4DD6A5742600083500CB4517 /* UserProfileSaving.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD6A5732600083500CB4517 /* UserProfileSaving.swift */; };
 		4DD6E8CE25DC549600EF5039 /* DLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD6E8CD25DC549600EF5039 /* DLogger.swift */; };
 		4DD6E8D725DC5CA300EF5039 /* Extension+VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD6E8D625DC5CA300EF5039 /* Extension+VC.swift */; };
 		4DD6E8E125DC60EC00EF5039 /* Extension+AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD6E8E025DC60EC00EF5039 /* Extension+AppDelegate.swift */; };
@@ -87,6 +90,9 @@
 		4DCD0AF925EFB0530096F893 /* ConversationMessageOutgoingViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ConversationMessageOutgoingViewCell.xib; sourceTree = "<group>"; };
 		4DCD0B0025EFBC280096F893 /* ConversationMessageIncomingViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationMessageIncomingViewCell.swift; sourceTree = "<group>"; };
 		4DCD0B0125EFBC280096F893 /* ConversationMessageIncomingViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ConversationMessageIncomingViewCell.xib; sourceTree = "<group>"; };
+		4DD6A56B2600080300CB4517 /* SaverGCD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaverGCD.swift; sourceTree = "<group>"; };
+		4DD6A56F2600081300CB4517 /* SavedOperations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedOperations.swift; sourceTree = "<group>"; };
+		4DD6A5732600083500CB4517 /* UserProfileSaving.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileSaving.swift; sourceTree = "<group>"; };
 		4DD6E8CD25DC549600EF5039 /* DLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DLogger.swift; sourceTree = "<group>"; };
 		4DD6E8D625DC5CA300EF5039 /* Extension+VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+VC.swift"; sourceTree = "<group>"; };
 		4DD6E8E025DC60EC00EF5039 /* Extension+AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+AppDelegate.swift"; sourceTree = "<group>"; };
@@ -196,6 +202,7 @@
 		4D92DF8125EEF1AD0093FA2A /* ProfileView */ = {
 			isa = PBXGroup;
 			children = (
+				4DD6A56A260007E500CB4517 /* Services */,
 				4DD6A56025FFE89900CB4517 /* ViewControllers */,
 			);
 			path = ProfileView;
@@ -297,6 +304,16 @@
 				4D2AFD7825E41B3200706ACE /* ProfileViewController.swift */,
 			);
 			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		4DD6A56A260007E500CB4517 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				4DD6A56B2600080300CB4517 /* SaverGCD.swift */,
+				4DD6A56F2600081300CB4517 /* SavedOperations.swift */,
+				4DD6A5732600083500CB4517 /* UserProfileSaving.swift */,
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 		4DD6E8CC25DC548800EF5039 /* Utils */ = {
@@ -433,6 +450,7 @@
 				4D0C0BA625F96F4500781A47 /* ClassicTheme.swift in Sources */,
 				4DD6E8CE25DC549600EF5039 /* DLogger.swift in Sources */,
 				4D0C0BA325F96E8900781A47 /* ThemeProtocol.swift in Sources */,
+				4DD6A5702600081300CB4517 /* SavedOperations.swift in Sources */,
 				4D0C0BB125F96FE100781A47 /* ThemePicker.swift in Sources */,
 				4D92DF7625EE14720093FA2A /* ConversationModel.swift in Sources */,
 				4DAFEC8525F6681400CE1BEA /* ChooseThemeButtonView.swift in Sources */,
@@ -440,6 +458,7 @@
 				4D2AFD7925E41B3200706ACE /* ProfileViewController.swift in Sources */,
 				4DAFEC8E25F80A8800CE1BEA /* ConversationListRouter.swift in Sources */,
 				4DCD0B0225EFBC280096F893 /* ConversationMessageIncomingViewCell.swift in Sources */,
+				4DD6A56C2600080300CB4517 /* SaverGCD.swift in Sources */,
 				4DD6E8D725DC5CA300EF5039 /* Extension+VC.swift in Sources */,
 				4D92DF8825EEF2400093FA2A /* MessageModel.swift in Sources */,
 				4D92DF6025ED67B90093FA2A /* ConversationsListViewController.swift in Sources */,
@@ -448,6 +467,7 @@
 				4DAFEC7725F6497600CE1BEA /* ProfileIconView.swift in Sources */,
 				4D92DF8425EEF1EF0093FA2A /* ConversationViewController.swift in Sources */,
 				4D92DF7125ED7CE60093FA2A /* Extension+Date.swift in Sources */,
+				4DD6A5742600083500CB4517 /* UserProfileSaving.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

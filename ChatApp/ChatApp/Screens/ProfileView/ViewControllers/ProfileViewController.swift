@@ -19,10 +19,29 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var avatarView: UIView!
     @IBOutlet weak var avatarImageView: UIImageView!
     @IBOutlet weak var userNameTextField: UITextField!
+    @IBOutlet weak var activityIndicatorView: UIView!
     
     @IBAction func touchButtonClose(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
+    
+    
+    lazy var activityIndicator: UIActivityIndicatorView = {
+        let activityIndicator = UIActivityIndicatorView()
+        activityIndicator.hidesWhenStopped = true
+        
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        activityIndicatorView.addSubview(activityIndicator)
+        
+        NSLayoutConstraint.activate([
+            activityIndicator.widthAnchor.constraint(equalToConstant: 20),
+            activityIndicator.heightAnchor.constraint(equalToConstant: 20),
+            activityIndicator.centerXAnchor.constraint(equalTo: activityIndicatorView.centerXAnchor),
+            activityIndicator.centerYAnchor.constraint(equalTo: activityIndicatorView.centerYAnchor)
+        ])
+        
+        return activityIndicator
+    }()
     
     // MARK: - Drawing Constants
     
@@ -51,8 +70,6 @@ class ProfileViewController: UIViewController {
         let tap = UITapGestureRecognizer(target: self, action: #selector(addAvatar(_ : )))
         avatarView.addGestureRecognizer(tap)
         avatarView.clipsToBounds = true
-        
-        userNameTextField.isEnabled = false
         
         setupViewButtons()
     }
@@ -97,6 +114,23 @@ class ProfileViewController: UIViewController {
         saveOperationsButton.isEnabled = !isEnabled
         cancelButton.isHidden = !isHidden
         cancelButton.isEnabled = !isEnabled
+    }
+    
+    private func savingMode(_ enable: Bool) {
+        saveGCDButton.isEnabled = !enable
+        saveOperationsButton.isEnabled = !enable
+        
+        if enable {
+            saveGCDButton.alpha = 0.5
+            saveOperationsButton.alpha = 0.5
+            
+            activityIndicator.startAnimating()
+        } else {
+            saveGCDButton.alpha = 1
+            saveOperationsButton.alpha = 1
+            
+            activityIndicator.stopAnimating()
+        }
     }
     
     private func setupLayout() {
@@ -209,14 +243,15 @@ extension ProfileViewController {
     
     @objc func touchCancelButton(_ sender: UIButton) {
         editingMode(false)
+        savingMode(false)
     }
     
     @objc func touchSaveGCDButton(_ sender: UIButton) {
-        
+        savingMode(true)
     }
     
     @objc func touchSaveOperationsButton(_ sender: UIButton) {
-        
+        savingMode(true)
     }
 }
 
