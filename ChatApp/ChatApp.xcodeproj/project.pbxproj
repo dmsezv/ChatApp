@@ -196,7 +196,7 @@
 		4D92DF8125EEF1AD0093FA2A /* ProfileView */ = {
 			isa = PBXGroup;
 			children = (
-				4D2AFD7825E41B3200706ACE /* ProfileViewController.swift */,
+				4DD6A56025FFE89900CB4517 /* ViewControllers */,
 			);
 			path = ProfileView;
 			sourceTree = "<group>";
@@ -287,6 +287,14 @@
 			isa = PBXGroup;
 			children = (
 				4D92DF8325EEF1EF0093FA2A /* ConversationViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		4DD6A56025FFE89900CB4517 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				4D2AFD7825E41B3200706ACE /* ProfileViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";

@@ -11,10 +11,14 @@ class ProfileViewController: UIViewController {
     
     //MARK: - IBOutlets
     
-    @IBOutlet weak var labelInitials: UILabel!
-    @IBOutlet weak var btnEdit: UIButton!
-    @IBOutlet weak var viewAvatar: UIView!
-    @IBOutlet weak var imageAvatar: UIImageView!
+    @IBOutlet weak var initialsLabel: UILabel!
+    @IBOutlet weak var editButton: UIButton!
+    @IBOutlet weak var saveGCDButton: UIButton!
+    @IBOutlet weak var saveOperationsButton: UIButton!
+    @IBOutlet weak var cancelButton: UIButton!
+    @IBOutlet weak var avatarView: UIView!
+    @IBOutlet weak var avatarImageView: UIImageView!
+    @IBOutlet weak var userNameTextField: UITextField!
     
     @IBAction func touchButtonClose(_ sender: Any) {
         dismiss(animated: true, completion: nil)
@@ -26,24 +30,6 @@ class ProfileViewController: UIViewController {
     private let charSpacing: Double = -22.0
     
     
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-        
-        //на данном этапе вьюхи еще не инициализированны
-        if let btnEdit = btnEdit {
-            log("\(btnEdit.frame)")
-        }
-    }
-    
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-        
-        //на данном этапе вьюхи еще не инициализированны
-        if let btnEdit = btnEdit {
-            log("\(btnEdit.frame)")
-        }
-    }
-    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
@@ -54,39 +40,67 @@ class ProfileViewController: UIViewController {
         super.viewDidLoad()
         
         setupView()
-        
-        //здесь вьюхи проинициализированны, но их значения взяты из IB.
-        //по заданию устройство в IB и в симуляторе разных размеров отсюда и разные фреймы
-        //окончательно все размеры посчитаются во viewDidLayoutSubviews
-        if let btnEdit = btnEdit {
-            log("\(#function) btnEdit.frame = \(btnEdit.frame)")
-        }
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        //на данном этапе frame корректный, уже все размеры посчитаны и вьюхи стоят правильно
-        //тк до этого метода уже вызвался viewDidLayoutSubviews
-        if let btnEdit = btnEdit {
-            log("\(#function) btnEdit.frame = \(btnEdit.frame)")
-        }
     }
     
     private func setupView() {
-        labelInitials?.addCharacterSpacing(kernValue: charSpacing)
-        labelInitials?.textColor = .black
+        hideKeyboardWhenTapAround()
         
-        btnEdit?.clipsToBounds = true
-        btnEdit?.layer.cornerRadius = cornRadBtn
+        initialsLabel.addCharacterSpacing(kernValue: charSpacing)
+        initialsLabel.textColor = .black
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(addAvatar(_ : )))
-        viewAvatar?.addGestureRecognizer(tap)
-        viewAvatar?.clipsToBounds = true
+        avatarView.addGestureRecognizer(tap)
+        avatarView.clipsToBounds = true
+        
+        userNameTextField.isEnabled = false
+        
+        setupViewButtons()
+    }
+    
+    private func setupViewButtons() {
+        editButton.clipsToBounds = true
+        editButton.layer.cornerRadius = cornRadBtn
+        editButton.addTarget(self, action: #selector(touchEditButton(_:)), for: .touchUpInside)
+        
+        saveGCDButton.clipsToBounds = true
+        saveGCDButton.layer.cornerRadius = cornRadBtn
+        saveGCDButton.addTarget(self, action: #selector(touchSaveGCDButton(_:)), for: .touchUpInside)
+        
+        saveOperationsButton.clipsToBounds = true
+        saveOperationsButton.layer.cornerRadius = cornRadBtn
+        saveOperationsButton.addTarget(self, action: #selector(touchSaveOperationsButton(_:)), for: .touchUpInside)
+        
+        cancelButton.clipsToBounds = true
+        cancelButton.layer.cornerRadius = cornRadBtn
+        cancelButton.addTarget(self, action: #selector(touchCancelButton(_:)), for: .touchUpInside)
+        
+        editingMode(false)
+    }
+    
+    private func editingMode(_ enabled: Bool) {
+        let isHidden = enabled
+        let isEnabled = !enabled
+        
+        editButton.isHidden = isHidden
+        editButton.isEnabled = isEnabled
+        
+        userNameTextField.isEnabled = !isEnabled
+        if !isEnabled {
+            userNameTextField.becomeFirstResponder()
+        } else {
+            userNameTextField.resignFirstResponder()
+        }
+        
+        saveGCDButton.isHidden = !isHidden
+        saveGCDButton.isEnabled = !isEnabled
+        saveOperationsButton.isHidden = !isHidden
+        saveOperationsButton.isEnabled = !isEnabled
+        cancelButton.isHidden = !isHidden
+        cancelButton.isEnabled = !isEnabled
     }
     
     private func setupLayout() {
-        if let viewAvatar = viewAvatar {
+        if let viewAvatar = avatarView {
             viewAvatar.layer.cornerRadius = viewAvatar.bounds.width / 2
         }
     }
@@ -111,12 +125,12 @@ extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationCo
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         
         if let editedImage = info[UIImagePickerController.InfoKey(rawValue: "UIImagePickerControllerEditedImage")] as? UIImage {
-            imageAvatar.image = editedImage.withRenderingMode(.alwaysOriginal)
+            avatarImageView.image = editedImage.withRenderingMode(.alwaysOriginal)
         } else if let originalImage = info[UIImagePickerController.InfoKey(rawValue: "UIImagePickerControllerOriginalImage")] as? UIImage {
-            imageAvatar.image = originalImage.withRenderingMode(.alwaysOriginal)
+            avatarImageView.image = originalImage.withRenderingMode(.alwaysOriginal)
         }
         
-        labelInitials?.isHidden = true
+        initialsLabel?.isHidden = true
         
         picker.dismiss(animated: true, completion: nil)
     }
@@ -162,11 +176,11 @@ extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationCo
 }
 
 
-//MARK: - Gesture funcs
+//MARK: - Touches
 
 extension ProfileViewController {
     @objc fileprivate func addAvatar(_ sender: UITapGestureRecognizer) {
-        guard let viewAvatar = viewAvatar else {
+        guard let viewAvatar = avatarView else {
             return
         }
         
@@ -187,6 +201,22 @@ extension ProfileViewController {
             
             present(alertController, animated: true, completion: nil)
         }
+    }
+    
+    @objc func touchEditButton(_ sender: UIButton) {
+        editingMode(true)
+    }
+    
+    @objc func touchCancelButton(_ sender: UIButton) {
+        editingMode(false)
+    }
+    
+    @objc func touchSaveGCDButton(_ sender: UIButton) {
+        
+    }
+    
+    @objc func touchSaveOperationsButton(_ sender: UIButton) {
+        
     }
 }
 
