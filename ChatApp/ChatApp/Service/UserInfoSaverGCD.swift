@@ -34,6 +34,8 @@ class UserInfoSaverGCD: UserInfoSaver {
                 return
             }
             
+            sleep(3)
+            
             do {
                 let data = try JSONEncoder().encode(model)
                 

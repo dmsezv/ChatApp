@@ -258,11 +258,38 @@ extension ProfileViewController {
     }
     
     @objc func touchSaveGCDButton(_ sender: UIButton) {
-        savingMode(true)
+        saveUserInfoBy(UserInfoSaverGCD())
     }
     
     @objc func touchSaveOperationsButton(_ sender: UIButton) {
+        saveUserInfoBy(UserInfoSaverOperation())
+    }
+    
+    private func saveUserInfoBy(_ saver: UserInfoSaver) {
         savingMode(true)
+        
+        activityIndicator.startAnimating()
+        
+        let userInfo = UserInfoModel(
+            name: userNameTextField.text,
+            position: userPositionTextField.text,
+            city: userCityTextField.text)
+        
+        saver.saveInfo(userInfo, complete: { result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success:
+                    self.activityIndicator.stopAnimating()
+                    self.savingMode(false)
+                    self.editingMode(false)
+                case .failure(let error):
+                    let alert = UIAlertController(title: "Ошибка", message: "Error", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+                    
+                    self.present(alert, animated: true, completion: nil)
+                }
+            }
+        })
     }
 }
 
