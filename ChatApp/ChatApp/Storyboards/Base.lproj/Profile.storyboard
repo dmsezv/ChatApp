@@ -41,13 +41,13 @@
                                 </state>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1aV-tZ-eHb">
-                                <rect key="frame" x="94.000000000000014" y="62.000000000000014" width="202.33333333333337" height="202.33333333333337"/>
+                                <rect key="frame" x="94" y="62" width="202" height="202"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Nfk-c6-GCw">
-                                        <rect key="frame" x="0.0" y="0.0" width="202.33333333333334" height="202.33333333333334"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="202" height="202"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MD" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="rsr-nU-fwx">
-                                        <rect key="frame" x="18" y="18" width="166.33333333333334" height="166.33333333333334"/>
+                                        <rect key="frame" x="18" y="18" width="166" height="166"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="110"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -89,12 +89,12 @@
                                 </state>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="ФИО" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Z4g-UX-9Fy">
-                                <rect key="frame" x="94.000000000000014" y="296.33333333333331" width="202.33333333333337" height="24.666666666666686"/>
+                                <rect key="frame" x="94" y="296" width="202" height="24.666666666666686"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Должность" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9Op-SG-4d3">
-                                <rect key="frame" x="94.000000000000014" y="353" width="202.33333333333337" height="19.666666666666686"/>
+                                <rect key="frame" x="94" y="352.66666666666669" width="202" height="19.666666666666686"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
@@ -110,19 +110,18 @@
                                 </state>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Город" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Kl4-3y-Ucw">
-                                <rect key="frame" x="94.000000000000014" y="380.66666666666669" width="202.33333333333337" height="19.666666666666686"/>
+                                <rect key="frame" x="94" y="380.33333333333331" width="202" height="19.666666666666686"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gdr-9n-Uhq">
-                                <rect key="frame" x="0.0" y="420.33333333333331" width="390" height="239.66666666666669"/>
+                                <rect key="frame" x="0.0" y="420" width="390" height="240"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="1aV-tZ-eHb" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="6oA-QP-qEP"/>
                             <constraint firstItem="Z4g-UX-9Fy" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Ceh-PO-MUC"/>
                             <constraint firstItem="URJ-u1-9Jf" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="55" id="DaC-pG-bUr"/>
                             <constraint firstItem="9Op-SG-4d3" firstAttribute="top" secondItem="Z4g-UX-9Fy" secondAttribute="bottom" constant="32" id="Eqx-fv-YMs"/>
@@ -141,6 +140,7 @@
                             <constraint firstItem="URJ-u1-9Jf" firstAttribute="top" secondItem="Gdr-9n-Uhq" secondAttribute="bottom" constant="20" id="gRq-IA-7MM"/>
                             <constraint firstItem="Z4g-UX-9Fy" firstAttribute="width" secondItem="1aV-tZ-eHb" secondAttribute="width" id="gZZ-Z4-ye8"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="QMT-w3-WpI" secondAttribute="bottom" constant="30" id="gyE-Hf-8aW"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="1aV-tZ-eHb" secondAttribute="trailing" constant="94" id="igs-tP-CCc"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="nGN-nz-ISt" secondAttribute="trailing" constant="55" id="mrL-UY-1SM"/>
                             <constraint firstItem="AD8-Mi-JiU" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="18" id="mwe-E2-7kO"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="AD8-Mi-JiU" secondAttribute="trailing" constant="18" id="mwe-Es-vhA"/>
@@ -151,6 +151,7 @@
                             <constraint firstItem="1aV-tZ-eHb" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="18" id="yQt-ac-gLU"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="URJ-u1-9Jf" secondAttribute="trailing" constant="55" id="zQK-EJ-nkO"/>
                             <constraint firstItem="Kl4-3y-Ucw" firstAttribute="top" secondItem="9Op-SG-4d3" secondAttribute="bottom" constant="8" id="zTB-VC-o1j"/>
+                            <constraint firstItem="1aV-tZ-eHb" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="94" id="zuC-eO-9lQ"/>
                         </constraints>
                     </view>
                     <connections>
@@ -162,7 +163,9 @@
                         <outlet property="initialsLabel" destination="rsr-nU-fwx" id="XCp-Mf-t1D"/>
                         <outlet property="saveGCDButton" destination="jee-Nk-L91" id="f4k-bM-1Vx"/>
                         <outlet property="saveOperationsButton" destination="QMT-w3-WpI" id="oul-0h-M08"/>
+                        <outlet property="userCityTextField" destination="Kl4-3y-Ucw" id="foK-Bc-Y17"/>
                         <outlet property="userNameTextField" destination="Z4g-UX-9Fy" id="Tje-u2-dfs"/>
+                        <outlet property="userPositionTextField" destination="9Op-SG-4d3" id="uJA-J4-X73"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

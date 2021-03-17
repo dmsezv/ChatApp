@@ -39,6 +39,9 @@
 		4DAFEC8525F6681400CE1BEA /* ChooseThemeButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DAFEC8425F6681400CE1BEA /* ChooseThemeButtonView.swift */; };
 		4DAFEC8A25F805CE00CE1BEA /* ProfileBarButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DAFEC8925F805CD00CE1BEA /* ProfileBarButtonView.swift */; };
 		4DAFEC8E25F80A8800CE1BEA /* ConversationListRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DAFEC8D25F80A8800CE1BEA /* ConversationListRouter.swift */; };
+		4DC1199E260256C30027E4A0 /* UserInfoSaverGCD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DC1199D260256C30027E4A0 /* UserInfoSaverGCD.swift */; };
+		4DC119A1260256D40027E4A0 /* UserInfoSaverOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DC119A0260256D40027E4A0 /* UserInfoSaverOperations.swift */; };
+		4DC119A52602570A0027E4A0 /* UserInfoSaver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DC119A42602570A0027E4A0 /* UserInfoSaver.swift */; };
 		4DCD0AFA25EFB0530096F893 /* ConversationMessageOutgoingViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DCD0AF825EFB0530096F893 /* ConversationMessageOutgoingViewCell.swift */; };
 		4DCD0AFB25EFB0530096F893 /* ConversationMessageOutgoingViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4DCD0AF925EFB0530096F893 /* ConversationMessageOutgoingViewCell.xib */; };
 		4DCD0B0225EFBC280096F893 /* ConversationMessageIncomingViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DCD0B0025EFBC280096F893 /* ConversationMessageIncomingViewCell.swift */; };
@@ -86,6 +89,9 @@
 		4DAFEC8425F6681400CE1BEA /* ChooseThemeButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseThemeButtonView.swift; sourceTree = "<group>"; };
 		4DAFEC8925F805CD00CE1BEA /* ProfileBarButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileBarButtonView.swift; sourceTree = "<group>"; };
 		4DAFEC8D25F80A8800CE1BEA /* ConversationListRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationListRouter.swift; sourceTree = "<group>"; };
+		4DC1199D260256C30027E4A0 /* UserInfoSaverGCD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoSaverGCD.swift; sourceTree = "<group>"; };
+		4DC119A0260256D40027E4A0 /* UserInfoSaverOperations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoSaverOperations.swift; sourceTree = "<group>"; };
+		4DC119A42602570A0027E4A0 /* UserInfoSaver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoSaver.swift; sourceTree = "<group>"; };
 		4DCD0AF825EFB0530096F893 /* ConversationMessageOutgoingViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationMessageOutgoingViewCell.swift; sourceTree = "<group>"; };
 		4DCD0AF925EFB0530096F893 /* ConversationMessageOutgoingViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ConversationMessageOutgoingViewCell.xib; sourceTree = "<group>"; };
 		4DCD0B0025EFBC280096F893 /* ConversationMessageIncomingViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationMessageIncomingViewCell.swift; sourceTree = "<group>"; };
@@ -159,6 +165,7 @@
 		4D49ADBB25D7F7FE000F0BBB /* ChatApp */ = {
 			isa = PBXGroup;
 			children = (
+				4DC1199C2602569C0027E4A0 /* Service */,
 				4D2AFD6F25E4110900706ACE /* Screens */,
 				4DD6E8DE25DC607F00EF5039 /* Storyboards */,
 				4DD6E8DC25DC602100EF5039 /* Resourses */,
@@ -260,6 +267,16 @@
 				4DAFEC8D25F80A8800CE1BEA /* ConversationListRouter.swift */,
 			);
 			path = Router;
+			sourceTree = "<group>";
+		};
+		4DC1199C2602569C0027E4A0 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				4DC1199D260256C30027E4A0 /* UserInfoSaverGCD.swift */,
+				4DC119A0260256D40027E4A0 /* UserInfoSaverOperations.swift */,
+				4DC119A42602570A0027E4A0 /* UserInfoSaver.swift */,
+			);
+			path = Service;
 			sourceTree = "<group>";
 		};
 		4DCD0AF725EFB0370096F893 /* Cells */ = {
@@ -448,12 +465,15 @@
 				4DD6E8E125DC60EC00EF5039 /* Extension+AppDelegate.swift in Sources */,
 				4DAFEC7E25F64C9800CE1BEA /* Extension+UIButton.swift in Sources */,
 				4D0C0BA625F96F4500781A47 /* ClassicTheme.swift in Sources */,
+				4DC119A1260256D40027E4A0 /* UserInfoSaverOperations.swift in Sources */,
 				4DD6E8CE25DC549600EF5039 /* DLogger.swift in Sources */,
+				4DC1199E260256C30027E4A0 /* UserInfoSaverGCD.swift in Sources */,
 				4D0C0BA325F96E8900781A47 /* ThemeProtocol.swift in Sources */,
 				4DD6A5702600081300CB4517 /* SavedOperations.swift in Sources */,
 				4D0C0BB125F96FE100781A47 /* ThemePicker.swift in Sources */,
 				4D92DF7625EE14720093FA2A /* ConversationModel.swift in Sources */,
 				4DAFEC8525F6681400CE1BEA /* ChooseThemeButtonView.swift in Sources */,
+				4DC119A52602570A0027E4A0 /* UserInfoSaver.swift in Sources */,
 				4D0C0BBD25FA26C000781A47 /* ConversationListNavigationController.swift in Sources */,
 				4D2AFD7925E41B3200706ACE /* ProfileViewController.swift in Sources */,
 				4DAFEC8E25F80A8800CE1BEA /* ConversationListRouter.swift in Sources */,

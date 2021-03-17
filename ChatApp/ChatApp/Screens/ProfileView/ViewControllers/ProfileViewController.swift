@@ -12,14 +12,19 @@ class ProfileViewController: UIViewController {
     //MARK: - IBOutlets
     
     @IBOutlet weak var initialsLabel: UILabel!
+    @IBOutlet weak var avatarView: UIView!
+    @IBOutlet weak var avatarImageView: UIImageView!
+    
+    @IBOutlet weak var userNameTextField: UITextField!
+    @IBOutlet weak var userPositionTextField: UITextField!
+    @IBOutlet weak var userCityTextField: UITextField!
+    
+    @IBOutlet weak var activityIndicatorView: UIView!
+    
     @IBOutlet weak var editButton: UIButton!
     @IBOutlet weak var saveGCDButton: UIButton!
     @IBOutlet weak var saveOperationsButton: UIButton!
     @IBOutlet weak var cancelButton: UIButton!
-    @IBOutlet weak var avatarView: UIView!
-    @IBOutlet weak var avatarImageView: UIImageView!
-    @IBOutlet weak var userNameTextField: UITextField!
-    @IBOutlet weak var activityIndicatorView: UIView!
     
     @IBAction func touchButtonClose(_ sender: Any) {
         dismiss(animated: true, completion: nil)
@@ -92,6 +97,9 @@ class ProfileViewController: UIViewController {
         cancelButton.addTarget(self, action: #selector(touchCancelButton(_:)), for: .touchUpInside)
         
         editingMode(false)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
     private func editingMode(_ enabled: Bool) {
@@ -102,7 +110,10 @@ class ProfileViewController: UIViewController {
         editButton.isEnabled = isEnabled
         
         userNameTextField.isEnabled = !isEnabled
-        if !isEnabled {
+        userCityTextField.isEnabled = !isEnabled
+        userPositionTextField.isEnabled = !isEnabled
+        
+        if enabled {
             userNameTextField.becomeFirstResponder()
         } else {
             userNameTextField.resignFirstResponder()
@@ -252,6 +263,39 @@ extension ProfileViewController {
     
     @objc func touchSaveOperationsButton(_ sender: UIButton) {
         savingMode(true)
+    }
+}
+
+
+//MARK: - Events
+
+extension ProfileViewController {
+    @objc private func keyboardWillShow(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+//            if view.frame.origin.y == 0 {
+//                view.frame.origin.y -= keyboardSize.height
+//            }
+            
+            var rectSize: CGRect = view.frame
+            rectSize.size.height -= keyboardSize.height
+            
+            if userNameTextField.isFirstResponder, !rectSize.contains(userNameTextField.frame.origin) {
+                view.frame.origin.y = userNameTextField.frame.origin.y
+                
+            } else if userPositionTextField.isFirstResponder, !rectSize.contains(userPositionTextField.frame.origin) {
+                view.frame.origin.y = userPositionTextField.frame.origin.y
+                
+            } else if userCityTextField.isFirstResponder {
+                view.frame.origin.y = -userCityTextField.frame.origin.y + keyboardSize.height
+                
+            }
+        }
+    }
+    
+    @objc private func keyboardWillHide(notification: NSNotification) {
+        if view.frame.origin.y != 0 {
+            view.frame.origin.y = 0
+        }
     }
 }
 
