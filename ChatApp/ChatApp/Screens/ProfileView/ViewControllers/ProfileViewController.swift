@@ -105,14 +105,19 @@ class ProfileViewController: UIViewController {
     private func setupView() {
         hideKeyboardWhenTapAround()
         
-        initialsLabel.addCharacterSpacing(kernValue: charSpacing)
-        initialsLabel.textColor = .black
+        setupInitialsLabel()
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(addAvatar(_ : )))
         avatarView.addGestureRecognizer(tap)
         avatarView.clipsToBounds = true
         
         setupViewButtons()
+    }
+    
+    private func setupInitialsLabel(_ name: String = "Unknown") {
+        initialsLabel.text = String(name.prefix(2)).uppercased()
+        initialsLabel.addCharacterSpacing(kernValue: charSpacing)
+        initialsLabel.textColor = .black
     }
     
     private func setupViewButtons() {
@@ -211,7 +216,7 @@ class ProfileViewController: UIViewController {
 
 extension ProfileViewController {
     func fetchUserInfoBy(_ type: UserInfoSaverType) {
-        //TODO: нужно придумать машину состояний VC
+        //TODO: нужно придумать логику состояний VC
         editingMode(false)
         savingMode(false)
         fetchDataMode(true)
@@ -250,6 +255,10 @@ extension ProfileViewController: ProfileDisplayLogic {
         userNameTextField.text = userInfo.name
         userCityTextField.text = userInfo.city
         userPositionTextField.text = userInfo.position
+        
+        if let name = userInfo.name {
+            setupInitialsLabel(name)
+        }
     }
     
     func errorDisplay(_ message: String) {
