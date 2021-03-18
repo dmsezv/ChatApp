@@ -69,6 +69,7 @@ class UserInfoSaverGCD: UserInfoSaver {
                 return
             }
             
+            sleep(5)
             
             do {
                 if self?.dispatchWorkItem?.isCancelled ?? true { return }

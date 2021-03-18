@@ -98,6 +98,12 @@ class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //TODO: не успеваю обработать закрытие свайпом, поэтому пока так
+        if #available(iOS 13.0, *) {
+            self.isModalInPresentation = true
+        }
+
+        
         setupView()
         fetchUserInfoBy(.operation)
     }
@@ -251,8 +257,14 @@ extension ProfileViewController: ProfileDisplayLogic {
     func successSavedUserInfo() {
         activityIndicator.stopAnimating()
         alertInfo(title: "Данные сохранены", nil, { _ in
-            self.editingMode(false)
-            self.savingMode(false)
+//            self.editingMode(false)
+//            self.savingMode(false)
+            
+            //TODO: возвращать модель после сохранения,
+            //а не ходить заново за ней.
+            //сейчас делаю так только из-за того, что не успел заметить,
+            //что некоторые данные надо обновить
+            self.fetchUserInfoBy(.gcd)
         })
     }
     
