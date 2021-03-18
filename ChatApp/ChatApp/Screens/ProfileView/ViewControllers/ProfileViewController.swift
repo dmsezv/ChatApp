@@ -39,7 +39,6 @@ class ProfileViewController: UIViewController {
         dismiss(animated: true, completion: nil)
     }
     
-    
     lazy var activityIndicator: UIActivityIndicatorView = {
         let activityIndicator = UIActivityIndicatorView()
         activityIndicator.hidesWhenStopped = true
@@ -143,6 +142,25 @@ class ProfileViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
+    private func setupLayout() {
+        if let viewAvatar = avatarView {
+            viewAvatar.layer.cornerRadius = viewAvatar.bounds.width / 2
+        }
+    }
+    
+    private func alertError(_ message: String) {
+        let alertController = UIAlertController(title: "Ошибка", message: message, preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "Хорошо", style: .default, handler: nil))
+        
+        present(alertController, animated: true, completion: nil)
+    }
+}
+
+
+//MARK: - States VC
+//TODO: нужно придумать логику состояний VC
+
+extension ProfileViewController {
     private func fetchDataMode(_ enabled: Bool) {
         if enabled {
             editButton.alpha = 0.5
@@ -196,20 +214,8 @@ class ProfileViewController: UIViewController {
             activityIndicator.stopAnimating()
         }
     }
-    
-    private func setupLayout() {
-        if let viewAvatar = avatarView {
-            viewAvatar.layer.cornerRadius = viewAvatar.bounds.width / 2
-        }
-    }
-    
-    private func alertError(_ message: String) {
-        let alertController = UIAlertController(title: "Ошибка", message: message, preferredStyle: .alert)
-        alertController.addAction(UIAlertAction(title: "Хорошо", style: .default, handler: nil))
-        
-        present(alertController, animated: true, completion: nil)
-    }
 }
+
 
 
 //MARK: - Business Logic
@@ -224,15 +230,14 @@ extension ProfileViewController {
         interactor?.fetchUserInfoBy(type)
     }
     
-    func saveUserInfo(_ model: UserInfoModel, _ saverType: UserInfoSaverType) {
+    func saveUserInfoBy(_ saverType: UserInfoSaverType) {
         savingMode(true)
-        
-        activityIndicator.startAnimating()
         
         let userInfo = UserInfoModel(
             name: userNameTextField.text,
             position: userPositionTextField.text,
-            city: userCityTextField.text)
+            city: userCityTextField.text,
+            avatarData: avatarImageView?.image?.pngData())
         
         interactor?.save(userInfo: userInfo, by: saverType)
     }
@@ -258,6 +263,13 @@ extension ProfileViewController: ProfileDisplayLogic {
         
         if let name = userInfo.name {
             setupInitialsLabel(name)
+        }
+        
+        if let avatarImageData = userInfo.avatarData {
+            initialsLabel?.isHidden = true
+            avatarImageView.image = UIImage(data: avatarImageData)
+        } else {
+            initialsLabel?.isHidden = false
         }
     }
     
@@ -376,18 +388,6 @@ extension ProfileViewController {
     @objc func touchSaveOperationsButton(_ sender: UIButton) {
         saveUserInfoBy(.operation)
     }
-    
-    private func saveUserInfoBy(_ saverType: UserInfoSaverType) {
-        savingMode(true)
-        activityIndicator.startAnimating()
-        
-        let userInfo = UserInfoModel(
-            name: userNameTextField.text,
-            position: userPositionTextField.text,
-            city: userCityTextField.text)
-        
-        interactor?.save(userInfo: userInfo, by: saverType)
-    }
 }
 
 
@@ -400,26 +400,26 @@ extension ProfileViewController {
 //                view.frame.origin.y -= keyboardSize.height
 //            }
             
-            var rectSize: CGRect = view.frame
-            rectSize.size.height -= keyboardSize.height
-            
-            if userNameTextField.isFirstResponder, !rectSize.contains(userNameTextField.frame.origin) {
-                view.frame.origin.y = userNameTextField.frame.origin.y
-                
-            } else if userPositionTextField.isFirstResponder, !rectSize.contains(userPositionTextField.frame.origin) {
-                view.frame.origin.y = userPositionTextField.frame.origin.y
-                
-            } else if userCityTextField.isFirstResponder {
-                view.frame.origin.y = -userCityTextField.frame.origin.y + keyboardSize.height
-                
-            }
+//            var rectSize: CGRect = view.frame
+//            rectSize.size.height -= keyboardSize.height
+//
+//            if userNameTextField.isFirstResponder, !rectSize.contains(userNameTextField.frame.origin) {
+//                view.frame.origin.y = userNameTextField.frame.origin.y
+//
+//            } else if userPositionTextField.isFirstResponder, !rectSize.contains(userPositionTextField.frame.origin) {
+//                view.frame.origin.y = userPositionTextField.frame.origin.y
+//
+//            } else if userCityTextField.isFirstResponder {
+//                view.frame.origin.y = -userCityTextField.frame.origin.y + keyboardSize.height
+//
+//            }
         }
     }
     
     @objc private func keyboardWillHide(notification: NSNotification) {
-        if view.frame.origin.y != 0 {
-            view.frame.origin.y = 0
-        }
+//        if view.frame.origin.y != 0 {
+//            view.frame.origin.y = 0
+//        }
     }
 }
 

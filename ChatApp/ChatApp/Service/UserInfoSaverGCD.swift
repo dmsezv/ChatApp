@@ -19,6 +19,7 @@ struct UserInfoModel: Codable {
     var name: String?
     var position: String?
     var city: String?
+    var avatarData: Data?
 }
 
 class UserInfoSaverGCD: UserInfoSaver {
