@@ -10,19 +10,22 @@ import Foundation
 protocol ProfileBusinessLogic {
     func fetchUserInfoBy(_ type: UserInfoSaverType)
     func save(userInfo: UserInfoModel, by type: UserInfoSaverType)
+    func cancel()
 }
 
 class ProfileInteractor: ProfileBusinessLogic {
     weak var viewController: ProfileDisplayLogic?
+    private lazy var userInfoOperation = UserInfoSaverOperation()
+    private lazy var userInfoGCD = UserInfoSaverGCD()
     
     func fetchUserInfoBy(_ type: UserInfoSaverType) {
         var saver: UserInfoSaver
         
         switch type {
         case .gcd:
-            saver = UserInfoSaverGCD()
+            saver = userInfoGCD
         case .operation:
-            saver = UserInfoSaverOperation()
+            saver = userInfoOperation
         }
         
         saver.fetchInfo { (result) in
@@ -51,9 +54,9 @@ class ProfileInteractor: ProfileBusinessLogic {
         
         switch type {
         case .gcd:
-            saver = UserInfoSaverGCD()
+            saver = userInfoGCD
         case .operation:
-            saver = UserInfoSaverOperation()
+            saver = userInfoOperation
         }
         
         saver.saveInfo(userInfo, complete: { result in
@@ -75,5 +78,10 @@ class ProfileInteractor: ProfileBusinessLogic {
                 }
             }
         })
+    }
+    
+    func cancel() {
+        userInfoOperation.cancelSaving()
+        userInfoGCD.cancelSaving()
     }
 }

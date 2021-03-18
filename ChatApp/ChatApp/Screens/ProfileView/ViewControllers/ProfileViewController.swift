@@ -9,7 +9,7 @@ import UIKit
 
 protocol ProfileDisplayLogic: class {
     //TODO: нужно завести норм можель и viewModel
-    func successFetch(_ userInfo: UserInfoModel)
+    func successFetch(_ userInfo: UserInfoModel?)
     func successSavedUserInfo()
     func errorDisplay(_ message: String)
 }
@@ -98,7 +98,7 @@ class ProfileViewController: UIViewController {
         super.viewDidLoad()
         
         setupView()
-        fetchUserInfoBy(.gcd)
+        fetchUserInfoBy(.operation)
     }
     
     private func setupView() {
@@ -148,9 +148,9 @@ class ProfileViewController: UIViewController {
         }
     }
     
-    private func alertError(_ message: String) {
-        let alertController = UIAlertController(title: "Ошибка", message: message, preferredStyle: .alert)
-        alertController.addAction(UIAlertAction(title: "Хорошо", style: .default, handler: nil))
+    private func alertInfo(title: String, _ message: String? = nil, _ handler: ((UIAlertAction) -> Void)? = nil) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "Хорошо", style: .default, handler: handler))
         
         present(alertController, animated: true, completion: nil)
     }
@@ -248,28 +248,33 @@ extension ProfileViewController {
 
 extension ProfileViewController: ProfileDisplayLogic {
     func successSavedUserInfo() {
-        editingMode(false)
-        savingMode(false)
+        activityIndicator.stopAnimating()
+        alertInfo(title: "Данные сохранены", nil, { _ in
+            self.editingMode(false)
+            self.savingMode(false)
+        })
     }
     
-    func successFetch(_ userInfo: UserInfoModel) {
+    func successFetch(_ userInfo: UserInfoModel?) {
         editingMode(false)
         savingMode(false)
         fetchDataMode(false)
         
-        userNameTextField.text = userInfo.name
-        userCityTextField.text = userInfo.city
-        userPositionTextField.text = userInfo.position
-        
-        if let name = userInfo.name {
-            setupInitialsLabel(name)
-        }
-        
-        if let avatarImageData = userInfo.avatarData {
-            initialsLabel?.isHidden = true
-            avatarImageView.image = UIImage(data: avatarImageData)
-        } else {
-            initialsLabel?.isHidden = false
+        if let userInfo = userInfo {
+            userNameTextField.text = userInfo.name
+            userCityTextField.text = userInfo.city
+            userPositionTextField.text = userInfo.position
+            
+            if let name = userInfo.name {
+                setupInitialsLabel(name)
+            }
+            
+            if let avatarImageData = userInfo.avatarData {
+                initialsLabel?.isHidden = true
+                avatarImageView.image = UIImage(data: avatarImageData)
+            } else {
+                initialsLabel?.isHidden = false
+            }
         }
     }
     
@@ -278,7 +283,7 @@ extension ProfileViewController: ProfileDisplayLogic {
         editingMode(false)
         savingMode(false)
         
-        alertError(message)
+        alertInfo(title: "Ошибка", message)
     }
 }
 
@@ -301,6 +306,7 @@ extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationCo
         
         initialsLabel?.isHidden = true
         
+        
         picker.dismiss(animated: true, completion: nil)
     }
     
@@ -308,11 +314,11 @@ extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationCo
         if !UIImagePickerController.isSourceTypeAvailable(type) {
             switch type {
             case .camera:
-                alertError("Камера недоступна")
+                alertInfo(title: "Ошибка", "Камера недоступна")
             case .photoLibrary:
-                alertError("Галерея недоступна")
+                alertInfo(title: "Ошибка", "Галерея недоступна")
             default:
-                alertError("Источник недоступен")
+                alertInfo(title: "Ошибка", "Источник недоступен")
             }
             
             return
@@ -379,6 +385,9 @@ extension ProfileViewController {
     @objc func touchCancelButton(_ sender: UIButton) {
         editingMode(false)
         savingMode(false)
+        
+        interactor?.cancel()
+        fetchUserInfoBy(.operation)
     }
     
     @objc func touchSaveGCDButton(_ sender: UIButton) {
@@ -395,7 +404,8 @@ extension ProfileViewController {
 
 extension ProfileViewController {
     @objc private func keyboardWillShow(notification: NSNotification) {
-        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+        //TODO: придумать как посчитать высоту подъема вьюхи если не видно textfield(не успел)
+//        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
 //            if view.frame.origin.y == 0 {
 //                view.frame.origin.y -= keyboardSize.height
 //            }
@@ -413,7 +423,7 @@ extension ProfileViewController {
 //                view.frame.origin.y = -userCityTextField.frame.origin.y + keyboardSize.height
 //
 //            }
-        }
+//        }
     }
     
     @objc private func keyboardWillHide(notification: NSNotification) {

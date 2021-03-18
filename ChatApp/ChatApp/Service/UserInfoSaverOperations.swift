@@ -14,33 +14,102 @@ class UserInfoSaverOperation: UserInfoSaver {
         queue.qualityOfService = .utility
         return queue
     }()
-    
+        
     func saveInfo(_ model: UserInfoModel, complete: @escaping (Result<Void, UserInfoSaverError>) -> Void) {
-        operationQueue.addOperation {
-            guard let docDirUrl: URL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
-                complete(.failure(.savingError))
-                return
-            }
-            
-            sleep(3)
-            
-            do {
-                let data = try JSONEncoder().encode(model)
-                
-                do {
-                    try data.write(to: docDirUrl.appendingPathComponent("test.json"))
-                    
-                    complete(.success(()))
-                } catch {
-                    complete(.failure(.savingError))
-                }
-            } catch {
-                complete(.failure(.encodingError))
-            }
-        }
+        let operation = SaveInfoOperation(model: model, completeHandler: complete)
+        operationQueue.addOperation(operation)
     }
     
-    func fetchInfo(_ complete: @escaping (Result<UserInfoModel, UserInfoSaverError>) -> Void) {
+    func fetchInfo(_ complete: @escaping (Result<UserInfoModel?, UserInfoSaverError>) -> Void) {
+        let operation = FetchInfoOperation(completeHandler: complete)
+        operationQueue.addOperation(operation)
+    }
+    
+    func cancelSaving() {
+        operationQueue.cancelAllOperations()
+    }
+}
+
+fileprivate class FetchInfoOperation: Operation {
+    private var complete: (Result<UserInfoModel?, UserInfoSaverError>) -> Void
+    
+    init(completeHandler: @escaping(Result<UserInfoModel?, UserInfoSaverError>) -> Void) {
+        self.complete = completeHandler
+    }
+    
+    override func main() {
+        if isCancelled { return }
+        guard let docDirUrl: URL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
+            complete(.failure(.savingError))
+            return
+        }
+         
+        sleep(5)
         
+        do {
+            if isCancelled { return }
+            let pathComponent = docDirUrl.appendingPathComponent("profileInfo.json")
+            if !FileManager.default.fileExists(atPath: pathComponent.path) {
+                complete(.success(nil))
+            }
+            let data = try Data(contentsOf: pathComponent)
+            
+            
+            do {
+                if isCancelled { return }
+                let userInfo = try JSONDecoder().decode(UserInfoModel.self, from: data)
+                
+                if isCancelled { return }
+                complete(.success(userInfo))
+            } catch {
+                if isCancelled { return }
+                complete(.failure(.decodingError))
+            }
+        } catch {
+            if isCancelled { return }
+            complete(.failure(.parseFile))
+        }
+    }
+}
+
+fileprivate class SaveInfoOperation: Operation {
+    private var model: UserInfoModel
+    private var complete: (Result<Void, UserInfoSaverError>) -> Void
+    
+    init(model: UserInfoModel, completeHandler: @escaping(Result<Void, UserInfoSaverError>) -> Void) {
+        self.model = model
+        self.complete = completeHandler
+    }
+    
+    override func main() {
+        if isCancelled { return }
+        
+        guard let docDirUrl: URL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
+            if isCancelled { return }
+            complete(.failure(.savingError))
+            return
+        }
+        
+        sleep(5)
+        
+        do {
+            if isCancelled { return }
+            let data = try JSONEncoder().encode(model)
+            
+            
+            do {
+                if isCancelled { return }
+                try data.write(to: docDirUrl.appendingPathComponent("profileInfo.json"))
+                
+                if isCancelled { return }
+                complete(.success(()))
+            } catch {
+                if isCancelled { return }
+                complete(.failure(.savingError))
+            }
+        } catch {
+            if isCancelled { return }
+            complete(.failure(.encodingError))
+        }
     }
 }

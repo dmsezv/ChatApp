@@ -8,20 +8,6 @@
 import UIKit
 
 
-enum UserInfoSaverError: Error {
-    case parseFile
-    case savingError
-    case encodingError
-    case decodingError
-}
-
-struct UserInfoModel: Codable {
-    var name: String?
-    var position: String?
-    var city: String?
-    var avatarData: Data?
-}
-
 class UserInfoSaverGCD: UserInfoSaver {
     static var docDir: URL? {
         FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
@@ -34,14 +20,12 @@ class UserInfoSaverGCD: UserInfoSaver {
                 complete(.failure(.savingError))
                 return
             }
-            
-            sleep(3)
-            
+                        
             do {
                 let data = try JSONEncoder().encode(model)
                 
                 do {
-                    try data.write(to: docDirUrl.appendingPathComponent("test.json"))
+                    try data.write(to: docDirUrl.appendingPathComponent("profileInfo.json"))
                     
                     complete(.success(()))
                 } catch {
@@ -53,17 +37,20 @@ class UserInfoSaverGCD: UserInfoSaver {
         }
     }
     
-    func fetchInfo(_ complete: @escaping (Result<UserInfoModel, UserInfoSaverError>) -> Void) {
+    func fetchInfo(_ complete: @escaping (Result<UserInfoModel?, UserInfoSaverError>) -> Void) {
         DispatchQueue.global(qos: .utility).async {
             guard let docDirUrl: URL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
                 complete(.failure(.savingError))
                 return
             }
-            
-            sleep(3)
-            
+                        
             do {
-                let data = try Data(contentsOf: docDirUrl.appendingPathComponent("test.json"))
+                let pathComponent = docDirUrl.appendingPathComponent("profileInfo.json")
+                if !FileManager.default.fileExists(atPath: pathComponent.path) {
+                    complete(.success(nil))
+                }
+                
+                let data = try Data(contentsOf: pathComponent)
                 
                 do {
                     let userInfo = try JSONDecoder().decode(UserInfoModel.self, from: data)
@@ -76,5 +63,10 @@ class UserInfoSaverGCD: UserInfoSaver {
                 complete(.failure(.parseFile))
             }
         }
+    }
+    
+    func cancelSaving() {
+        //TODO: cancel GCD (не успел)
+        //DispatchWorkItem нужно было использовать
     }
 }
