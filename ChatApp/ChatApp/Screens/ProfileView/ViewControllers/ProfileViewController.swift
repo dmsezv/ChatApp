@@ -387,7 +387,7 @@ extension ProfileViewController {
         editingMode(false)
         savingMode(false)
         
-        
+        interactor?.cancel()
         fetchUserInfoBy(.operation)
     }
     

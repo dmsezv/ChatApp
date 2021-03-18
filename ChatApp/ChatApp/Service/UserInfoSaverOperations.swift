@@ -9,7 +9,7 @@ import UIKit
 
 
 class UserInfoSaverOperation: UserInfoSaver {
-    lazy var operationQueue: OperationQueue = {
+    private lazy var operationQueue: OperationQueue = {
         let queue = OperationQueue()
         queue.qualityOfService = .utility
         return queue
@@ -39,13 +39,13 @@ fileprivate class FetchInfoOperation: Operation {
     
     override func main() {
         if isCancelled { return }
+        
+        //TODO: дублирование кода надо вынести
+
         guard let docDirUrl: URL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
             complete(.failure(.savingError))
             return
         }
-         
-        sleep(5)
-        
         
         if isCancelled { return }
         guard let data = try? Data(contentsOf: docDirUrl.appendingPathComponent("profileInfo.json")) else {
@@ -80,14 +80,14 @@ fileprivate class SaveInfoOperation: Operation {
     override func main() {
         if isCancelled { return }
         
+        //TODO: дублирование кода надо вынести
+
         guard let docDirUrl: URL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
             if isCancelled { return }
             complete(.failure(.savingError))
             return
         }
-        
-        sleep(5)
-        
+                
         do {
             if isCancelled { return }
             let data = try JSONEncoder().encode(model)
