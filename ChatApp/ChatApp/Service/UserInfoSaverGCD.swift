@@ -19,8 +19,6 @@ class UserInfoSaverGCD: UserInfoSaver {
             if self?.dispatchWorkItem?.isCancelled ?? true { return }
             
             //TODO: дублирование кода надо вынести
-
-            sleep(5)
             
             guard let docDirUrl: URL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
                 if self?.dispatchWorkItem?.isCancelled ?? true { return }
@@ -68,9 +66,7 @@ class UserInfoSaverGCD: UserInfoSaver {
                 complete(.success(nil))
                 return
             }
-            
-            sleep(5)
-            
+                        
             do {
                 if self?.dispatchWorkItem?.isCancelled ?? true { return }
                 let userInfo = try JSONDecoder().decode(UserInfoModel.self, from: data)
