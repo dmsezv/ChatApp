@@ -8,7 +8,6 @@
 import Foundation
 
 enum UserInfoSaverError: Error {
-    case parseFile
     case savingError
     case encodingError
     case decodingError

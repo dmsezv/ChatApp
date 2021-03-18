@@ -36,6 +36,7 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var cancelButton: UIButton!
     
     @IBAction func touchButtonClose(_ sender: Any) {
+        interactor?.cancel()
         dismiss(animated: true, completion: nil)
     }
     
@@ -386,7 +387,7 @@ extension ProfileViewController {
         editingMode(false)
         savingMode(false)
         
-        interactor?.cancel()
+        
         fetchUserInfoBy(.operation)
     }
     

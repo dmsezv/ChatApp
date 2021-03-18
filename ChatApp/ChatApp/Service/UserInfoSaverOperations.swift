@@ -46,28 +46,24 @@ fileprivate class FetchInfoOperation: Operation {
          
         sleep(5)
         
+        
+        if isCancelled { return }
+        guard let data = try? Data(contentsOf: docDirUrl.appendingPathComponent("profileInfo.json")) else {
+            complete(.success(nil))
+            return
+        }
+        
+        
         do {
             if isCancelled { return }
-            let pathComponent = docDirUrl.appendingPathComponent("profileInfo.json")
-            if !FileManager.default.fileExists(atPath: pathComponent.path) {
-                complete(.success(nil))
-            }
-            let data = try Data(contentsOf: pathComponent)
+            let userInfo = try JSONDecoder().decode(UserInfoModel.self, from: data)
             
-            
-            do {
-                if isCancelled { return }
-                let userInfo = try JSONDecoder().decode(UserInfoModel.self, from: data)
-                
-                if isCancelled { return }
-                complete(.success(userInfo))
-            } catch {
-                if isCancelled { return }
-                complete(.failure(.decodingError))
-            }
+            if isCancelled { return }
+            complete(.success(userInfo))
         } catch {
             if isCancelled { return }
-            complete(.failure(.parseFile))
+            complete(.failure(.decodingError))
+            
         }
     }
 }
