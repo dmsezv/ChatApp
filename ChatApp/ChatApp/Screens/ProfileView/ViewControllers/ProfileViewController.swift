@@ -7,9 +7,18 @@
 
 import UIKit
 
+protocol ProfileDisplayLogic: class {
+    //TODO: нужно завести норм можель и viewModel
+    func successFetch(_ userInfo: UserInfoModel)
+    func successSavedUserInfo()
+    func errorDisplay(_ message: String)
+}
+
 class ProfileViewController: UIViewController {
+    var interactor: ProfileBusinessLogic?
     
-    //MARK: - IBOutlets
+    
+    //MARK: - IBOutlets and Views
     
     @IBOutlet weak var initialsLabel: UILabel!
     @IBOutlet weak var avatarView: UIView!
@@ -48,11 +57,37 @@ class ProfileViewController: UIViewController {
         return activityIndicator
     }()
     
+    
     // MARK: - Drawing Constants
     
     private let cornRadBtn: CGFloat = 14.0
     private let charSpacing: Double = -22.0
     
+    
+    //MARK: - Setup
+    
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        setup()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        setup()
+    }
+    
+    
+    // MARK: Setup
+    
+    private func setup() {
+        let viewController = self
+        let interactor = ProfileInteractor()
+        viewController.interactor = interactor
+        interactor.viewController = viewController
+    }
+
+    
+    //MARK: - Life Cycle
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
@@ -64,6 +99,7 @@ class ProfileViewController: UIViewController {
         super.viewDidLoad()
         
         setupView()
+        fetchUserInfoBy(.gcd)
     }
     
     private func setupView() {
@@ -100,6 +136,18 @@ class ProfileViewController: UIViewController {
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    private func fetchDataMode(_ enabled: Bool) {
+        if enabled {
+            editButton.alpha = 0.5
+            editButton.isEnabled = !enabled
+            activityIndicator.startAnimating()
+        } else {
+            editButton.alpha = 1
+            editButton.isEnabled = !enabled
+            activityIndicator.stopAnimating()
+        }
     }
     
     private func editingMode(_ enabled: Bool) {
@@ -155,6 +203,61 @@ class ProfileViewController: UIViewController {
         alertController.addAction(UIAlertAction(title: "Хорошо", style: .default, handler: nil))
         
         present(alertController, animated: true, completion: nil)
+    }
+}
+
+
+//MARK: - Business Logic
+
+extension ProfileViewController {
+    func fetchUserInfoBy(_ type: UserInfoSaverType) {
+        //TODO: нужно придумать машину состояний VC
+        editingMode(false)
+        savingMode(false)
+        fetchDataMode(true)
+                
+        interactor?.fetchUserInfoBy(type)
+    }
+    
+    func saveUserInfo(_ model: UserInfoModel, _ saverType: UserInfoSaverType) {
+        savingMode(true)
+        
+        activityIndicator.startAnimating()
+        
+        let userInfo = UserInfoModel(
+            name: userNameTextField.text,
+            position: userPositionTextField.text,
+            city: userCityTextField.text)
+        
+        interactor?.save(userInfo: userInfo, by: saverType)
+    }
+}
+
+
+//MARK: - Display Logic
+
+extension ProfileViewController: ProfileDisplayLogic {
+    func successSavedUserInfo() {
+        editingMode(false)
+        savingMode(false)
+    }
+    
+    func successFetch(_ userInfo: UserInfoModel) {
+        editingMode(false)
+        savingMode(false)
+        fetchDataMode(false)
+        
+        userNameTextField.text = userInfo.name
+        userCityTextField.text = userInfo.city
+        userPositionTextField.text = userInfo.position
+    }
+    
+    func errorDisplay(_ message: String) {
+        fetchDataMode(false)
+        editingMode(false)
+        savingMode(false)
+        
+        alertError(message)
     }
 }
 
@@ -258,16 +361,15 @@ extension ProfileViewController {
     }
     
     @objc func touchSaveGCDButton(_ sender: UIButton) {
-        saveUserInfoBy(UserInfoSaverGCD())
+        saveUserInfoBy(.gcd)
     }
     
     @objc func touchSaveOperationsButton(_ sender: UIButton) {
-        saveUserInfoBy(UserInfoSaverOperation())
+        saveUserInfoBy(.operation)
     }
     
-    private func saveUserInfoBy(_ saver: UserInfoSaver) {
+    private func saveUserInfoBy(_ saverType: UserInfoSaverType) {
         savingMode(true)
-        
         activityIndicator.startAnimating()
         
         let userInfo = UserInfoModel(
@@ -275,21 +377,7 @@ extension ProfileViewController {
             position: userPositionTextField.text,
             city: userCityTextField.text)
         
-        saver.saveInfo(userInfo, complete: { result in
-            DispatchQueue.main.async {
-                switch result {
-                case .success:
-                    self.activityIndicator.stopAnimating()
-                    self.savingMode(false)
-                    self.editingMode(false)
-                case .failure(let error):
-                    let alert = UIAlertController(title: "Ошибка", message: "Error", preferredStyle: .alert)
-                    alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-                    
-                    self.present(alert, animated: true, completion: nil)
-                }
-            }
-        })
+        interactor?.save(userInfo: userInfo, by: saverType)
     }
 }
 

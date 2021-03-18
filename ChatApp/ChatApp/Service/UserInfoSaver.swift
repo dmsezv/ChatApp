@@ -7,6 +7,10 @@
 
 import Foundation
 
+enum UserInfoSaverType {
+    case operation, gcd
+}
+
 protocol UserInfoSaver {
     func saveInfo(_ model: UserInfoModel, complete: @escaping (Result<Void, UserInfoSaverError>) -> Void)
     func fetchInfo(_ complete: @escaping (Result<UserInfoModel, UserInfoSaverError>) -> Void)

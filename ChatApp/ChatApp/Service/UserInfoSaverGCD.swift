@@ -34,7 +34,7 @@ class UserInfoSaverGCD: UserInfoSaver {
                 return
             }
             
-            sleep(3)
+            sleep(5)
             
             do {
                 let data = try JSONEncoder().encode(model)
@@ -59,8 +59,10 @@ class UserInfoSaverGCD: UserInfoSaver {
                 return
             }
             
+            sleep(5)
+            
             do {
-                let data = try Data(contentsOf: docDirUrl)
+                let data = try Data(contentsOf: docDirUrl.appendingPathComponent("test.json"))
                 
                 do {
                     let userInfo = try JSONDecoder().decode(UserInfoModel.self, from: data)
@@ -69,7 +71,7 @@ class UserInfoSaverGCD: UserInfoSaver {
                 } catch {
                     complete(.failure(.decodingError))
                 }
-            } catch {
+            } catch (let _) {
                 complete(.failure(.parseFile))
             }
         }
