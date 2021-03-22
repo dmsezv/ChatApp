@@ -8,10 +8,49 @@
 import Foundation
 import UIKit
 
+
 final class ConversationsListViewController: UIViewController {
     
+    var router: ConversationListRoutingLogic?
+    
+    //MARK: - IBOutlets
+    
+    @IBOutlet weak var profileButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var profileButton: UIBarButtonItem!
+    @IBOutlet weak var settingsButton: UIButton!
+    
+    
+    // MARK: - Drawing Constants
+    
+    private let profileButtonFrame: CGRect = CGRect(x: 0, y: 0, width: 40, height: 40)
+    private let kernLetterNameValue: Double = -4
+    private let titleViewHeight: CGFloat = 40
+    private let titleLabelPaddingX: CGFloat = 10
+    private let titleLabelPaddingY: CGFloat = -5
+    private let titleLableFontSize: CGFloat = 15
+    
+    
+    //MARK: - Setup
+    
+    private func setup() {
+        let viewController = self
+        let router = ConversationListRouter()
+        viewController.router = router
+        router.viewController = viewController
+    }
+    
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        setup()
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        setup()
+    }
+    
+    
+    //MARK: - View life cycle
     
     private let cellIdentifier = String(describing: ConversationListCell.self)
     private var viewModelMessages: ConversationsListViewController.ViewModel?
@@ -23,14 +62,28 @@ final class ConversationsListViewController: UIViewController {
         loadData()
     }
     
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        tableView.reloadData()
     }
     
     private func setupView() {
         tableView.register(UINib(nibName: cellIdentifier, bundle: nil), forCellReuseIdentifier: cellIdentifier)
         tableView.delegate = self
         tableView.dataSource = self
+        
+        
+        settingsButton.addTarget(self, action: #selector(touchSettingsButton(_:)), for: .touchUpInside)
+        
+        if let view = ProfileIconView.instanceFromNib() {
+            view.lettersNameLabel.text = "MD"
+            view.lettersNameLabel.textColor = .black
+            view.lettersNameLabel.addCharacterSpacing(kernValue: kernLetterNameValue)
+            view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(touchRightBarButton(_:))))
+            let rightBarButton = UIBarButtonItem(customView: view)
+            navigationItem.rightBarButtonItem = rightBarButton
+        }
     }
     
     private func loadData() {
@@ -42,16 +95,6 @@ final class ConversationsListViewController: UIViewController {
         viewModelMessages = ConversationsListViewController.ViewModel(
             historyMessages: historyMessages,
             onlineMessages: onlineMessages)
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        //TODO: нужен router
-        if segue.identifier == "showChatSegue" {
-            if let destinationVC = segue.destination as? ConversationViewController,
-               let nameTitle = sender as? String? {
-                destinationVC.title = nameTitle ?? "Unknown User"
-            }
-        }
     }
 }
 
@@ -66,18 +109,26 @@ extension ConversationsListViewController: UITableViewDelegate, UITableViewDataS
             return
         }
         
-        //TODO: нужен router
         switch indexPath.section {
         case TableSection.history.getSectionIndex():
-            performSegue(withIdentifier: "showChatSegue", sender: vm.historyMessages[indexPath.row].name)
+            router?.routeToShowChat(title: vm.historyMessages[indexPath.row].name)
         case TableSection.online.getSectionIndex():
-            performSegue(withIdentifier: "showChatSegue", sender: vm.onlineMessages[indexPath.row].name)
+            router?.routeToShowChat(title: vm.onlineMessages[indexPath.row].name)
         default: break
         }
     }
     
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        TableSection.getSectionTitleBy(index: section)
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let viewHeader = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: titleViewHeight))
+        viewHeader.backgroundColor = ThemePicker.shared.currentTheme.backgroundColor
+        
+        let label = UILabel(frame: CGRect(x: titleLabelPaddingX, y: titleLabelPaddingY, width: viewHeader.frame.width, height: viewHeader.frame.height))
+        label.text = TableSection.getSectionTitleBy(index: section)
+        label.textColor = ThemePicker.shared.currentTheme.textColor
+        label.font = .boldSystemFont(ofSize: titleLableFontSize)
+        
+        viewHeader.addSubview(label)
+        return viewHeader
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -110,6 +161,7 @@ extension ConversationsListViewController: UITableViewDelegate, UITableViewDataS
             return UITableViewCell()
         }
         
+        
         return cell
     }
 }
@@ -141,5 +193,18 @@ extension ConversationsListViewController {
     private struct ViewModel {
         var historyMessages: [ConversationModel]
         var onlineMessages: [ConversationModel]
+    }
+}
+
+
+//MARK: - Touches
+
+extension ConversationsListViewController {
+    @objc private func touchRightBarButton(_ sender: UITapGestureRecognizer) {
+        router?.routeToProfile()
+    }
+    
+    @objc private func touchSettingsButton(_ sender: UIButton) {
+        router?.routeToSettings()
     }
 }

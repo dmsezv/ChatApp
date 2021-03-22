@@ -7,6 +7,7 @@
 
 import UIKit
 
+
 class ConversationListCell: UITableViewCell {
     
     @IBOutlet weak var nameLabel: UILabel!
@@ -14,7 +15,13 @@ class ConversationListCell: UITableViewCell {
     @IBOutlet weak var messageLabel: UILabel!
     @IBOutlet weak var nameLetterView: UIView!
     @IBOutlet weak var nameLetterLabel: UILabel!
-    
+        
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        backgroundColor = ThemePicker.shared.currentTheme.backgroundColor
+        nameLabel.textColor = ThemePicker.shared.currentTheme.textColor
+    }
     
     func configure(with model: ConversationCellConfiguration) {
         nameLabel.text = model.name ?? "Unknown user"
@@ -38,7 +45,7 @@ class ConversationListCell: UITableViewCell {
         
         backgroundColor = model.online
             ? .bananaHalf
-            : .white
+            : ThemePicker.shared.currentTheme.backgroundColor
         
         nameLetterView.layer.cornerRadius = nameLetterView.bounds.size.width / 2
         nameLetterLabel.text = model.name?.first?.uppercased() ?? "U"

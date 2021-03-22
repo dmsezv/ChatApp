@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4D0C0BA325F96E8900781A47 /* ThemeProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D0C0BA225F96E8900781A47 /* ThemeProtocol.swift */; };
+		4D0C0BA625F96F4500781A47 /* ClassicTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D0C0BA525F96F4500781A47 /* ClassicTheme.swift */; };
+		4D0C0BAA25F96F5A00781A47 /* NightTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D0C0BA925F96F5A00781A47 /* NightTheme.swift */; };
+		4D0C0BAD25F96F7B00781A47 /* DayTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D0C0BAC25F96F7B00781A47 /* DayTheme.swift */; };
+		4D0C0BB125F96FE100781A47 /* ThemePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D0C0BB025F96FE100781A47 /* ThemePicker.swift */; };
+		4D0C0BBD25FA26C000781A47 /* ConversationListNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D0C0BBC25FA26C000781A47 /* ConversationListNavigationController.swift */; };
 		4D26AEBA25F0437B00C0B8C6 /* Extension+UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D26AEB925F0437B00C0B8C6 /* Extension+UIColor.swift */; };
 		4D2AFD7425E4198100706ACE /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4D2AFD7325E4198100706ACE /* Colors.xcassets */; };
 		4D2AFD7925E41B3200706ACE /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D2AFD7825E41B3200706ACE /* ProfileViewController.swift */; };
@@ -24,6 +30,15 @@
 		4D92DF8425EEF1EF0093FA2A /* ConversationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D92DF8325EEF1EF0093FA2A /* ConversationViewController.swift */; };
 		4D92DF8825EEF2400093FA2A /* MessageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D92DF8725EEF2400093FA2A /* MessageModel.swift */; };
 		4DAFEC5D25F15D9D00CE1BEA /* DataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DAFEC5C25F15D9D00CE1BEA /* DataProvider.swift */; };
+		4DAFEC6D25F6428100CE1BEA /* ThemesSetting.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4DAFEC6C25F6428100CE1BEA /* ThemesSetting.storyboard */; };
+		4DAFEC7225F6448200CE1BEA /* ThemesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DAFEC7125F6448200CE1BEA /* ThemesViewController.swift */; };
+		4DAFEC7725F6497600CE1BEA /* ProfileIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DAFEC7625F6497600CE1BEA /* ProfileIconView.swift */; };
+		4DAFEC7B25F6498000CE1BEA /* ProfileIconView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4DAFEC7A25F6498000CE1BEA /* ProfileIconView.xib */; };
+		4DAFEC7E25F64C9800CE1BEA /* Extension+UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DAFEC7D25F64C9700CE1BEA /* Extension+UIButton.swift */; };
+		4DAFEC8225F6680400CE1BEA /* ChooseThemeButtonView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4DAFEC8125F6680400CE1BEA /* ChooseThemeButtonView.xib */; };
+		4DAFEC8525F6681400CE1BEA /* ChooseThemeButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DAFEC8425F6681400CE1BEA /* ChooseThemeButtonView.swift */; };
+		4DAFEC8A25F805CE00CE1BEA /* ProfileBarButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DAFEC8925F805CD00CE1BEA /* ProfileBarButtonView.swift */; };
+		4DAFEC8E25F80A8800CE1BEA /* ConversationListRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DAFEC8D25F80A8800CE1BEA /* ConversationListRouter.swift */; };
 		4DCD0AFA25EFB0530096F893 /* ConversationMessageOutgoingViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DCD0AF825EFB0530096F893 /* ConversationMessageOutgoingViewCell.swift */; };
 		4DCD0AFB25EFB0530096F893 /* ConversationMessageOutgoingViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4DCD0AF925EFB0530096F893 /* ConversationMessageOutgoingViewCell.xib */; };
 		4DCD0B0225EFBC280096F893 /* ConversationMessageIncomingViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DCD0B0025EFBC280096F893 /* ConversationMessageIncomingViewCell.swift */; };
@@ -34,6 +49,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4D0C0BA225F96E8900781A47 /* ThemeProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeProtocol.swift; sourceTree = "<group>"; };
+		4D0C0BA525F96F4500781A47 /* ClassicTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassicTheme.swift; sourceTree = "<group>"; };
+		4D0C0BA925F96F5A00781A47 /* NightTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NightTheme.swift; sourceTree = "<group>"; };
+		4D0C0BAC25F96F7B00781A47 /* DayTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayTheme.swift; sourceTree = "<group>"; };
+		4D0C0BB025F96FE100781A47 /* ThemePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemePicker.swift; sourceTree = "<group>"; };
+		4D0C0BBC25FA26C000781A47 /* ConversationListNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationListNavigationController.swift; sourceTree = "<group>"; };
 		4D26AEB925F0437B00C0B8C6 /* Extension+UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIColor.swift"; sourceTree = "<group>"; };
 		4D2AFD7325E4198100706ACE /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		4D2AFD7825E41B3200706ACE /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
@@ -53,6 +74,15 @@
 		4D92DF8325EEF1EF0093FA2A /* ConversationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationViewController.swift; sourceTree = "<group>"; };
 		4D92DF8725EEF2400093FA2A /* MessageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageModel.swift; sourceTree = "<group>"; };
 		4DAFEC5C25F15D9D00CE1BEA /* DataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataProvider.swift; sourceTree = "<group>"; };
+		4DAFEC6C25F6428100CE1BEA /* ThemesSetting.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ThemesSetting.storyboard; sourceTree = "<group>"; };
+		4DAFEC7125F6448200CE1BEA /* ThemesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemesViewController.swift; sourceTree = "<group>"; };
+		4DAFEC7625F6497600CE1BEA /* ProfileIconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileIconView.swift; sourceTree = "<group>"; };
+		4DAFEC7A25F6498000CE1BEA /* ProfileIconView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileIconView.xib; sourceTree = "<group>"; };
+		4DAFEC7D25F64C9700CE1BEA /* Extension+UIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIButton.swift"; sourceTree = "<group>"; };
+		4DAFEC8125F6680400CE1BEA /* ChooseThemeButtonView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChooseThemeButtonView.xib; sourceTree = "<group>"; };
+		4DAFEC8425F6681400CE1BEA /* ChooseThemeButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseThemeButtonView.swift; sourceTree = "<group>"; };
+		4DAFEC8925F805CD00CE1BEA /* ProfileBarButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileBarButtonView.swift; sourceTree = "<group>"; };
+		4DAFEC8D25F80A8800CE1BEA /* ConversationListRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationListRouter.swift; sourceTree = "<group>"; };
 		4DCD0AF825EFB0530096F893 /* ConversationMessageOutgoingViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationMessageOutgoingViewCell.swift; sourceTree = "<group>"; };
 		4DCD0AF925EFB0530096F893 /* ConversationMessageOutgoingViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ConversationMessageOutgoingViewCell.xib; sourceTree = "<group>"; };
 		4DCD0B0025EFBC280096F893 /* ConversationMessageIncomingViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationMessageIncomingViewCell.swift; sourceTree = "<group>"; };
@@ -73,9 +103,30 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4D0C0BA125F96DEF00781A47 /* Theme */ = {
+			isa = PBXGroup;
+			children = (
+				4D0C0BA225F96E8900781A47 /* ThemeProtocol.swift */,
+				4D0C0BB025F96FE100781A47 /* ThemePicker.swift */,
+				4D0C0BAF25F96FBE00781A47 /* ThemeTypes */,
+			);
+			path = Theme;
+			sourceTree = "<group>";
+		};
+		4D0C0BAF25F96FBE00781A47 /* ThemeTypes */ = {
+			isa = PBXGroup;
+			children = (
+				4D0C0BA525F96F4500781A47 /* ClassicTheme.swift */,
+				4D0C0BA925F96F5A00781A47 /* NightTheme.swift */,
+				4D0C0BAC25F96F7B00781A47 /* DayTheme.swift */,
+			);
+			path = ThemeTypes;
+			sourceTree = "<group>";
+		};
 		4D2AFD6F25E4110900706ACE /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				4DAFEC6F25F6444300CE1BEA /* ThemeSetting */,
 				4D92DF6325ED714C0093FA2A /* ConversationList */,
 				4D92DF8225EEF1C00093FA2A /* ConversationView */,
 				4D92DF8125EEF1AD0093FA2A /* ProfileView */,
@@ -116,6 +167,8 @@
 		4D92DF6325ED714C0093FA2A /* ConversationList */ = {
 			isa = PBXGroup;
 			children = (
+				4DAFEC8C25F80A7600CE1BEA /* Router */,
+				4DAFEC7525F6494700CE1BEA /* Views */,
 				4DCD0B0525EFE0F00096F893 /* ViewControllers */,
 				4D92DF7425EE14410093FA2A /* Cells */,
 				4D92DF7325EE13FF0093FA2A /* Models */,
@@ -158,6 +211,50 @@
 			path = ConversationView;
 			sourceTree = "<group>";
 		};
+		4DAFEC6F25F6444300CE1BEA /* ThemeSetting */ = {
+			isa = PBXGroup;
+			children = (
+				4DAFEC8025F667D900CE1BEA /* Views */,
+				4DAFEC7025F6445900CE1BEA /* ViewControllers */,
+			);
+			path = ThemeSetting;
+			sourceTree = "<group>";
+		};
+		4DAFEC7025F6445900CE1BEA /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				4DAFEC7125F6448200CE1BEA /* ThemesViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		4DAFEC7525F6494700CE1BEA /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				4DAFEC7625F6497600CE1BEA /* ProfileIconView.swift */,
+				4DAFEC7A25F6498000CE1BEA /* ProfileIconView.xib */,
+				4DAFEC8925F805CD00CE1BEA /* ProfileBarButtonView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		4DAFEC8025F667D900CE1BEA /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				4DAFEC8125F6680400CE1BEA /* ChooseThemeButtonView.xib */,
+				4DAFEC8425F6681400CE1BEA /* ChooseThemeButtonView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		4DAFEC8C25F80A7600CE1BEA /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				4DAFEC8D25F80A8800CE1BEA /* ConversationListRouter.swift */,
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
 		4DCD0AF725EFB0370096F893 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
@@ -173,6 +270,7 @@
 			isa = PBXGroup;
 			children = (
 				4D92DF5F25ED67B90093FA2A /* ConversationsListViewController.swift */,
+				4D0C0BBC25FA26C000781A47 /* ConversationListNavigationController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -210,6 +308,7 @@
 				4D2AFD7B25E576E500706ACE /* Extension+UILabel.swift */,
 				4D92DF7025ED7CE60093FA2A /* Extension+Date.swift */,
 				4D26AEB925F0437B00C0B8C6 /* Extension+UIColor.swift */,
+				4DAFEC7D25F64C9700CE1BEA /* Extension+UIButton.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -217,6 +316,7 @@
 		4DD6E8DC25DC602100EF5039 /* Resourses */ = {
 			isa = PBXGroup;
 			children = (
+				4D0C0BA125F96DEF00781A47 /* Theme */,
 				4D49ADC525D7F800000F0BBB /* Assets.xcassets */,
 				4D2AFD7325E4198100706ACE /* Colors.xcassets */,
 			);
@@ -229,6 +329,7 @@
 				4D49ADC225D7F7FE000F0BBB /* Profile.storyboard */,
 				4D92DF5B25ED658D0093FA2A /* Conversation.storyboard */,
 				4D49ADC725D7F800000F0BBB /* LaunchScreen.storyboard */,
+				4DAFEC6C25F6428100CE1BEA /* ThemesSetting.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -290,14 +391,17 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4DAFEC6D25F6428100CE1BEA /* ThemesSetting.storyboard in Resources */,
 				4D92DF6B25ED74420093FA2A /* ConversationListCell.xib in Resources */,
 				4D49ADC925D7F800000F0BBB /* LaunchScreen.storyboard in Resources */,
 				4D2AFD7425E4198100706ACE /* Colors.xcassets in Resources */,
 				4D92DF5C25ED658D0093FA2A /* Conversation.storyboard in Resources */,
 				4D49ADC625D7F800000F0BBB /* Assets.xcassets in Resources */,
 				4D49ADC425D7F7FE000F0BBB /* Profile.storyboard in Resources */,
+				4DAFEC7B25F6498000CE1BEA /* ProfileIconView.xib in Resources */,
 				4DCD0AFB25EFB0530096F893 /* ConversationMessageOutgoingViewCell.xib in Resources */,
 				4DCD0B0325EFBC280096F893 /* ConversationMessageIncomingViewCell.xib in Resources */,
+				4DAFEC8225F6680400CE1BEA /* ChooseThemeButtonView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -309,19 +413,31 @@
 			buildActionMask = 2147483647;
 			files = (
 				4DCD0AFA25EFB0530096F893 /* ConversationMessageOutgoingViewCell.swift in Sources */,
+				4DAFEC7225F6448200CE1BEA /* ThemesViewController.swift in Sources */,
 				4D92DF6A25ED74420093FA2A /* ConversationListCell.swift in Sources */,
 				4DAFEC5D25F15D9D00CE1BEA /* DataProvider.swift in Sources */,
+				4D0C0BAD25F96F7B00781A47 /* DayTheme.swift in Sources */,
+				4DAFEC8A25F805CE00CE1BEA /* ProfileBarButtonView.swift in Sources */,
+				4D0C0BAA25F96F5A00781A47 /* NightTheme.swift in Sources */,
 				4D2AFD7C25E576E500706ACE /* Extension+UILabel.swift in Sources */,
 				4DD6E8E125DC60EC00EF5039 /* Extension+AppDelegate.swift in Sources */,
+				4DAFEC7E25F64C9800CE1BEA /* Extension+UIButton.swift in Sources */,
+				4D0C0BA625F96F4500781A47 /* ClassicTheme.swift in Sources */,
 				4DD6E8CE25DC549600EF5039 /* DLogger.swift in Sources */,
+				4D0C0BA325F96E8900781A47 /* ThemeProtocol.swift in Sources */,
+				4D0C0BB125F96FE100781A47 /* ThemePicker.swift in Sources */,
 				4D92DF7625EE14720093FA2A /* ConversationModel.swift in Sources */,
+				4DAFEC8525F6681400CE1BEA /* ChooseThemeButtonView.swift in Sources */,
+				4D0C0BBD25FA26C000781A47 /* ConversationListNavigationController.swift in Sources */,
 				4D2AFD7925E41B3200706ACE /* ProfileViewController.swift in Sources */,
+				4DAFEC8E25F80A8800CE1BEA /* ConversationListRouter.swift in Sources */,
 				4DCD0B0225EFBC280096F893 /* ConversationMessageIncomingViewCell.swift in Sources */,
 				4DD6E8D725DC5CA300EF5039 /* Extension+VC.swift in Sources */,
 				4D92DF8825EEF2400093FA2A /* MessageModel.swift in Sources */,
 				4D92DF6025ED67B90093FA2A /* ConversationsListViewController.swift in Sources */,
 				4D26AEBA25F0437B00C0B8C6 /* Extension+UIColor.swift in Sources */,
 				4D49ADBD25D7F7FE000F0BBB /* AppDelegate.swift in Sources */,
+				4DAFEC7725F6497600CE1BEA /* ProfileIconView.swift in Sources */,
 				4D92DF8425EEF1EF0093FA2A /* ConversationViewController.swift in Sources */,
 				4D92DF7125ED7CE60093FA2A /* Extension+Date.swift in Sources */,
 			);

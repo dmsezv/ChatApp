@@ -11,10 +11,19 @@ class ConversationMessageOutgoingViewCell: UITableViewCell {
     @IBOutlet weak var messageView: UIView!
     @IBOutlet weak var messageLabel: UILabel!
     
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        contentView.backgroundColor = ThemePicker.shared.currentTheme.backgroundColor
+    }
+    
     func configure(with model: MessageCellConfiguration) {
         messageLabel.text = model.text
         messageView.layer.cornerRadius = cornerRadius
         messageView.layer.maskedCorners = maskedCorners
+        
+        messageView.backgroundColor = ThemePicker.shared.currentTheme.cellOutgoingBackground
+        messageLabel.textColor = ThemePicker.shared.currentTheme.cellOutgoingTextColor
     }
     
     

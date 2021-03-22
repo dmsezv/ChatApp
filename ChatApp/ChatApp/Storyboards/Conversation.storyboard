@@ -18,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="9Nd-eA-gmH">
-                                <rect key="frame" x="0.0" y="140" width="414" height="722"/>
+                                <rect key="frame" x="0.0" y="140" width="414" height="756"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <connections>
                                     <outlet property="dataSource" destination="7Xq-hJ-Tgi" id="zQg-tj-IEN"/>
@@ -26,25 +26,37 @@
                                 </connections>
                             </tableView>
                         </subviews>
-                        <viewLayoutGuide key="safeArea" id="znw-cI-st9"/>
+                        <viewLayoutGuide key="safeArea" id="iyl-v1-DbT"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="znw-cI-st9" firstAttribute="trailing" secondItem="9Nd-eA-gmH" secondAttribute="trailing" id="2gN-So-We3"/>
-                            <constraint firstItem="9Nd-eA-gmH" firstAttribute="top" secondItem="znw-cI-st9" secondAttribute="top" id="C7K-nu-nql"/>
-                            <constraint firstItem="znw-cI-st9" firstAttribute="bottom" secondItem="9Nd-eA-gmH" secondAttribute="bottom" id="l2q-Lh-kP3"/>
-                            <constraint firstItem="9Nd-eA-gmH" firstAttribute="leading" secondItem="znw-cI-st9" secondAttribute="leading" id="lDB-hK-fse"/>
+                            <constraint firstItem="iyl-v1-DbT" firstAttribute="trailing" secondItem="9Nd-eA-gmH" secondAttribute="trailing" id="2gN-So-We3"/>
+                            <constraint firstItem="9Nd-eA-gmH" firstAttribute="top" secondItem="iyl-v1-DbT" secondAttribute="top" id="C7K-nu-nql"/>
+                            <constraint firstAttribute="bottom" secondItem="9Nd-eA-gmH" secondAttribute="bottom" id="PMz-Mt-Jnr"/>
+                            <constraint firstItem="9Nd-eA-gmH" firstAttribute="leading" secondItem="iyl-v1-DbT" secondAttribute="leading" id="lDB-hK-fse"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Tinkoff Chat" id="8VE-Vm-7dE">
-                        <barButtonItem key="rightBarButtonItem" image="profileLogo" style="plain" id="0kX-NT-tRT">
-                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <connections>
-                                <segue destination="n50-7x-0ux" kind="presentation" id="3hQ-Fr-bms"/>
-                            </connections>
+                        <barButtonItem key="leftBarButtonItem" title="Item" id="bsx-CZ-nYM">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="zFL-qd-xBB">
+                                <rect key="frame" x="20" y="9.5" width="25" height="25"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="settingsLogo"/>
+                            </button>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" id="PuO-so-Xeh">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="RdM-8D-ubc">
+                                <rect key="frame" x="302" y="7" width="92" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Profile"/>
+                                <connections>
+                                    <segue destination="n50-7x-0ux" kind="presentation" id="i1a-yA-FeY"/>
+                                </connections>
+                            </button>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="profileButton" destination="0kX-NT-tRT" id="2d6-7K-R0X"/>
+                        <outlet property="profileButton" destination="RdM-8D-ubc" id="lhT-0d-Rjc"/>
+                        <outlet property="settingsButton" destination="zFL-qd-xBB" id="9dX-au-YT5"/>
                         <outlet property="tableView" destination="9Nd-eA-gmH" id="qos-GI-GTG"/>
                         <segue destination="Zoi-tU-2HO" kind="show" identifier="showChatSegue" id="w9b-3E-TF7"/>
                     </connections>
@@ -66,13 +78,13 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
                         </subviews>
-                        <viewLayoutGuide key="safeArea" id="sN9-Gp-Cyq"/>
+                        <viewLayoutGuide key="safeArea" id="BnJ-bf-8Mb"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="sN9-Gp-Cyq" firstAttribute="bottom" secondItem="gjd-E1-2gp" secondAttribute="bottom" id="ByF-OX-JqS"/>
-                            <constraint firstItem="gjd-E1-2gp" firstAttribute="top" secondItem="sN9-Gp-Cyq" secondAttribute="top" id="Jfp-fh-yzR"/>
-                            <constraint firstItem="sN9-Gp-Cyq" firstAttribute="trailing" secondItem="gjd-E1-2gp" secondAttribute="trailing" id="dWt-1D-0hg"/>
-                            <constraint firstItem="gjd-E1-2gp" firstAttribute="leading" secondItem="sN9-Gp-Cyq" secondAttribute="leading" id="m1p-QZ-OC3"/>
+                            <constraint firstItem="BnJ-bf-8Mb" firstAttribute="bottom" secondItem="gjd-E1-2gp" secondAttribute="bottom" id="ByF-OX-JqS"/>
+                            <constraint firstItem="gjd-E1-2gp" firstAttribute="top" secondItem="BnJ-bf-8Mb" secondAttribute="top" id="Jfp-fh-yzR"/>
+                            <constraint firstItem="BnJ-bf-8Mb" firstAttribute="trailing" secondItem="gjd-E1-2gp" secondAttribute="trailing" id="dWt-1D-0hg"/>
+                            <constraint firstItem="gjd-E1-2gp" firstAttribute="leading" secondItem="BnJ-bf-8Mb" secondAttribute="leading" id="m1p-QZ-OC3"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="uYk-GS-POL">
@@ -98,10 +110,10 @@
             </objects>
             <point key="canvasLocation" x="1654" y="-323"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Conversation List Navigation Controller-->
         <scene sceneID="Gkx-KB-Ecm">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="sUk-cH-Enl" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="sUk-cH-Enl" customClass="ConversationListNavigationController" customModule="ChatApp" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="C4W-57-tWY">
                         <rect key="frame" x="0.0" y="44" width="414" height="96"/>
@@ -119,7 +131,7 @@
     </scenes>
     <resources>
         <image name="leftArrayBlue" width="12" height="21"/>
-        <image name="profileLogo" width="28" height="28"/>
+        <image name="settingsLogo" width="25" height="25"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

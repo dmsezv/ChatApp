@@ -32,6 +32,8 @@ final class ConversationViewController: UIViewController {
         tableView.register(UINib(nibName: cellOutgoingIdentifier, bundle: nil), forCellReuseIdentifier: cellOutgoingIdentifier)
         tableView.register(UINib(nibName: cellIncomingIdentifier, bundle: nil), forCellReuseIdentifier: cellIncomingIdentifier)
         tableView.transform = CGAffineTransform(scaleX: 1, y: -1)
+        
+        tableView.backgroundColor = ThemePicker.shared.currentTheme.backgroundColor
     }
     
     private func loadData() {
