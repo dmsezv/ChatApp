@@ -52,6 +52,7 @@
 		4DD6E8CE25DC549600EF5039 /* DLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD6E8CD25DC549600EF5039 /* DLogger.swift */; };
 		4DD6E8D725DC5CA300EF5039 /* Extension+VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD6E8D625DC5CA300EF5039 /* Extension+VC.swift */; };
 		4DD6E8E125DC60EC00EF5039 /* Extension+AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD6E8E025DC60EC00EF5039 /* Extension+AppDelegate.swift */; };
+		4DF1C49926092B72005D127C /* ConversationListInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF1C49826092B72005D127C /* ConversationListInteractor.swift */; };
 		C1748107E93706AD35E52E52 /* Pods_ChatApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9B14D5F3D4B14D1C8B676FB /* Pods_ChatApp.framework */; };
 /* End PBXBuildFile section */
 
@@ -105,6 +106,7 @@
 		4DD6E8CD25DC549600EF5039 /* DLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DLogger.swift; sourceTree = "<group>"; };
 		4DD6E8D625DC5CA300EF5039 /* Extension+VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+VC.swift"; sourceTree = "<group>"; };
 		4DD6E8E025DC60EC00EF5039 /* Extension+AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+AppDelegate.swift"; sourceTree = "<group>"; };
+		4DF1C49826092B72005D127C /* ConversationListInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationListInteractor.swift; sourceTree = "<group>"; };
 		A9B14D5F3D4B14D1C8B676FB /* Pods_ChatApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChatApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -196,6 +198,7 @@
 		4D92DF6325ED714C0093FA2A /* ConversationList */ = {
 			isa = PBXGroup;
 			children = (
+				4DF1C49726092B5D005D127C /* Interactors */,
 				4DAFEC8C25F80A7600CE1BEA /* Router */,
 				4DAFEC7525F6494700CE1BEA /* Views */,
 				4DCD0B0525EFE0F00096F893 /* ViewControllers */,
@@ -391,6 +394,14 @@
 			path = Storyboards;
 			sourceTree = "<group>";
 		};
+		4DF1C49726092B5D005D127C /* Interactors */ = {
+			isa = PBXGroup;
+			children = (
+				4DF1C49826092B72005D127C /* ConversationListInteractor.swift */,
+			);
+			path = Interactors;
+			sourceTree = "<group>";
+		};
 		B29BD3482C758A063861EC4C /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -553,6 +564,7 @@
 				4DC119A52602570A0027E4A0 /* UserInfoSaver.swift in Sources */,
 				4D0C0BBD25FA26C000781A47 /* ConversationListNavigationController.swift in Sources */,
 				4D2AFD7925E41B3200706ACE /* ProfileViewController.swift in Sources */,
+				4DF1C49926092B72005D127C /* ConversationListInteractor.swift in Sources */,
 				4DAFEC8E25F80A8800CE1BEA /* ConversationListRouter.swift in Sources */,
 				4DCD0B0225EFBC280096F893 /* ConversationMessageIncomingViewCell.swift in Sources */,
 				4DD6E8D725DC5CA300EF5039 /* Extension+VC.swift in Sources */,
@@ -719,7 +731,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.fintech.tinkoff.ChatApp;
+				PRODUCT_BUNDLE_IDENTIFIER = ru.tinkoff.TinkoffChat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -740,7 +752,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.fintech.tinkoff.ChatApp;
+				PRODUCT_BUNDLE_IDENTIFIER = ru.tinkoff.TinkoffChat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;

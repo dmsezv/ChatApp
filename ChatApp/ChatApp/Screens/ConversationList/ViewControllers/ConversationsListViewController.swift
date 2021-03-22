@@ -8,9 +8,13 @@
 import Foundation
 import UIKit
 
+protocol ConversationListDisplayLogic: class {
+    func displayListChannels()
+}
 
 final class ConversationsListViewController: UIViewController {
     
+    var interactor: ConversationListInteractor?
     var router: ConversationListRoutingLogic?
     
     //MARK: - IBOutlets
@@ -35,8 +39,11 @@ final class ConversationsListViewController: UIViewController {
     private func setup() {
         let viewController = self
         let router = ConversationListRouter()
+        let interactor = ConversationListInteractor()
         viewController.router = router
+        viewController.interactor = interactor
         router.viewController = viewController
+        interactor.viewController = viewController
     }
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
@@ -60,6 +67,8 @@ final class ConversationsListViewController: UIViewController {
         
         setupView()
         loadData()
+        
+        interactor?.getChannelList()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -95,6 +104,15 @@ final class ConversationsListViewController: UIViewController {
         viewModelMessages = ConversationsListViewController.ViewModel(
             historyMessages: historyMessages,
             onlineMessages: onlineMessages)
+    }
+}
+
+
+//MARK: - Display Logic
+
+extension ConversationsListViewController: ConversationListDisplayLogic {
+    func displayListChannels() {
+        
     }
 }
 
