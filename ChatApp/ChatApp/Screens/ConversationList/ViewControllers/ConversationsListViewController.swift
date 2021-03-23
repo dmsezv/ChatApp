@@ -170,6 +170,7 @@ extension ConversationsListViewController: UITableViewDelegate, UITableViewDataS
             return UITableViewCell()
         }
         
+        cell.configure(with: vm.onlineMessages[indexPath.row])
         switch indexPath.section {
         case TableSection.history.getSectionIndex():
             cell.configure(with: vm.historyMessages[indexPath.row])
