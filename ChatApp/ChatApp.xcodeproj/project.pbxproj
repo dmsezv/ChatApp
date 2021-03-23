@@ -53,6 +53,7 @@
 		4DD6E8D725DC5CA300EF5039 /* Extension+VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD6E8D625DC5CA300EF5039 /* Extension+VC.swift */; };
 		4DD6E8E125DC60EC00EF5039 /* Extension+AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD6E8E025DC60EC00EF5039 /* Extension+AppDelegate.swift */; };
 		4DDED28D260A90D400FF4204 /* ChannelModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DDED28C260A90D400FF4204 /* ChannelModel.swift */; };
+		4DDED291260A970900FF4204 /* ConversationViewInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DDED290260A970900FF4204 /* ConversationViewInteractor.swift */; };
 		4DF1C49926092B72005D127C /* ConversationListInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF1C49826092B72005D127C /* ConversationListInteractor.swift */; };
 		C1748107E93706AD35E52E52 /* Pods_ChatApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9B14D5F3D4B14D1C8B676FB /* Pods_ChatApp.framework */; };
 /* End PBXBuildFile section */
@@ -108,6 +109,7 @@
 		4DD6E8D625DC5CA300EF5039 /* Extension+VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+VC.swift"; sourceTree = "<group>"; };
 		4DD6E8E025DC60EC00EF5039 /* Extension+AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+AppDelegate.swift"; sourceTree = "<group>"; };
 		4DDED28C260A90D400FF4204 /* ChannelModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelModel.swift; sourceTree = "<group>"; };
+		4DDED290260A970900FF4204 /* ConversationViewInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationViewInteractor.swift; sourceTree = "<group>"; };
 		4DF1C49826092B72005D127C /* ConversationListInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationListInteractor.swift; sourceTree = "<group>"; };
 		A9B14D5F3D4B14D1C8B676FB /* Pods_ChatApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChatApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -241,6 +243,7 @@
 		4D92DF8225EEF1C00093FA2A /* ConversationView */ = {
 			isa = PBXGroup;
 			children = (
+				4DDED28F260A96F100FF4204 /* Interactors */,
 				4DCD0B0725EFE1070096F893 /* ViewControllers */,
 				4DCD0B0625EFE0FE0096F893 /* Models */,
 				4DCD0AF725EFB0370096F893 /* Cells */,
@@ -397,6 +400,14 @@
 			path = Storyboards;
 			sourceTree = "<group>";
 		};
+		4DDED28F260A96F100FF4204 /* Interactors */ = {
+			isa = PBXGroup;
+			children = (
+				4DDED290260A970900FF4204 /* ConversationViewInteractor.swift */,
+			);
+			path = Interactors;
+			sourceTree = "<group>";
+		};
 		4DF1C49726092B5D005D127C /* Interactors */ = {
 			isa = PBXGroup;
 			children = (
@@ -549,6 +560,7 @@
 				4DCD0AFA25EFB0530096F893 /* ConversationMessageOutgoingViewCell.swift in Sources */,
 				4DAFEC7225F6448200CE1BEA /* ThemesViewController.swift in Sources */,
 				4D92DF6A25ED74420093FA2A /* ConversationListCell.swift in Sources */,
+				4DDED291260A970900FF4204 /* ConversationViewInteractor.swift in Sources */,
 				4DAFEC5D25F15D9D00CE1BEA /* DataProvider.swift in Sources */,
 				4D0C0BAD25F96F7B00781A47 /* DayTheme.swift in Sources */,
 				4DAFEC8A25F805CE00CE1BEA /* ProfileBarButtonView.swift in Sources */,

@@ -170,39 +170,4 @@ struct DataProvider {
                 hasUnreadMessages: false)
         ]
     }
-
-    static func getMockMessages() -> [MessageModel] {
-        return [
-            .init(text: "Ты тупой идиот. Приходи сегодня на репу.",
-                  isIncoming: true),
-            .init(text: "Чо?",
-                  isIncoming: false),
-            .init(text: "Мы сегодня не договаривались",
-                  isIncoming: false),
-            .init(text: "Да и голова ужасно после вчерашнего болит ",
-                  isIncoming: false),
-            .init(text: "Будет еще сильнее болеть, когда мы об нее твою басуху разобьем",
-                  isIncoming: true),
-            .init(text: "что случилось то?",
-                  isIncoming: false),
-            .init(text: "Ничего не помнишь?",
-                  isIncoming: true),
-            .init(text: "Ты на барабанах (на каждом) написал маркером \"йа барабанчег\". Да еще так крупно, что теперь все будут думать, что так называется наша группа",
-                  isIncoming: true),
-            .init(text: "И на гитаре \"йа гитарко\"",
-                  isIncoming: true),
-            .init(text: "Йа кросавчег)))",
-                  isIncoming: false),
-            .init(text: "Вот значит почему Витек мне смску прислал \"ты труп\"",
-                  isIncoming: false),
-            .init(text: "Нет, не по этому",
-                  isIncoming: true),
-            .init(text: "Мы все утро с анькиного лба \"йа тёлко\" оттирали",
-                  isIncoming: true),
-            .init(text: "жесть",
-                  isIncoming: false),
-            .init(text: "Йа идиот",
-              isIncoming: false),
-        ]
-    }
 }

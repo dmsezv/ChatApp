@@ -7,24 +7,55 @@
 
 import UIKit
 
+protocol ConversationViewDisplayLogic: class {
+    func displayList(_ messages: [MessageModel])
+}
+
 final class ConversationViewController: UIViewController {
     
+    var interactor: ConversationViewBusinessLogic?
+    
+    
+    //MARK: - IBOutlets
+    
     @IBOutlet weak var tableView: UITableView!
-    
-    private let cellOutgoingIdentifier = String(describing: ConversationMessageOutgoingViewCell.self)
-    private let cellIncomingIdentifier = String(describing: ConversationMessageIncomingViewCell.self)
-    
     @IBAction func touchButtonBack(_ sender: Any) {
         navigationController?.popViewController(animated: true)
     }
     
-    private var viewModelMessages: ConversationViewController.ViewModel?
+    
+    //MARK: - Setup
+    
+    private func setup() {
+        let viewController = self
+        let interactor = ConversationViewInteractor()
+        viewController.interactor = interactor
+        interactor.viewController = self
+    }
+    
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        setup()
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        setup()
+    }
+    
+    
+    //MARK: - Life Cycle
+    
+    private let cellOutgoingIdentifier = String(describing: ConversationMessageOutgoingViewCell.self)
+    private let cellIncomingIdentifier = String(describing: ConversationMessageIncomingViewCell.self)
+    private var messages: [MessageModel]?
+    var identifierChannel: String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupView()
-        loadData()
+        interactor?.getMessagesBy(identifierChannel)
     }
     
     private func setupView() {
@@ -35,13 +66,16 @@ final class ConversationViewController: UIViewController {
         
         tableView.backgroundColor = ThemePicker.shared.currentTheme.backgroundColor
     }
-    
-    private func loadData() {
-        //TODO: поставить потом интерактор, чтоб ходить за данными в репы и в нем их приводить впорядок
-        var msgs = DataProvider.getMockMessages()
-        msgs.reverse()
-        
-        viewModelMessages = ConversationViewController.ViewModel(messages: msgs)
+}
+
+
+//MARK: - Display Logic
+
+extension ConversationViewController: ConversationViewDisplayLogic {
+    func displayList(_ messages: [MessageModel]) {
+        self.messages = messages
+        self.messages?.reverse()
+        tableView.reloadData()
     }
 }
 
@@ -50,25 +84,26 @@ final class ConversationViewController: UIViewController {
 
 extension ConversationViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let vm = viewModelMessages else {
+        guard let messages = messages else {
             return 0
         }
         
-        return vm.messages.count
+        return messages.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let vm = viewModelMessages else {
+        guard let messages = messages else {
             return UITableViewCell()
         }
         
         
-        let model = vm.messages[indexPath.row]
-        if model.isIncoming {
-            return setupIncomingCell(with: model, tableView, indexPath)
-        } else {
-            return setupOutgoingCell(with: model, tableView, indexPath)
-        }
+        let model = messages[indexPath.row]
+        return setupIncomingCell(with: model, tableView, indexPath)
+//        if model.isIncoming {
+//            return setupIncomingCell(with: model, tableView, indexPath)
+//        } else {
+//            return setupOutgoingCell(with: model, tableView, indexPath)
+//        }
     }
 }
 
@@ -76,7 +111,7 @@ extension ConversationViewController: UITableViewDataSource {
 //MARK: - Setup Cells
 
 extension ConversationViewController {
-    private func setupIncomingCell(with model: MessageCellConfiguration, _ tableView: UITableView, _ indexPath: IndexPath) -> UITableViewCell {
+    private func setupIncomingCell(with model: MessageModel, _ tableView: UITableView, _ indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIncomingIdentifier, for: indexPath) as? ConversationMessageIncomingViewCell else {
             return UITableViewCell()
         }
@@ -87,7 +122,7 @@ extension ConversationViewController {
         return cell
     }
     
-    private func setupOutgoingCell(with model: MessageCellConfiguration, _ tableView: UITableView, _ indexPath: IndexPath) -> UITableViewCell {
+    private func setupOutgoingCell(with model: MessageModel, _ tableView: UITableView, _ indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: cellOutgoingIdentifier, for: indexPath) as? ConversationMessageOutgoingViewCell else {
             return UITableViewCell()
         }
@@ -96,12 +131,5 @@ extension ConversationViewController {
         cell.contentView.transform = CGAffineTransform(scaleX: 1, y: -1)
         
         return cell
-    }
-}
-
-
-extension ConversationViewController {
-    private struct ViewModel {
-        var messages: [MessageModel]
     }
 }

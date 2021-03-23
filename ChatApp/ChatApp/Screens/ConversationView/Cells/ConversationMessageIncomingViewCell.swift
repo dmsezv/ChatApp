@@ -21,8 +21,8 @@ class ConversationMessageIncomingViewCell: UITableViewCell {
         super.init(coder: coder)
     }
     
-    func configure(with model: MessageCellConfiguration) {
-        messageLabel.text = model.text
+    func configure(with model: MessageModel) {
+        messageLabel.text = model.content
         messageView.layer.cornerRadius = cornerRadius
         messageView.layer.maskedCorners = maskedCorners
         

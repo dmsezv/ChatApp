@@ -14,7 +14,7 @@ protocol ConversationListDisplayLogic: class {
 
 final class ConversationsListViewController: UIViewController {
     
-    var interactor: ConversationListInteractor?
+    var interactor: ConversationListBusinessLogic?
     var router: ConversationListRoutingLogic?
     
     //MARK: - IBOutlets
@@ -116,7 +116,7 @@ extension ConversationsListViewController: UITableViewDelegate, UITableViewDataS
             return
         }
         
-        router?.routeToShowChat(title: channels[indexPath.row].name)
+        router?.routeToShowChat(title: channels[indexPath.row].name, identifierChannel: channels[indexPath.row].identifier)
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
