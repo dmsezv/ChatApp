@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 protocol ConversationListDisplayLogic: class {
-    func displayListChannels()
+    func displayList(_ channels: [ChannelModel])
 }
 
 final class ConversationsListViewController: UIViewController {
@@ -28,9 +28,9 @@ final class ConversationsListViewController: UIViewController {
     
     private let profileButtonFrame: CGRect = CGRect(x: 0, y: 0, width: 40, height: 40)
     private let kernLetterNameValue: Double = -4
-    private let titleViewHeight: CGFloat = 40
+    private let titleViewHeight: CGFloat = 45
     private let titleLabelPaddingX: CGFloat = 10
-    private let titleLabelPaddingY: CGFloat = -5
+    private let titleLabelPaddingY: CGFloat = 0
     private let titleLableFontSize: CGFloat = 15
     
     
@@ -59,14 +59,13 @@ final class ConversationsListViewController: UIViewController {
     
     //MARK: - View life cycle
     
+    private var channels: [ChannelModel]?
     private let cellIdentifier = String(describing: ConversationListCell.self)
-    private var viewModelMessages: ConversationsListViewController.ViewModel?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupView()
-        loadData()
         
         interactor?.getChannelList()
     }
@@ -94,25 +93,15 @@ final class ConversationsListViewController: UIViewController {
             navigationItem.rightBarButtonItem = rightBarButton
         }
     }
-    
-    private func loadData() {
-        //TODO: поставить потом интерактор, чтоб ходить за данными в репы и в нем их приводить впорядок
-
-        let historyMessages = DataProvider.getMockConversationsHistory()
-        let onlineMessages = DataProvider.getMockConversationsOnline()
-        
-        viewModelMessages = ConversationsListViewController.ViewModel(
-            historyMessages: historyMessages,
-            onlineMessages: onlineMessages)
-    }
 }
 
 
 //MARK: - Display Logic
 
 extension ConversationsListViewController: ConversationListDisplayLogic {
-    func displayListChannels() {
-        
+    func displayList(_ channels: [ChannelModel]) {
+        self.channels = channels
+        tableView.reloadData()
     }
 }
 
@@ -123,17 +112,11 @@ extension ConversationsListViewController: UITableViewDelegate, UITableViewDataS
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        guard let vm = viewModelMessages else {
+        guard let channels = channels else {
             return
         }
         
-        switch indexPath.section {
-        case TableSection.history.getSectionIndex():
-            router?.routeToShowChat(title: vm.historyMessages[indexPath.row].name)
-        case TableSection.online.getSectionIndex():
-            router?.routeToShowChat(title: vm.onlineMessages[indexPath.row].name)
-        default: break
-        }
+        router?.routeToShowChat(title: channels[indexPath.row].name)
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -141,77 +124,54 @@ extension ConversationsListViewController: UITableViewDelegate, UITableViewDataS
         viewHeader.backgroundColor = ThemePicker.shared.currentTheme.backgroundColor
         
         let label = UILabel(frame: CGRect(x: titleLabelPaddingX, y: titleLabelPaddingY, width: viewHeader.frame.width, height: viewHeader.frame.height))
-        label.text = TableSection.getSectionTitleBy(index: section)
+        label.text = "Channels"
         label.textColor = ThemePicker.shared.currentTheme.textColor
         label.font = .boldSystemFont(ofSize: titleLableFontSize)
         
+       
+        let button = UIButton()
+        
+        button.setTitle("Добавить канал", for: .normal)
+        button.setTitleColor(.systemBlue, for: .normal)
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: titleLableFontSize)
+        button.frame = CGRect(
+            x: viewHeader.frame.width - button.intrinsicContentSize.width - titleLabelPaddingX,
+            y: titleLabelPaddingY,
+            width: button.intrinsicContentSize.width,
+            height: viewHeader.frame.height)
+        
+        button.addTarget(self, action: #selector(touchAddChannelButton(_ :)), for: .touchUpInside)
+        
+        viewHeader.addSubview(button)
         viewHeader.addSubview(label)
         return viewHeader
     }
     
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        titleViewHeight
+    }
+    
     func numberOfSections(in tableView: UITableView) -> Int {
-        TableSection.allCases.count
+        1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let vm = viewModelMessages else {
+        guard let channels = channels else {
             return 0
         }
         
-        switch TableSection.allCases[section] {
-        case .history:  return vm.historyMessages.count
-        case .online:   return vm.onlineMessages.count
-        }
+        return channels.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? ConversationListCell,
-              let vm = viewModelMessages else {
+              let channels = channels else {
             return UITableViewCell()
         }
         
-        cell.configure(with: vm.onlineMessages[indexPath.row])
-        switch indexPath.section {
-        case TableSection.history.getSectionIndex():
-            cell.configure(with: vm.historyMessages[indexPath.row])
-        case TableSection.online.getSectionIndex():
-            cell.configure(with: vm.onlineMessages[indexPath.row])
-        default:
-            return UITableViewCell()
-        }
-        
+        cell.configure(with: channels[indexPath.row])
         
         return cell
-    }
-}
-
-
-extension ConversationsListViewController {
-    //знаю, что это все плохо и некрасиво, но пока так.
-    private enum TableSection: String, CaseIterable {
-        case online = "Online"
-        case history = "History"
-        
-        func getSectionIndex() -> Int {
-            switch self {
-            case .online: return 0
-            case .history: return 1
-            }
-        }
-        
-        static func getSectionTitleBy(index: Int) -> String? {
-            switch index {
-            case 0: return TableSection.online.rawValue
-            case 1: return TableSection.history.rawValue
-            default: return nil
-            }
-        }
-    }
-    
-    //TODO: сделать норм ViewModel
-    private struct ViewModel {
-        var historyMessages: [ConversationModel]
-        var onlineMessages: [ConversationModel]
     }
 }
 
@@ -225,5 +185,20 @@ extension ConversationsListViewController {
     
     @objc private func touchSettingsButton(_ sender: UIButton) {
         router?.routeToSettings()
+    }
+    
+    @objc private func touchAddChannelButton(_ sender: UIButton) {
+        let alertController = UIAlertController(title: "Добавить новый канал", message: nil, preferredStyle: .alert)
+        alertController.addTextField { (textField) in
+            textField.placeholder = "Введите название канала"
+        }
+        alertController.addAction(UIAlertAction(title: "Создать", style: .default, handler: { (action) in
+            if let nameChannel = alertController.textFields?[0].text, nameChannel.count > 0 {
+                //interactor?.addNew(nameChannel)
+            }
+        }))
+        alertController.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: nil))
+        
+        present(alertController, animated: true, completion: nil)
     }
 }

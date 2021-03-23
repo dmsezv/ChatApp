@@ -8,6 +8,14 @@
 import Foundation
 import Firebase
 
+
+struct Message {
+    let content: String
+    let created: Date
+    let senderId: String
+    let senderName: String
+}
+
 protocol ConversationListBusinessLogic {
     func getChannelList()
 }
@@ -21,8 +29,23 @@ class ConversationListInteractor: ConversationListBusinessLogic {
     
     func getChannelList() {
         reference.addSnapshotListener { [weak self] snapshot, error in
+            guard let snapshot = snapshot else { return }
+            let channels = snapshot.documents.compactMap { document -> ChannelModel? in
+                guard let name = document["name"] as? String else { return nil }
+                
+                return ChannelModel(
+                    identifier: document.documentID,
+                    name: name,
+                    lastMessage: document["lastMessage"] as? String,
+                    lastActivity: (document["lastActivity"] as? Timestamp)?.dateValue()
+                )
+            }
+
             
-            print(snapshot!.documents[0].data())
+            DispatchQueue.main.async {
+                self?.viewController?.displayList(channels)
+            }
         }
     }
 }
+
