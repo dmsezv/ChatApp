@@ -10,6 +10,8 @@ import Firebase
 
 protocol ConversationViewBusinessLogic {
     func getMessagesBy(_ identifierChannel: String)
+    func send(_ message: String, to identifierChannel: String)
+    func unsubscribeChannel()
 }
 
 class ConversationViewInteractor: ConversationViewBusinessLogic {
@@ -18,8 +20,10 @@ class ConversationViewInteractor: ConversationViewBusinessLogic {
     lazy var db = Firestore.firestore()
     lazy var reference = db.collection("channels")
     
+    private var listenerMessages: ListenerRegistration?
+    
     func getMessagesBy(_ identifierChannel: String) {
-        reference.document(identifierChannel).collection("messages").addSnapshotListener { [weak self] (snapshot, error) in
+        listenerMessages = reference.document(identifierChannel).collection("messages").addSnapshotListener { [weak self] (snapshot, error) in
             guard let snapshot = snapshot else { return }
             let messages = snapshot.documents.compactMap { document -> MessageModel? in
                 guard let content = document["content"] as? String,
@@ -38,5 +42,17 @@ class ConversationViewInteractor: ConversationViewBusinessLogic {
                 self?.viewController?.displayList(messages)
             }
         }
+    }
+    
+    func send(_ message: String, to identifierChannel: String) {
+        reference.document(identifierChannel).collection("messages")
+            .addDocument(data: ["content": message,
+                                "created": Timestamp(date: Date()),
+                                "senderName": "senderName",
+                                "senderId": "senderId"])
+    }
+    
+    func unsubscribeChannel() {
+        listenerMessages?.remove()
     }
 }

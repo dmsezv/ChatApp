@@ -18,6 +18,7 @@ struct Message {
 
 protocol ConversationListBusinessLogic {
     func getChannelList()
+    func createChannel(_ name: String)
 }
 
 class ConversationListInteractor: ConversationListBusinessLogic {
@@ -46,6 +47,10 @@ class ConversationListInteractor: ConversationListBusinessLogic {
                 self?.viewController?.displayList(channels)
             }
         }
+    }
+    
+    func createChannel(_ name: String) {
+        
     }
 }
 

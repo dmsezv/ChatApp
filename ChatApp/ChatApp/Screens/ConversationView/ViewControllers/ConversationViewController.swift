@@ -58,6 +58,11 @@ final class ConversationViewController: UIViewController {
         interactor?.getMessagesBy(identifierChannel)
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        interactor?.unsubscribeChannel()
+    }
+    
     private func setupView() {
         tableView.dataSource = self
         tableView.register(UINib(nibName: cellOutgoingIdentifier, bundle: nil), forCellReuseIdentifier: cellOutgoingIdentifier)
@@ -73,7 +78,9 @@ final class ConversationViewController: UIViewController {
 
 extension ConversationViewController: ConversationViewDisplayLogic {
     func displayList(_ messages: [MessageModel]) {
-        self.messages = messages
+        self.messages = messages.sorted(by: { (prev, next) -> Bool in
+            prev.created < next.created
+        })
         self.messages?.reverse()
         tableView.reloadData()
     }
