@@ -13,4 +13,7 @@ struct MessageModel {
     let created: Date
     let senderId: String
     let senderName: String
+    var isIncoming: Bool {
+        senderId != UserInfoSaverGCD().fetchSenderId()
+    }
 }

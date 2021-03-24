@@ -21,6 +21,10 @@ class ConversationViewInteractor: ConversationViewBusinessLogic {
     lazy var reference = db.collection("channels")
     
     private var listenerMessages: ListenerRegistration?
+    private lazy var userInfoGCD = UserInfoSaverGCD()
+    private lazy var senderId: String = userInfoGCD.fetchSenderId()
+    private var senderName: String?
+
     
     func getMessagesBy(_ identifierChannel: String) {
         listenerMessages = reference.document(identifierChannel).collection("messages").addSnapshotListener { [weak self] (snapshot, error) in
@@ -48,8 +52,8 @@ class ConversationViewInteractor: ConversationViewBusinessLogic {
         reference.document(identifierChannel).collection("messages")
             .addDocument(data: ["content": message,
                                 "created": Timestamp(date: Date()),
-                                "senderName": "senderName",
-                                "senderId": "senderId"])
+                                "senderName": "Undefinded",
+                                "senderId": senderId])
     }
     
     func unsubscribeChannel() {

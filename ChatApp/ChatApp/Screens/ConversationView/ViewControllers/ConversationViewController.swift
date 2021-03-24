@@ -67,6 +67,7 @@ final class ConversationViewController: UIViewController {
     
     private func setupView() {
         sendMessageButton.isEnabled = false
+        sendMessageButton.addTarget(self, action: #selector(touchSendMessageButton(_ :)), for: .touchUpInside)
         
         tableView.dataSource = self
         tableView.register(UINib(nibName: cellOutgoingIdentifier, bundle: nil), forCellReuseIdentifier: cellOutgoingIdentifier)
@@ -124,12 +125,11 @@ extension ConversationViewController: UITableViewDataSource {
         
         
         let model = messages[indexPath.row]
-        return setupIncomingCell(with: model, tableView, indexPath)
-//        if model.isIncoming {
-//            return setupIncomingCell(with: model, tableView, indexPath)
-//        } else {
-//            return setupOutgoingCell(with: model, tableView, indexPath)
-//        }
+        if model.isIncoming {
+            return setupIncomingCell(with: model, tableView, indexPath)
+        } else {
+            return setupOutgoingCell(with: model, tableView, indexPath)
+        }
     }
 }
 
@@ -195,6 +195,14 @@ extension ConversationViewController {
     @objc private func messageTextFieldEditing(_ textField: UITextField) {
         if let text = textField.text {
             sendMessageButton.isEnabled = !text.isEmpty
+        }
+    }
+    
+    @objc private func touchSendMessageButton(_ sender: UIButton) {
+        if let message = messageTextField.text {
+            messageTextField.text = ""
+            sendMessageButton.isEnabled = false
+            interactor?.send(message, to: identifierChannel)
         }
     }
 }
