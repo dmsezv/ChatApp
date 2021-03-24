@@ -10,6 +10,7 @@ import UIKit
 class ConversationMessageIncomingViewCell: UITableViewCell {
     @IBOutlet weak var messageLabel: UILabel!
     @IBOutlet weak var messageView: UIView!
+    @IBOutlet weak var senderNameLabel: UILabel!
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -22,6 +23,7 @@ class ConversationMessageIncomingViewCell: UITableViewCell {
     }
     
     func configure(with model: MessageModel) {
+        senderNameLabel.text = model.senderName
         messageLabel.text = model.content
         messageView.layer.cornerRadius = cornerRadius
         messageView.layer.maskedCorners = maskedCorners

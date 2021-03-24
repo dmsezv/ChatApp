@@ -10,6 +10,7 @@ import UIKit
 class ConversationMessageOutgoingViewCell: UITableViewCell {
     @IBOutlet weak var messageView: UIView!
     @IBOutlet weak var messageLabel: UILabel!
+    @IBOutlet weak var senderNameLabel: UILabel!
     
     override func layoutSubviews() {
         super.layoutSubviews()
@@ -18,6 +19,7 @@ class ConversationMessageOutgoingViewCell: UITableViewCell {
     }
     
     func configure(with model: MessageModel) {
+        senderNameLabel.text = model.senderName
         messageLabel.text = model.content
         messageView.layer.cornerRadius = cornerRadius
         messageView.layer.maskedCorners = maskedCorners
