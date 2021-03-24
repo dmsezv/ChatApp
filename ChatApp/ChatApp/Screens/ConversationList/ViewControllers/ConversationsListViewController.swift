@@ -131,7 +131,7 @@ extension ConversationsListViewController: UITableViewDelegate, UITableViewDataS
        
         let button = UIButton()
         
-        button.setTitle("Добавить канал", for: .normal)
+        button.setTitle("Add channel", for: .normal)
         button.setTitleColor(.systemBlue, for: .normal)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: titleLableFontSize)
         button.frame = CGRect(
@@ -188,16 +188,16 @@ extension ConversationsListViewController {
     }
     
     @objc private func touchAddChannelButton(_ sender: UIButton) {
-        let alertController = UIAlertController(title: "Добавить новый канал", message: nil, preferredStyle: .alert)
+        let alertController = UIAlertController(title: "Add new channel", message: nil, preferredStyle: .alert)
         alertController.addTextField { (textField) in
-            textField.placeholder = "Введите название канала"
+            textField.placeholder = "Enter name of channel"
         }
-        alertController.addAction(UIAlertAction(title: "Создать", style: .default, handler: { (action) in
+        alertController.addAction(UIAlertAction(title: "Create", style: .default, handler: { (action) in
             if let nameChannel = alertController.textFields?[0].text, nameChannel.count > 0 {
                 //interactor?.addNew(nameChannel)
             }
         }))
-        alertController.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: nil))
+        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         
         present(alertController, animated: true, completion: nil)
     }

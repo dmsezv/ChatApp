@@ -19,6 +19,8 @@ final class ConversationViewController: UIViewController {
     //MARK: - IBOutlets
     
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var messageTextField: UITextField!
+    @IBOutlet weak var sendMessageButton: UIButton!
     @IBAction func touchButtonBack(_ sender: Any) {
         navigationController?.popViewController(animated: true)
     }
@@ -64,12 +66,29 @@ final class ConversationViewController: UIViewController {
     }
     
     private func setupView() {
+        sendMessageButton.isEnabled = false
+        
         tableView.dataSource = self
         tableView.register(UINib(nibName: cellOutgoingIdentifier, bundle: nil), forCellReuseIdentifier: cellOutgoingIdentifier)
         tableView.register(UINib(nibName: cellIncomingIdentifier, bundle: nil), forCellReuseIdentifier: cellIncomingIdentifier)
         tableView.transform = CGAffineTransform(scaleX: 1, y: -1)
-        
         tableView.backgroundColor = ThemePicker.shared.currentTheme.backgroundColor
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard(_ :)))
+        tableView.addGestureRecognizer(tap)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+        
+        messageTextField.addTarget(self, action: #selector(messageTextFieldEditing(_ :)), for: .editingChanged)
+    }
+    
+    private func setSendMessageButton(enabled: Bool) {
+        sendMessageButton.isEnabled = enabled
+        if enabled {
+            sendMessageButton.alpha = 0.7
+        } else {
+            sendMessageButton.alpha = 1.0
+        }
     }
 }
 
@@ -138,5 +157,44 @@ extension ConversationViewController {
         cell.contentView.transform = CGAffineTransform(scaleX: 1, y: -1)
         
         return cell
+    }
+}
+
+
+//MARK: - Touches
+
+extension ConversationViewController {
+    @objc private func keyboardWillShow(_ notification: NSNotification) {
+        if let keyboardFrame = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue,
+           let duration = (notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? NSValue) as? Double {
+            
+            let keyboardFrameInView = view.convert(keyboardFrame, from: nil)
+            let safeAreaFrame = view.safeAreaLayoutGuide.layoutFrame.insetBy(dx: 0, dy: -additionalSafeAreaInsets.bottom)
+            let intersection = safeAreaFrame.intersection(keyboardFrameInView)
+
+            UIView.animate(withDuration: duration) {
+                self.additionalSafeAreaInsets.bottom = intersection.height
+                self.view.layoutIfNeeded()
+            }
+        }
+    }
+    
+    @objc private func keyboardWillHide(_ notification: NSNotification) {
+        if let duration = (notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? NSValue) as? Double {
+            UIView.animate(withDuration: duration) {
+                self.additionalSafeAreaInsets.bottom = 0
+                self.view.layoutIfNeeded()
+            }
+        }
+    }
+    
+    @objc private func dismissKeyboard(_ sender: UITapGestureRecognizer) {
+        view.endEditing(true)
+    }
+    
+    @objc private func messageTextFieldEditing(_ textField: UITextField) {
+        if let text = textField.text {
+            sendMessageButton.isEnabled = !text.isEmpty
+        }
     }
 }
