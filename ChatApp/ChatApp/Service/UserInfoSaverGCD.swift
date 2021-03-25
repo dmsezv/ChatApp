@@ -31,9 +31,8 @@ class UserInfoSaverGCD: UserInfoSaver {
                 do {
                     if self?.dispatchWorkItem?.isCancelled ?? true { return }
                     try data.write(to: docDirUrl.appendingPathComponent("profileInfo.json"))
-                    
-                    if self?.dispatchWorkItem?.isCancelled ?? true { return }
                     UserDefaults.standard.set(model.name, forKey: "senderName")
+                    if self?.dispatchWorkItem?.isCancelled ?? true { return }
                     complete(.success(()))
                 } catch {
                     if self?.dispatchWorkItem?.isCancelled ?? true { return }

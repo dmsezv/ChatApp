@@ -38,7 +38,7 @@ extension UserInfoSaver {
     }
     
     func fetchSenderName() -> String {
-        if let senderName = UserDefaults.standard.string(forKey: "senderName") {
+        if let senderName = UserDefaults.standard.string(forKey: "senderName"), !senderName.isEmpty {
             return senderName
         } else {
             let senderName = "Unknown"

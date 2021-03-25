@@ -59,6 +59,7 @@ class ConversationViewInteractor: ConversationViewBusinessLogic {
                     if let name = userInfo?.name, !name.isEmpty {
                         self.senderName = name
                     } else {
+                        // TODO: после сдачи поменять на деволт
                         self.senderName = "Dmitrii Zverev"
                     }
                 case .failure:

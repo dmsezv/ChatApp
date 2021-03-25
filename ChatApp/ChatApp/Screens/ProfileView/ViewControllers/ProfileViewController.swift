@@ -113,12 +113,12 @@ class ProfileViewController: UIViewController {
         avatarView.addGestureRecognizer(tap)
         avatarView.clipsToBounds = true
         
-        let name = UserInfoSaverGCD().fetchSenderName()
-        setupInitialsLabel(name)
+        setupInitialsLabel()
         setupViewButtons()
     }
     
-    private func setupInitialsLabel(_ name: String) {
+    private func setupInitialsLabel() {
+        let name = UserInfoSaverGCD().fetchSenderName()
         initialsLabel.text = String(name.prefix(2)).uppercased()
         initialsLabel.addCharacterSpacing(kernValue: charSpacing)
         initialsLabel.textColor = .black
@@ -257,9 +257,7 @@ extension ProfileViewController: ProfileDisplayLogic {
             userCityTextField.text = userInfo.city
             userPositionTextField.text = userInfo.position
             
-            if let name = userInfo.name {
-                setupInitialsLabel(name)
-            }
+            setupInitialsLabel()
             
             if let avatarImageData = userInfo.avatarData {
                 initialsLabel?.isHidden = true
