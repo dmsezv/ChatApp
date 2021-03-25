@@ -25,18 +25,30 @@
                                 <rect key="frame" x="0.0" y="8" width="57.5" height="91"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w2B-kt-EZK">
-                                        <rect key="frame" x="8" y="8" width="41.5" height="75"/>
+                                        <rect key="frame" x="8" y="8" width="41.5" height="62"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="20:22" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AAM-tx-3cp">
+                                        <rect key="frame" x="6" y="74" width="45.5" height="11"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="45" id="UWi-Q3-qZp"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="9"/>
+                                        <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBlueColor"/>
                                 <constraints>
                                     <constraint firstItem="w2B-kt-EZK" firstAttribute="top" secondItem="zft-IW-HvY" secondAttribute="top" constant="8" id="4wI-Vj-Kye"/>
+                                    <constraint firstItem="AAM-tx-3cp" firstAttribute="top" secondItem="w2B-kt-EZK" secondAttribute="bottom" constant="4" id="4zB-ng-IIg"/>
+                                    <constraint firstItem="AAM-tx-3cp" firstAttribute="leading" secondItem="zft-IW-HvY" secondAttribute="leading" constant="6" id="7wg-PF-HTm"/>
                                     <constraint firstAttribute="trailing" secondItem="w2B-kt-EZK" secondAttribute="trailing" constant="8" id="F4D-UZ-8j4"/>
-                                    <constraint firstAttribute="bottom" secondItem="w2B-kt-EZK" secondAttribute="bottom" constant="8" id="P9D-4R-8r6"/>
+                                    <constraint firstAttribute="bottom" secondItem="AAM-tx-3cp" secondAttribute="bottom" constant="6" id="OMD-6V-Qzp"/>
                                     <constraint firstItem="w2B-kt-EZK" firstAttribute="leading" secondItem="zft-IW-HvY" secondAttribute="leading" constant="8" id="hgO-5X-OWI"/>
+                                    <constraint firstAttribute="trailing" secondItem="AAM-tx-3cp" secondAttribute="trailing" constant="6" id="r9X-dd-CG1"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -61,6 +73,7 @@
             <connections>
                 <outlet property="messageLabel" destination="w2B-kt-EZK" id="cql-0v-FUx"/>
                 <outlet property="messageView" destination="zft-IW-HvY" id="r5A-Ks-NF9"/>
+                <outlet property="timeMessageLabel" destination="AAM-tx-3cp" id="lrJ-ee-2n0"/>
             </connections>
             <point key="canvasLocation" x="37.681159420289859" y="56.584821428571423"/>
         </tableViewCell>

@@ -11,6 +11,7 @@ class ConversationMessageIncomingViewCell: UITableViewCell {
     @IBOutlet weak var messageLabel: UILabel!
     @IBOutlet weak var messageView: UIView!
     @IBOutlet weak var senderNameLabel: UILabel!
+    @IBOutlet weak var timeMessageLabel: UILabel!
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -23,6 +24,7 @@ class ConversationMessageIncomingViewCell: UITableViewCell {
     }
     
     func configure(with model: MessageModel) {
+        timeMessageLabel.text = model.created.toString(format: "HH:mm")
         senderNameLabel.text = model.senderName
         messageLabel.text = model.content
         messageView.layer.cornerRadius = cornerRadius
