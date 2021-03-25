@@ -23,7 +23,7 @@ class ConversationViewInteractor: ConversationViewBusinessLogic {
     private var listenerMessages: ListenerRegistration?
     private lazy var userInfoGCD = UserInfoSaverGCD()
     private lazy var senderId: String = userInfoGCD.fetchSenderId()
-    private var senderName: String?
+    private var senderName: String = ""
 
     
     func getMessagesBy(_ identifierChannel: String) {
@@ -51,10 +51,33 @@ class ConversationViewInteractor: ConversationViewBusinessLogic {
     }
     
     func send(_ message: String, to identifierChannel: String) {
-        reference.document(identifierChannel).collection("messages")
+        if senderName.isEmpty {
+            userInfoGCD.fetchInfo { [self] (result) in
+                switch result {
+                //TODO: нужна логика обработки неудачи вытаскивания userInfo
+                //пока оставляю так, по текущей задаче ее отсутствие не критично
+                case .success(let userInfo):
+                    if let name = userInfo?.name, !name.isEmpty {
+                        self.senderName = name
+                    } else {
+                        self.senderName = "Dmitrii Zverev"
+                    }
+                case .failure:
+                    break
+                }
+                
+                self.sendMessageToChannel(message, identifierChannel)
+            }
+        } else {
+            sendMessageToChannel(message, identifierChannel)
+        }
+    }
+    
+    private func sendMessageToChannel(_ message: String, _ id: String) {
+        reference.document(id).collection("messages")
             .addDocument(data: ["content": message,
                                 "created": Timestamp(date: Date()),
-                                "senderName": "Undefinded",
+                                "senderName": senderName,
                                 "senderId": senderId])
     }
     
