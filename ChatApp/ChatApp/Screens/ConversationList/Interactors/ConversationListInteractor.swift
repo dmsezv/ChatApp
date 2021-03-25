@@ -18,7 +18,7 @@ struct Message {
 
 protocol ConversationListBusinessLogic {
     func getChannelList()
-    func createChannel(_ name: String)
+    func createChannel(_ name: String?)
 }
 
 class ConversationListInteractor: ConversationListBusinessLogic {
@@ -51,8 +51,14 @@ class ConversationListInteractor: ConversationListBusinessLogic {
         }
     }
     
-    func createChannel(_ name: String) {
-        reference.addDocument(data: ["name": name])
+    func createChannel(_ name: String?) {
+        if let name = name, !name.isEmpty {
+            reference.addDocument(data: ["name": name])
+        } else {
+            DispatchQueue.main.async {
+                self.viewController?.displayError("The channel name should not be empty")
+            }
+        }
     }
 }
 

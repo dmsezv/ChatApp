@@ -10,6 +10,7 @@ import UIKit
 
 protocol ConversationListDisplayLogic: class {
     func displayList(_ channels: [ChannelModel])
+    func displayError(_ message: String)
 }
 
 final class ConversationsListViewController: UIViewController {
@@ -103,6 +104,13 @@ extension ConversationsListViewController: ConversationListDisplayLogic {
         self.channels = channels
         tableView.reloadData()
     }
+    
+    func displayError(_ message: String) {
+        let alertController = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+        
+        present(alertController, animated: true, completion: nil)
+    }
 }
 
 
@@ -193,9 +201,7 @@ extension ConversationsListViewController {
             textField.placeholder = "Enter name of channel"
         }
         alertController.addAction(UIAlertAction(title: "Create", style: .default, handler: { (action) in
-            if let nameChannel = alertController.textFields?[0].text, nameChannel.count > 0 {
-                self.interactor?.createChannel(nameChannel)
-            }
+            self.interactor?.createChannel(alertController.textFields?[0].text)
         }))
         alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         
