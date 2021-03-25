@@ -8,7 +8,7 @@
 import UIKit
 
 protocol ProfileDisplayLogic: class {
-    //TODO: нужно завести норм можель и viewModel
+    // TODO: нужно завести норм модель и viewModel
     func successFetch(_ userInfo: UserInfoModel?)
     func successSavedUserInfo()
     func errorDisplay(_ message: String)
@@ -17,9 +17,7 @@ protocol ProfileDisplayLogic: class {
 class ProfileViewController: UIViewController {
     var interactor: ProfileBusinessLogic?
     
-    
-    //MARK: - IBOutlets and Views
-    
+    // MARK: - IBOutlets and Views
     @IBOutlet weak var initialsLabel: UILabel!
     @IBOutlet weak var avatarView: UIView!
     @IBOutlet weak var avatarImageView: UIImageView!
@@ -56,16 +54,12 @@ class ProfileViewController: UIViewController {
         
         return activityIndicator
     }()
-    
-    
+        
     // MARK: - Drawing Constants
-    
     private let cornRadBtn: CGFloat = 14.0
     private let charSpacing: Double = -22.0
     
-    
-    //MARK: - Setup
-    
+    // MARK: - Setup
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         setup()
@@ -76,9 +70,7 @@ class ProfileViewController: UIViewController {
         setup()
     }
     
-    
-    // MARK: Setup
-    
+    // MARK: - Setup
     private func setup() {
         let viewController = self
         let interactor = ProfileInteractor()
@@ -86,9 +78,7 @@ class ProfileViewController: UIViewController {
         interactor.viewController = viewController
     }
 
-    
-    //MARK: - Life Cycle
-    
+    // MARK: - Life Cycle
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
@@ -98,12 +88,11 @@ class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //TODO: не успеваю обработать закрытие свайпом, поэтому пока так
+        // TODO: не успеваю обработать закрытие свайпом, поэтому пока так
         if #available(iOS 13.0, *) {
             self.isModalInPresentation = true
         }
 
-        
         setupView()
         fetchUserInfoBy(.operation)
     }
@@ -163,10 +152,8 @@ class ProfileViewController: UIViewController {
     }
 }
 
-
-//MARK: - States VC
-//TODO: нужно придумать логику состояний VC
-
+// MARK: - States VC
+// TODO: нужно придумать логику состояний VC
 extension ProfileViewController {
     private func fetchDataMode(_ enabled: Bool) {
         if enabled {
@@ -223,13 +210,10 @@ extension ProfileViewController {
     }
 }
 
-
-
-//MARK: - Business Logic
-
+// MARK: - Business Logic
 extension ProfileViewController {
     func fetchUserInfoBy(_ type: UserInfoSaverType) {
-        //TODO: нужно придумать логику состояний VC
+        // TODO: нужно придумать логику состояний VC
         editingMode(false)
         savingMode(false)
         fetchDataMode(true)
@@ -250,20 +234,15 @@ extension ProfileViewController {
     }
 }
 
-
-//MARK: - Display Logic
-
+// MARK: - Display Logic
 extension ProfileViewController: ProfileDisplayLogic {
     func successSavedUserInfo() {
         activityIndicator.stopAnimating()
         alertInfo(title: "Данные сохранены", nil, { _ in
-//            self.editingMode(false)
-//            self.savingMode(false)
-            
-            //TODO: возвращать модель после сохранения,
-            //а не ходить заново за ней.
-            //сейчас делаю так только из-за того, что не успел заметить,
-            //что некоторые данные надо обновить
+            // TODO: возвращать модель после сохранения,
+            // а не ходить заново за ней.
+            // сейчас делаю так только из-за того, что не успел заметить,
+            // что некоторые данные надо обновить
             self.fetchUserInfoBy(.gcd)
         })
     }
@@ -300,16 +279,14 @@ extension ProfileViewController: ProfileDisplayLogic {
     }
 }
 
-
-//MARK: - UIImage Picker
-
+// MARK: - UIImage Picker
 extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         picker.dismiss(animated: true)
     }
     
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
         
         if let editedImage = info[UIImagePickerController.InfoKey(rawValue: "UIImagePickerControllerEditedImage")] as? UIImage {
             avatarImageView.image = editedImage.withRenderingMode(.alwaysOriginal)
@@ -318,7 +295,6 @@ extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationCo
         }
         
         initialsLabel?.isHidden = true
-        
         
         picker.dismiss(animated: true, completion: nil)
     }
@@ -349,7 +325,6 @@ extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationCo
             return
         }
         
-        
         self.present(picker, animated: true, completion: nil)
     }
     
@@ -363,9 +338,7 @@ extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationCo
     }
 }
 
-
-//MARK: - Touches
-
+// MARK: - Touches
 extension ProfileViewController {
     @objc fileprivate func addAvatar(_ sender: UITapGestureRecognizer) {
         guard let viewAvatar = avatarView else {
@@ -373,15 +346,15 @@ extension ProfileViewController {
         }
         
         let locationTap = sender.location(in: viewAvatar)
-        let path = UIBezierPath.init(ovalIn: viewAvatar.bounds)
+        let path = UIBezierPath(ovalIn: viewAvatar.bounds)
         
         if path.contains(locationTap) {
             let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-            alertController.addAction(UIAlertAction(title: "Установить из галлереи", style: .default, handler: { (action) in
+            alertController.addAction(UIAlertAction(title: "Установить из галлереи", style: .default, handler: { _ in
                 self.imagePickerGetAvatarFrom(.photoLibrary)
             }))
             
-            alertController.addAction(UIAlertAction(title: "Сделать фото", style: .default, handler: { (action) in
+            alertController.addAction(UIAlertAction(title: "Сделать фото", style: .default, handler: { _ in
                 self.imagePickerGetAvatarFrom(.camera)
             }))
             
@@ -412,12 +385,10 @@ extension ProfileViewController {
     }
 }
 
-
-//MARK: - Events
-
+// MARK: - Events
 extension ProfileViewController {
     @objc private func keyboardWillShow(notification: NSNotification) {
-        //TODO: придумать как посчитать высоту подъема вьюхи если не видно textfield(не успел)
+        // TODO: придумать как посчитать высоту подъема вьюхи если не видно textfield(не успел)
 //        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
 //            if view.frame.origin.y == 0 {
 //                view.frame.origin.y -= keyboardSize.height
@@ -445,4 +416,3 @@ extension ProfileViewController {
 //        }
     }
 }
-

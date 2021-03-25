@@ -8,7 +8,6 @@
 import Foundation
 import Firebase
 
-
 struct Message {
     let content: String
     let created: Date
@@ -26,10 +25,9 @@ class ConversationListInteractor: ConversationListBusinessLogic {
         
     lazy var db = Firestore.firestore()
     lazy var reference = db.collection("channels")
-    
-    
+        
     func getChannelList() {
-        reference.addSnapshotListener { [weak self] snapshot, error in
+        reference.addSnapshotListener { [weak self] snapshot, _ in
             guard let snapshot = snapshot else { return }
             let channels = snapshot.documents.compactMap { document -> ChannelModel? in
                 guard let name = document["name"] as? String else { return nil }
@@ -44,7 +42,6 @@ class ConversationListInteractor: ConversationListBusinessLogic {
                 prev.lastActivity ?? Date.distantPast > next.lastActivity ?? Date.distantPast
             })
 
-            
             DispatchQueue.main.async {
                 self?.viewController?.displayList(channels)
             }
@@ -61,4 +58,3 @@ class ConversationListInteractor: ConversationListBusinessLogic {
         }
     }
 }
-

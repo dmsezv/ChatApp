@@ -24,7 +24,10 @@ class ConversationListRouter: ConversationListRoutingLogic {
     }
     
     func routeToShowChat(title: String?, identifierChannel: String) {
-        if let destinationVC = viewController?.storyboard?.instantiateViewController(withIdentifier: String(describing: ConversationViewController.self)) as? ConversationViewController {
+        if let destinationVC = viewController?
+            .storyboard?
+            .instantiateViewController(withIdentifier: String(describing: ConversationViewController.self)) as? ConversationViewController {
+            
             destinationVC.title = title ?? "Unknown user"
             destinationVC.identifierChannel = identifierChannel
             viewController?.show(destinationVC, sender: nil)

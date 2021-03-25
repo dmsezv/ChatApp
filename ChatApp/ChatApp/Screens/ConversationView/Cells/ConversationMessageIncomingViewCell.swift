@@ -31,10 +31,8 @@ class ConversationMessageIncomingViewCell: UITableViewCell {
         messageView.backgroundColor = ThemePicker.shared.currentTheme.cellIncomingBackground
         messageLabel.textColor = ThemePicker.shared.currentTheme.cellIncomingTextColor
     }
-    
-    
+        
     // MARK: - Drawing Constants
-    
     let cornerRadius: CGFloat = 10
     let maskedCorners: CACornerMask = [
         .layerMaxXMaxYCorner,

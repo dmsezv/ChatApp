@@ -7,25 +7,19 @@
 
 import UIKit
 
-
 class ConversationListCell: UITableViewCell {
     
-    //MARK: - IBOutlets
-    
+    // MARK: - IBOutlets
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var messageLabel: UILabel!
     @IBOutlet weak var nameLetterView: UIView!
     @IBOutlet weak var nameLetterLabel: UILabel!
     
-    
     // MARK: - Drawing Constants
-    
     let fontSize: CGFloat = 17
         
-    
-    //MARK: - Life Cycle
-    
+    // MARK: - Life Cycle
     override func layoutSubviews() {
         super.layoutSubviews()
         
@@ -51,7 +45,6 @@ class ConversationListCell: UITableViewCell {
         } else {
             dateLabel.text = "No date"
         }
-        
         
         nameLetterView.layer.cornerRadius = nameLetterView.bounds.size.width / 2
         nameLetterLabel.text = model.name.first?.uppercased() ?? "U"

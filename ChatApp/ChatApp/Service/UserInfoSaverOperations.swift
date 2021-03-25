@@ -7,7 +7,6 @@
 
 import UIKit
 
-
 class UserInfoSaverOperation: UserInfoSaver {
     private lazy var operationQueue: OperationQueue = {
         let queue = OperationQueue()
@@ -30,7 +29,7 @@ class UserInfoSaverOperation: UserInfoSaver {
     }
 }
 
-fileprivate class FetchInfoOperation: Operation {
+private class FetchInfoOperation: Operation {
     private var complete: (Result<UserInfoModel?, UserInfoSaverError>) -> Void
     
     init(completeHandler: @escaping(Result<UserInfoModel?, UserInfoSaverError>) -> Void) {
@@ -40,8 +39,7 @@ fileprivate class FetchInfoOperation: Operation {
     override func main() {
         if isCancelled { return }
         
-        //TODO: дублирование кода надо вынести
-
+        // TODO: дублирование кода надо вынести
         guard let docDirUrl: URL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
             complete(.failure(.savingError))
             return
@@ -52,7 +50,6 @@ fileprivate class FetchInfoOperation: Operation {
             complete(.success(nil))
             return
         }
-        
         
         do {
             if isCancelled { return }
@@ -68,7 +65,7 @@ fileprivate class FetchInfoOperation: Operation {
     }
 }
 
-fileprivate class SaveInfoOperation: Operation {
+private class SaveInfoOperation: Operation {
     private var model: UserInfoModel
     private var complete: (Result<Void, UserInfoSaverError>) -> Void
     
@@ -80,8 +77,7 @@ fileprivate class SaveInfoOperation: Operation {
     override func main() {
         if isCancelled { return }
         
-        //TODO: дублирование кода надо вынести
-
+        // TODO: дублирование кода надо вынести
         guard let docDirUrl: URL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
             if isCancelled { return }
             complete(.failure(.savingError))
@@ -91,8 +87,7 @@ fileprivate class SaveInfoOperation: Operation {
         do {
             if isCancelled { return }
             let data = try JSONEncoder().encode(model)
-            
-            
+                        
             do {
                 if isCancelled { return }
                 try data.write(to: docDirUrl.appendingPathComponent("profileInfo.json"))

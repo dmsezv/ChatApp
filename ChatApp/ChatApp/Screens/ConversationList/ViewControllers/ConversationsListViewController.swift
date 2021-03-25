@@ -18,25 +18,20 @@ final class ConversationsListViewController: UIViewController {
     var interactor: ConversationListBusinessLogic?
     var router: ConversationListRoutingLogic?
     
-    //MARK: - IBOutlets
-    
+    // MARK: - IBOutlets
     @IBOutlet weak var profileButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var settingsButton: UIButton!
     
-    
     // MARK: - Drawing Constants
-    
     private let profileButtonFrame: CGRect = CGRect(x: 0, y: 0, width: 40, height: 40)
     private let kernLetterNameValue: Double = -4
     private let titleViewHeight: CGFloat = 45
     private let titleLabelPaddingX: CGFloat = 10
     private let titleLabelPaddingY: CGFloat = 0
     private let titleLableFontSize: CGFloat = 15
-    
-    
-    //MARK: - Setup
-    
+        
+    // MARK: - Setup
     private func setup() {
         let viewController = self
         let router = ConversationListRouter()
@@ -57,9 +52,7 @@ final class ConversationsListViewController: UIViewController {
         setup()
     }
     
-    
-    //MARK: - View life cycle
-    
+    // MARK: - View life cycle
     private var channels: [ChannelModel]?
     private let cellIdentifier = String(describing: ConversationListCell.self)
     
@@ -81,15 +74,13 @@ final class ConversationsListViewController: UIViewController {
         tableView.register(UINib(nibName: cellIdentifier, bundle: nil), forCellReuseIdentifier: cellIdentifier)
         tableView.delegate = self
         tableView.dataSource = self
-        
-        
+                
         settingsButton.addTarget(self, action: #selector(touchSettingsButton(_:)), for: .touchUpInside)
         
         if let view = ProfileIconView.instanceFromNib() {
             view.lettersNameLabel.text = "DZ"
             view.lettersNameLabel.textColor = .black
             view.lettersNameLabel.addCharacterSpacing(kernValue: kernLetterNameValue)
-            //view.layer.cornerRadius = frame.height / 2
             view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(touchRightBarButton(_:))))
             let rightBarButton = UIBarButtonItem(customView: view)
             navigationItem.rightBarButtonItem = rightBarButton
@@ -97,9 +88,7 @@ final class ConversationsListViewController: UIViewController {
     }
 }
 
-
-//MARK: - Display Logic
-
+// MARK: - Display Logic
 extension ConversationsListViewController: ConversationListDisplayLogic {
     func displayList(_ channels: [ChannelModel]) {
         self.channels = channels
@@ -114,9 +103,7 @@ extension ConversationsListViewController: ConversationListDisplayLogic {
     }
 }
 
-
-//MARK: - UITableViewDelegate, UITableViewDataSource
-
+// MARK: - UITableViewDelegate, UITableViewDataSource
 extension ConversationsListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
@@ -137,9 +124,7 @@ extension ConversationsListViewController: UITableViewDelegate, UITableViewDataS
         label.textColor = ThemePicker.shared.currentTheme.textColor
         label.font = .boldSystemFont(ofSize: titleLableFontSize)
         
-       
         let button = UIButton()
-        
         button.setTitle("Add channel", for: .normal)
         button.setTitleColor(.systemBlue, for: .normal)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: titleLableFontSize)
@@ -148,7 +133,6 @@ extension ConversationsListViewController: UITableViewDelegate, UITableViewDataS
             y: titleLabelPaddingY,
             width: button.intrinsicContentSize.width,
             height: viewHeader.frame.height)
-        
         button.addTarget(self, action: #selector(touchAddChannelButton(_ :)), for: .touchUpInside)
         
         viewHeader.addSubview(button)
@@ -184,9 +168,7 @@ extension ConversationsListViewController: UITableViewDelegate, UITableViewDataS
     }
 }
 
-
-//MARK: - Touches
-
+// MARK: - Touches
 extension ConversationsListViewController {
     @objc private func touchRightBarButton(_ sender: UITapGestureRecognizer) {
         router?.routeToProfile()
@@ -201,7 +183,7 @@ extension ConversationsListViewController {
         alertController.addTextField { (textField) in
             textField.placeholder = "Enter name of channel"
         }
-        alertController.addAction(UIAlertAction(title: "Create", style: .default, handler: { (action) in
+        alertController.addAction(UIAlertAction(title: "Create", style: .default, handler: { _ in
             self.interactor?.createChannel(alertController.textFields?[0].text)
         }))
         alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))

@@ -11,14 +11,11 @@ typealias ThemeColors = UIColor.ChooseThemeButtonView
 
 class ChooseThemeButtonView: UIView {
     
-    //MARK: - IBOutlet
-
+    // MARK: - IBOutlet
     @IBOutlet weak var leftView: UIView!
     @IBOutlet weak var rightView: UIView!
-    
-    
-    //MARK: - Drawing Constraints
-
+        
+    // MARK: - Drawing Constraints
     let cornerRadiusViewDialog: CGFloat = 10
     let maskedCornersRightView: CACornerMask = [
         .layerMaxXMinYCorner,
@@ -30,7 +27,6 @@ class ChooseThemeButtonView: UIView {
         .layerMinXMinYCorner,
         .layerMaxXMinYCorner
     ]
-
     
     func configureThemeButtonView(_ type: ChooseThemeButtonViewType) {
         leftView.layer.cornerRadius = cornerRadiusViewDialog
@@ -50,7 +46,6 @@ class ChooseThemeButtonView: UIView {
         frame = parentBounds
     }
 
-    
     private func configureClassic() {
         backgroundColor = ThemeColors.Classic.mainViewColorWhite
         leftView.backgroundColor = ThemeColors.Classic.leftViewColorGray
@@ -69,7 +64,6 @@ class ChooseThemeButtonView: UIView {
         rightView.backgroundColor = ThemeColors.Night.rightViewColorGray
     }
 }
-
 
 extension ChooseThemeButtonView {
     enum ChooseThemeButtonViewType {

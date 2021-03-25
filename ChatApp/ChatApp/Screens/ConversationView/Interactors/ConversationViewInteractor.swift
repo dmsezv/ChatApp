@@ -25,9 +25,8 @@ class ConversationViewInteractor: ConversationViewBusinessLogic {
     private lazy var senderId: String = userInfoGCD.fetchSenderId()
     private var senderName: String = ""
 
-    
     func getMessagesFrom(_ identifierChannel: String) {
-        listenerMessages = reference.document(identifierChannel).collection("messages").addSnapshotListener { [weak self] (snapshot, error) in
+        listenerMessages = reference.document(identifierChannel).collection("messages").addSnapshotListener { [weak self] snapshot, _ in
             guard let snapshot = snapshot else { return }
             let messages = snapshot.documents.compactMap { document -> MessageModel? in
                 guard let content = document["content"] as? String,
@@ -54,8 +53,8 @@ class ConversationViewInteractor: ConversationViewBusinessLogic {
         if senderName.isEmpty {
             userInfoGCD.fetchInfo { [self] (result) in
                 switch result {
-                //TODO: нужна логика обработки неудачи вытаскивания userInfo
-                //пока оставляю так, по текущей задаче ее отсутствие не критично
+                // TODO: нужна логика обработки неудачи вытаскивания userInfo
+                // пока оставляю так, по текущей задаче ее отсутствие не критично
                 case .success(let userInfo):
                     if let name = userInfo?.name, !name.isEmpty {
                         self.senderName = name

@@ -31,8 +31,7 @@ fileprivate final class DLogger {
         #endif
     }
     
-    
-    //MARK: - log life cycle
+    // MARK: log life cycle
     
     private var fromState: String = "not running"
     private var toState: String = ""

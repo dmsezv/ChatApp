@@ -9,11 +9,11 @@ import UIKit
 
 extension UIColor {
     static var banana: UIColor {
-        UIColor(red: 255/255, green: 255/255, blue: 102/255, alpha: 1.0)
+        UIColor(red: 255 / 255, green: 255 / 255, blue: 102 / 255, alpha: 1.0)
     }
     
     static var bananaHalf: UIColor {
-        UIColor(red: 255/255, green: 255/255, blue: 102/255, alpha: 0.5)
+        UIColor(red: 255 / 255, green: 255 / 255, blue: 102 / 255, alpha: 0.5)
     }
     
     static var blueStroke: UIColor {

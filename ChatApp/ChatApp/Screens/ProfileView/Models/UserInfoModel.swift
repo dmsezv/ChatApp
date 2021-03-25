@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 struct UserInfoModel: Codable {
     var name: String?
     var position: String?

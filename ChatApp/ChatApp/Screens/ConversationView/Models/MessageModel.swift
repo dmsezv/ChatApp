@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 struct MessageModel {
     let content: String
     let created: Date
