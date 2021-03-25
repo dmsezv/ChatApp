@@ -98,9 +98,7 @@ final class ConversationViewController: UIViewController {
 
 extension ConversationViewController: ConversationViewDisplayLogic {
     func displayList(_ messages: [MessageModel]) {
-        self.messages = messages.sorted(by: { (prev, next) -> Bool in
-            prev.created < next.created
-        })
+        self.messages = messages
         self.messages?.reverse()
         tableView.reloadData()
     }

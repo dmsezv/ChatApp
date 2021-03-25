@@ -40,7 +40,9 @@ class ConversationViewInteractor: ConversationViewBusinessLogic {
                 else { return nil }
                 
                 return MessageModel(content: content, created: created, senderId: senderId, senderName: senderName)
-            }
+            }.sorted(by: { (prev, next) -> Bool in
+                prev.created < next.created
+            })
             
             DispatchQueue.main.async {
                 self?.viewController?.displayList(messages)

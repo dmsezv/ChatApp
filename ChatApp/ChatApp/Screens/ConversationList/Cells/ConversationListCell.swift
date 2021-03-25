@@ -48,6 +48,8 @@ class ConversationListCell: UITableViewCell {
             dateLabel.text = Calendar.current.isDateInToday(date)
                 ? "Today \(date.toString(format: "HH:mm"))"
                 : date.toString(format: "dd MMM")
+        } else {
+            dateLabel.text = "No date"
         }
         
         

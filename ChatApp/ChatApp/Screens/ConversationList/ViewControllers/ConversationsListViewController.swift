@@ -194,7 +194,7 @@ extension ConversationsListViewController {
         }
         alertController.addAction(UIAlertAction(title: "Create", style: .default, handler: { (action) in
             if let nameChannel = alertController.textFields?[0].text, nameChannel.count > 0 {
-                //interactor?.addNew(nameChannel)
+                self.interactor?.createChannel(nameChannel)
             }
         }))
         alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))

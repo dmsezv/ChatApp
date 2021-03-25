@@ -40,7 +40,9 @@ class ConversationListInteractor: ConversationListBusinessLogic {
                     lastMessage: document["lastMessage"] as? String,
                     lastActivity: (document["lastActivity"] as? Timestamp)?.dateValue()
                 )
-            }
+            }.sorted(by: { (prev, next) -> Bool in
+                prev.lastActivity ?? Date.distantPast > next.lastActivity ?? Date.distantPast
+            })
 
             
             DispatchQueue.main.async {
@@ -50,7 +52,7 @@ class ConversationListInteractor: ConversationListBusinessLogic {
     }
     
     func createChannel(_ name: String) {
-        
+        reference.addDocument(data: ["name": name])
     }
 }
 
