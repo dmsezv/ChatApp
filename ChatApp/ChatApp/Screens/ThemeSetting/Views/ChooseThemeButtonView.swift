@@ -12,10 +12,12 @@ typealias ThemeColors = UIColor.ChooseThemeButtonView
 class ChooseThemeButtonView: UIView {
     
     // MARK: - IBOutlet
+    
     @IBOutlet weak var leftView: UIView!
     @IBOutlet weak var rightView: UIView!
         
     // MARK: - Drawing Constraints
+    
     let cornerRadiusViewDialog: CGFloat = 10
     let maskedCornersRightView: CACornerMask = [
         .layerMaxXMinYCorner,

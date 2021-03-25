@@ -16,6 +16,7 @@ final class ConversationViewController: UIViewController {
     var interactor: ConversationViewBusinessLogic?
     
     // MARK: - IBOutlets
+    
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var messageTextField: UITextField!
     @IBOutlet weak var sendMessageButton: UIButton!
@@ -24,6 +25,7 @@ final class ConversationViewController: UIViewController {
     }
     
     // MARK: - Setup
+    
     private func setup() {
         let viewController = self
         let interactor = ConversationViewInteractor()
@@ -42,6 +44,7 @@ final class ConversationViewController: UIViewController {
     }
         
     // MARK: - Life Cycle
+    
     private let cellOutgoingIdentifier = String(describing: ConversationMessageOutgoingViewCell.self)
     private let cellIncomingIdentifier = String(describing: ConversationMessageIncomingViewCell.self)
     private var messages: [MessageModel]?
@@ -88,6 +91,7 @@ final class ConversationViewController: UIViewController {
 }
 
 // MARK: - Display Logic
+
 extension ConversationViewController: ConversationViewDisplayLogic {
     func displayList(_ messages: [MessageModel]) {
         self.messages = messages
@@ -97,6 +101,7 @@ extension ConversationViewController: ConversationViewDisplayLogic {
 }
 
 // MARK: - UITableViewDataSource
+
 extension ConversationViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard let messages = messages else {
@@ -121,6 +126,7 @@ extension ConversationViewController: UITableViewDataSource {
 }
 
 // MARK: - Setup Cells
+
 extension ConversationViewController {
     private func setupIncomingCell(with model: MessageModel, _ tableView: UITableView, _ indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIncomingIdentifier, for: indexPath) as? ConversationMessageIncomingViewCell else {
@@ -146,6 +152,7 @@ extension ConversationViewController {
 }
 
 // MARK: - Touches
+
 extension ConversationViewController {
     @objc private func keyboardWillShow(_ notification: NSNotification) {
         if let keyboardFrame = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue,

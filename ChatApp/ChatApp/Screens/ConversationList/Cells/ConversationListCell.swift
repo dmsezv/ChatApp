@@ -10,6 +10,7 @@ import UIKit
 class ConversationListCell: UITableViewCell {
     
     // MARK: - IBOutlets
+    
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var messageLabel: UILabel!
@@ -17,9 +18,11 @@ class ConversationListCell: UITableViewCell {
     @IBOutlet weak var nameLetterLabel: UILabel!
     
     // MARK: - Drawing Constants
+    
     let fontSize: CGFloat = 17
         
     // MARK: - Life Cycle
+    
     override func layoutSubviews() {
         super.layoutSubviews()
         

@@ -29,6 +29,7 @@ class ConversationMessageOutgoingViewCell: UITableViewCell {
     }
         
     // MARK: - Drawing Constants
+    
     let cornerRadius: CGFloat = 10
     let maskedCorners: CACornerMask = [
         .layerMaxXMinYCorner,

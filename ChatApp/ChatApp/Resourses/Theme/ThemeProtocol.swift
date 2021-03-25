@@ -10,6 +10,7 @@ import UIKit
 protocol ThemeProtocol {
     
     // MARK: - Main Colors
+    
     var typeTheme: ThemePicker.ThemeType { get }
     var backgroundColor: UIColor { get }
     var textColor: UIColor { get }
@@ -17,6 +18,7 @@ protocol ThemeProtocol {
     var statusBarStyle: UIStatusBarStyle { get }
     
     // MARK: - Message Cells
+    
     var cellOutgoingBackground: UIColor { get }
     var cellIncomingBackground: UIColor { get }
     var cellOutgoingTextColor: UIColor { get }

@@ -18,6 +18,7 @@ struct Message {
 protocol ConversationListBusinessLogic {
     func getChannelList()
     func createChannel(_ name: String?)
+    func unsubscribeChannel()
 }
 
 class ConversationListInteractor: ConversationListBusinessLogic {
@@ -25,6 +26,7 @@ class ConversationListInteractor: ConversationListBusinessLogic {
         
     lazy var db = Firestore.firestore()
     lazy var reference = db.collection("channels")
+    private var listenerMessages: ListenerRegistration?
         
     func getChannelList() {
         reference.addSnapshotListener { [weak self] snapshot, _ in
@@ -56,5 +58,9 @@ class ConversationListInteractor: ConversationListBusinessLogic {
                 self.viewController?.displayError("The channel name should not be empty")
             }
         }
+    }
+    
+    func unsubscribeChannel() {
+        listenerMessages?.remove()
     }
 }

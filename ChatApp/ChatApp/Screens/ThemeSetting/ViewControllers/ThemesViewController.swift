@@ -10,6 +10,7 @@ import UIKit
 class ThemesViewController: UIViewController {
     
     // MARK: - IBOutlet
+    
     @IBOutlet weak var contentView: UIView!
     
     @IBOutlet weak var themeClassicView: UIView!
@@ -26,10 +27,12 @@ class ThemesViewController: UIViewController {
     }
         
     // MARK: - Delegate & Callback
+    
     var themePickerDelegate: ThemePickerDelegate?
     var themePickerCallback: ((ThemePicker.ThemeType) -> Void)?
 
     // MARK: - Drawing Constants
+    
     let cornerRadiusThemeView: CGFloat = 10
     
     override func viewDidLoad() {
@@ -136,6 +139,7 @@ class ThemesViewController: UIViewController {
 }
 
 // MARK: - Touches
+
 extension ThemesViewController {
     @objc private func touchThemeView(_ sender: UITapGestureRecognizer) {
         if let view = sender.view,

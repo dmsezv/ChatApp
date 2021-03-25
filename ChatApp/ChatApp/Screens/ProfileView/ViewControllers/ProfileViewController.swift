@@ -18,6 +18,7 @@ class ProfileViewController: UIViewController {
     var interactor: ProfileBusinessLogic?
     
     // MARK: - IBOutlets and Views
+    
     @IBOutlet weak var initialsLabel: UILabel!
     @IBOutlet weak var avatarView: UIView!
     @IBOutlet weak var avatarImageView: UIImageView!
@@ -56,10 +57,12 @@ class ProfileViewController: UIViewController {
     }()
         
     // MARK: - Drawing Constants
+    
     private let cornRadBtn: CGFloat = 14.0
     private let charSpacing: Double = -22.0
     
     // MARK: - Setup
+    
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         setup()
@@ -71,6 +74,7 @@ class ProfileViewController: UIViewController {
     }
     
     // MARK: - Setup
+    
     private func setup() {
         let viewController = self
         let interactor = ProfileInteractor()
@@ -79,6 +83,7 @@ class ProfileViewController: UIViewController {
     }
 
     // MARK: - Life Cycle
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
@@ -211,6 +216,7 @@ extension ProfileViewController {
 }
 
 // MARK: - Business Logic
+
 extension ProfileViewController {
     func fetchUserInfoBy(_ type: UserInfoSaverType) {
         // TODO: нужно придумать логику состояний VC
@@ -235,6 +241,7 @@ extension ProfileViewController {
 }
 
 // MARK: - Display Logic
+
 extension ProfileViewController: ProfileDisplayLogic {
     func successSavedUserInfo() {
         activityIndicator.stopAnimating()
@@ -280,6 +287,7 @@ extension ProfileViewController: ProfileDisplayLogic {
 }
 
 // MARK: - UIImage Picker
+
 extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
@@ -339,6 +347,7 @@ extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationCo
 }
 
 // MARK: - Touches
+
 extension ProfileViewController {
     @objc fileprivate func addAvatar(_ sender: UITapGestureRecognizer) {
         guard let viewAvatar = avatarView else {
@@ -386,6 +395,7 @@ extension ProfileViewController {
 }
 
 // MARK: - Events
+
 extension ProfileViewController {
     @objc private func keyboardWillShow(notification: NSNotification) {
         // TODO: придумать как посчитать высоту подъема вьюхи если не видно textfield(не успел)

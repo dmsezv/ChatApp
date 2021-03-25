@@ -19,11 +19,13 @@ final class ConversationsListViewController: UIViewController {
     var router: ConversationListRoutingLogic?
     
     // MARK: - IBOutlets
+    
     @IBOutlet weak var profileButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var settingsButton: UIButton!
     
     // MARK: - Drawing Constants
+    
     private let profileButtonFrame: CGRect = CGRect(x: 0, y: 0, width: 40, height: 40)
     private let kernLetterNameValue: Double = -4
     private let titleViewHeight: CGFloat = 45
@@ -32,6 +34,7 @@ final class ConversationsListViewController: UIViewController {
     private let titleLableFontSize: CGFloat = 15
         
     // MARK: - Setup
+    
     private func setup() {
         let viewController = self
         let router = ConversationListRouter()
@@ -53,6 +56,7 @@ final class ConversationsListViewController: UIViewController {
     }
     
     // MARK: - View life cycle
+    
     private var channels: [ChannelModel]?
     private let cellIdentifier = String(describing: ConversationListCell.self)
     
@@ -68,6 +72,11 @@ final class ConversationsListViewController: UIViewController {
         super.viewWillAppear(animated)
         
         tableView.reloadData()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        interactor?.unsubscribeChannel()
     }
     
     private func setupView() {
@@ -89,6 +98,7 @@ final class ConversationsListViewController: UIViewController {
 }
 
 // MARK: - Display Logic
+
 extension ConversationsListViewController: ConversationListDisplayLogic {
     func displayList(_ channels: [ChannelModel]) {
         self.channels = channels
@@ -104,6 +114,7 @@ extension ConversationsListViewController: ConversationListDisplayLogic {
 }
 
 // MARK: - UITableViewDelegate, UITableViewDataSource
+
 extension ConversationsListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
@@ -169,6 +180,7 @@ extension ConversationsListViewController: UITableViewDelegate, UITableViewDataS
 }
 
 // MARK: - Touches
+
 extension ConversationsListViewController {
     @objc private func touchRightBarButton(_ sender: UITapGestureRecognizer) {
         router?.routeToProfile()
