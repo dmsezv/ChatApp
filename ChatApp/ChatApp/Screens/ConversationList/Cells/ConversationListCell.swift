@@ -19,7 +19,6 @@ class ConversationListCell: UITableViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        backgroundColor = ThemePicker.shared.currentTheme.backgroundColor
         nameLabel.textColor = ThemePicker.shared.currentTheme.textColor
     }
     
