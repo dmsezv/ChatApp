@@ -9,7 +9,7 @@ import Foundation
 import Firebase
 
 protocol ConversationViewBusinessLogic {
-    func getMessagesBy(_ identifierChannel: String)
+    func getMessagesFrom(_ identifierChannel: String)
     func send(_ message: String, to identifierChannel: String)
     func unsubscribeChannel()
 }
@@ -26,7 +26,7 @@ class ConversationViewInteractor: ConversationViewBusinessLogic {
     private var senderName: String = ""
 
     
-    func getMessagesBy(_ identifierChannel: String) {
+    func getMessagesFrom(_ identifierChannel: String) {
         listenerMessages = reference.document(identifierChannel).collection("messages").addSnapshotListener { [weak self] (snapshot, error) in
             guard let snapshot = snapshot else { return }
             let messages = snapshot.documents.compactMap { document -> MessageModel? in

@@ -86,9 +86,10 @@ final class ConversationsListViewController: UIViewController {
         settingsButton.addTarget(self, action: #selector(touchSettingsButton(_:)), for: .touchUpInside)
         
         if let view = ProfileIconView.instanceFromNib() {
-            view.lettersNameLabel.text = "MD"
+            view.lettersNameLabel.text = "DZ"
             view.lettersNameLabel.textColor = .black
             view.lettersNameLabel.addCharacterSpacing(kernValue: kernLetterNameValue)
+            //view.layer.cornerRadius = frame.height / 2
             view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(touchRightBarButton(_:))))
             let rightBarButton = UIBarButtonItem(customView: view)
             navigationItem.rightBarButtonItem = rightBarButton
