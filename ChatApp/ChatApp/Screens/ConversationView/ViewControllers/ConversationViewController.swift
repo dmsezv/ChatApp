@@ -54,6 +54,10 @@ final class ConversationViewController: UIViewController {
         super.viewDidLoad()
         
         setupView()
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         interactor?.getMessagesFrom(identifierChannel)
     }
     

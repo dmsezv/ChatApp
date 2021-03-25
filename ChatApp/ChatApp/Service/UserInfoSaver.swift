@@ -23,6 +23,7 @@ protocol UserInfoSaver {
     func fetchInfo(_ complete: @escaping (Result<UserInfoModel?, UserInfoSaverError>) -> Void)
     func cancelSaving()
     func fetchSenderId() -> String
+    func fetchSenderName() -> String
 }
 
 extension UserInfoSaver {
@@ -33,6 +34,16 @@ extension UserInfoSaver {
             let senderId = UUID().uuidString
             UserDefaults.standard.set(senderId, forKey: "senderId")
             return senderId
+        }
+    }
+    
+    func fetchSenderName() -> String {
+        if let senderName = UserDefaults.standard.string(forKey: "senderName") {
+            return senderName
+        } else {
+            let senderName = "Unknown"
+            UserDefaults.standard.set(senderName, forKey: "senderName")
+            return senderName
         }
     }
 }

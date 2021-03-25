@@ -27,6 +27,7 @@ class ConversationListCell: UITableViewCell {
         super.layoutSubviews()
         
         nameLabel.textColor = ThemePicker.shared.currentTheme.textColor
+        backgroundColor = ThemePicker.shared.currentTheme.backgroundColor
     }
     
     func configure(with model: ChannelModel) {

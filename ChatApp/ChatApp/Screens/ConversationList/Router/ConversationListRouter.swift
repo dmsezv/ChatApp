@@ -19,6 +19,7 @@ class ConversationListRouter: ConversationListRoutingLogic {
     func routeToProfile() {
         let SB = UIStoryboard(name: "Profile", bundle: nil)
         if let destinationVC = SB.instantiateInitialViewController() as? ProfileViewController {
+            destinationVC.delegateViewController = viewController
             viewController?.present(destinationVC, animated: true)
         }
     }

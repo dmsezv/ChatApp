@@ -17,7 +17,7 @@ protocol ProfileDisplayLogic: class {
 class ProfileViewController: UIViewController {
     var interactor: ProfileBusinessLogic?
     
-    // MARK: - IBOutlets and Views
+    // MARK: - IBOutlets
     
     @IBOutlet weak var initialsLabel: UILabel!
     @IBOutlet weak var avatarView: UIView!
@@ -31,13 +31,15 @@ class ProfileViewController: UIViewController {
     
     @IBOutlet weak var editButton: UIButton!
     @IBOutlet weak var saveGCDButton: UIButton!
-    @IBOutlet weak var saveOperationsButton: UIButton!
     @IBOutlet weak var cancelButton: UIButton!
     
     @IBAction func touchButtonClose(_ sender: Any) {
+        delegateViewController?.updateProfileView()
         interactor?.cancel()
         dismiss(animated: true, completion: nil)
     }
+    
+    // MARK: - Views
     
     lazy var activityIndicator: UIActivityIndicatorView = {
         let activityIndicator = UIActivityIndicatorView()
@@ -84,6 +86,8 @@ class ProfileViewController: UIViewController {
 
     // MARK: - Life Cycle
     
+    var delegateViewController: ConversationsListDelegate?
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
@@ -99,22 +103,22 @@ class ProfileViewController: UIViewController {
         }
 
         setupView()
-        fetchUserInfoBy(.operation)
+        fetchUserInfoBy(.gcd)
     }
     
     private func setupView() {
         hideKeyboardWhenTapAround()
-        
-        setupInitialsLabel()
-        
+                
         let tap = UITapGestureRecognizer(target: self, action: #selector(addAvatar(_ : )))
         avatarView.addGestureRecognizer(tap)
         avatarView.clipsToBounds = true
         
+        let name = UserInfoSaverGCD().fetchSenderName()
+        setupInitialsLabel(name)
         setupViewButtons()
     }
     
-    private func setupInitialsLabel(_ name: String = "Unknown") {
+    private func setupInitialsLabel(_ name: String) {
         initialsLabel.text = String(name.prefix(2)).uppercased()
         initialsLabel.addCharacterSpacing(kernValue: charSpacing)
         initialsLabel.textColor = .black
@@ -128,10 +132,6 @@ class ProfileViewController: UIViewController {
         saveGCDButton.clipsToBounds = true
         saveGCDButton.layer.cornerRadius = cornRadBtn
         saveGCDButton.addTarget(self, action: #selector(touchSaveGCDButton(_:)), for: .touchUpInside)
-        
-        saveOperationsButton.clipsToBounds = true
-        saveOperationsButton.layer.cornerRadius = cornRadBtn
-        saveOperationsButton.addTarget(self, action: #selector(touchSaveOperationsButton(_:)), for: .touchUpInside)
         
         cancelButton.clipsToBounds = true
         cancelButton.layer.cornerRadius = cornRadBtn
@@ -191,25 +191,18 @@ extension ProfileViewController {
         
         saveGCDButton.isHidden = !isHidden
         saveGCDButton.isEnabled = !isEnabled
-        saveOperationsButton.isHidden = !isHidden
-        saveOperationsButton.isEnabled = !isEnabled
         cancelButton.isHidden = !isHidden
         cancelButton.isEnabled = !isEnabled
     }
     
     private func savingMode(_ enable: Bool) {
         saveGCDButton.isEnabled = !enable
-        saveOperationsButton.isEnabled = !enable
         
         if enable {
             saveGCDButton.alpha = 0.5
-            saveOperationsButton.alpha = 0.5
-            
             activityIndicator.startAnimating()
         } else {
             saveGCDButton.alpha = 1
-            saveOperationsButton.alpha = 1
-            
             activityIndicator.stopAnimating()
         }
     }
@@ -387,10 +380,6 @@ extension ProfileViewController {
     
     @objc func touchSaveGCDButton(_ sender: UIButton) {
         saveUserInfoBy(.gcd)
-    }
-    
-    @objc func touchSaveOperationsButton(_ sender: UIButton) {
-        saveUserInfoBy(.operation)
     }
 }
 

@@ -13,7 +13,11 @@ protocol ConversationListDisplayLogic: class {
     func displayError(_ message: String)
 }
 
-final class ConversationsListViewController: UIViewController {
+protocol ConversationsListDelegate {
+    func updateProfileView() 
+}
+
+final class ConversationsListViewController: UIViewController, ConversationsListDelegate {
     
     var interactor: ConversationListBusinessLogic?
     var router: ConversationListRoutingLogic?
@@ -32,6 +36,22 @@ final class ConversationsListViewController: UIViewController {
     private let titleLabelPaddingX: CGFloat = 10
     private let titleLabelPaddingY: CGFloat = 0
     private let titleLableFontSize: CGFloat = 15
+    
+    // MARK: - Views
+    
+    private lazy var profileView: ProfileIconView? = {
+        guard  let view = ProfileIconView.instanceFromNib() else {
+            return nil
+        }
+        
+        let name = UserInfoSaverGCD().fetchSenderName()
+        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(touchRightBarButton(_:))))
+        
+        let rightBarButton = UIBarButtonItem(customView: view)
+        navigationItem.rightBarButtonItem = rightBarButton
+        
+        return view
+    }()
         
     // MARK: - Setup
     
@@ -64,14 +84,13 @@ final class ConversationsListViewController: UIViewController {
         super.viewDidLoad()
         
         setupView()
-        
-        interactor?.getChannelList()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        tableView.reloadData()
+        updateProfileView()
+        interactor?.getChannelList()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -85,15 +104,13 @@ final class ConversationsListViewController: UIViewController {
         tableView.dataSource = self
                 
         settingsButton.addTarget(self, action: #selector(touchSettingsButton(_:)), for: .touchUpInside)
-        
-        if let view = ProfileIconView.instanceFromNib() {
-            view.lettersNameLabel.text = "DZ"
-            view.lettersNameLabel.textColor = .black
-            view.lettersNameLabel.addCharacterSpacing(kernValue: kernLetterNameValue)
-            view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(touchRightBarButton(_:))))
-            let rightBarButton = UIBarButtonItem(customView: view)
-            navigationItem.rightBarButtonItem = rightBarButton
-        }
+    }
+    
+    func updateProfileView() {
+        let name = UserInfoSaverGCD().fetchSenderName()
+        profileView?.lettersNameLabel?.text = String(name.prefix(2)).uppercased()
+        profileView?.lettersNameLabel.textColor = .black
+        profileView?.lettersNameLabel.addCharacterSpacing(kernValue: kernLetterNameValue)
     }
 }
 
