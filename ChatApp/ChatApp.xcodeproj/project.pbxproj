@@ -18,6 +18,7 @@
 		4D2AFD7425E4198100706ACE /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4D2AFD7325E4198100706ACE /* Colors.xcassets */; };
 		4D2AFD7925E41B3200706ACE /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D2AFD7825E41B3200706ACE /* ProfileViewController.swift */; };
 		4D2AFD7C25E576E500706ACE /* Extension+UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D2AFD7B25E576E500706ACE /* Extension+UILabel.swift */; };
+		4D3A37442613BD0400E9CE04 /* Chat.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4D3A37422613BD0400E9CE04 /* Chat.xcdatamodeld */; };
 		4D49ADBD25D7F7FE000F0BBB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D49ADBC25D7F7FE000F0BBB /* AppDelegate.swift */; };
 		4D49ADC425D7F7FE000F0BBB /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4D49ADC225D7F7FE000F0BBB /* Profile.storyboard */; };
 		4D49ADC625D7F800000F0BBB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4D49ADC525D7F800000F0BBB /* Assets.xcassets */; };
@@ -71,6 +72,7 @@
 		4D2AFD7325E4198100706ACE /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		4D2AFD7825E41B3200706ACE /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		4D2AFD7B25E576E500706ACE /* Extension+UILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UILabel.swift"; sourceTree = "<group>"; };
+		4D3A37432613BD0400E9CE04 /* Chat.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Chat.xcdatamodel; sourceTree = "<group>"; };
 		4D49ADB925D7F7FE000F0BBB /* ChatApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChatApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4D49ADBC25D7F7FE000F0BBB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4D49ADC325D7F7FE000F0BBB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Profile.storyboard; sourceTree = "<group>"; };
@@ -163,6 +165,14 @@
 			path = Screens;
 			sourceTree = "<group>";
 		};
+		4D3A37412613BCE400E9CE04 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				4D3A37422613BD0400E9CE04 /* Chat.xcdatamodeld */,
+			);
+			path = CoreData;
+			sourceTree = "<group>";
+		};
 		4D49ADB025D7F7FE000F0BBB = {
 			isa = PBXGroup;
 			children = (
@@ -184,6 +194,7 @@
 		4D49ADBB25D7F7FE000F0BBB /* ChatApp */ = {
 			isa = PBXGroup;
 			children = (
+				4D3A37412613BCE400E9CE04 /* CoreData */,
 				4DC1199C2602569C0027E4A0 /* Service */,
 				4D2AFD6F25E4110900706ACE /* Screens */,
 				4DD6E8DE25DC607F00EF5039 /* Storyboards */,
@@ -578,6 +589,7 @@
 				4D92DF6A25ED74420093FA2A /* ConversationListCell.swift in Sources */,
 				4DDED291260A970900FF4204 /* ConversationViewInteractor.swift in Sources */,
 				4D0C0BAD25F96F7B00781A47 /* DayTheme.swift in Sources */,
+				4D3A37442613BD0400E9CE04 /* Chat.xcdatamodeld in Sources */,
 				4D0C0BAA25F96F5A00781A47 /* NightTheme.swift in Sources */,
 				4D2AFD7C25E576E500706ACE /* Extension+UILabel.swift in Sources */,
 				4DD6E8E125DC60EC00EF5039 /* Extension+AppDelegate.swift in Sources */,
@@ -811,6 +823,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		4D3A37422613BD0400E9CE04 /* Chat.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				4D3A37432613BD0400E9CE04 /* Chat.xcdatamodel */,
+			);
+			currentVersion = 4D3A37432613BD0400E9CE04 /* Chat.xcdatamodel */;
+			path = Chat.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 4D49ADB125D7F7FE000F0BBB /* Project object */;
 }
