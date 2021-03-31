@@ -9,6 +9,9 @@ import Foundation
 import CoreData
 
 class CoreDataStack {
+    private init() {}
+    static let shared = CoreDataStack()
+    
     var didUpdateDataBase: ((CoreDataStack) -> Void)?
     
     private var storeUrl: URL = {
@@ -16,7 +19,7 @@ class CoreDataStack {
                                                           in: .userDomainMask).last else {
             fatalError("document path not found")
         }
-        return documentsUrl
+        return documentsUrl.appendingPathComponent("Chat.sqlite")
     }()
     
     private let dataModelName = "Chat"
@@ -55,6 +58,7 @@ class CoreDataStack {
     
     private lazy var writtenContext: NSManagedObjectContext = {
         let context = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
+        context.persistentStoreCoordinator = persistentStoreCoordinator
         context.mergePolicy = NSOverwriteMergePolicy
         return context
     }()
@@ -130,6 +134,22 @@ class CoreDataStack {
         if let deletes = userInfo[NSDeletedObjectsKey] as? Set<NSManagedObject>,
            deletes.count > 0 {
             print("Count objects deleted: ", deletes.count)
+        }
+    }
+    
+    // MARK: - Core Data Logs
+    
+    func printDatabaseStatistics() {
+        mainContext.perform {
+            do {
+                let countChannels = try self.mainContext.count(for: ChannelDB.fetchRequest())
+                print("\(countChannels) Channels")
+                
+                let arrayChannels = try self.mainContext.fetch(ChannelDB.fetchRequest()) as? [ChannelDB] ?? []
+                arrayChannels.forEach { ($0.about()) }
+            } catch {
+                fatalError(error.localizedDescription)
+            }
         }
     }
 }

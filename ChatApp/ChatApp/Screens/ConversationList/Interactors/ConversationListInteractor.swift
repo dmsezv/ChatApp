@@ -44,6 +44,8 @@ class ConversationListInteractor: ConversationListBusinessLogic {
                 prev.lastActivity ?? Date.distantPast > next.lastActivity ?? Date.distantPast
             })
 
+            self?.saveInCoreData(channels)
+            
             DispatchQueue.main.async {
                 self?.viewController?.displayList(channels)
             }
@@ -62,5 +64,19 @@ class ConversationListInteractor: ConversationListBusinessLogic {
     
     func unsubscribeChannel() {
         listenerMessages?.remove()
+    }
+}
+
+// MARK: - Core Data
+
+extension ConversationListInteractor {
+    private func saveInCoreData(_ channels: [ChannelModel]) {
+        DispatchQueue.global().async {
+            CoreDataStack.shared.performSave { (context) in
+                for c in channels {
+                    _ = ChannelDB(channel: c, in: context)
+                }
+            }
+        }
     }
 }
