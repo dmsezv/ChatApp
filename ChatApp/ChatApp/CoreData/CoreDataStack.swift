@@ -142,12 +142,15 @@ class CoreDataStack {
     func printDatabaseStatistics() {
         mainContext.perform {
             do {
+                print("-------")
                 let countChannels = try self.mainContext.count(for: ChannelDB.fetchRequest())
                 print("\(countChannels) Channels")
                 
-                let arrayChannels = try self.mainContext.fetch(ChannelDB.fetchRequest()) as? [ChannelDB] ?? []
-                arrayChannels.forEach { ($0.about()) }
-                
+                let countMessages = try self.mainContext.count(for: MessageDB.fetchRequest())
+                print("\(countMessages) Messages")
+//                let arrayChannels = try self.mainContext.fetch(ChannelDB.fetchRequest()) as? [ChannelDB] ?? []
+//                arrayChannels.forEach { ($0.about()) }
+                print("-------")
                 
             } catch {
                 fatalError(error.localizedDescription)

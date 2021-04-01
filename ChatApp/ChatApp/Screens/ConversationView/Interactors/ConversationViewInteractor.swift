@@ -95,7 +95,11 @@ class ConversationViewInteractor: ConversationViewBusinessLogic {
         }
     }
     
-    func send(_ message: String, to identifierChannel: String) {
+    func send(_ message: String, to identifierChannel: String = "") {
+        guard let channel = channel else {
+            return
+        }
+        
         if senderName.isEmpty {
             userInfoGCD.fetchInfo { [self] (result) in
                 switch result {
@@ -112,10 +116,10 @@ class ConversationViewInteractor: ConversationViewBusinessLogic {
                     break
                 }
                 
-                self.sendMessageToChannel(message, identifierChannel)
+                self.sendMessageToChannel(message, channel.identifier)
             }
         } else {
-            sendMessageToChannel(message, identifierChannel)
+            sendMessageToChannel(message, channel.identifier)
         }
     }
     
@@ -142,8 +146,12 @@ extension ConversationViewInteractor {
         
         DispatchQueue.global().async {
             CoreDataStack.shared.performSave { (context) in
+                let messagesDB: [MessageDB] = messages.map { msg in
+                    return MessageDB(message: msg, in: context)
+                }
+                
                 let chn = ChannelDB(channel: channel, in: context)
-                messages.forEach { chn.addToMessages(MessageDB(message: $0, in: context)) }
+                messagesDB.forEach { chn.addToMessages($0) }
             }
         }
     }
