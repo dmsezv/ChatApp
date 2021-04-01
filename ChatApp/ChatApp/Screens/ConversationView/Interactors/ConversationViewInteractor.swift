@@ -9,13 +9,17 @@ import Foundation
 import Firebase
 
 protocol ConversationViewBusinessLogic {
+    func getMessages()
     func getMessagesFrom(_ identifierChannel: String)
     func send(_ message: String, to identifierChannel: String)
     func unsubscribeChannel()
+    
+    var channel: ChannelModel? { get set }
 }
 
 class ConversationViewInteractor: ConversationViewBusinessLogic {
     weak var viewController: ConversationViewDisplayLogic?
+    var channel: ChannelModel?
     
     lazy var db = Firestore.firestore()
     lazy var reference = db.collection("channels")
@@ -35,13 +39,55 @@ class ConversationViewInteractor: ConversationViewBusinessLogic {
                       let senderId = document["senderId"] as? String,
                       !senderId.isEmpty,
                       let senderName = document["senderName"] as? String,
-                      !senderName.isEmpty
+                      !senderName.isEmpty,
+                      !document.documentID.isEmpty
                 else { return nil }
                 
-                return MessageModel(content: content, created: created, senderId: senderId, senderName: senderName)
+                return MessageModel(
+                    identifier: document.documentID,
+                    content: content,
+                    created: created,
+                    senderId: senderId,
+                    senderName: senderName)
             }.sorted(by: { (prev, next) -> Bool in
                 prev.created < next.created
             })
+            
+            DispatchQueue.main.async {
+                self?.viewController?.displayList(messages)
+            }
+        }
+    }
+    
+    func getMessages() {
+        guard let channel = channel else {
+            return
+        }
+        
+        listenerMessages = reference.document(channel.identifier).collection("messages").addSnapshotListener { [weak self] snapshot, _ in
+            guard let snapshot = snapshot else { return }
+            let messages = snapshot.documents.compactMap { document -> MessageModel? in
+                guard let content = document["content"] as? String,
+                      !content.isEmpty,
+                      let created = (document["created"] as? Timestamp)?.dateValue(),
+                      let senderId = document["senderId"] as? String,
+                      !senderId.isEmpty,
+                      let senderName = document["senderName"] as? String,
+                      !senderName.isEmpty,
+                      !document.documentID.isEmpty
+                else { return nil }
+                
+                return MessageModel(
+                    identifier: document.documentID,
+                    content: content,
+                    created: created,
+                    senderId: senderId,
+                    senderName: senderName)
+            }.sorted(by: { (prev, next) -> Bool in
+                prev.created < next.created
+            })
+            
+            self?.saveInCoreData(messages)
             
             DispatchQueue.main.async {
                 self?.viewController?.displayList(messages)
@@ -83,5 +129,22 @@ class ConversationViewInteractor: ConversationViewBusinessLogic {
     
     func unsubscribeChannel() {
         listenerMessages?.remove()
+    }
+}
+
+// MARK: - Core Data
+
+extension ConversationViewInteractor {
+    private func saveInCoreData(_ messages: [MessageModel]) {
+        guard let channel = channel else {
+            return
+        }
+        
+        DispatchQueue.global().async {
+            CoreDataStack.shared.performSave { (context) in
+                let chn = ChannelDB(channel: channel, in: context)
+                messages.forEach { chn.addToMessages(MessageDB(message: $0, in: context)) }
+            }
+        }
     }
 }

@@ -11,7 +11,7 @@ import UIKit
 protocol DLogging {}
 
 extension DLogging {
-    func log(_ message: String) {
+    func setLog(_ message: String) {
         DLogger.shared.log(message)
     }
     

@@ -140,7 +140,8 @@ extension ConversationsListViewController: UITableViewDelegate, UITableViewDataS
             return
         }
         
-        router?.routeToShowChat(title: channels[indexPath.row].name, identifierChannel: channels[indexPath.row].identifier)
+//        router?.routeToShowChat(title: channels[indexPath.row].name, identifierChannel: channels[indexPath.row].identifier)
+        router?.routeToMessagesIn(channels[indexPath.row])
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {

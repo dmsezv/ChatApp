@@ -7,17 +7,27 @@
 
 import CoreData
 
-extension ChannelDB: DLogging {
+extension ChannelDB {
     convenience init(channel c: ChannelModel, in context: NSManagedObjectContext) {
         self.init(context: context)
         
-        identifier = c.identifier
-        name = c.name
-        lastMessage = c.lastMessage
-        lastActivity = c.lastActivity
+        self.identifier = c.identifier
+        self.name = c.name
+        self.lastMessage = c.lastMessage
+        self.lastActivity = c.lastActivity
     }
-    
+}
+
+extension ChannelDB: DLogging {
     func about() {
-        log("\(String(describing: self.identifier))\n\(String(describing: self.name))\n\(String(describing: self.lastMessage))\n\(String(describing: self.lastActivity))\n")
+        setLog("---")
+        setLog("Chn:\(String(describing: self.name))\n\(String(describing: self.lastMessage))\n")
+        if let ms = messages {
+            setLog("MSGS:")
+            for m in ms {
+                setLog("\(String(describing: (m as? MessageDB)?.content))")
+            }
+        }
+        setLog("---")
     }
 }

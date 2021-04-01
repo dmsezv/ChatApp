@@ -147,6 +147,8 @@ class CoreDataStack {
                 
                 let arrayChannels = try self.mainContext.fetch(ChannelDB.fetchRequest()) as? [ChannelDB] ?? []
                 arrayChannels.forEach { ($0.about()) }
+                
+                
             } catch {
                 fatalError(error.localizedDescription)
             }
