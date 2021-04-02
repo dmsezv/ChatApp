@@ -9,17 +9,17 @@ import Firebase
 
 class FirebaseService {
     private init() {}
-    static let shared = FirebaseService()
+    static var shared = FirebaseService()
     
     private let channelCollectonId = "channels"
     private let messagesCollectionId = "messages"
     
     private lazy var db = Firestore.firestore()
-    private lazy var reference = db.collection(channelCollectonId)
+    private lazy var channelReference = db.collection(channelCollectonId)
     private var listenerMessages: ListenerRegistration?
     
     func listenChannelList(_ completionHandler: @escaping([ChannelModel]?) -> Void) {
-        listenerMessages = reference.addSnapshotListener { snapshot, _ in
+        channelReference.addSnapshotListener { snapshot, _ in
             guard let snapshot = snapshot else { return }
             let channels = snapshot.documents.compactMap { document -> ChannelModel? in
                 guard let name = document["name"] as? String else { return nil }
@@ -38,7 +38,45 @@ class FirebaseService {
         }
     }
     
-    func removeListener() {
+    func listenMessageList(in identifierChannel: String, _ completionHandler: @escaping([MessageModel]?) -> Void) {
+        listenerMessages = channelReference.document(identifierChannel).collection(messagesCollectionId).addSnapshotListener { snapshot, _ in
+            guard let snapshot = snapshot else { return }
+            let messages = snapshot.documents.compactMap { document -> MessageModel? in
+                guard let content = document["content"] as? String,
+                      !content.isEmpty,
+                      let created = (document["created"] as? Timestamp)?.dateValue(),
+                      let senderId = document["senderId"] as? String,
+                      !senderId.isEmpty,
+                      let senderName = document["senderName"] as? String,
+                      !senderName.isEmpty,
+                      !document.documentID.isEmpty
+                else { return nil }
+                
+                return MessageModel(
+                    identifier: document.documentID,
+                    content: content,
+                    created: created,
+                    senderId: senderId,
+                    senderName: senderName)
+            }.sorted(by: { (prev, next) -> Bool in
+                prev.created < next.created
+            })
+            
+            completionHandler(messages)
+        }
+    }
+    
+    func createChannel(_ name: String) {
+        channelReference.addDocument(data: ["name": name])
+    }
+    
+    func addDocument(data: [String: Any], to documentId: String) {
+        channelReference.document(documentId)
+            .collection(messagesCollectionId)
+            .addDocument(data: data)
+    }
+    
+    func removeListenerMessages() {
         listenerMessages?.remove()
     }
 }

@@ -84,18 +84,13 @@ final class ConversationsListViewController: UIViewController, ConversationsList
         super.viewDidLoad()
         
         setupView()
+        interactor?.getChannelList()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         updateProfileView()
-        interactor?.getChannelList()
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        interactor?.unsubscribeChannel()
     }
     
     private func setupView() {

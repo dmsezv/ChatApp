@@ -10,7 +10,6 @@ import Firebase
 
 protocol ConversationViewBusinessLogic {
     func getMessages()
-    func getMessagesFrom(_ identifierChannel: String)
     func send(_ message: String)
     func unsubscribeChannel()
     
@@ -21,73 +20,18 @@ class ConversationViewInteractor: ConversationViewBusinessLogic {
     weak var viewController: ConversationViewDisplayLogic?
     var channel: ChannelModel?
     
-    lazy var db = Firestore.firestore()
-    lazy var reference = db.collection("channels")
-    
-    private var listenerMessages: ListenerRegistration?
+    private lazy var firebaseService = FirebaseService.shared
     private lazy var userInfoGCD = UserInfoSaverGCD()
     private lazy var senderId: String = userInfoGCD.fetchSenderId()
     private var senderName: String = ""
-
-    func getMessagesFrom(_ identifierChannel: String) {
-        listenerMessages = reference.document(identifierChannel).collection("messages").addSnapshotListener { [weak self] snapshot, _ in
-            guard let snapshot = snapshot else { return }
-            let messages = snapshot.documents.compactMap { document -> MessageModel? in
-                guard let content = document["content"] as? String,
-                      !content.isEmpty,
-                      let created = (document["created"] as? Timestamp)?.dateValue(),
-                      let senderId = document["senderId"] as? String,
-                      !senderId.isEmpty,
-                      let senderName = document["senderName"] as? String,
-                      !senderName.isEmpty,
-                      !document.documentID.isEmpty
-                else { return nil }
-                
-                return MessageModel(
-                    identifier: document.documentID,
-                    content: content,
-                    created: created,
-                    senderId: senderId,
-                    senderName: senderName)
-            }.sorted(by: { (prev, next) -> Bool in
-                prev.created < next.created
-            })
-            
-            DispatchQueue.main.async {
-                self?.viewController?.displayList(messages)
-            }
-        }
-    }
     
     func getMessages() {
         guard let channel = channel else {
             return
         }
         
-        listenerMessages = reference.document(channel.identifier).collection("messages").addSnapshotListener { [weak self] snapshot, _ in
-            guard let snapshot = snapshot else { return }
-            let messages = snapshot.documents.compactMap { document -> MessageModel? in
-                guard let content = document["content"] as? String,
-                      !content.isEmpty,
-                      let created = (document["created"] as? Timestamp)?.dateValue(),
-                      let senderId = document["senderId"] as? String,
-                      !senderId.isEmpty,
-                      let senderName = document["senderName"] as? String,
-                      !senderName.isEmpty,
-                      !document.documentID.isEmpty
-                else { return nil }
-                
-                return MessageModel(
-                    identifier: document.documentID,
-                    content: content,
-                    created: created,
-                    senderId: senderId,
-                    senderName: senderName)
-            }.sorted(by: { (prev, next) -> Bool in
-                prev.created < next.created
-            })
-            
-            self?.saveInCoreData(messages)
+        firebaseService.listenMessageList(in: channel.identifier) { [weak self] messages in
+            guard let messages = messages else { return }
             
             DispatchQueue.main.async {
                 self?.viewController?.displayList(messages)
@@ -101,22 +45,22 @@ class ConversationViewInteractor: ConversationViewBusinessLogic {
         }
         
         if senderName.isEmpty {
-            userInfoGCD.fetchInfo { [self] (result) in
+            userInfoGCD.fetchInfo { [weak self] (result) in
                 switch result {
                 // TODO: нужна логика обработки неудачи вытаскивания userInfo
                 // пока оставляю так, по текущей задаче ее отсутствие не критично
                 case .success(let userInfo):
                     if let name = userInfo?.name, !name.isEmpty {
-                        self.senderName = name
+                        self?.senderName = name
                     } else {
                         // TODO: после сдачи поменять на деволт
-                        self.senderName = "Dmitrii Zverev"
+                        self?.senderName = "Dmitrii Zverev"
                     }
                 case .failure:
                     break
                 }
                 
-                self.sendMessageToChannel(message, channel.identifier)
+                self?.sendMessageToChannel(message, channel.identifier)
             }
         } else {
             sendMessageToChannel(message, channel.identifier)
@@ -124,15 +68,14 @@ class ConversationViewInteractor: ConversationViewBusinessLogic {
     }
     
     private func sendMessageToChannel(_ message: String, _ id: String) {
-        reference.document(id).collection("messages")
-            .addDocument(data: ["content": message,
-                                "created": Timestamp(date: Date()),
-                                "senderName": senderName,
-                                "senderId": senderId])
+        firebaseService.addDocument(data: ["content": message,
+                                           "created": Timestamp(date: Date()),
+                                           "senderName": senderName,
+                                           "senderId": senderId], to: id)
     }
     
     func unsubscribeChannel() {
-        listenerMessages?.remove()
+        firebaseService.removeListenerMessages()
     }
 }
 
