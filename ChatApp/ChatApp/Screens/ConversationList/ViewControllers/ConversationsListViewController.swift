@@ -8,35 +8,61 @@
 import Foundation
 import UIKit
 
+protocol ConversationListDisplayLogic: class {
+    func displayList(_ channels: [ChannelModel])
+    func displayError(_ message: String)
+}
 
-final class ConversationsListViewController: UIViewController {
+protocol ConversationsListDelegate {
+    func updateProfileView() 
+}
+
+final class ConversationsListViewController: UIViewController, ConversationsListDelegate {
     
+    var interactor: ConversationListBusinessLogic?
     var router: ConversationListRoutingLogic?
     
-    //MARK: - IBOutlets
+    // MARK: - IBOutlets
     
     @IBOutlet weak var profileButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var settingsButton: UIButton!
     
-    
     // MARK: - Drawing Constants
     
     private let profileButtonFrame: CGRect = CGRect(x: 0, y: 0, width: 40, height: 40)
     private let kernLetterNameValue: Double = -4
-    private let titleViewHeight: CGFloat = 40
+    private let titleViewHeight: CGFloat = 45
     private let titleLabelPaddingX: CGFloat = 10
-    private let titleLabelPaddingY: CGFloat = -5
+    private let titleLabelPaddingY: CGFloat = 0
     private let titleLableFontSize: CGFloat = 15
     
+    // MARK: - Views
     
-    //MARK: - Setup
+    private lazy var profileView: ProfileIconView? = {
+        guard  let view = ProfileIconView.instanceFromNib() else {
+            return nil
+        }
+        
+        let name = UserInfoSaverGCD().fetchSenderName()
+        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(touchRightBarButton(_:))))
+        
+        let rightBarButton = UIBarButtonItem(customView: view)
+        navigationItem.rightBarButtonItem = rightBarButton
+        
+        return view
+    }()
+        
+    // MARK: - Setup
     
     private func setup() {
         let viewController = self
         let router = ConversationListRouter()
+        let interactor = ConversationListInteractor()
         viewController.router = router
+        viewController.interactor = interactor
         router.viewController = viewController
+        interactor.viewController = viewController
     }
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
@@ -49,73 +75,72 @@ final class ConversationsListViewController: UIViewController {
         setup()
     }
     
+    // MARK: - View life cycle
     
-    //MARK: - View life cycle
-    
+    private var channels: [ChannelModel]?
     private let cellIdentifier = String(describing: ConversationListCell.self)
-    private var viewModelMessages: ConversationsListViewController.ViewModel?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupView()
-        loadData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        tableView.reloadData()
+        updateProfileView()
+        interactor?.getChannelList()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        interactor?.unsubscribeChannel()
     }
     
     private func setupView() {
         tableView.register(UINib(nibName: cellIdentifier, bundle: nil), forCellReuseIdentifier: cellIdentifier)
         tableView.delegate = self
         tableView.dataSource = self
-        
-        
+                
         settingsButton.addTarget(self, action: #selector(touchSettingsButton(_:)), for: .touchUpInside)
-        
-        if let view = ProfileIconView.instanceFromNib() {
-            view.lettersNameLabel.text = "MD"
-            view.lettersNameLabel.textColor = .black
-            view.lettersNameLabel.addCharacterSpacing(kernValue: kernLetterNameValue)
-            view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(touchRightBarButton(_:))))
-            let rightBarButton = UIBarButtonItem(customView: view)
-            navigationItem.rightBarButtonItem = rightBarButton
-        }
     }
     
-    private func loadData() {
-        //TODO: поставить потом интерактор, чтоб ходить за данными в репы и в нем их приводить впорядок
-
-        let historyMessages = DataProvider.getMockConversationsHistory()
-        let onlineMessages = DataProvider.getMockConversationsOnline()
-        
-        viewModelMessages = ConversationsListViewController.ViewModel(
-            historyMessages: historyMessages,
-            onlineMessages: onlineMessages)
+    func updateProfileView() {
+        let name = UserInfoSaverGCD().fetchSenderName()
+        profileView?.lettersNameLabel?.text = String(name.prefix(2)).uppercased()
+        profileView?.lettersNameLabel.textColor = .black
+        profileView?.lettersNameLabel.addCharacterSpacing(kernValue: kernLetterNameValue)
     }
 }
 
+// MARK: - Display Logic
 
-//MARK: - UITableViewDelegate, UITableViewDataSource
+extension ConversationsListViewController: ConversationListDisplayLogic {
+    func displayList(_ channels: [ChannelModel]) {
+        self.channels = channels
+        tableView.reloadData()
+    }
+    
+    func displayError(_ message: String) {
+        let alertController = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+        
+        present(alertController, animated: true, completion: nil)
+    }
+}
+
+// MARK: - UITableViewDelegate, UITableViewDataSource
 
 extension ConversationsListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        guard let vm = viewModelMessages else {
+        guard let channels = channels else {
             return
         }
         
-        switch indexPath.section {
-        case TableSection.history.getSectionIndex():
-            router?.routeToShowChat(title: vm.historyMessages[indexPath.row].name)
-        case TableSection.online.getSectionIndex():
-            router?.routeToShowChat(title: vm.onlineMessages[indexPath.row].name)
-        default: break
-        }
+        router?.routeToShowChat(title: channels[indexPath.row].name, identifierChannel: channels[indexPath.row].identifier)
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -123,81 +148,55 @@ extension ConversationsListViewController: UITableViewDelegate, UITableViewDataS
         viewHeader.backgroundColor = ThemePicker.shared.currentTheme.backgroundColor
         
         let label = UILabel(frame: CGRect(x: titleLabelPaddingX, y: titleLabelPaddingY, width: viewHeader.frame.width, height: viewHeader.frame.height))
-        label.text = TableSection.getSectionTitleBy(index: section)
+        label.text = "Channels"
         label.textColor = ThemePicker.shared.currentTheme.textColor
         label.font = .boldSystemFont(ofSize: titleLableFontSize)
         
+        let button = UIButton()
+        button.setTitle("Add channel", for: .normal)
+        button.setTitleColor(.systemBlue, for: .normal)
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: titleLableFontSize)
+        button.frame = CGRect(
+            x: viewHeader.frame.width - button.intrinsicContentSize.width - titleLabelPaddingX,
+            y: titleLabelPaddingY,
+            width: button.intrinsicContentSize.width,
+            height: viewHeader.frame.height)
+        button.addTarget(self, action: #selector(touchAddChannelButton(_ :)), for: .touchUpInside)
+        
+        viewHeader.addSubview(button)
         viewHeader.addSubview(label)
         return viewHeader
     }
     
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        titleViewHeight
+    }
+    
     func numberOfSections(in tableView: UITableView) -> Int {
-        TableSection.allCases.count
+        1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let vm = viewModelMessages else {
+        guard let channels = channels else {
             return 0
         }
         
-        switch TableSection.allCases[section] {
-        case .history:  return vm.historyMessages.count
-        case .online:   return vm.onlineMessages.count
-        }
+        return channels.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? ConversationListCell,
-              let vm = viewModelMessages else {
+              let channels = channels else {
             return UITableViewCell()
         }
         
-        switch indexPath.section {
-        case TableSection.history.getSectionIndex():
-            cell.configure(with: vm.historyMessages[indexPath.row])
-        case TableSection.online.getSectionIndex():
-            cell.configure(with: vm.onlineMessages[indexPath.row])
-        default:
-            return UITableViewCell()
-        }
-        
+        cell.configure(with: channels[indexPath.row])
         
         return cell
     }
 }
 
-
-extension ConversationsListViewController {
-    //знаю, что это все плохо и некрасиво, но пока так.
-    private enum TableSection: String, CaseIterable {
-        case online = "Online"
-        case history = "History"
-        
-        func getSectionIndex() -> Int {
-            switch self {
-            case .online: return 0
-            case .history: return 1
-            }
-        }
-        
-        static func getSectionTitleBy(index: Int) -> String? {
-            switch index {
-            case 0: return TableSection.online.rawValue
-            case 1: return TableSection.history.rawValue
-            default: return nil
-            }
-        }
-    }
-    
-    //TODO: сделать норм ViewModel
-    private struct ViewModel {
-        var historyMessages: [ConversationModel]
-        var onlineMessages: [ConversationModel]
-    }
-}
-
-
-//MARK: - Touches
+// MARK: - Touches
 
 extension ConversationsListViewController {
     @objc private func touchRightBarButton(_ sender: UITapGestureRecognizer) {
@@ -206,5 +205,18 @@ extension ConversationsListViewController {
     
     @objc private func touchSettingsButton(_ sender: UIButton) {
         router?.routeToSettings()
+    }
+    
+    @objc private func touchAddChannelButton(_ sender: UIButton) {
+        let alertController = UIAlertController(title: "Add new channel", message: nil, preferredStyle: .alert)
+        alertController.addTextField { (textField) in
+            textField.placeholder = "Enter name of channel"
+        }
+        alertController.addAction(UIAlertAction(title: "Create", style: .default, handler: { _ in
+            self.interactor?.createChannel(alertController.textFields?[0].text)
+        }))
+        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        
+        present(alertController, animated: true, completion: nil)
     }
 }

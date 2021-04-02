@@ -8,7 +8,7 @@
 import UIKit
 
 protocol ProfileDisplayLogic: class {
-    //TODO: нужно завести норм можель и viewModel
+    // TODO: нужно завести норм модель и viewModel
     func successFetch(_ userInfo: UserInfoModel?)
     func successSavedUserInfo()
     func errorDisplay(_ message: String)
@@ -17,8 +17,7 @@ protocol ProfileDisplayLogic: class {
 class ProfileViewController: UIViewController {
     var interactor: ProfileBusinessLogic?
     
-    
-    //MARK: - IBOutlets and Views
+    // MARK: - IBOutlets
     
     @IBOutlet weak var initialsLabel: UILabel!
     @IBOutlet weak var avatarView: UIView!
@@ -32,13 +31,15 @@ class ProfileViewController: UIViewController {
     
     @IBOutlet weak var editButton: UIButton!
     @IBOutlet weak var saveGCDButton: UIButton!
-    @IBOutlet weak var saveOperationsButton: UIButton!
     @IBOutlet weak var cancelButton: UIButton!
     
     @IBAction func touchButtonClose(_ sender: Any) {
+        delegateViewController?.updateProfileView()
         interactor?.cancel()
         dismiss(animated: true, completion: nil)
     }
+    
+    // MARK: - Views
     
     lazy var activityIndicator: UIActivityIndicatorView = {
         let activityIndicator = UIActivityIndicatorView()
@@ -56,15 +57,13 @@ class ProfileViewController: UIViewController {
         
         return activityIndicator
     }()
-    
-    
+        
     // MARK: - Drawing Constants
     
     private let cornRadBtn: CGFloat = 14.0
     private let charSpacing: Double = -22.0
     
-    
-    //MARK: - Setup
+    // MARK: - Setup
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -76,8 +75,7 @@ class ProfileViewController: UIViewController {
         setup()
     }
     
-    
-    // MARK: Setup
+    // MARK: - Setup
     
     private func setup() {
         let viewController = self
@@ -86,8 +84,9 @@ class ProfileViewController: UIViewController {
         interactor.viewController = viewController
     }
 
+    // MARK: - Life Cycle
     
-    //MARK: - Life Cycle
+    var delegateViewController: ConversationsListDelegate?
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
@@ -98,29 +97,28 @@ class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //TODO: не успеваю обработать закрытие свайпом, поэтому пока так
+        // TODO: не успеваю обработать закрытие свайпом, поэтому пока так
         if #available(iOS 13.0, *) {
             self.isModalInPresentation = true
         }
 
-        
         setupView()
-        fetchUserInfoBy(.operation)
+        fetchUserInfoBy(.gcd)
     }
     
     private func setupView() {
         hideKeyboardWhenTapAround()
-        
-        setupInitialsLabel()
-        
+                
         let tap = UITapGestureRecognizer(target: self, action: #selector(addAvatar(_ : )))
         avatarView.addGestureRecognizer(tap)
         avatarView.clipsToBounds = true
         
+        setupInitialsLabel()
         setupViewButtons()
     }
     
-    private func setupInitialsLabel(_ name: String = "Unknown") {
+    private func setupInitialsLabel() {
+        let name = UserInfoSaverGCD().fetchSenderName()
         initialsLabel.text = String(name.prefix(2)).uppercased()
         initialsLabel.addCharacterSpacing(kernValue: charSpacing)
         initialsLabel.textColor = .black
@@ -134,10 +132,6 @@ class ProfileViewController: UIViewController {
         saveGCDButton.clipsToBounds = true
         saveGCDButton.layer.cornerRadius = cornRadBtn
         saveGCDButton.addTarget(self, action: #selector(touchSaveGCDButton(_:)), for: .touchUpInside)
-        
-        saveOperationsButton.clipsToBounds = true
-        saveOperationsButton.layer.cornerRadius = cornRadBtn
-        saveOperationsButton.addTarget(self, action: #selector(touchSaveOperationsButton(_:)), for: .touchUpInside)
         
         cancelButton.clipsToBounds = true
         cancelButton.layer.cornerRadius = cornRadBtn
@@ -163,10 +157,8 @@ class ProfileViewController: UIViewController {
     }
 }
 
-
-//MARK: - States VC
-//TODO: нужно придумать логику состояний VC
-
+// MARK: - States VC
+// TODO: нужно придумать логику состояний VC
 extension ProfileViewController {
     private func fetchDataMode(_ enabled: Bool) {
         if enabled {
@@ -199,37 +191,28 @@ extension ProfileViewController {
         
         saveGCDButton.isHidden = !isHidden
         saveGCDButton.isEnabled = !isEnabled
-        saveOperationsButton.isHidden = !isHidden
-        saveOperationsButton.isEnabled = !isEnabled
         cancelButton.isHidden = !isHidden
         cancelButton.isEnabled = !isEnabled
     }
     
     private func savingMode(_ enable: Bool) {
         saveGCDButton.isEnabled = !enable
-        saveOperationsButton.isEnabled = !enable
         
         if enable {
             saveGCDButton.alpha = 0.5
-            saveOperationsButton.alpha = 0.5
-            
             activityIndicator.startAnimating()
         } else {
             saveGCDButton.alpha = 1
-            saveOperationsButton.alpha = 1
-            
             activityIndicator.stopAnimating()
         }
     }
 }
 
-
-
-//MARK: - Business Logic
+// MARK: - Business Logic
 
 extension ProfileViewController {
     func fetchUserInfoBy(_ type: UserInfoSaverType) {
-        //TODO: нужно придумать логику состояний VC
+        // TODO: нужно придумать логику состояний VC
         editingMode(false)
         savingMode(false)
         fetchDataMode(true)
@@ -250,20 +233,16 @@ extension ProfileViewController {
     }
 }
 
-
-//MARK: - Display Logic
+// MARK: - Display Logic
 
 extension ProfileViewController: ProfileDisplayLogic {
     func successSavedUserInfo() {
         activityIndicator.stopAnimating()
         alertInfo(title: "Данные сохранены", nil, { _ in
-//            self.editingMode(false)
-//            self.savingMode(false)
-            
-            //TODO: возвращать модель после сохранения,
-            //а не ходить заново за ней.
-            //сейчас делаю так только из-за того, что не успел заметить,
-            //что некоторые данные надо обновить
+            // TODO: возвращать модель после сохранения,
+            // а не ходить заново за ней.
+            // сейчас делаю так только из-за того, что не успел заметить,
+            // что некоторые данные надо обновить
             self.fetchUserInfoBy(.gcd)
         })
     }
@@ -278,9 +257,7 @@ extension ProfileViewController: ProfileDisplayLogic {
             userCityTextField.text = userInfo.city
             userPositionTextField.text = userInfo.position
             
-            if let name = userInfo.name {
-                setupInitialsLabel(name)
-            }
+            setupInitialsLabel()
             
             if let avatarImageData = userInfo.avatarData {
                 initialsLabel?.isHidden = true
@@ -300,8 +277,7 @@ extension ProfileViewController: ProfileDisplayLogic {
     }
 }
 
-
-//MARK: - UIImage Picker
+// MARK: - UIImage Picker
 
 extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
@@ -309,7 +285,7 @@ extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationCo
         picker.dismiss(animated: true)
     }
     
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
         
         if let editedImage = info[UIImagePickerController.InfoKey(rawValue: "UIImagePickerControllerEditedImage")] as? UIImage {
             avatarImageView.image = editedImage.withRenderingMode(.alwaysOriginal)
@@ -318,7 +294,6 @@ extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationCo
         }
         
         initialsLabel?.isHidden = true
-        
         
         picker.dismiss(animated: true, completion: nil)
     }
@@ -349,7 +324,6 @@ extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationCo
             return
         }
         
-        
         self.present(picker, animated: true, completion: nil)
     }
     
@@ -363,8 +337,7 @@ extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationCo
     }
 }
 
-
-//MARK: - Touches
+// MARK: - Touches
 
 extension ProfileViewController {
     @objc fileprivate func addAvatar(_ sender: UITapGestureRecognizer) {
@@ -373,15 +346,15 @@ extension ProfileViewController {
         }
         
         let locationTap = sender.location(in: viewAvatar)
-        let path = UIBezierPath.init(ovalIn: viewAvatar.bounds)
+        let path = UIBezierPath(ovalIn: viewAvatar.bounds)
         
         if path.contains(locationTap) {
             let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-            alertController.addAction(UIAlertAction(title: "Установить из галлереи", style: .default, handler: { (action) in
+            alertController.addAction(UIAlertAction(title: "Установить из галлереи", style: .default, handler: { _ in
                 self.imagePickerGetAvatarFrom(.photoLibrary)
             }))
             
-            alertController.addAction(UIAlertAction(title: "Сделать фото", style: .default, handler: { (action) in
+            alertController.addAction(UIAlertAction(title: "Сделать фото", style: .default, handler: { _ in
                 self.imagePickerGetAvatarFrom(.camera)
             }))
             
@@ -406,18 +379,13 @@ extension ProfileViewController {
     @objc func touchSaveGCDButton(_ sender: UIButton) {
         saveUserInfoBy(.gcd)
     }
-    
-    @objc func touchSaveOperationsButton(_ sender: UIButton) {
-        saveUserInfoBy(.operation)
-    }
 }
 
-
-//MARK: - Events
+// MARK: - Events
 
 extension ProfileViewController {
     @objc private func keyboardWillShow(notification: NSNotification) {
-        //TODO: придумать как посчитать высоту подъема вьюхи если не видно textfield(не успел)
+        // TODO: придумать как посчитать высоту подъема вьюхи если не видно textfield(не успел)
 //        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
 //            if view.frame.origin.y == 0 {
 //                view.frame.origin.y -= keyboardSize.height
@@ -445,4 +413,3 @@ extension ProfileViewController {
 //        }
     }
 }
-

@@ -7,7 +7,6 @@
 
 import UIKit
 
-
 struct ClassicTheme: ThemeProtocol {
     typealias MessageColor = UIColor.ChooseThemeButtonView.Classic
     

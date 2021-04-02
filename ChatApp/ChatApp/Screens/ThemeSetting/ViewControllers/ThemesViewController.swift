@@ -7,10 +7,9 @@
 
 import UIKit
 
-
 class ThemesViewController: UIViewController {
     
-    //MARK: - IBOutlet
+    // MARK: - IBOutlet
     
     @IBOutlet weak var contentView: UIView!
     
@@ -26,20 +25,15 @@ class ThemesViewController: UIViewController {
     @IBAction func touchButtonBack(_ sender: Any) {
         navigationController?.popViewController(animated: true)
     }
+        
+    // MARK: - Delegate & Callback
     
-    
-    //MARK: Delegate & Callback
-    //я решил использовать singleton, поэтому здесь weak не нужен, тк класс не будет освобожден
-    //но в другом случае weak помог бы избежать утечки памяти тк не итерировал бы счетчик ссылок
-    //и благодаря тому, что он optional мы могли бы безопасно стучать в делегат
     var themePickerDelegate: ThemePickerDelegate?
     var themePickerCallback: ((ThemePicker.ThemeType) -> Void)?
 
-    
-    //MARK: - Drawing Constants
+    // MARK: - Drawing Constants
     
     let cornerRadiusThemeView: CGFloat = 10
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,7 +57,7 @@ class ThemesViewController: UIViewController {
     
     private func setupThemeNightView() {
         if let chooseThemeButtonView = ChooseThemeButtonView.instanceFromNib() {
-            chooseThemeButtonView.configureThemeButtonView(.night,  parentBounds: themeDayView.bounds)
+            chooseThemeButtonView.configureThemeButtonView(.night, parentBounds: themeDayView.bounds)
             themeNightView.addSubview(chooseThemeButtonView)
             themeNightView.tag = ThemePicker.ThemeType.night.rawValue
             configureTheme(themeNightView)
@@ -87,9 +81,9 @@ class ThemesViewController: UIViewController {
         }
     }
     
-    private func setupThemeClassicView()  {
+    private func setupThemeClassicView() {
         if let chooseThemeButtonView = ChooseThemeButtonView.instanceFromNib() {
-            chooseThemeButtonView.configureThemeButtonView(.classic,  parentBounds: themeDayView.bounds)
+            chooseThemeButtonView.configureThemeButtonView(.classic, parentBounds: themeDayView.bounds)
             themeClassicView.addSubview(chooseThemeButtonView)
             themeClassicView.tag = ThemePicker.ThemeType.classic.rawValue
             configureTheme(themeClassicView)
@@ -138,15 +132,13 @@ class ThemesViewController: UIViewController {
     private func changeInApplication(_ themeType: ThemePicker.ThemeType) {
         if let delegate = themePickerDelegate {
             delegate.changeThemeTo(themeType)
-        }
-        else if let callback = themePickerCallback {
+        } else if let callback = themePickerCallback {
             callback(themeType)
         }
     }
 }
 
-
-//MARK: - Touches
+// MARK: - Touches
 
 extension ThemesViewController {
     @objc private func touchThemeView(_ sender: UITapGestureRecognizer) {

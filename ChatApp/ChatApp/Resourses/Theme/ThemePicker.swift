@@ -11,8 +11,6 @@ protocol ThemePickerDelegate: class {
     func changeThemeTo(_ type: ThemePicker.ThemeType)
 }
 
-
-
 final class ThemePicker: ThemePickerDelegate {
     enum ThemeType: Int {
         case classic = 100, day = 200, night = 300
@@ -23,7 +21,6 @@ final class ThemePicker: ThemePickerDelegate {
     
     var currentTheme: ThemeProtocol = ClassicTheme()
     
-   
     private func getTheme(_ type: ThemePicker.ThemeType) -> ThemeProtocol {
         switch type {
         case .classic: return ClassicTheme()
@@ -58,8 +55,7 @@ final class ThemePicker: ThemePickerDelegate {
             }
         }
         
-        //TODO: сохрянение id темы например в UserDefaults
-        
+        // TODO: сохрянение id темы например в UserDefaults
         currentTheme = theme
     }
     

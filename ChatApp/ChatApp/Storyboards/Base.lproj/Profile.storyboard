@@ -30,13 +30,13 @@
                                 </state>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jee-Nk-L91">
-                                <rect key="frame" x="55" y="740" width="130" height="40"/>
+                                <rect key="frame" x="55" y="740" width="280" height="40"/>
                                 <color key="backgroundColor" name="btn_light_gray"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="NAZ-zN-nox"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
-                                <state key="normal" title="Save GCD">
+                                <state key="normal" title="Save">
                                     <color key="titleColor" systemColor="systemBlueColor"/>
                                 </state>
                             </button>
@@ -77,17 +77,6 @@
                                     <action selector="touchButtonClose:" destination="BYZ-38-t0r" eventType="touchUpInside" id="m7w-yS-ZqP"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QMT-w3-WpI">
-                                <rect key="frame" x="205" y="740" width="130" height="40"/>
-                                <color key="backgroundColor" name="btn_light_gray"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="qng-h7-Gk3"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
-                                <state key="normal" title="Save Operations">
-                                    <color key="titleColor" systemColor="systemBlueColor"/>
-                                </state>
-                            </button>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="ФИО" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Z4g-UX-9Fy">
                                 <rect key="frame" x="94" y="296" width="202" height="24.666666666666686"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
@@ -126,8 +115,6 @@
                             <constraint firstItem="URJ-u1-9Jf" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="55" id="DaC-pG-bUr"/>
                             <constraint firstItem="9Op-SG-4d3" firstAttribute="top" secondItem="Z4g-UX-9Fy" secondAttribute="bottom" constant="32" id="Eqx-fv-YMs"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="jee-Nk-L91" secondAttribute="bottom" constant="30" id="Jgx-7x-Jza"/>
-                            <constraint firstItem="QMT-w3-WpI" firstAttribute="leading" secondItem="jee-Nk-L91" secondAttribute="trailing" constant="20" id="Mis-Z1-KdE"/>
-                            <constraint firstItem="QMT-w3-WpI" firstAttribute="width" secondItem="jee-Nk-L91" secondAttribute="width" id="QZ3-cn-1An"/>
                             <constraint firstItem="Kl4-3y-Ucw" firstAttribute="width" secondItem="9Op-SG-4d3" secondAttribute="width" id="QmD-LS-8Ge"/>
                             <constraint firstItem="Gdr-9n-Uhq" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="RWL-q2-f07"/>
                             <constraint firstItem="Gdr-9n-Uhq" firstAttribute="top" secondItem="Kl4-3y-Ucw" secondAttribute="bottom" constant="20" id="SIG-6k-kf8"/>
@@ -135,19 +122,18 @@
                             <constraint firstItem="jee-Nk-L91" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="55" id="Wx3-7W-Vxe"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="nGN-nz-ISt" secondAttribute="bottom" constant="30" id="YU3-jB-TIJ"/>
                             <constraint firstItem="9Op-SG-4d3" firstAttribute="width" secondItem="Z4g-UX-9Fy" secondAttribute="width" id="Yb7-bu-xOZ"/>
-                            <constraint firstItem="QMT-w3-WpI" firstAttribute="top" secondItem="URJ-u1-9Jf" secondAttribute="bottom" constant="20" id="aL8-Xr-zeE"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="jee-Nk-L91" secondAttribute="trailing" constant="55" id="dAg-aZ-ya9"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Gdr-9n-Uhq" secondAttribute="trailing" id="ed2-4P-EsZ"/>
                             <constraint firstItem="URJ-u1-9Jf" firstAttribute="top" secondItem="Gdr-9n-Uhq" secondAttribute="bottom" constant="20" id="gRq-IA-7MM"/>
                             <constraint firstItem="Z4g-UX-9Fy" firstAttribute="width" secondItem="1aV-tZ-eHb" secondAttribute="width" id="gZZ-Z4-ye8"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="QMT-w3-WpI" secondAttribute="bottom" constant="30" id="gyE-Hf-8aW"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="1aV-tZ-eHb" secondAttribute="trailing" constant="94" id="igs-tP-CCc"/>
+                            <constraint firstItem="jee-Nk-L91" firstAttribute="top" secondItem="URJ-u1-9Jf" secondAttribute="bottom" constant="20" id="jD8-xq-VN5"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="nGN-nz-ISt" secondAttribute="trailing" constant="55" id="mrL-UY-1SM"/>
                             <constraint firstItem="AD8-Mi-JiU" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="18" id="mwe-E2-7kO"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="AD8-Mi-JiU" secondAttribute="trailing" constant="18" id="mwe-Es-vhA"/>
                             <constraint firstItem="Z4g-UX-9Fy" firstAttribute="top" secondItem="1aV-tZ-eHb" secondAttribute="bottom" constant="32" id="oLM-ae-1JJ"/>
                             <constraint firstItem="nGN-nz-ISt" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="55" id="sSh-Oo-RZn"/>
                             <constraint firstItem="Kl4-3y-Ucw" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="tpB-Ga-FDN"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="QMT-w3-WpI" secondAttribute="trailing" constant="55" id="uM6-NS-QRQ"/>
                             <constraint firstItem="1aV-tZ-eHb" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="18" id="yQt-ac-gLU"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="URJ-u1-9Jf" secondAttribute="trailing" constant="55" id="zQK-EJ-nkO"/>
                             <constraint firstItem="Kl4-3y-Ucw" firstAttribute="top" secondItem="9Op-SG-4d3" secondAttribute="bottom" constant="8" id="zTB-VC-o1j"/>
@@ -162,7 +148,6 @@
                         <outlet property="editButton" destination="nGN-nz-ISt" id="ggy-Nx-GKw"/>
                         <outlet property="initialsLabel" destination="rsr-nU-fwx" id="XCp-Mf-t1D"/>
                         <outlet property="saveGCDButton" destination="jee-Nk-L91" id="f4k-bM-1Vx"/>
-                        <outlet property="saveOperationsButton" destination="QMT-w3-WpI" id="oul-0h-M08"/>
                         <outlet property="userCityTextField" destination="Kl4-3y-Ucw" id="foK-Bc-Y17"/>
                         <outlet property="userNameTextField" destination="Z4g-UX-9Fy" id="Tje-u2-dfs"/>
                         <outlet property="userPositionTextField" destination="9Op-SG-4d3" id="uJA-J4-X73"/>

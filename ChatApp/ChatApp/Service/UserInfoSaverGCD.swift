@@ -7,7 +7,6 @@
 
 import UIKit
 
-
 class UserInfoSaverGCD: UserInfoSaver {
     
     private lazy var dispatchQueue = DispatchQueue.global()
@@ -18,8 +17,7 @@ class UserInfoSaverGCD: UserInfoSaver {
             
             if self?.dispatchWorkItem?.isCancelled ?? true { return }
             
-            //TODO: дублирование кода надо вынести
-            
+            // TODO: дублирование кода надо вынести
             guard let docDirUrl: URL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
                 if self?.dispatchWorkItem?.isCancelled ?? true { return }
                 complete(.failure(.savingError))
@@ -29,12 +27,11 @@ class UserInfoSaverGCD: UserInfoSaver {
             do {
                 if self?.dispatchWorkItem?.isCancelled ?? true { return }
                 let data = try JSONEncoder().encode(model)
-                
-                
+                                
                 do {
                     if self?.dispatchWorkItem?.isCancelled ?? true { return }
                     try data.write(to: docDirUrl.appendingPathComponent("profileInfo.json"))
-                    
+                    UserDefaults.standard.set(model.name, forKey: "senderName")
                     if self?.dispatchWorkItem?.isCancelled ?? true { return }
                     complete(.success(()))
                 } catch {
@@ -54,8 +51,8 @@ class UserInfoSaverGCD: UserInfoSaver {
     
     func fetchInfo(_ complete: @escaping (Result<UserInfoModel?, UserInfoSaverError>) -> Void) {
         dispatchWorkItem = DispatchWorkItem { [weak self] in
-            //TODO: дублирование кода надо вынести
-
+            
+            // TODO: дублирование кода надо вынести
             guard let docDirUrl: URL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
                 complete(.failure(.savingError))
                 return

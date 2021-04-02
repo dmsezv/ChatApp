@@ -7,18 +7,12 @@
 
 import Foundation
 
-protocol MessageCellConfiguration {
-    var text: String { get set }
-    var isIncoming: Bool { get set }
-}
-
-
-class MessageModel: MessageCellConfiguration {
-    var text: String
-    var isIncoming: Bool
-    
-    init(text: String, isIncoming: Bool) {
-        self.text = text
-        self.isIncoming = isIncoming
+struct MessageModel {
+    let content: String
+    let created: Date
+    let senderId: String
+    let senderName: String
+    var isIncoming: Bool {
+        senderId != UserInfoSaverGCD().fetchSenderId()
     }
 }
