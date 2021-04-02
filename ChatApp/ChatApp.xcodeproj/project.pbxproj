@@ -14,6 +14,7 @@
 		4D0C0BB125F96FE100781A47 /* ThemePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D0C0BB025F96FE100781A47 /* ThemePicker.swift */; };
 		4D0C0BBD25FA26C000781A47 /* ConversationListNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D0C0BBC25FA26C000781A47 /* ConversationListNavigationController.swift */; };
 		4D0F53752616F8BF004DBC5C /* FirebaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D0F53742616F8BF004DBC5C /* FirebaseService.swift */; };
+		4D0F5378261721FE004DBC5C /* CoreDataStack+SaveModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D0F5377261721FE004DBC5C /* CoreDataStack+SaveModels.swift */; };
 		4D1262C226151317003A6F28 /* ChannelDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D1262C126151317003A6F28 /* ChannelDB.swift */; };
 		4D1262E72615A416003A6F28 /* MessageDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D1262E62615A416003A6F28 /* MessageDB.swift */; };
 		4D2237102603E72700DA1E1D /* UserInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D22370F2603E72700DA1E1D /* UserInfoModel.swift */; };
@@ -72,6 +73,7 @@
 		4D0C0BB025F96FE100781A47 /* ThemePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemePicker.swift; sourceTree = "<group>"; };
 		4D0C0BBC25FA26C000781A47 /* ConversationListNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationListNavigationController.swift; sourceTree = "<group>"; };
 		4D0F53742616F8BF004DBC5C /* FirebaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseService.swift; sourceTree = "<group>"; };
+		4D0F5377261721FE004DBC5C /* CoreDataStack+SaveModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreDataStack+SaveModels.swift"; sourceTree = "<group>"; };
 		4D1262C126151317003A6F28 /* ChannelDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelDB.swift; sourceTree = "<group>"; };
 		4D1262E62615A416003A6F28 /* MessageDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageDB.swift; sourceTree = "<group>"; };
 		4D22370F2603E72700DA1E1D /* UserInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoModel.swift; sourceTree = "<group>"; };
@@ -188,6 +190,7 @@
 				4D1262C0261512F4003A6F28 /* Extensions */,
 				4D3A37422613BD0400E9CE04 /* Chat.xcdatamodeld */,
 				4D3A37462613CD0100E9CE04 /* CoreDataStack.swift */,
+				4D0F5377261721FE004DBC5C /* CoreDataStack+SaveModels.swift */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
@@ -627,6 +630,7 @@
 				4DAFEC8525F6681400CE1BEA /* ChooseThemeButtonView.swift in Sources */,
 				4DC119A52602570A0027E4A0 /* UserInfoSaver.swift in Sources */,
 				4D1262C226151317003A6F28 /* ChannelDB.swift in Sources */,
+				4D0F5378261721FE004DBC5C /* CoreDataStack+SaveModels.swift in Sources */,
 				4D0C0BBD25FA26C000781A47 /* ConversationListNavigationController.swift in Sources */,
 				4D2AFD7925E41B3200706ACE /* ProfileViewController.swift in Sources */,
 				4DF1C49926092B72005D127C /* ConversationListInteractor.swift in Sources */,

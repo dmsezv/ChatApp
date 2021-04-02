@@ -21,6 +21,7 @@ class ConversationViewInteractor: ConversationViewBusinessLogic {
     var channel: ChannelModel?
     
     private lazy var firebaseService = FirebaseService.shared
+    private lazy var coreDataStack = CoreDataStack.shared
     private lazy var userInfoGCD = UserInfoSaverGCD()
     private lazy var senderId: String = userInfoGCD.fetchSenderId()
     private var senderName: String = ""
@@ -36,6 +37,8 @@ class ConversationViewInteractor: ConversationViewBusinessLogic {
             DispatchQueue.main.async {
                 self?.viewController?.displayList(messages)
             }
+            
+            self?.coreDataStack.saveInCoreData(messages, from: channel)
         }
     }
     
@@ -76,24 +79,5 @@ class ConversationViewInteractor: ConversationViewBusinessLogic {
     
     func unsubscribeChannel() {
         firebaseService.removeListenerMessages()
-    }
-}
-
-// MARK: - Core Data
-
-extension ConversationViewInteractor {
-    private func saveInCoreData(_ messages: [MessageModel]) {
-        guard let channel = channel else {
-            return
-        }
-        
-        CoreDataStack.shared.performSave { (context) in
-            let messagesDB: [MessageDB] = messages.compactMap { msg in
-                return MessageDB(message: msg, in: context)
-            }
-            
-            let chn = ChannelDB(channel: channel, in: context)
-            messagesDB.forEach { chn.addToMessages($0) }
-        }
     }
 }

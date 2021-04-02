@@ -23,8 +23,8 @@ protocol ConversationListBusinessLogic {
 class ConversationListInteractor: ConversationListBusinessLogic {
     weak var viewController: ConversationListDisplayLogic?
         
-    private let firebaseService = FirebaseService.shared
-    private let coreDataStack = CoreDataStack.shared
+    private lazy var firebaseService = FirebaseService.shared
+    private lazy var coreDataStack = CoreDataStack.shared
         
     func getChannelList() {
         firebaseService.listenChannelList { [weak self] channels in
@@ -33,6 +33,8 @@ class ConversationListInteractor: ConversationListBusinessLogic {
             DispatchQueue.main.async {
                 self?.viewController?.displayList(channels)
             }
+            
+            self?.coreDataStack.saveInCoreData(channels)
         }
     }
     
@@ -43,16 +45,6 @@ class ConversationListInteractor: ConversationListBusinessLogic {
             DispatchQueue.main.async {
                 self.viewController?.displayError("The channel name should not be empty")
             }
-        }
-    }
-}
-
-// MARK: - Core Data
-
-extension ConversationListInteractor {
-    private func saveInCoreData(_ channels: [ChannelModel]) {
-        coreDataStack.performSave { (context) in
-            channels.forEach { _ = ChannelDB(channel: $0, in: context) }
         }
     }
 }
