@@ -123,17 +123,17 @@ class CoreDataStack {
         
         if let inserts = userInfo[NSInsertedObjectsKey] as? Set<NSManagedObject>,
            inserts.count > 0 {
-            print("Count objects added: ", inserts.count)
+            self.printOutput("Count objects added: \(inserts.count)")
         }
         
         if let updates = userInfo[NSUpdatedObjectsKey] as? Set<NSManagedObject>,
            updates.count > 0 {
-            print("Count objects updated: ", updates.count)
+            self.printOutput("Count objects updated: \(updates.count)")
         }
         
         if let deletes = userInfo[NSDeletedObjectsKey] as? Set<NSManagedObject>,
            deletes.count > 0 {
-            print("Count objects deleted: ", deletes.count)
+            self.printOutput("Count objects deleted: \(deletes.count)")
         }
     }
     
@@ -142,18 +142,20 @@ class CoreDataStack {
     func printDatabaseStatistics() {
         mainContext.perform {
             do {
-                print("-------")
+                self.printOutput("-------")
+                
                 let countChannels = try self.mainContext.count(for: ChannelDB.fetchRequest())
-                print("\(countChannels) Channels")
+                self.printOutput("\(countChannels) channels")
                 
                 let countMessages = try self.mainContext.count(for: MessageDB.fetchRequest())
-                print("\(countMessages) Messages")
-//                let arrayChannels = try self.mainContext.fetch(ChannelDB.fetchRequest()) as? [ChannelDB] ?? []
-//                arrayChannels.forEach { ($0.about()) }
-                print("-------")
+                self.printOutput("\(countMessages) messages")
+                self.printOutput("About:")
+                let arrayChannels = try self.mainContext.fetch(ChannelDB.fetchRequest()) as? [ChannelDB] ?? []
+                arrayChannels.forEach { ($0.about()) }
                 
+                self.printOutput("-------")
             } catch {
-                fatalError(error.localizedDescription)
+                self.printOutput(error.localizedDescription)
             }
         }
     }

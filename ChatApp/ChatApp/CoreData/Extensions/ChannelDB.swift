@@ -20,14 +20,14 @@ extension ChannelDB {
 
 extension ChannelDB: DLogging {
     func about() {
-        setLog("---")
-        setLog("Chn:\(String(describing: self.name))\n\(String(describing: self.lastMessage))\n")
-        if let ms = messages {
-            setLog("MSGS:")
-            for m in ms {
-                setLog("\(String(describing: (m as? MessageDB)?.content))")
+        printOutput("\nChannel name: \(self.name ?? "undf")")
+        if let messages = messages, messages.count > 0 {
+            printOutput("Messages:")
+            messages.forEach {
+                printOutput("\(($0 as? MessageDB)?.senderName ?? "undf") : \(String(describing: ($0 as? MessageDB)?.content ?? "undf"))")
             }
+        } else {
+            printOutput("No saved message")
         }
-        setLog("---")
     }
-}
+    }

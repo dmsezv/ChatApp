@@ -18,9 +18,3 @@ extension MessageDB {
         self.senderName = m.senderName
     }
 }
-
-extension MessageDB: DLogging {
-    func about() {
-        setLog("Channel: \(String(describing: channel?.name)) Message: \(String(describing: content))")
-    }
-}

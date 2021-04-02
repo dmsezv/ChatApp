@@ -15,6 +15,7 @@
 		4D0C0BBD25FA26C000781A47 /* ConversationListNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D0C0BBC25FA26C000781A47 /* ConversationListNavigationController.swift */; };
 		4D0F53752616F8BF004DBC5C /* FirebaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D0F53742616F8BF004DBC5C /* FirebaseService.swift */; };
 		4D0F5378261721FE004DBC5C /* CoreDataStack+SaveModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D0F5377261721FE004DBC5C /* CoreDataStack+SaveModels.swift */; };
+		4D0F537B261734A7004DBC5C /* Extension+CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D0F537A261734A7004DBC5C /* Extension+CoreDataStack.swift */; };
 		4D1262C226151317003A6F28 /* ChannelDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D1262C126151317003A6F28 /* ChannelDB.swift */; };
 		4D1262E72615A416003A6F28 /* MessageDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D1262E62615A416003A6F28 /* MessageDB.swift */; };
 		4D2237102603E72700DA1E1D /* UserInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D22370F2603E72700DA1E1D /* UserInfoModel.swift */; };
@@ -74,6 +75,7 @@
 		4D0C0BBC25FA26C000781A47 /* ConversationListNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationListNavigationController.swift; sourceTree = "<group>"; };
 		4D0F53742616F8BF004DBC5C /* FirebaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseService.swift; sourceTree = "<group>"; };
 		4D0F5377261721FE004DBC5C /* CoreDataStack+SaveModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreDataStack+SaveModels.swift"; sourceTree = "<group>"; };
+		4D0F537A261734A7004DBC5C /* Extension+CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+CoreDataStack.swift"; sourceTree = "<group>"; };
 		4D1262C126151317003A6F28 /* ChannelDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelDB.swift; sourceTree = "<group>"; };
 		4D1262E62615A416003A6F28 /* MessageDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageDB.swift; sourceTree = "<group>"; };
 		4D22370F2603E72700DA1E1D /* UserInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoModel.swift; sourceTree = "<group>"; };
@@ -406,6 +408,7 @@
 				4D92DF7025ED7CE60093FA2A /* Extension+Date.swift */,
 				4D26AEB925F0437B00C0B8C6 /* Extension+UIColor.swift */,
 				4DAFEC7D25F64C9700CE1BEA /* Extension+UIButton.swift */,
+				4D0F537A261734A7004DBC5C /* Extension+CoreDataStack.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -608,6 +611,7 @@
 			files = (
 				4D2237102603E72700DA1E1D /* UserInfoModel.swift in Sources */,
 				4DCD0AFA25EFB0530096F893 /* ConversationMessageOutgoingViewCell.swift in Sources */,
+				4D0F537B261734A7004DBC5C /* Extension+CoreDataStack.swift in Sources */,
 				4DAFEC7225F6448200CE1BEA /* ThemesViewController.swift in Sources */,
 				4D3A37472613CD0100E9CE04 /* CoreDataStack.swift in Sources */,
 				4D92DF6A25ED74420093FA2A /* ConversationListCell.swift in Sources */,
