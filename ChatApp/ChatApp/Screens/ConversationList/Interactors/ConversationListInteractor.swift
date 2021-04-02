@@ -27,24 +27,13 @@ class ConversationListInteractor: ConversationListBusinessLogic {
     lazy var db = Firestore.firestore()
     lazy var reference = db.collection("channels")
     private var listenerMessages: ListenerRegistration?
+    
+    let firebaseService = FirebaseService.shared
+    let coreDataStack = CoreDataStack.shared
         
     func getChannelList() {
-        reference.addSnapshotListener { [weak self] snapshot, _ in
-            guard let snapshot = snapshot else { return }
-            let channels = snapshot.documents.compactMap { document -> ChannelModel? in
-                guard let name = document["name"] as? String else { return nil }
-                
-                return ChannelModel(
-                    identifier: document.documentID,
-                    name: name,
-                    lastMessage: document["lastMessage"] as? String,
-                    lastActivity: (document["lastActivity"] as? Timestamp)?.dateValue()
-                )
-            }.sorted(by: { (prev, next) -> Bool in
-                prev.lastActivity ?? Date.distantPast > next.lastActivity ?? Date.distantPast
-            })
-
-            self?.saveInCoreData(channels)
+        firebaseService.listenChannelList { [weak self] channels in
+            guard let channels = channels else { return }
             
             DispatchQueue.main.async {
                 self?.viewController?.displayList(channels)
@@ -63,7 +52,7 @@ class ConversationListInteractor: ConversationListBusinessLogic {
     }
     
     func unsubscribeChannel() {
-        listenerMessages?.remove()
+        firebaseService.removeListener()
     }
 }
 
@@ -71,10 +60,8 @@ class ConversationListInteractor: ConversationListBusinessLogic {
 
 extension ConversationListInteractor {
     private func saveInCoreData(_ channels: [ChannelModel]) {
-        CoreDataStack.shared.performSave { (context) in
-            for c in channels {
-                _ = ChannelDB(channel: c, in: context)
-            }
+        coreDataStack.performSave { (context) in
+            channels.forEach { _ = ChannelDB(channel: $0, in: context) }
         }
     }
 }
