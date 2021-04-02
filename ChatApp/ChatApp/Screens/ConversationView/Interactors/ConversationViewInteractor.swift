@@ -11,7 +11,7 @@ import Firebase
 protocol ConversationViewBusinessLogic {
     func getMessages()
     func getMessagesFrom(_ identifierChannel: String)
-    func send(_ message: String, to identifierChannel: String)
+    func send(_ message: String)
     func unsubscribeChannel()
     
     var channel: ChannelModel? { get set }
@@ -95,7 +95,7 @@ class ConversationViewInteractor: ConversationViewBusinessLogic {
         }
     }
     
-    func send(_ message: String, to identifierChannel: String = "") {
+    func send(_ message: String) {
         guard let channel = channel else {
             return
         }
@@ -144,15 +144,13 @@ extension ConversationViewInteractor {
             return
         }
         
-        DispatchQueue.global().async {
-            CoreDataStack.shared.performSave { (context) in
-                let messagesDB: [MessageDB] = messages.map { msg in
-                    return MessageDB(message: msg, in: context)
-                }
-                
-                let chn = ChannelDB(channel: channel, in: context)
-                messagesDB.forEach { chn.addToMessages($0) }
+        CoreDataStack.shared.performSave { (context) in
+            let messagesDB: [MessageDB] = messages.compactMap { msg in
+                return MessageDB(message: msg, in: context)
             }
+            
+            let chn = ChannelDB(channel: channel, in: context)
+            messagesDB.forEach { chn.addToMessages($0) }
         }
     }
 }

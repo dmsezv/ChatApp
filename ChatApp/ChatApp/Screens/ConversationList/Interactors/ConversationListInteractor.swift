@@ -71,12 +71,9 @@ class ConversationListInteractor: ConversationListBusinessLogic {
 
 extension ConversationListInteractor {
     private func saveInCoreData(_ channels: [ChannelModel]) {
-        //UserInfoSaverGCD
-        DispatchQueue.global().async {
-            CoreDataStack.shared.performSave { (context) in
-                for c in channels {
-                    _ = ChannelDB(channel: c, in: context)
-                }
+        CoreDataStack.shared.performSave { (context) in
+            for c in channels {
+                _ = ChannelDB(channel: c, in: context)
             }
         }
     }

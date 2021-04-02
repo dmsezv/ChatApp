@@ -58,7 +58,6 @@ final class ConversationViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        //interactor?.getMessagesFrom(identifierChannel)
         interactor?.getMessages()
     }
     
@@ -197,7 +196,8 @@ extension ConversationViewController {
         if let message = messageTextField.text {
             messageTextField.text = ""
             sendMessageButton.isEnabled = false
-            interactor?.send(message, to: identifierChannel)
+            
+            interactor?.send(message)
         }
     }
 }
