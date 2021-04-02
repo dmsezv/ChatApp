@@ -24,6 +24,15 @@ final class ConversationViewController: UIViewController {
         navigationController?.popViewController(animated: true)
     }
     
+    // MARK: - Views
+    
+    private lazy var activityIndicator: UIActivityIndicatorView = {
+        let activityIndicator = UIActivityIndicatorView()
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.startAnimating()
+        return activityIndicator
+    }()
+    
     // MARK: - Setup
     
     private func setup() {
@@ -77,6 +86,7 @@ final class ConversationViewController: UIViewController {
         tableView.backgroundColor = ThemePicker.shared.currentTheme.backgroundColor
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard(_ :)))
         tableView.addGestureRecognizer(tap)
+        tableView.backgroundView = activityIndicator
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
@@ -98,6 +108,10 @@ final class ConversationViewController: UIViewController {
 
 extension ConversationViewController: ConversationViewDisplayLogic {
     func displayList(_ messages: [MessageModel]) {
+        if activityIndicator.isAnimating {
+            activityIndicator.stopAnimating()
+        }
+        
         self.messages = messages
         self.messages?.reverse()
         tableView.reloadData()

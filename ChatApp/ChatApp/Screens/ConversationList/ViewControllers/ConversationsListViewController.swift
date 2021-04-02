@@ -52,6 +52,13 @@ final class ConversationsListViewController: UIViewController, ConversationsList
         
         return view
     }()
+    
+    private lazy var activityIndicator: UIActivityIndicatorView = {
+        let activityIndicator = UIActivityIndicatorView()
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.startAnimating()
+        return activityIndicator
+    }()
         
     // MARK: - Setup
     
@@ -97,6 +104,8 @@ final class ConversationsListViewController: UIViewController, ConversationsList
         tableView.register(UINib(nibName: cellIdentifier, bundle: nil), forCellReuseIdentifier: cellIdentifier)
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.backgroundView = activityIndicator
+        tableView.separatorStyle = .none
                 
         settingsButton.addTarget(self, action: #selector(touchSettingsButton(_:)), for: .touchUpInside)
     }
@@ -113,6 +122,11 @@ final class ConversationsListViewController: UIViewController, ConversationsList
 
 extension ConversationsListViewController: ConversationListDisplayLogic {
     func displayList(_ channels: [ChannelModel]) {
+        if activityIndicator.isAnimating {
+            activityIndicator.stopAnimating()
+            tableView.separatorStyle = .singleLine
+        }
+        
         self.channels = channels
         tableView.reloadData()
     }
