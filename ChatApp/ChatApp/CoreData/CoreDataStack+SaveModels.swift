@@ -24,4 +24,8 @@ extension CoreDataStack {
             channels.forEach { _ = ChannelDB(channel: $0, in: context) }
         }
     }
+    
+    func fetch() {
+        //ChannelDB.fetchRequest()
+    }
 }

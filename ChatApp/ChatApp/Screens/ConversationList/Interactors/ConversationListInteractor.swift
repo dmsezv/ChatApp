@@ -7,6 +7,7 @@
 
 import Foundation
 import Firebase
+import CoreData
 
 struct Message {
     let content: String
@@ -45,6 +46,17 @@ class ConversationListInteractor: ConversationListBusinessLogic {
             DispatchQueue.main.async {
                 self.viewController?.displayError("The channel name should not be empty")
             }
+        }
+    }
+}
+
+extension ConversationListInteractor {
+    func test() {
+        firebaseService.listenChannelList { [weak self] channels in
+            guard let channels = channels else { return }
+            self?.coreDataStack.saveInCoreData(channels)
+            
+            
         }
     }
 }

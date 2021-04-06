@@ -5,8 +5,8 @@
 //  Created by Dmitrii Zverev on 01.03.2021.
 //
 
-import Foundation
 import UIKit
+import CoreData
 
 protocol ConversationListDisplayLogic: class {
     func displayList(_ channels: [ChannelModel])
@@ -84,20 +84,46 @@ final class ConversationsListViewController: UIViewController, ConversationsList
     
     // MARK: - View life cycle
     
-    private var channels: [ChannelModel]?
     private let cellIdentifier = String(describing: ConversationListCell.self)
+    private lazy var fetchedResultController: NSFetchedResultsController<ChannelDB> = {
+        let request: NSFetchRequest<ChannelDB> = ChannelDB.fetchRequest()
+        request.sortDescriptors = [NSSortDescriptor(key: "lastActivity", ascending: false)]
+        request.resultType = .managedObjectResultType
+        
+        return NSFetchedResultsController(
+            fetchRequest: request,
+            managedObjectContext: CoreDataStack.shared.mainContext,
+            sectionNameKeyPath: nil,
+            cacheName: nil)
+    }()
+    private var channelList: [ChannelDB]? {
+        fetchedResultController.fetchedObjects
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupView()
-        interactor?.getChannelList()
+        
+        do {
+            try fetchedResultController.performFetch()
+        } catch {
+            fatalError()
+        }
+        //interactor?.getChannelList()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        tableView.reloadData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         updateProfileView()
+        tableView.reloadData()
+
     }
     
     private func setupView() {
@@ -127,7 +153,7 @@ extension ConversationsListViewController: ConversationListDisplayLogic {
             tableView.separatorStyle = .singleLine
         }
         
-        self.channels = channels
+        //self.channels = channels
         tableView.reloadData()
     }
     
@@ -145,12 +171,14 @@ extension ConversationsListViewController: UITableViewDelegate, UITableViewDataS
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        guard let channels = channels else {
+        guard let channel = ChannelModel
+                .createFrom(fetchedResultController.object(at: indexPath)) else {
             return
         }
         
-//        router?.routeToShowChat(title: channels[indexPath.row].name, identifierChannel: channels[indexPath.row].identifier)
-        router?.routeToMessagesIn(channels[indexPath.row])
+        //fetchedResultController.object(at: indexPath)
+        
+        router?.routeToMessagesIn(channel)
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -187,22 +215,55 @@ extension ConversationsListViewController: UITableViewDelegate, UITableViewDataS
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let channels = channels else {
-            return 0
-        }
-        
-        return channels.count
+        return channelList?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? ConversationListCell,
-              let channels = channels else {
+              let channel = ChannelModel.createFrom(fetchedResultController.object(at: indexPath)) else {
             return UITableViewCell()
         }
         
-        cell.configure(with: channels[indexPath.row])
+        cell.configure(with: channel)
         
         return cell
+    }
+}
+
+// MARK: - NSFetchedResultsControllerDelegate
+
+extension ConversationsListViewController: NSFetchedResultsControllerDelegate {
+    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        tableView.beginUpdates()
+    }
+    
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        tableView.endUpdates()
+    }
+    
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+        switch type {
+        case .insert:
+            if let newIndexPath = newIndexPath {
+                tableView.insertRows(at: [newIndexPath], with: .automatic)
+            }
+        case .move:
+            if let indexPath = indexPath,
+               let newIndexPath = newIndexPath {
+                tableView.deleteRows(at: [indexPath], with: .automatic)
+                tableView.insertRows(at: [newIndexPath], with: .automatic)
+            }
+        case .update:
+            if let indexPath = indexPath {
+                tableView.reloadRows(at: [indexPath], with: .automatic)
+            }
+        case .delete:
+            if let indexPath = indexPath {
+                tableView.deleteRows(at: [indexPath], with: .automatic)
+            }
+        @unknown default:
+            break
+        }
     }
 }
 
