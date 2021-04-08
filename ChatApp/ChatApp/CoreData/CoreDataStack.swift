@@ -95,6 +95,9 @@ class CoreDataStack {
         context.performAndWait {
             do {
                 try context.obtainPermanentIDs(for: Array(context.insertedObjects))
+                try context.obtainPermanentIDs(for: Array(context.updatedObjects))
+                try context.obtainPermanentIDs(for: Array(context.deletedObjects))
+
                 try context.save()
             } catch {
                 assertionFailure(error.localizedDescription)

@@ -10,6 +10,7 @@ import Firebase
 
 protocol ConversationViewBusinessLogic {
     func getMessages()
+    func listenMessagesChanges()
     func send(_ message: String)
     func unsubscribeChannel()
     
@@ -75,6 +76,16 @@ class ConversationViewInteractor: ConversationViewBusinessLogic {
                                            "created": Timestamp(date: Date()),
                                            "senderName": senderName,
                                            "senderId": senderId], to: id)
+    }
+    
+    func listenMessagesChanges() {
+        guard let channel = channel else {
+            return
+        }
+        
+        firebaseService.listenChangesMessageList(in: channel.identifier) { [weak self] documentChanges in
+            
+        }
     }
     
     func unsubscribeChannel() {

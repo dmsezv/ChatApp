@@ -69,6 +69,22 @@ extension CoreDataStack {
             }
         }
     }
+    
+    func updateInCoreData(_ messageListChanges: [DocumentChange], in channelId: String) {
+        let entityName = String(describing: MessageDB.self)
+        
+        performSave { context in
+            let deletedIdList = messageListChanges
+                .filter { $0.type == .removed }
+                .compactMap { $0.document.documentID }
+            
+            if !deletedIdList.isEmpty {
+                delete(from: entityName,
+                    in: context,
+                    by: NSPredicate(format: "identifier IN %@", deletedIdList))
+            }
+        }
+    }
 }
 
 // MARK: - Copy Read Update Delete
