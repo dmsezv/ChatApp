@@ -44,7 +44,7 @@ class ConversationListInteractor: ConversationListBusinessLogic {
     func listenChannelChanges() {
         firebaseService.listenChangesChannelList { [weak self] documentChanges in
             if let documentChanges = documentChanges {
-                self?.coreDataStack.updateInCoreData(documentChanges)
+                self?.coreDataStack.updateInCoreData(channelListChanges: documentChanges)
             }
         }
     }

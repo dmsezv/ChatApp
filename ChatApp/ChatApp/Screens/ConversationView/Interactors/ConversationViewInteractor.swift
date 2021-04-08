@@ -84,7 +84,9 @@ class ConversationViewInteractor: ConversationViewBusinessLogic {
         }
         
         firebaseService.listenChangesMessageList(in: channel.identifier) { [weak self] documentChanges in
-            
+            if let documentChanges = documentChanges {
+                self?.coreDataStack.updateInCoreData(messageListChanges: documentChanges, in: channel.identifier)
+            }
         }
     }
     

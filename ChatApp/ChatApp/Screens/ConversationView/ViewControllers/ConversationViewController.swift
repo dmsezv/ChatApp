@@ -59,7 +59,8 @@ final class ConversationViewController: UIViewController {
     private let cellIncomingIdentifier = String(describing: ConversationMessageIncomingViewCell.self)
     private lazy var fetchedResultController: NSFetchedResultsController<MessageDB> = {
         let request: NSFetchRequest<MessageDB> = MessageDB.fetchRequest()
-        request.sortDescriptors = [NSSortDescriptor(key: "created", ascending: true)]
+        request.predicate = NSPredicate(format: "channel.identifier == %@", interactor?.channel?.identifier ?? "")
+        request.sortDescriptors = [NSSortDescriptor(key: "created", ascending: false)]
         request.resultType = .managedObjectResultType
 
         let controller = NSFetchedResultsController(
@@ -78,11 +79,13 @@ final class ConversationViewController: UIViewController {
         super.viewDidLoad()
         
         setupView()
-    }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        //interactor?.getMessages()
+        
+        do {
+            try fetchedResultController.performFetch()
+            interactor?.listenMessagesChanges()
+        } catch {
+            printOutput(error.localizedDescription)
+        }
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -95,6 +98,7 @@ final class ConversationViewController: UIViewController {
         sendMessageButton.addTarget(self, action: #selector(touchSendMessageButton(_ :)), for: .touchUpInside)
         
         tableView.dataSource = self
+        tableView.delegate = self
         tableView.register(UINib(nibName: cellOutgoingIdentifier, bundle: nil), forCellReuseIdentifier: cellOutgoingIdentifier)
         tableView.register(UINib(nibName: cellIncomingIdentifier, bundle: nil), forCellReuseIdentifier: cellIncomingIdentifier)
         tableView.transform = CGAffineTransform(scaleX: 1, y: -1)
@@ -135,7 +139,7 @@ extension ConversationViewController: ConversationViewDisplayLogic {
 
 // MARK: - UITableViewDataSource
 
-extension ConversationViewController: UITableViewDataSource {
+extension ConversationViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return messageList?.count ?? 0
     }
@@ -183,11 +187,13 @@ extension ConversationViewController {
 
 extension ConversationViewController: NSFetchedResultsControllerDelegate {
     func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        UIView.setAnimationsEnabled(false)
         tableView.beginUpdates()
     }
     
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         tableView.endUpdates()
+        UIView.setAnimationsEnabled(true)
     }
     
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>,

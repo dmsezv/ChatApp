@@ -32,7 +32,7 @@ extension CoreDataStack {
         }
     }
 
-    func updateInCoreData(_ channelListChanges: [DocumentChange]) {
+    func updateInCoreData(channelListChanges: [DocumentChange]) {
         let entityName = String(describing: ChannelDB.self)
         
         performSave { context in
@@ -70,16 +70,15 @@ extension CoreDataStack {
         }
     }
     
-    func updateInCoreData(_ messageListChanges: [DocumentChange], in channelId: String) {
-        let entityChannelDBName = String(describing: MessageDB.self)
-        let entityMessageDBName = String(describing: ChannelDB.self)
+    func updateInCoreData(messageListChanges: [DocumentChange], in channelId: String) {
+        let entityChannelDBName = String(describing: ChannelDB.self)
+        let entityMessageDBName = String(describing: MessageDB.self)
 
         performSave { context in
-            guard let channel = read(
-                    from: entityMessageDBName,
-                    in: context,
-                    by: NSPredicate(
-                        format: "identifier IN %@", channelId))?.first as? ChannelDB else { return }
+            guard let channel = read(from: entityChannelDBName,
+                                     in: context,
+                                     by: NSPredicate(format: "identifier == %@", channelId))?.first as? ChannelDB
+            else { return }
             
             let deletedIdList = messageListChanges
                 .filter { $0.type == .removed }
@@ -94,8 +93,27 @@ extension CoreDataStack {
             let addedOrModifMessages = messageListChanges
                 .filter { $0.type == .added || $0.type == .modified }
             
-            addedOrModifMessages.forEach { change in
-                channel.addToMessages(<#T##value: MessageDB##MessageDB#>)
+            let messages = addedOrModifMessages.compactMap { change -> MessageModel? in
+                guard let content = change.document["content"] as? String,
+                      !content.isEmpty,
+                      let created = (change.document["created"] as? Timestamp)?.dateValue(),
+                      let senderId = change.document["senderId"] as? String,
+                      !senderId.isEmpty,
+                      let senderName = change.document["senderName"] as? String,
+                      !senderName.isEmpty,
+                      !change.document.documentID.isEmpty
+                else { return nil }
+                
+                return MessageModel(
+                    identifier: change.document.documentID,
+                    content: content,
+                    created: created,
+                    senderId: senderId,
+                    senderName: senderName)
+            }
+            
+            messages.forEach {
+                channel.addToMessages(MessageDB(message: $0, in: context))
             }
         }
     }
