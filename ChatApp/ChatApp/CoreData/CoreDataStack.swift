@@ -25,6 +25,9 @@ class CoreDataStack {
     private let dataModelName = "Chat"
     private let dataModelExtension = "momd"
     
+    let entityChannelDBName = String(describing: ChannelDB.self)
+    let entityMessageDBName = String(describing: MessageDB.self)
+    
     // MARK: - Init Stack
     
     private(set) lazy var managedObjectModel: NSManagedObjectModel = {
@@ -161,6 +164,36 @@ class CoreDataStack {
             } catch {
                 self.printOutput(error.localizedDescription)
             }
+        }
+    }
+}
+
+// MARK: - Copy Read Update Delete
+// TODO: - add update
+
+extension CoreDataStack {
+    func delete(from entity: String, in context: NSManagedObjectContext, by predicate: NSPredicate) {
+        let request = NSFetchRequest<NSManagedObject>(entityName: entity)
+        request.predicate = predicate
+        
+        do {
+            let objs = try context.fetch(request)
+            objs.forEach { context.delete($0) }
+        } catch {
+            printOutput(error.localizedDescription)
+        }
+    }
+    
+    func read(from entity: String, in context: NSManagedObjectContext, by predicate: NSPredicate? = nil) -> [NSManagedObject]? {
+        let request = NSFetchRequest<NSManagedObject>(entityName: entity)
+        request.predicate = predicate
+        
+        do {
+            let res = try context.fetch(request)
+            return res
+        } catch {
+            printOutput(error.localizedDescription)
+            return nil
         }
     }
 }

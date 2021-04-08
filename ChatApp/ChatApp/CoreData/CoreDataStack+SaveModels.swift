@@ -32,6 +32,7 @@ extension CoreDataStack {
         }
     }
 
+    // TODO: отрефакторить как следует
     func updateInCoreData(channelListChanges: [DocumentChange]) {
         let entityName = String(describing: ChannelDB.self)
         
@@ -49,7 +50,7 @@ extension CoreDataStack {
             let addedOrModifChannelList = channelListChanges
                 .filter { $0.type == .added || $0.type == .modified }
             
-            let relevantChannelsInDb = read(from: entityName,
+            let existingChannelsInDb = read(from: entityName,
                                             in: context,
                                             by: NSPredicate(format: "identifier IN %@",
                                                             addedOrModifChannelList
@@ -58,22 +59,27 @@ extension CoreDataStack {
             addedOrModifChannelList.forEach { change in
                 guard let name = change.document["name"] as? String else { return }
                 
-                let channel = ChannelModel(
-                    identifier: change.document.documentID,
-                    name: name,
-                    lastMessage: change.document["lastMessage"] as? String,
-                    lastActivity: (change.document["lastActivity"] as? Timestamp)?.dateValue()
-                )
-                
-                _ = ChannelDB(channel: channel, in: context)
+                if let existingChannelsInDb = existingChannelsInDb?
+                    .first(where: { $0.identifier == change.document.documentID }) {
+                    existingChannelsInDb.setValue(name, forKey: "name")
+                    existingChannelsInDb.setValue(change.document["lastMessage"] as? String, forKey: "lastMessage")
+                    existingChannelsInDb.setValue((change.document["lastActivity"] as? Timestamp)?.dateValue(), forKey: "lastActivity")
+                } else {
+                    let channel = ChannelModel(
+                        identifier: change.document.documentID,
+                        name: name,
+                        lastMessage: change.document["lastMessage"] as? String,
+                        lastActivity: (change.document["lastActivity"] as? Timestamp)?.dateValue()
+                    )
+                    
+                    _ = ChannelDB(channel: channel, in: context)
+                }
             }
         }
     }
     
+    // TODO: отрефакторить как следует
     func updateInCoreData(messageListChanges: [DocumentChange], in channelId: String) {
-        let entityChannelDBName = String(describing: ChannelDB.self)
-        let entityMessageDBName = String(describing: MessageDB.self)
-
         performSave { context in
             guard let channel = read(from: entityChannelDBName,
                                      in: context,
@@ -93,7 +99,12 @@ extension CoreDataStack {
             let addedOrModifMessages = messageListChanges
                 .filter { $0.type == .added || $0.type == .modified }
             
-            let messages = addedOrModifMessages.compactMap { change -> MessageModel? in
+            let existingMessagesInDb = read(from: entityMessageDBName,
+                                            in: context,
+                                            by: NSPredicate(format: "identifier IN %@", addedOrModifMessages
+                                                                .compactMap { $0.document.documentID })) as? [MessageDB]
+            
+            addedOrModifMessages.forEach { change in
                 guard let content = change.document["content"] as? String,
                       !content.isEmpty,
                       let created = (change.document["created"] as? Timestamp)?.dateValue(),
@@ -102,61 +113,24 @@ extension CoreDataStack {
                       let senderName = change.document["senderName"] as? String,
                       !senderName.isEmpty,
                       !change.document.documentID.isEmpty
-                else { return nil }
+                else { return }
                 
-                return MessageModel(
-                    identifier: change.document.documentID,
-                    content: content,
-                    created: created,
-                    senderId: senderId,
-                    senderName: senderName)
+                if let existingMessagesInDb = existingMessagesInDb?
+                    .first(where: { $0.identifier == change.document.documentID }) {
+                    existingMessagesInDb.setValue(content, forKey: "content")
+                    existingMessagesInDb.setValue(created, forKey: "created")
+                    existingMessagesInDb.setValue(senderId, forKey: "senderId")
+                    existingMessagesInDb.setValue(senderName, forKey: "senderName")
+                } else {
+                    channel.addToMessages(MessageDB(message: MessageModel(
+                                                        identifier: change.document.documentID,
+                                                        content: content,
+                                                        created: created,
+                                                        senderId: senderId,
+                                                        senderName: senderName),
+                                                    in: context))
+                }
             }
-            
-            messages.forEach {
-                channel.addToMessages(MessageDB(message: $0, in: context))
-            }
-        }
-    }
-}
-
-// MARK: - Copy Read Update Delete
-
-extension CoreDataStack {
-    private func delete(from entity: String, in context: NSManagedObjectContext, by predicate: NSPredicate) {
-        let request = NSFetchRequest<NSManagedObject>(entityName: entity)
-        request.predicate = predicate
-        
-        do {
-            let objs = try context.fetch(request)
-            objs.forEach { context.delete($0) }
-        } catch {
-            printOutput(error.localizedDescription)
-        }
-    }
-    
-    private func read(from entity: String, in context: NSManagedObjectContext, by predicate: NSPredicate? = nil) -> [NSManagedObject]? {
-        let request = NSFetchRequest<NSManagedObject>(entityName: entity)
-        request.predicate = predicate
-        
-        do {
-            let res = try context.fetch(request)
-            return res
-        } catch {
-            printOutput(error.localizedDescription)
-            return nil
-        }
-    }
-    
-    private func update(from entity: String, valuesForKeys: [String: Any], in context: NSManagedObjectContext, by predicate: NSPredicate) {
-        let request = NSFetchRequest<NSManagedObject>(entityName: entity)
-        request.predicate = predicate
-        
-        do {
-            if let res = try context.fetch(request).first {
-                res.setValuesForKeys(valuesForKeys)
-            }
-        } catch {
-            printOutput(error.localizedDescription)
         }
     }
 }
