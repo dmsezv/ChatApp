@@ -178,9 +178,7 @@ extension ConversationsListViewController: UITableViewDelegate, UITableViewDataS
                 .createFrom(fetchedResultController.object(at: indexPath)) else {
             return
         }
-        
-        //fetchedResultController.object(at: indexPath)
-        
+                
         router?.routeToMessagesIn(channel)
     }
     

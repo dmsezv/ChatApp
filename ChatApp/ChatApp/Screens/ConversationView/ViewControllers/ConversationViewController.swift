@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CoreData
 
 protocol ConversationViewDisplayLogic: class {
     func displayList(_ messages: [MessageModel])
@@ -56,8 +57,22 @@ final class ConversationViewController: UIViewController {
     
     private let cellOutgoingIdentifier = String(describing: ConversationMessageOutgoingViewCell.self)
     private let cellIncomingIdentifier = String(describing: ConversationMessageIncomingViewCell.self)
-    private var messages: [MessageModel]?
-    var identifierChannel: String = ""
+    private lazy var fetchedResultController: NSFetchedResultsController<MessageDB> = {
+        let request: NSFetchRequest<MessageDB> = MessageDB.fetchRequest()
+        request.sortDescriptors = [NSSortDescriptor(key: "created", ascending: true)]
+        request.resultType = .managedObjectResultType
+
+        let controller = NSFetchedResultsController(
+            fetchRequest: request,
+            managedObjectContext: CoreDataStack.shared.mainContext,
+            sectionNameKeyPath: nil,
+            cacheName: nil)
+        controller.delegate = self
+        return controller
+    }()
+    private var messageList: [MessageDB]? {
+        fetchedResultController.fetchedObjects
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -67,7 +82,7 @@ final class ConversationViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        interactor?.getMessages()
+        //interactor?.getMessages()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -86,7 +101,7 @@ final class ConversationViewController: UIViewController {
         tableView.backgroundColor = ThemePicker.shared.currentTheme.backgroundColor
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard(_ :)))
         tableView.addGestureRecognizer(tap)
-        tableView.backgroundView = activityIndicator
+        //tableView.backgroundView = activityIndicator
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
@@ -112,8 +127,8 @@ extension ConversationViewController: ConversationViewDisplayLogic {
             activityIndicator.stopAnimating()
         }
         
-        self.messages = messages
-        self.messages?.reverse()
+        //self.messages = messages
+        //self.messages?.reverse()
         tableView.reloadData()
     }
 }
@@ -122,23 +137,18 @@ extension ConversationViewController: ConversationViewDisplayLogic {
 
 extension ConversationViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let messages = messages else {
-            return 0
-        }
-        
-        return messages.count
+        return messageList?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let messages = messages else {
+        guard let message = MessageModel.createFrom(fetchedResultController.object(at: indexPath)) else {
             return UITableViewCell()
         }
         
-        let model = messages[indexPath.row]
-        if model.isIncoming {
-            return setupIncomingCell(with: model, tableView, indexPath)
+        if message.isIncoming {
+            return setupIncomingCell(with: message, tableView, indexPath)
         } else {
-            return setupOutgoingCell(with: model, tableView, indexPath)
+            return setupOutgoingCell(with: message, tableView, indexPath)
         }
     }
 }
@@ -166,6 +176,47 @@ extension ConversationViewController {
         cell.contentView.transform = CGAffineTransform(scaleX: 1, y: -1)
         
         return cell
+    }
+}
+
+// MARK: - NSFetchedResultsControllerDelegate
+
+extension ConversationViewController: NSFetchedResultsControllerDelegate {
+    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        tableView.beginUpdates()
+    }
+    
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        tableView.endUpdates()
+    }
+    
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>,
+                    didChange anObject: Any,
+                    at indexPath: IndexPath?,
+                    for type: NSFetchedResultsChangeType,
+                    newIndexPath: IndexPath?) {
+        switch type {
+        case .insert:
+            if let newIndexPath = newIndexPath {
+                tableView.insertRows(at: [newIndexPath], with: .automatic)
+            }
+        case .move:
+            if let indexPath = indexPath,
+               let newIndexPath = newIndexPath {
+                tableView.deleteRows(at: [indexPath], with: .automatic)
+                tableView.insertRows(at: [newIndexPath], with: .automatic)
+            }
+        case .update:
+            if let indexPath = indexPath {
+                tableView.reloadRows(at: [indexPath], with: .automatic)
+            }
+        case .delete:
+            if let indexPath = indexPath {
+                tableView.deleteRows(at: [indexPath], with: .automatic)
+            }
+        @unknown default:
+            break
+        }
     }
 }
 

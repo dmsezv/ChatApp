@@ -71,17 +71,31 @@ extension CoreDataStack {
     }
     
     func updateInCoreData(_ messageListChanges: [DocumentChange], in channelId: String) {
-        let entityName = String(describing: MessageDB.self)
-        
+        let entityChannelDBName = String(describing: MessageDB.self)
+        let entityMessageDBName = String(describing: ChannelDB.self)
+
         performSave { context in
+            guard let channel = read(
+                    from: entityMessageDBName,
+                    in: context,
+                    by: NSPredicate(
+                        format: "identifier IN %@", channelId))?.first as? ChannelDB else { return }
+            
             let deletedIdList = messageListChanges
                 .filter { $0.type == .removed }
                 .compactMap { $0.document.documentID }
             
             if !deletedIdList.isEmpty {
-                delete(from: entityName,
+                delete(from: entityMessageDBName,
                     in: context,
                     by: NSPredicate(format: "identifier IN %@", deletedIdList))
+            }
+            
+            let addedOrModifMessages = messageListChanges
+                .filter { $0.type == .added || $0.type == .modified }
+            
+            addedOrModifMessages.forEach { change in
+                channel.addToMessages(<#T##value: MessageDB##MessageDB#>)
             }
         }
     }
