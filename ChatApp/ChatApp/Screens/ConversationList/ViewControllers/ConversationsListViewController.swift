@@ -109,11 +109,10 @@ final class ConversationsListViewController: UIViewController, ConversationsList
         
         do {
             try fetchedResultController.performFetch()
+            interactor?.listenChannelChanges()
         } catch {
-            fatalError()
+            printOutput(error.localizedDescription)
         }
-        
-        interactor?.getChannelList()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -133,8 +132,9 @@ final class ConversationsListViewController: UIViewController, ConversationsList
         tableView.register(UINib(nibName: cellIdentifier, bundle: nil), forCellReuseIdentifier: cellIdentifier)
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.backgroundView = activityIndicator
-        tableView.separatorStyle = .none
+        
+        //tableView.backgroundView = activityIndicator
+        //tableView.separatorStyle = .none
                 
         settingsButton.addTarget(self, action: #selector(touchSettingsButton(_:)), for: .touchUpInside)
     }
@@ -231,6 +231,18 @@ extension ConversationsListViewController: UITableViewDelegate, UITableViewDataS
         
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            if let id = fetchedResultController.object(at: indexPath).identifier {
+                interactor?.deleteChannel(id)
+            }
+        }
+    }
 }
 
 // MARK: - NSFetchedResultsControllerDelegate
@@ -244,7 +256,11 @@ extension ConversationsListViewController: NSFetchedResultsControllerDelegate {
         tableView.endUpdates()
     }
     
-    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>,
+                    didChange anObject: Any,
+                    at indexPath: IndexPath?,
+                    for type: NSFetchedResultsChangeType,
+                    newIndexPath: IndexPath?) {
         switch type {
         case .insert:
             if let newIndexPath = newIndexPath {

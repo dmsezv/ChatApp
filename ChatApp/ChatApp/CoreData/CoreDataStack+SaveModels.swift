@@ -25,6 +25,12 @@ extension CoreDataStack {
             channels.forEach { _ = ChannelDB(channel: $0, in: context) }
         }
     }
+    
+    func removeFromCoreData(_ channels: [ChannelModel]) {
+        performSave { (context) in
+            channels.forEach { context.delete(ChannelDB(channel: $0, in: context)) }
+        }
+    }
 
     func updateInCoreData(_ channelListChanges: [DocumentChange]) {
         let entityName = String(describing: ChannelDB.self)
@@ -59,9 +65,7 @@ extension CoreDataStack {
                     lastActivity: (change.document["lastActivity"] as? Timestamp)?.dateValue()
                 )
                 
-                if let relevantChannelsInDb = relevantChannelsInDb?.first(where: { $0.identifier == change.document.documentID }) {
-                    
-                }
+                _ = ChannelDB(channel: channel, in: context)
             }
         }
     }

@@ -70,6 +70,10 @@ class FirebaseService {
         channelReference.addDocument(data: ["name": name])
     }
     
+    func deleteChannel(_ identifier: String) {
+        channelReference.document(identifier).delete()
+    }
+    
     func addDocument(data: [String: Any], to documentId: String) {
         channelReference.document(documentId)
             .collection(messagesCollectionId)
@@ -102,19 +106,41 @@ class FirebaseService {
     
     func listenChangesChannelList() {
         channelReference.addSnapshotListener { snapshot, _ in
-            snapshot?.documentChanges.forEach({ diff in
-//                diff.type == .added {
-//                    
-//                }
-//                
-//                diff.type == .modified {
-//                    
-//                }
-//                
-//                diff.type == .removed {
-//                    
-//                }
-            })
+            guard let snapshot = snapshot else { return }
+            CoreDataStack.shared.updateInCoreData(snapshot.documentChanges)
+            
+            /*
+            let channelsForUpdate = snapshot
+                .documentChanges
+                .filter { $0.type == .added || $0.type == .modified }
+                .compactMap { diff -> ChannelModel? in
+                    guard let name = diff.document["name"] as? String else { return nil }
+                    
+                    return ChannelModel(
+                        identifier: diff.document.documentID,
+                        name: name,
+                        lastMessage: diff.document["lastMessage"] as? String,
+                        lastActivity: (diff.document["lastActivity"] as? Timestamp)?.dateValue()
+                    )
+            }
+            
+            let channelsForDelete = snapshot
+                .documentChanges
+                .filter { $0.type == .removed }
+                .compactMap { diff -> ChannelModel? in
+                    guard let name = diff.document["name"] as? String else { return nil }
+                    
+                    return ChannelModel(
+                        identifier: diff.document.documentID,
+                        name: name,
+                        lastMessage: diff.document["lastMessage"] as? String,
+                        lastActivity: (diff.document["lastActivity"] as? Timestamp)?.dateValue()
+                    )
+            }
+            
+            CoreDataStack.shared.saveInCoreData(channelsForUpdate)
+            //CoreDataStack.shared.removeFromCoreData(channelsForDelete)
+            */
         }
     }
     

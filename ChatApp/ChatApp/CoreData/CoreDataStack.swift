@@ -94,12 +94,13 @@ class CoreDataStack {
     private func performSave(in context: NSManagedObjectContext) {
         context.performAndWait {
             do {
+                try context.obtainPermanentIDs(for: Array(context.insertedObjects))
                 try context.save()
             } catch {
                 assertionFailure(error.localizedDescription)
             }
         }
-        
+            
         if let parent = context.parent {
             performSave(in: parent)
         }
