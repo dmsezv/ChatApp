@@ -9,7 +9,6 @@ import Foundation
 import Firebase
 
 protocol ConversationViewBusinessLogic {
-    func getMessages()
     func listenMessagesChanges()
     func send(_ message: String)
     func unsubscribeChannel()
@@ -26,22 +25,6 @@ class ConversationViewInteractor: ConversationViewBusinessLogic {
     private lazy var userInfoGCD = UserInfoSaverGCD()
     private lazy var senderId: String = userInfoGCD.fetchSenderId()
     private var senderName: String = ""
-    
-    func getMessages() {
-        guard let channel = channel else {
-            return
-        }
-        
-        firebaseService.listenMessageList(in: channel.identifier) { [weak self] messages in
-            guard let messages = messages else { return }
-            
-            DispatchQueue.main.async {
-                self?.viewController?.displayList(messages)
-            }
-            
-            self?.coreDataStack.saveInCoreData(messages, from: channel)
-        }
-    }
     
     func send(_ message: String) {
         guard let channel = channel else {
@@ -86,6 +69,9 @@ class ConversationViewInteractor: ConversationViewBusinessLogic {
         firebaseService.listenChangesMessageList(in: channel.identifier) { [weak self] documentChanges in
             if let documentChanges = documentChanges {
                 self?.coreDataStack.updateInCoreData(messageListChanges: documentChanges, in: channel.identifier)
+                DispatchQueue.main.async {
+                    self?.viewController?.messagesLoaded()
+                }
             }
         }
     }

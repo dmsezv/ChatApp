@@ -9,7 +9,7 @@ import UIKit
 import CoreData
 
 protocol ConversationViewDisplayLogic: class {
-    func displayList(_ messages: [MessageModel])
+    func messagesLoaded()
 }
 
 final class ConversationViewController: UIViewController {
@@ -57,6 +57,8 @@ final class ConversationViewController: UIViewController {
     
     private let cellOutgoingIdentifier = String(describing: ConversationMessageOutgoingViewCell.self)
     private let cellIncomingIdentifier = String(describing: ConversationMessageIncomingViewCell.self)
+    // TODO: по хорошему его нужно перебросить в интерактор, тк он не является view
+    // и оттуда дергать что нужно. Но я не успеваю
     private lazy var fetchedResultController: NSFetchedResultsController<MessageDB> = {
         let request: NSFetchRequest<MessageDB> = MessageDB.fetchRequest()
         request.predicate = NSPredicate(format: "channel.identifier == %@", interactor?.channel?.identifier ?? "")
@@ -105,7 +107,7 @@ final class ConversationViewController: UIViewController {
         tableView.backgroundColor = ThemePicker.shared.currentTheme.backgroundColor
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard(_ :)))
         tableView.addGestureRecognizer(tap)
-        //tableView.backgroundView = activityIndicator
+        tableView.backgroundView = activityIndicator
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
@@ -126,14 +128,10 @@ final class ConversationViewController: UIViewController {
 // MARK: - Display Logic
 
 extension ConversationViewController: ConversationViewDisplayLogic {
-    func displayList(_ messages: [MessageModel]) {
+    func messagesLoaded() {
         if activityIndicator.isAnimating {
             activityIndicator.stopAnimating()
         }
-        
-        //self.messages = messages
-        //self.messages?.reverse()
-        tableView.reloadData()
     }
 }
 

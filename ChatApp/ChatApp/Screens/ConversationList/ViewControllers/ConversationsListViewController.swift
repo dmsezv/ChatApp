@@ -9,7 +9,7 @@ import UIKit
 import CoreData
 
 protocol ConversationListDisplayLogic: class {
-    func displayList(_ channels: [ChannelModel])
+    func channelsLoaded()
     func displayError(_ message: String)
 }
 
@@ -85,6 +85,8 @@ final class ConversationsListViewController: UIViewController, ConversationsList
     // MARK: - View life cycle
     
     private let cellIdentifier = String(describing: ConversationListCell.self)
+    // TODO: по хорошему его нужно перебросить в интерактор, тк он не является view
+    // и оттуда дергать что нужно. Но я не успеваю
     private lazy var fetchedResultController: NSFetchedResultsController<ChannelDB> = {
         let request: NSFetchRequest<ChannelDB> = ChannelDB.fetchRequest()
         request.sortDescriptors = [NSSortDescriptor(key: "lastActivity", ascending: false)]
@@ -133,8 +135,8 @@ final class ConversationsListViewController: UIViewController, ConversationsList
         tableView.delegate = self
         tableView.dataSource = self
         
-        //tableView.backgroundView = activityIndicator
-        //tableView.separatorStyle = .none
+        tableView.backgroundView = activityIndicator
+        tableView.separatorStyle = .none
                 
         settingsButton.addTarget(self, action: #selector(touchSettingsButton(_:)), for: .touchUpInside)
     }
@@ -150,14 +152,11 @@ final class ConversationsListViewController: UIViewController, ConversationsList
 // MARK: - Display Logic
 
 extension ConversationsListViewController: ConversationListDisplayLogic {
-    func displayList(_ channels: [ChannelModel]) {
+    func channelsLoaded() {
         if activityIndicator.isAnimating {
             activityIndicator.stopAnimating()
             tableView.separatorStyle = .singleLine
         }
-        
-        //self.channels = channels
-        tableView.reloadData()
     }
     
     func displayError(_ message: String) {

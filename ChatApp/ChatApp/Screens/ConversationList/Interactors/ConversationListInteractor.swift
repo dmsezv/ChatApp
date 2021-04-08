@@ -17,7 +17,6 @@ struct Message {
 }
 
 protocol ConversationListBusinessLogic {
-    func getChannelList()
     func listenChannelChanges()
     func createChannel(_ name: String?)
     func deleteChannel(_ identifier: String)
@@ -28,23 +27,14 @@ class ConversationListInteractor: ConversationListBusinessLogic {
         
     private lazy var firebaseService = FirebaseService.shared
     private lazy var coreDataStack = CoreDataStack.shared
-        
-    func getChannelList() {
-        firebaseService.listenChannelList { [weak self] channels in
-            guard let channels = channels else { return }
-
-            DispatchQueue.main.async {
-                self?.viewController?.displayList(channels)
-            }
-
-            self?.coreDataStack.saveInCoreData(channels)
-        }
-    }
     
     func listenChannelChanges() {
         firebaseService.listenChangesChannelList { [weak self] documentChanges in
             if let documentChanges = documentChanges {
                 self?.coreDataStack.updateInCoreData(channelListChanges: documentChanges)
+                DispatchQueue.main.async {
+                    self?.viewController?.channelsLoaded()
+                }
             }
         }
     }
