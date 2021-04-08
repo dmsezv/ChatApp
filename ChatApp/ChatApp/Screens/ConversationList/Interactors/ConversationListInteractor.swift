@@ -28,9 +28,17 @@ class ConversationListInteractor: ConversationListBusinessLogic {
     private lazy var coreDataStack = CoreDataStack.shared
         
     func getChannelList() {
-        firebaseService.listenChannelList { [weak self] channels in
+//        firebaseService.listenChannelList { [weak self] channels in
+//            guard let channels = channels else { return }
+//
+//            DispatchQueue.main.async {
+//                self?.viewController?.displayList(channels)
+//            }
+//
+//            self?.coreDataStack.saveInCoreData(channels)
+//        }
+        firebaseService.getChannelList { [weak self] channels in
             guard let channels = channels else { return }
-            
             DispatchQueue.main.async {
                 self?.viewController?.displayList(channels)
             }

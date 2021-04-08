@@ -6,6 +6,7 @@
 //
 
 import CoreData
+import Firebase
 
 extension CoreDataStack {
     func saveInCoreData(_ messages: [MessageModel], from channel: ChannelModel) {
@@ -24,8 +25,86 @@ extension CoreDataStack {
             channels.forEach { _ = ChannelDB(channel: $0, in: context) }
         }
     }
+
+    func updateInCoreData(_ channelListChanges: [DocumentChange]) {
+        let entityName = String(describing: ChannelDB.self)
+        
+        performSave { context in
+            let deletedIdList = channelListChanges
+                .filter { $0.type == .removed }
+                .compactMap { $0.document.documentID }
+            
+            if !deletedIdList.isEmpty {
+                delete(from: entityName,
+                    in: context,
+                    by: NSPredicate(format: "identifier IN %@", deletedIdList))
+            }
+            
+            let addedOrModifChannelList = channelListChanges
+                .filter { $0.type == .added || $0.type == .modified }
+            
+            let relevantChannelsInDb = read(from: entityName,
+                                            in: context,
+                                            by: NSPredicate(format: "identifier IN %@",
+                                                            addedOrModifChannelList
+                                                                .compactMap { $0.document.documentID })) as? [ChannelDB]
+            
+            addedOrModifChannelList.forEach { change in
+                guard let name = change.document["name"] as? String else { return }
+                
+                let channel = ChannelModel(
+                    identifier: change.document.documentID,
+                    name: name,
+                    lastMessage: change.document["lastMessage"] as? String,
+                    lastActivity: (change.document["lastActivity"] as? Timestamp)?.dateValue()
+                )
+                
+                if let relevantChannelsInDb = relevantChannelsInDb?.first(where: { $0.identifier == change.document.documentID }) {
+                    
+                }
+            }
+        }
+    }
+}
+
+// MARK: - Copy Read Update Delete
+
+extension CoreDataStack {
+    private func delete(from entity: String, in context: NSManagedObjectContext, by predicate: NSPredicate) {
+        let request = NSFetchRequest<NSManagedObject>(entityName: entity)
+        request.predicate = predicate
+        
+        do {
+            let objs = try context.fetch(request)
+            objs.forEach { context.delete($0) }
+        } catch {
+            printOutput(error.localizedDescription)
+        }
+    }
     
-    func fetch() {
-        //ChannelDB.fetchRequest()
+    private func read(from entity: String, in context: NSManagedObjectContext, by predicate: NSPredicate? = nil) -> [NSManagedObject]? {
+        let request = NSFetchRequest<NSManagedObject>(entityName: entity)
+        request.predicate = predicate
+        
+        do {
+            let res = try context.fetch(request)
+            return res
+        } catch {
+            printOutput(error.localizedDescription)
+            return nil
+        }
+    }
+    
+    private func update(from entity: String, valuesForKeys: [String: Any], in context: NSManagedObjectContext, by predicate: NSPredicate) {
+        let request = NSFetchRequest<NSManagedObject>(entityName: entity)
+        request.predicate = predicate
+        
+        do {
+            if let res = try context.fetch(request).first {
+                res.setValuesForKeys(valuesForKeys)
+            }
+        } catch {
+            printOutput(error.localizedDescription)
+        }
     }
 }

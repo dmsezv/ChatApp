@@ -90,11 +90,13 @@ final class ConversationsListViewController: UIViewController, ConversationsList
         request.sortDescriptors = [NSSortDescriptor(key: "lastActivity", ascending: false)]
         request.resultType = .managedObjectResultType
         
-        return NSFetchedResultsController(
+        let controller = NSFetchedResultsController(
             fetchRequest: request,
             managedObjectContext: CoreDataStack.shared.mainContext,
             sectionNameKeyPath: nil,
             cacheName: nil)
+        controller.delegate = self
+        return controller
     }()
     private var channelList: [ChannelDB]? {
         fetchedResultController.fetchedObjects
@@ -110,7 +112,8 @@ final class ConversationsListViewController: UIViewController, ConversationsList
         } catch {
             fatalError()
         }
-        //interactor?.getChannelList()
+        
+        interactor?.getChannelList()
     }
     
     override func viewDidAppear(_ animated: Bool) {
