@@ -52,6 +52,13 @@ final class ConversationsListViewController: UIViewController, ConversationsList
         
         return view
     }()
+    
+    private lazy var activityIndicator: UIActivityIndicatorView = {
+        let activityIndicator = UIActivityIndicatorView()
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.startAnimating()
+        return activityIndicator
+    }()
         
     // MARK: - Setup
     
@@ -84,24 +91,21 @@ final class ConversationsListViewController: UIViewController, ConversationsList
         super.viewDidLoad()
         
         setupView()
+        interactor?.getChannelList()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         updateProfileView()
-        interactor?.getChannelList()
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        interactor?.unsubscribeChannel()
     }
     
     private func setupView() {
         tableView.register(UINib(nibName: cellIdentifier, bundle: nil), forCellReuseIdentifier: cellIdentifier)
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.backgroundView = activityIndicator
+        tableView.separatorStyle = .none
                 
         settingsButton.addTarget(self, action: #selector(touchSettingsButton(_:)), for: .touchUpInside)
     }
@@ -118,6 +122,11 @@ final class ConversationsListViewController: UIViewController, ConversationsList
 
 extension ConversationsListViewController: ConversationListDisplayLogic {
     func displayList(_ channels: [ChannelModel]) {
+        if activityIndicator.isAnimating {
+            activityIndicator.stopAnimating()
+            tableView.separatorStyle = .singleLine
+        }
+        
         self.channels = channels
         tableView.reloadData()
     }
@@ -140,7 +149,8 @@ extension ConversationsListViewController: UITableViewDelegate, UITableViewDataS
             return
         }
         
-        router?.routeToShowChat(title: channels[indexPath.row].name, identifierChannel: channels[indexPath.row].identifier)
+//        router?.routeToShowChat(title: channels[indexPath.row].name, identifierChannel: channels[indexPath.row].identifier)
+        router?.routeToMessagesIn(channels[indexPath.row])
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {

@@ -18,49 +18,33 @@ struct Message {
 protocol ConversationListBusinessLogic {
     func getChannelList()
     func createChannel(_ name: String?)
-    func unsubscribeChannel()
 }
 
 class ConversationListInteractor: ConversationListBusinessLogic {
     weak var viewController: ConversationListDisplayLogic?
         
-    lazy var db = Firestore.firestore()
-    lazy var reference = db.collection("channels")
-    private var listenerMessages: ListenerRegistration?
+    private lazy var firebaseService = FirebaseService.shared
+    private lazy var coreDataStack = CoreDataStack.shared
         
     func getChannelList() {
-        reference.addSnapshotListener { [weak self] snapshot, _ in
-            guard let snapshot = snapshot else { return }
-            let channels = snapshot.documents.compactMap { document -> ChannelModel? in
-                guard let name = document["name"] as? String else { return nil }
-                
-                return ChannelModel(
-                    identifier: document.documentID,
-                    name: name,
-                    lastMessage: document["lastMessage"] as? String,
-                    lastActivity: (document["lastActivity"] as? Timestamp)?.dateValue()
-                )
-            }.sorted(by: { (prev, next) -> Bool in
-                prev.lastActivity ?? Date.distantPast > next.lastActivity ?? Date.distantPast
-            })
-
+        firebaseService.listenChannelList { [weak self] channels in
+            guard let channels = channels else { return }
+            
             DispatchQueue.main.async {
                 self?.viewController?.displayList(channels)
             }
+            
+            self?.coreDataStack.saveInCoreData(channels)
         }
     }
     
     func createChannel(_ name: String?) {
         if let name = name, !name.isEmpty {
-            reference.addDocument(data: ["name": name])
+            firebaseService.createChannel(name)
         } else {
             DispatchQueue.main.async {
                 self.viewController?.displayError("The channel name should not be empty")
             }
         }
-    }
-    
-    func unsubscribeChannel() {
-        listenerMessages?.remove()
     }
 }

@@ -15,24 +15,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
-        FirebaseApp.configure()
-        ThemePicker.shared.changeThemeTo(.classic)
+        configureApp()
         
         return true
     }
     
-    func applicationWillResignActive(_ application: UIApplication) {
+    private func configureApp() {
+        FirebaseApp.configure()
+        ThemePicker.shared.changeThemeTo(.classic)
+        
+        configureCoreData()
     }
     
-    func applicationDidBecomeActive(_ application: UIApplication) {
-    }
-    
-    func applicationDidEnterBackground(_ application: UIApplication) {
-    }
-    
-    func applicationWillEnterForeground(_ application: UIApplication) {
-    }
-    
-    func applicationWillTerminate(_ application: UIApplication) {
+    private func configureCoreData() {
+        let coreData = CoreDataStack.shared
+        
+        coreData.didUpdateDataBase = { stack in
+            stack.printDatabaseStatistics()
+        }
+        coreData.enableObservers()
     }
 }
