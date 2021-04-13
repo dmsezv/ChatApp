@@ -7,8 +7,29 @@
 
 import Firebase
 
+protocol FirebaseServiceChannelsProtocol {
+    func listenChangesChannelList(_ completeHandler: @escaping([DocumentChange]?) -> Void)
+    func createChannel(_ name: String)
+    func deleteChannel(_ identifier: String)
+}
+
+protocol FirebaseMessagesServiceProtocol {
+    func listenChangesMessageList(in identifierChannel: String, _ completeHandler: @escaping([DocumentChange]?) -> Void)
+    func sendMessage(_ content: String, to channelId: String)
+    func removeListenerMessages()
+}
+
 class FirebaseService {
-    private init() {}
+    private let coreDataStack: CoreDataStackProtocol
+    
+    init(userInfoDataManager usrInfo: UserInfoSaver,
+         coreDataStack: CoreDataStackProtocol) {
+        senderName = usrInfo.fetchSenderName()
+        senderId = usrInfo.fetchSenderId()
+        
+        self.coreDataStack = coreDataStack
+    }
+    
     static var shared = FirebaseService()
     
     private let channelCollectonId = "channels"
@@ -18,6 +39,26 @@ class FirebaseService {
     private lazy var channelReference = db.collection(channelCollectonId)
     private var listenerMessages: ListenerRegistration?
     
+    private let senderName: String
+    private let senderId: String
+}
+
+extension FirebaseService: FirebaseServiceChannelsProtocol {
+    func createChannel(_ name: String) {
+        channelReference.addDocument(data: ["name": name])
+    }
+    
+    func deleteChannel(_ identifier: String) {
+        channelReference.document(identifier).delete()
+    }
+    
+    func listenChangesChannelList(_ completeHandler: @escaping([DocumentChange]?) -> Void) {
+        channelReference.addSnapshotListener { snapshot, _ in
+            guard let snapshot = snapshot else { completeHandler(nil); return }
+            completeHandler(snapshot.documentChanges)
+        }
+    }
+
     func listenChannelList(_ completionHandler: @escaping([ChannelModel]?) -> Void) {
         channelReference.addSnapshotListener { snapshot, _ in
             guard let snapshot = snapshot else { completionHandler(nil); return }
@@ -37,7 +78,9 @@ class FirebaseService {
             completionHandler(channels)
         }
     }
-    
+}
+
+extension FirebaseService: FirebaseMessagesServiceProtocol {
     func listenMessageList(in identifierChannel: String, _ completionHandler: @escaping([MessageModel]?) -> Void) {
         listenerMessages = channelReference.document(identifierChannel).collection(messagesCollectionId).addSnapshotListener { snapshot, _ in
             guard let snapshot = snapshot else { return }
@@ -66,18 +109,22 @@ class FirebaseService {
         }
     }
     
-    func createChannel(_ name: String) {
-        channelReference.addDocument(data: ["name": name])
-    }
-    
-    func deleteChannel(_ identifier: String) {
-        channelReference.document(identifier).delete()
-    }
-    
     func addDocument(data: [String: Any], to documentId: String) {
         channelReference.document(documentId)
             .collection(messagesCollectionId)
             .addDocument(data: data)
+    }
+    
+    func sendMessage(_ content: String, to channelId: String) {
+        channelReference
+            .document(channelId)
+            .collection(messagesCollectionId)
+            .addDocument(data: [
+                "content": content,
+                "created": Timestamp(date: Date()),
+                "senderName": senderName,
+                "senderId": senderId
+            ])
     }
     
     func removeListenerMessages() {
@@ -101,13 +148,6 @@ class FirebaseService {
             })
             
             completionHandler(channels)
-        }
-    }
-    
-    func listenChangesChannelList(_ completeHandler: @escaping([DocumentChange]?) -> Void) {
-        channelReference.addSnapshotListener { snapshot, _ in
-            guard let snapshot = snapshot else { completeHandler(nil); return }
-            completeHandler(snapshot.documentChanges)
         }
     }
     

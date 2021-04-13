@@ -40,8 +40,7 @@ class ConversationViewInteractor: ConversationViewBusinessLogic {
                     if let name = userInfo?.name, !name.isEmpty {
                         self?.senderName = name
                     } else {
-                        // TODO: после сдачи поменять на деволт
-                        self?.senderName = "Dmitrii Zverev"
+                        self?.senderName = "Undefined"
                     }
                 case .failure:
                     break
@@ -56,7 +55,7 @@ class ConversationViewInteractor: ConversationViewBusinessLogic {
     
     private func sendMessageToChannel(_ message: String, _ id: String) {
         firebaseService.addDocument(data: ["content": message,
-                                           "created": Timestamp(date: Date()),
+                                           "created": Timestamp(date: Date()) as? String,
                                            "senderName": senderName,
                                            "senderId": senderId], to: id)
     }

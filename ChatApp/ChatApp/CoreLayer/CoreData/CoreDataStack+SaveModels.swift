@@ -78,6 +78,10 @@ extension CoreDataStack {
         }
     }
     
+    func save(_ channels: [ChannelDB]) {
+        z
+    }
+    
     // TODO: отрефакторить как следует
     func updateInCoreData(messageListChanges: [DocumentChange], in channelId: String) {
         performSave { context in
