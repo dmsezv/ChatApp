@@ -43,6 +43,8 @@ class FirebaseService {
     private let senderId: String
 }
 
+// MARK: - Firebase Channels
+
 extension FirebaseService: FirebaseServiceChannelsProtocol {
     func createChannel(_ name: String) {
         channelReference.addDocument(data: ["name": name])
@@ -53,9 +55,53 @@ extension FirebaseService: FirebaseServiceChannelsProtocol {
     }
     
     func listenChangesChannelList(_ completeHandler: @escaping([DocumentChange]?) -> Void) {
-        channelReference.addSnapshotListener { snapshot, _ in
+        channelReference.addSnapshotListener { [weak self] snapshot, _ in
             guard let snapshot = snapshot else { completeHandler(nil); return }
+            self?.updateChannels(snapshot.documentChanges)
             completeHandler(snapshot.documentChanges)
+        }
+    }
+    
+    private func updateChannels(_ changes: [DocumentChange]) {
+        coreDataStack.performSave { [weak self] context in
+            let deletedIdList = changes
+                .filter { $0.type == .removed }
+                .compactMap { $0.document.documentID }
+            
+            if !deletedIdList.isEmpty {
+                self?.coreDataStack.delete(from: .channels,
+                                           in: context,
+                                           by: NSPredicate(format: "identifier IN %@", deletedIdList))
+            }
+            
+            let addedOrModifChannelList = changes
+                .filter { $0.type == .added || $0.type == .modified }
+            
+            let existingChannelsInDb = self?.coreDataStack.read(from: .channels,
+                                                                in: context,
+                                                                by: NSPredicate(format: "identifier IN %@",
+                                                                                addedOrModifChannelList
+                                                                                    .compactMap { $0.document.documentID })) as? [ChannelDB]
+            
+            addedOrModifChannelList.forEach { change in
+                guard let name = change.document["name"] as? String else { return }
+                
+                if let existingChannelsInDb = existingChannelsInDb?
+                    .first(where: { $0.identifier == change.document.documentID }) {
+                    existingChannelsInDb.setValue(name, forKey: "name")
+                    existingChannelsInDb.setValue(change.document["lastMessage"] as? String, forKey: "lastMessage")
+                    existingChannelsInDb.setValue((change.document["lastActivity"] as? Timestamp)?.dateValue(), forKey: "lastActivity")
+                } else {
+                    let channel = ChannelModel(
+                        identifier: change.document.documentID,
+                        name: name,
+                        lastMessage: change.document["lastMessage"] as? String,
+                        lastActivity: (change.document["lastActivity"] as? Timestamp)?.dateValue()
+                    )
+                    
+                    _ = ChannelDB(channel: channel, in: context)
+                }
+            }
         }
     }
 
@@ -78,7 +124,29 @@ extension FirebaseService: FirebaseServiceChannelsProtocol {
             completionHandler(channels)
         }
     }
+    
+    func getChannelList(_ completionHandler: @escaping([ChannelModel]?) -> Void) {
+        channelReference.getDocuments { snapshot, _ in
+            guard let snapshot = snapshot else { completionHandler(nil); return }
+            let channels = snapshot.documents.compactMap { document -> ChannelModel? in
+                guard let name = document["name"] as? String else { return nil }
+                
+                return ChannelModel(
+                    identifier: document.documentID,
+                    name: name,
+                    lastMessage: document["lastMessage"] as? String,
+                    lastActivity: (document["lastActivity"] as? Timestamp)?.dateValue()
+                )
+            }.sorted(by: { (prev, next) -> Bool in
+                prev.lastActivity ?? Date.distantPast > next.lastActivity ?? Date.distantPast
+            })
+            
+            completionHandler(channels)
+        }
+    }
 }
+
+// MARK: - Firebase Messages
 
 extension FirebaseService: FirebaseMessagesServiceProtocol {
     func listenMessageList(in identifierChannel: String, _ completionHandler: @escaping([MessageModel]?) -> Void) {
@@ -131,30 +199,66 @@ extension FirebaseService: FirebaseMessagesServiceProtocol {
         listenerMessages?.remove()
     }
     
-    func getChannelList(_ completionHandler: @escaping([ChannelModel]?) -> Void) {
-        channelReference.getDocuments { snapshot, _ in
-            guard let snapshot = snapshot else { completionHandler(nil); return }
-            let channels = snapshot.documents.compactMap { document -> ChannelModel? in
-                guard let name = document["name"] as? String else { return nil }
-                
-                return ChannelModel(
-                    identifier: document.documentID,
-                    name: name,
-                    lastMessage: document["lastMessage"] as? String,
-                    lastActivity: (document["lastActivity"] as? Timestamp)?.dateValue()
-                )
-            }.sorted(by: { (prev, next) -> Bool in
-                prev.lastActivity ?? Date.distantPast > next.lastActivity ?? Date.distantPast
-            })
-            
-            completionHandler(channels)
+    func listenChangesMessageList(in identifierChannel: String, _ completeHandler: @escaping([DocumentChange]?) -> Void) {
+        listenerMessages = channelReference.document(identifierChannel).collection(messagesCollectionId).addSnapshotListener { [weak self] snapshot, _ in
+            guard let snapshot = snapshot else { completeHandler(nil); return }
+            self?.updateMessages(snapshot.documentChanges, in: identifierChannel)
+            completeHandler(snapshot.documentChanges)
         }
     }
     
-    func listenChangesMessageList(in identifierChannel: String, _ completeHandler: @escaping([DocumentChange]?) -> Void) {
-        listenerMessages = channelReference.document(identifierChannel).collection(messagesCollectionId).addSnapshotListener { snapshot, _ in
-            guard let snapshot = snapshot else { completeHandler(nil); return }
-            completeHandler(snapshot.documentChanges)
+    private func updateMessages(_ changes: [DocumentChange], in channelId: String) {
+        coreDataStack.performSave { [weak self] context in
+            guard let channel = self?.coreDataStack.read(from: .channels,
+                                     in: context,
+                                     by: NSPredicate(format: "identifier == %@", channelId))?.first as? ChannelDB
+            else { return }
+            
+            let deletedIdList = changes
+                .filter { $0.type == .removed }
+                .compactMap { $0.document.documentID }
+            
+            if !deletedIdList.isEmpty {
+                self?.coreDataStack.delete(from: .messages,
+                    in: context,
+                    by: NSPredicate(format: "identifier IN %@", deletedIdList))
+            }
+            
+            let addedOrModifMessages = changes
+                .filter { $0.type == .added || $0.type == .modified }
+            
+            let existingMessagesInDb = self?.coreDataStack.read(from: .messages,
+                                            in: context,
+                                            by: NSPredicate(format: "identifier IN %@", addedOrModifMessages
+                                                                .compactMap { $0.document.documentID })) as? [MessageDB]
+            
+            addedOrModifMessages.forEach { change in
+                guard let content = change.document["content"] as? String,
+                      !content.isEmpty,
+                      let created = (change.document["created"] as? Timestamp)?.dateValue(),
+                      let senderId = change.document["senderId"] as? String,
+                      !senderId.isEmpty,
+                      let senderName = change.document["senderName"] as? String,
+                      !senderName.isEmpty,
+                      !change.document.documentID.isEmpty
+                else { return }
+                
+                if let existingMessagesInDb = existingMessagesInDb?
+                    .first(where: { $0.identifier == change.document.documentID }) {
+                    existingMessagesInDb.setValue(content, forKey: "content")
+                    existingMessagesInDb.setValue(created, forKey: "created")
+                    existingMessagesInDb.setValue(senderId, forKey: "senderId")
+                    existingMessagesInDb.setValue(senderName, forKey: "senderName")
+                } else {
+                    channel.addToMessages(MessageDB(message: MessageModel(
+                                                        identifier: change.document.documentID,
+                                                        content: content,
+                                                        created: created,
+                                                        senderId: senderId,
+                                                        senderName: senderName),
+                                                    in: context))
+                }
+            }
         }
     }
 }

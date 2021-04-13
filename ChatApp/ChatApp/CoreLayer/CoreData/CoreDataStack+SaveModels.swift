@@ -8,7 +8,7 @@
 import CoreData
 import Firebase
 
-extension CoreDataStack {
+extension CoreDataStack: CoreDataStackProtocol {
     func saveInCoreData(_ messages: [MessageModel], from channel: ChannelModel) {
         performSave { (context) in
             let messagesDB: [MessageDB] = messages.compactMap { msg in
@@ -76,10 +76,6 @@ extension CoreDataStack {
                 }
             }
         }
-    }
-    
-    func save(_ channels: [ChannelDB]) {
-        z
     }
     
     // TODO: отрефакторить как следует

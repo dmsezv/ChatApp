@@ -8,6 +8,11 @@
 import Foundation
 import CoreData
 
+enum CoreDataEntityName: String {
+    case messages = "MessageDB"
+    case channels = "ChannelDB"
+}
+
 class CoreDataStack {
     private init() {}
     static let shared = CoreDataStack()
@@ -172,8 +177,8 @@ class CoreDataStack {
 // TODO: - add update
 
 extension CoreDataStack {
-    func delete(from entity: String, in context: NSManagedObjectContext, by predicate: NSPredicate) {
-        let request = NSFetchRequest<NSManagedObject>(entityName: entity)
+    func delete(from entity: CoreDataEntityName, in context: NSManagedObjectContext, by predicate: NSPredicate) {
+        let request = NSFetchRequest<NSManagedObject>(entityName: entity.rawValue)
         request.predicate = predicate
         
         do {
@@ -184,8 +189,8 @@ extension CoreDataStack {
         }
     }
     
-    func read(from entity: String, in context: NSManagedObjectContext, by predicate: NSPredicate? = nil) -> [NSManagedObject]? {
-        let request = NSFetchRequest<NSManagedObject>(entityName: entity)
+    func read(from entity: CoreDataEntityName, in context: NSManagedObjectContext, by predicate: NSPredicate? = nil) -> [NSManagedObject]? {
+        let request = NSFetchRequest<NSManagedObject>(entityName: entity.rawValue)
         request.predicate = predicate
         
         do {
