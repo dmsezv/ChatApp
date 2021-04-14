@@ -29,9 +29,7 @@ class FirebaseService {
         
         self.coreDataStack = coreDataStack
     }
-    
-    static var shared = FirebaseService()
-    
+        
     private let channelCollectonId = "channels"
     private let messagesCollectionId = "messages"
     
