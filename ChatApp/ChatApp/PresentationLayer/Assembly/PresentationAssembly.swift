@@ -29,7 +29,10 @@ class PresentationAssembly: PresentationAssemblyProtocol {
     func conversationViewController(channel: ChannelModel) -> ConversationViewController? {
         let viewController = UIStoryboard(name: "Conversation", bundle: nil)
         .instantiateViewController(withIdentifier: String(describing: ConversationViewController.self)) as? ConversationViewController
-        let interactor = ConversationViewInteractor(messagesService: serviceAssembly.messagesServices(), messagesRepository: repositoriesAssembly.messageRepository(channelId: channel.identifier))
+        let interactor = ConversationViewInteractor(
+            messagesService: serviceAssembly.messagesServices(),
+            messagesRepository: repositoriesAssembly.messageRepository(channelId: channel.identifier)
+        )
         interactor.channel = channel
         viewController?.interactor = interactor
         interactor.viewController = viewController
@@ -62,6 +65,11 @@ class PresentationAssembly: PresentationAssemblyProtocol {
     func profileViewController(delegate: ConversationsListDelegate?) -> ProfileViewController? {
         let viewController = UIStoryboard(name: "Profile", bundle: nil).instantiateInitialViewController() as? ProfileViewController
         viewController?.delegateViewController = delegate
+        let interactor = ProfileInteractor(
+            userInfoService: serviceAssembly.userInfoService()
+        )
+        viewController?.interactor = interactor
+        interactor.viewController = viewController
         
         return viewController
     }

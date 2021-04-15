@@ -8,7 +8,7 @@
 import Foundation
 
 protocol ProfileBusinessLogic {
-    func fetchUserInfoBy(_ type: UserInfoSaverType)
+    func fetchUserInfo()
     func save(userInfo: UserInfoModel, by type: UserInfoSaverType)
     func cancel()
 }
@@ -18,33 +18,20 @@ class ProfileInteractor: ProfileBusinessLogic {
     private lazy var userInfoOperation = UserInfoSaverOperation()
     private lazy var userInfoGCD = UserInfoSaverGCD()
     
-    func fetchUserInfoBy(_ type: UserInfoSaverType) {
-        var saver: UserInfoManagerProtocol
-        
-        switch type {
-        case .gcd:
-            saver = userInfoGCD
-        case .operation:
-            saver = userInfoOperation
-        }
-        
-        saver.fetchInfo { (result) in
+    let userInfoService: UserInfoServiceProtocol
+    
+    init(userInfoService: UserInfoServiceProtocol) {
+        self.userInfoService = userInfoService
+    }
+    
+    func fetchUserInfo() {
+        userInfoService.fetchInfo { userInfoModel in
             DispatchQueue.main.async {
-                switch result {
-                case .success(let model):
-                    self.viewController?.successFetch(model)
-                case .failure(let error):
-                    var message = ""
-                    
-                    switch error {
-                    case .decodingError:
-                        message = "Не удалось декодировать модели"
-                    default:
-                        message = "Не удалось выгрузить данные"
-                    }
-                    
-                    self.viewController?.errorDisplay(message)
-                }
+                self.viewController?.successFetch(userInfoModel)
+            }
+        } fail: { message in
+            DispatchQueue.main.async {
+                self.viewController?.errorDisplay(message)
             }
         }
     }

@@ -62,27 +62,6 @@ class ProfileViewController: UIViewController {
     
     private let cornRadBtn: CGFloat = 14.0
     private let charSpacing: Double = -22.0
-    
-    // MARK: - Setup
-    
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-        setup()
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        setup()
-    }
-    
-    // MARK: - Setup
-    
-    private func setup() {
-        let viewController = self
-        let interactor = ProfileInteractor()
-        viewController.interactor = interactor
-        interactor.viewController = viewController
-    }
 
     // MARK: - Life Cycle
     
@@ -103,7 +82,7 @@ class ProfileViewController: UIViewController {
         }
 
         setupView()
-        fetchUserInfoBy(.gcd)
+        setupUserInfoState()
     }
     
     private func setupView() {
@@ -211,13 +190,13 @@ extension ProfileViewController {
 // MARK: - Business Logic
 
 extension ProfileViewController {
-    func fetchUserInfoBy(_ type: UserInfoSaverType) {
+    func setupUserInfoState() {
         // TODO: нужно придумать логику состояний VC
         editingMode(false)
         savingMode(false)
         fetchDataMode(true)
                 
-        interactor?.fetchUserInfoBy(type)
+        interactor?.fetchUserInfo()
     }
     
     func saveUserInfoBy(_ saverType: UserInfoSaverType) {
@@ -243,7 +222,7 @@ extension ProfileViewController: ProfileDisplayLogic {
             // а не ходить заново за ней.
             // сейчас делаю так только из-за того, что не успел заметить,
             // что некоторые данные надо обновить
-            self.fetchUserInfoBy(.gcd)
+            self.setupUserInfoState()
         })
     }
     
@@ -373,7 +352,7 @@ extension ProfileViewController {
         savingMode(false)
         
         interactor?.cancel()
-        fetchUserInfoBy(.operation)
+        setupUserInfoState()
     }
     
     @objc func touchSaveGCDButton(_ sender: UIButton) {
