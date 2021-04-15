@@ -33,25 +33,6 @@ final class ConversationViewController: UIViewController {
         activityIndicator.startAnimating()
         return activityIndicator
     }()
-    
-    // MARK: - Setup
-    
-    private func setup() {
-        let viewController = self
-        let interactor = ConversationViewInteractor()
-        viewController.interactor = interactor
-        interactor.viewController = self
-    }
-    
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-        setup()
-    }
-    
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-        setup()
-    }
         
     // MARK: - Life Cycle
     

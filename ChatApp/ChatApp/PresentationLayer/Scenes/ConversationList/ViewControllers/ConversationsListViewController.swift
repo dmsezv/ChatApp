@@ -59,28 +59,6 @@ final class ConversationsListViewController: UIViewController, ConversationsList
         activityIndicator.startAnimating()
         return activityIndicator
     }()
-        
-    // MARK: - Setup
-    
-    private func setup() {
-//        let viewController = self
-//        let router = ConversationListRouter()
-//        let interactor = ConversationListInteractor()
-//        viewController.router = router
-//        viewController.interactor = interactor
-//        router.viewController = viewController
-//        interactor.viewController = viewController
-    }
-    
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-        setup()
-    }
-    
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-        setup()
-    }
     
     // MARK: - View life cycle
     

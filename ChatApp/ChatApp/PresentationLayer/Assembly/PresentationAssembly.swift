@@ -9,8 +9,9 @@ import UIKit
 
 protocol PresentationAssemblyProtocol {
     func conversationListViewController() -> ConversationsListViewController?
+    func conversationViewController(channel: ChannelModel) -> ConversationViewController? 
     func conversationListNavigationController(rootViewController: ConversationsListViewController) -> ConversationListNavigationController
-    func profileViewController() -> ProfileViewController?
+    func profileViewController(delegate: ConversationsListDelegate?) -> ProfileViewController?
     func themesViewController() -> ThemesViewController?
 }
 
@@ -19,6 +20,18 @@ class PresentationAssembly: PresentationAssemblyProtocol {
     
     init(serviceAssembly: ServiceAssemblyProtocol) {
         self.serviceAssembly = serviceAssembly
+    }
+    
+    func conversationViewController(channel: ChannelModel) -> ConversationViewController? {
+        let viewController = UIStoryboard(name: "Conversation", bundle: nil)
+        .instantiateViewController(withIdentifier: String(describing: ConversationViewController.self)) as? ConversationViewController
+        let interactor = ConversationViewInteractor()
+        interactor.channel = channel
+        viewController?.interactor = interactor
+        interactor.viewController = viewController
+        viewController?.title = channel.name
+        
+        return viewController
     }
     
     func conversationListViewController() -> ConversationsListViewController? {
@@ -38,8 +51,11 @@ class PresentationAssembly: PresentationAssemblyProtocol {
         ConversationListNavigationController(rootViewController: rootViewController)
     }
     
-    func profileViewController() -> ProfileViewController? {
-        UIStoryboard(name: "Profile", bundle: nil).instantiateInitialViewController() as? ProfileViewController
+    func profileViewController(delegate: ConversationsListDelegate?) -> ProfileViewController? {
+        let viewController = UIStoryboard(name: "Profile", bundle: nil).instantiateInitialViewController() as? ProfileViewController
+        viewController?.delegateViewController = delegate
+        
+        return viewController
     }
     
     //TODO: setvice theme.shared

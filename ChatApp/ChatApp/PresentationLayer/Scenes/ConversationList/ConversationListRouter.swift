@@ -23,20 +23,14 @@ class ConversationListRouter: ConversationListRoutingLogic {
     }
     
     func routeToProfile() {
-        if let profileVC = presentationAssembly?.profileViewController() {
-            profileVC.delegateViewController = viewController
+        if let profileVC = presentationAssembly?.profileViewController(delegate: viewController) {
             viewController?.present(profileVC, animated: true)
         }
     }
     
     func routeToMessagesIn(_ channel: ChannelModel) {
-        if let destinationVC = viewController?
-            .storyboard?
-            .instantiateViewController(withIdentifier: String(describing: ConversationViewController.self)) as? ConversationViewController {
-            
-            destinationVC.title = channel.name
-            destinationVC.interactor?.channel = channel
-            viewController?.show(destinationVC, sender: nil)
+        if let conversationVC = presentationAssembly?.conversationViewController(channel: channel) {
+            viewController?.show(conversationVC, sender: nil)
         }
     }
     
