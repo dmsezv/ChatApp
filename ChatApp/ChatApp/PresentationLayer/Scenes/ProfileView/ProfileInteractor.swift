@@ -19,7 +19,7 @@ class ProfileInteractor: ProfileBusinessLogic {
     private lazy var userInfoGCD = UserInfoSaverGCD()
     
     func fetchUserInfoBy(_ type: UserInfoSaverType) {
-        var saver: UserInfoSaver
+        var saver: UserInfoManagerProtocol
         
         switch type {
         case .gcd:
@@ -50,7 +50,7 @@ class ProfileInteractor: ProfileBusinessLogic {
     }
     
     func save(userInfo: UserInfoModel, by type: UserInfoSaverType) {
-        var saver: UserInfoSaver
+        var saver: UserInfoManagerProtocol
         
         switch type {
         case .gcd:

@@ -20,8 +20,6 @@ class ConversationViewInteractor: ConversationViewBusinessLogic {
     weak var viewController: ConversationViewDisplayLogic?
     var channel: ChannelModel?
     
-//    private lazy var firebaseService = FirebaseService.shared
-    private lazy var coreDataStack = CoreDataStack.shared
     private lazy var userInfoGCD = UserInfoSaverGCD()
     private lazy var senderId: String = userInfoGCD.fetchSenderId()
     private var senderName: String = ""
@@ -40,8 +38,6 @@ class ConversationViewInteractor: ConversationViewBusinessLogic {
         if senderName.isEmpty {
             userInfoGCD.fetchInfo { [weak self] (result) in
                 switch result {
-                // TODO: нужна логика обработки неудачи вытаскивания userInfo
-                // пока оставляю так, по текущей задаче ее отсутствие не критично
                 case .success(let userInfo):
                     if let name = userInfo?.name, !name.isEmpty {
                         self?.senderName = name
@@ -60,10 +56,7 @@ class ConversationViewInteractor: ConversationViewBusinessLogic {
     }
     
     private func sendMessageToChannel(_ message: String, _ id: String) {
-//        firebaseService.addDocument(data: ["content": message,
-//                                           "created": Timestamp(date: Date()) as? String,
-//                                           "senderName": senderName,
-//                                           "senderId": senderId], to: id)
+        messagesService.send(message, to: id)
     }
     
     func listenMessagesChanges() {

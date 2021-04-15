@@ -7,7 +7,7 @@
 
 import UIKit
 
-class UserInfoSaverGCD: UserInfoSaver {
+class UserInfoSaverGCD: UserInfoManagerProtocol {
     
     private lazy var dispatchQueue = DispatchQueue.global()
     private var dispatchWorkItem: DispatchWorkItem?

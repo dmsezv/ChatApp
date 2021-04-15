@@ -7,7 +7,7 @@
 
 import UIKit
 
-class UserInfoSaverOperation: UserInfoSaver {
+class UserInfoSaverOperation: UserInfoManagerProtocol {
     private lazy var operationQueue: OperationQueue = {
         let queue = OperationQueue()
         queue.qualityOfService = .utility

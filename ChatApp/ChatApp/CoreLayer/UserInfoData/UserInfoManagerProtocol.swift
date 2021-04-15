@@ -18,7 +18,7 @@ enum UserInfoSaverType {
     case operation, gcd
 }
 
-protocol UserInfoSaver {
+protocol UserInfoManagerProtocol {
     func saveInfo(_ model: UserInfoModel, complete: @escaping (Result<Void, UserInfoSaverError>) -> Void)
     func fetchInfo(_ complete: @escaping (Result<UserInfoModel?, UserInfoSaverError>) -> Void)
     func cancelSaving()
@@ -26,7 +26,7 @@ protocol UserInfoSaver {
     func fetchSenderName() -> String
 }
 
-extension UserInfoSaver {
+extension UserInfoManagerProtocol {
     func fetchSenderId() -> String {
         if let senderId = UserDefaults.standard.string(forKey: "senderId") {
             return senderId

@@ -12,7 +12,6 @@ protocol FirebaseManagerProtocol {
     func createChannel(_ name: String)
     func deleteChannel(_ identifier: String)
     func listenChangesMessageList(in identifierChannel: String, _ completeHandler: @escaping([DocumentChange]?) -> Void)
-    func send(_ message: MessageModel, to channelId: String)
     func addMessage(data: [String: Any], to documentId: String)
     func removeListenerMessages()
 }
@@ -48,18 +47,6 @@ class FirebaseManager: FirebaseManagerProtocol {
         channelReference.document(documentId)
             .collection(messagesCollectionId)
             .addDocument(data: data)
-    }
-    
-    func send(_ message: MessageModel, to channelId: String) {
-        channelReference
-            .document(channelId)
-            .collection(messagesCollectionId)
-            .addDocument(data: [
-                "content": message.content,
-                "created": Timestamp(date: Date()),
-                "senderName": message.senderName,
-                "senderId": message.senderId
-            ])
     }
     
     func removeListenerMessages() {

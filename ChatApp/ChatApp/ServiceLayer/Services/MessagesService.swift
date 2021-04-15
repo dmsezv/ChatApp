@@ -17,11 +17,11 @@ protocol MessagesServiceProtocol {
 class MessagesService: MessagesServiceProtocol {
     private let coreDataStack: CoreDataStackProtocol
     private let firebaseManager: FirebaseManagerProtocol
-    private let userInfoDataManager: UserInfoSaver
+    private let userInfoDataManager: UserInfoManagerProtocol
     
     init(coreDataStack: CoreDataStackProtocol,
          firebaseManager: FirebaseManagerProtocol,
-         userInfoDataManager: UserInfoSaver) {
+         userInfoDataManager: UserInfoManagerProtocol) {
         self.userInfoDataManager = userInfoDataManager
         self.coreDataStack = coreDataStack
         self.firebaseManager = firebaseManager

@@ -22,7 +22,7 @@ protocol FirebaseMessagesServiceProtocol {
 class FirebaseService {
     private let coreDataStack: CoreDataStackProtocol
     
-    init(userInfoDataManager usrInfo: UserInfoSaver,
+    init(userInfoDataManager usrInfo: UserInfoManagerProtocol,
          coreDataStack: CoreDataStackProtocol) {
         senderName = usrInfo.fetchSenderName()
         senderId = usrInfo.fetchSenderId()

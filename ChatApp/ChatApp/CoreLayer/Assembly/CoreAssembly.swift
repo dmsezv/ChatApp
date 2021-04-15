@@ -9,7 +9,7 @@ import Foundation
 
 protocol CoreAssemblyProtocol {
     func coreDataStack() -> CoreDataStackProtocol
-    func userInfoDataManager(_ type: UserInfoSaverType) -> UserInfoSaver
+    func userInfoDataManager(_ type: UserInfoSaverType) -> UserInfoManagerProtocol
     func firebaseManager() -> FirebaseManagerProtocol
 }
 
@@ -18,7 +18,7 @@ class CoreAssembly: CoreAssemblyProtocol {
         return CoreDataStack.shared
     }
     
-    func userInfoDataManager(_ type: UserInfoSaverType) -> UserInfoSaver {
+    func userInfoDataManager(_ type: UserInfoSaverType) -> UserInfoManagerProtocol {
         switch type {
         case .gcd:
             return UserInfoSaverGCD()
