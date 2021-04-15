@@ -11,6 +11,7 @@ protocol PresentationAssemblyProtocol {
     func conversationListViewController() -> ConversationsListViewController?
     func conversationListNavigationController(rootViewController: ConversationsListViewController) -> ConversationListNavigationController
     func profileViewController() -> ProfileViewController?
+    func themesViewController() -> ThemesViewController?
 }
 
 class PresentationAssembly: PresentationAssemblyProtocol {
@@ -39,5 +40,14 @@ class PresentationAssembly: PresentationAssemblyProtocol {
     
     func profileViewController() -> ProfileViewController? {
         UIStoryboard(name: "Profile", bundle: nil).instantiateInitialViewController() as? ProfileViewController
+    }
+    
+    //TODO: setvice theme.shared
+    func themesViewController() -> ThemesViewController? {
+        let viewController = UIStoryboard(name: "ThemesSetting", bundle: nil).instantiateInitialViewController() as? ThemesViewController
+        viewController?.themePickerDelegate = ThemePicker.shared
+        viewController?.themePickerCallback = ThemePicker.shared.callbackChangeTheme
+        
+        return viewController
     }
 }

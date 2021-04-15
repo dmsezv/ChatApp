@@ -41,12 +41,8 @@ class ConversationListRouter: ConversationListRoutingLogic {
     }
     
     func routeToSettings() {
-        let SB = UIStoryboard(name: "ThemesSetting", bundle: nil)
-        if let destinationVC = SB.instantiateInitialViewController() as? ThemesViewController {
-            destinationVC.themePickerDelegate = ThemePicker.shared
-            destinationVC.themePickerCallback = ThemePicker.shared.callbackChangeTheme
-
-            viewController?.show(destinationVC, sender: nil)
+        if let themesVC = presentationAssembly?.themesViewController() {
+            viewController?.show(themesVC, sender: nil)
         }
     }
 }
