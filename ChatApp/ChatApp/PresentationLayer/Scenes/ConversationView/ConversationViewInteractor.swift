@@ -23,8 +23,7 @@ protocol ConversationViewBusinessLogic {
 class ConversationViewInteractor: ConversationViewBusinessLogic {
     weak var viewController: ConversationViewDisplayLogic?
     var channel: ChannelModel?
-    
-    
+        
     let messagesService: MessagesServiceProtocol
     let messagesRepository: MessageRepositoryProtocol
     
@@ -57,6 +56,13 @@ class ConversationViewInteractor: ConversationViewBusinessLogic {
     
     func performFetch(delegate: NSFetchedResultsControllerDelegate) {
         messagesRepository.setFetchedResultsController(delegate: delegate)
+        messagesRepository.performFetch { [weak self] error in
+            if let error = error {
+                DispatchQueue.main.async {
+                    self?.viewController?.displayError(error.localizedDescription)
+                }
+            }
+        }
     }
     
     func fetchMessages() -> [MessageModel]? {

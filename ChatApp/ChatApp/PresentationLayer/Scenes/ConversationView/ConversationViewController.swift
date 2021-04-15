@@ -10,6 +10,7 @@ import CoreData
 
 protocol ConversationViewDisplayLogic: class {
     func messagesLoaded()
+    func displayError(_ message: String)
 }
 
 final class ConversationViewController: UIViewController {
@@ -38,37 +39,17 @@ final class ConversationViewController: UIViewController {
     
     private let cellOutgoingIdentifier = String(describing: ConversationMessageOutgoingViewCell.self)
     private let cellIncomingIdentifier = String(describing: ConversationMessageIncomingViewCell.self)
-    // TODO: по хорошему его нужно перебросить в интерактор, тк он не является view
-    // и оттуда дергать что нужно. Но я не успеваю
-    private lazy var fetchedResultController: NSFetchedResultsController<MessageDB> = {
-        let request: NSFetchRequest<MessageDB> = MessageDB.fetchRequest()
-        request.predicate = NSPredicate(format: "channel.identifier == %@", interactor?.channel?.identifier ?? "")
-        request.sortDescriptors = [NSSortDescriptor(key: "created", ascending: false)]
-        request.resultType = .managedObjectResultType
-
-        let controller = NSFetchedResultsController(
-            fetchRequest: request,
-            managedObjectContext: CoreDataStack.shared.mainContext,
-            sectionNameKeyPath: nil,
-            cacheName: nil)
-        controller.delegate = self
-        return controller
-    }()
-    private var messageList: [MessageDB]? {
-        fetchedResultController.fetchedObjects
+    
+    private var messageList: [MessageModel]? {
+        return interactor?.fetchMessages()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupView()
-        
-        do {
-            try fetchedResultController.performFetch()
-            interactor?.listenMessagesChanges()
-        } catch {
-            printOutput(error.localizedDescription)
-        }
+        interactor?.performFetch(delegate: self)
+        interactor?.listenMessagesChanges()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -114,6 +95,18 @@ extension ConversationViewController: ConversationViewDisplayLogic {
             activityIndicator.stopAnimating()
         }
     }
+    
+    func displayError(_ message: String) {
+        if activityIndicator.isAnimating {
+            activityIndicator.stopAnimating()
+            tableView.separatorStyle = .singleLine
+        }
+        
+        let alertController = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+        
+        present(alertController, animated: true, completion: nil)
+    }
 }
 
 // MARK: - UITableViewDataSource
@@ -124,7 +117,7 @@ extension ConversationViewController: UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let message = MessageModel.createFrom(fetchedResultController.object(at: indexPath)) else {
+        guard let message = interactor?.fetchMessage(at: indexPath) else {
             return UITableViewCell()
         }
         

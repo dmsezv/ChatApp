@@ -41,6 +41,7 @@ class RepositoriesAssembly: RepositoriesAssemblyProtocol {
         
         return MessageRepository(
             coreDataStack: coreAssembly.coreDataStack(),
-            fetchRequest: request)
+            fetchRequest: request
+        )
     }
 }

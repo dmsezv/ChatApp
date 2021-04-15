@@ -63,7 +63,6 @@ class ConversationListInteractor: ConversationListBusinessLogic {
     
     func performFetch(delegate: NSFetchedResultsControllerDelegate) {
         channelsRepository.setFetchedResultsController(delegate: delegate)
-        
         channelsRepository.performFetch { [weak self] error in
             if let error = error {
                 DispatchQueue.main.async {

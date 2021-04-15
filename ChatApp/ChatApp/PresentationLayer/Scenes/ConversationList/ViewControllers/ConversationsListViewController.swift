@@ -68,8 +68,6 @@ final class ConversationsListViewController: UIViewController, ConversationsList
         return interactor?.fetchChannels()
     }
     
-    private var conversationListViewModel: ConversationList.ViewModel?
-
     override func viewDidLoad() {
         super.viewDidLoad()
         
