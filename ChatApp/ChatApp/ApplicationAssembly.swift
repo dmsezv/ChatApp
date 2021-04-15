@@ -11,5 +11,5 @@ class ApplicationAssembly {
     lazy var coreAssembly: CoreAssemblyProtocol = CoreAssembly()
     lazy var serviceAssembly: ServiceAssemblyProtocol = ServiceAssembly(coreAssembly: coreAssembly)
     lazy var repositoriesAssembly: RepositoriesAssemblyProtocol = RepositoriesAssembly(coreAssembly: coreAssembly)
-    lazy var presentationAssembly: PresentationAssemblyProtocol = PresentationAssembly(serviceAssembly: serviceAssembly)
+    lazy var presentationAssembly: PresentationAssemblyProtocol = PresentationAssembly(serviceAssembly: serviceAssembly, repositoriesAssembly: repositoriesAssembly)
 }

@@ -17,9 +17,13 @@ protocol PresentationAssemblyProtocol {
 
 class PresentationAssembly: PresentationAssemblyProtocol {
     private let serviceAssembly: ServiceAssemblyProtocol
+    private let repositoriesAssembly: RepositoriesAssemblyProtocol
     
-    init(serviceAssembly: ServiceAssemblyProtocol) {
+    init(
+        serviceAssembly: ServiceAssemblyProtocol,
+        repositoriesAssembly: RepositoriesAssemblyProtocol) {
         self.serviceAssembly = serviceAssembly
+        self.repositoriesAssembly = repositoriesAssembly
     }
     
     func conversationViewController(channel: ChannelModel) -> ConversationViewController? {
@@ -40,7 +44,8 @@ class PresentationAssembly: PresentationAssemblyProtocol {
         let router = ConversationListRouter(presentationAssembly: self)
         let interactor = ConversationListInteractor(
             channelsService: serviceAssembly.channelsService(),
-            userInfoService: serviceAssembly.userInfoService()
+            userInfoService: serviceAssembly.userInfoService(),
+            channelsRepository: repositoriesAssembly.channelRepository()
         )
         viewController?.router = router
         viewController?.interactor = interactor

@@ -19,13 +19,16 @@ protocol ConversationListBusinessLogic {
 class ConversationListInteractor: ConversationListBusinessLogic {
     weak var viewController: ConversationListDisplayLogic?
         
+    let channelsRepository: ChannelRepositoryProtocol
     let channelsService: ChannelsServiceProtocol
     let userInfoService: UserInfoServiceProtocol
     
     init(channelsService: ChannelsServiceProtocol,
-         userInfoService: UserInfoServiceProtocol) {
+         userInfoService: UserInfoServiceProtocol,
+         channelsRepository: ChannelRepositoryProtocol) {
         self.channelsService = channelsService
         self.userInfoService = userInfoService
+        self.channelsRepository = channelsRepository
     }
     
     func listenChannelChanges() {
