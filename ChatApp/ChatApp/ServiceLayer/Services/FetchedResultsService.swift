@@ -11,7 +11,7 @@ protocol FetchedResultServiceProtocol {
     
 }
 
-class FetchedResultService<T: NSFetchRequestResult>: NSObject, FetchedResultServiceProtocol, NSFetchedResultsControllerDelegate {
+class FetchedResultService<T: NSFetchRequestResult>: NSObject, NSFetchedResultsControllerDelegate {
     private let fetchRequest: NSFetchRequest<T>
     private let coreDataStack: CoreDataStackProtocol
     
