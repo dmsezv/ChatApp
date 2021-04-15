@@ -10,6 +10,7 @@ import Foundation
 protocol ServiceAssemblyProtocol {
     func firebaseMessagesService() -> FirebaseMessagesServiceProtocol
     func channelsService() -> ChannelsServiceProtocol
+    func messagesServices() -> MessagesServiceProtocol
 }
 
 class ServiceAssembly: ServiceAssemblyProtocol {
@@ -22,7 +23,16 @@ class ServiceAssembly: ServiceAssemblyProtocol {
     func channelsService() -> ChannelsServiceProtocol {
         return ChannelsService(
             coreDataStack: coreAssembly.coreDataStack(),
-            firebaseManager: coreAssembly.firebaseManager())
+            firebaseManager: coreAssembly.firebaseManager()
+        )
+    }
+    
+    func messagesServices() -> MessagesServiceProtocol {
+        return MessagesService(
+            coreDataStack: coreAssembly.coreDataStack(),
+            firebaseManager: coreAssembly.firebaseManager(),
+            userInfoDataManager: coreAssembly.userInfoDataManager(.gcd)
+        )
     }
     
     func firebaseMessagesService() -> FirebaseMessagesServiceProtocol {

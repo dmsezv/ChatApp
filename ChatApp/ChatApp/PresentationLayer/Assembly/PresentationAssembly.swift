@@ -25,7 +25,7 @@ class PresentationAssembly: PresentationAssemblyProtocol {
     func conversationViewController(channel: ChannelModel) -> ConversationViewController? {
         let viewController = UIStoryboard(name: "Conversation", bundle: nil)
         .instantiateViewController(withIdentifier: String(describing: ConversationViewController.self)) as? ConversationViewController
-        let interactor = ConversationViewInteractor()
+        let interactor = ConversationViewInteractor(messagesService: serviceAssembly.messagesServices())
         interactor.channel = channel
         viewController?.interactor = interactor
         interactor.viewController = viewController

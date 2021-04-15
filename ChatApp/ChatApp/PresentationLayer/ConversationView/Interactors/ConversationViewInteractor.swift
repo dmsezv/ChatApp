@@ -26,6 +26,12 @@ class ConversationViewInteractor: ConversationViewBusinessLogic {
     private lazy var senderId: String = userInfoGCD.fetchSenderId()
     private var senderName: String = ""
     
+    let messagesService: MessagesServiceProtocol
+    
+    init(messagesService: MessagesServiceProtocol) {
+        self.messagesService = messagesService
+    }
+    
     func send(_ message: String) {
         guard let channel = channel else {
             return
@@ -65,17 +71,15 @@ class ConversationViewInteractor: ConversationViewBusinessLogic {
             return
         }
         
-//        firebaseService.listenChangesMessageList(in: channel.identifier) { [weak self] documentChanges in
-//            if let documentChanges = documentChanges {
-//                self?.coreDataStack.updateInCoreData(messageListChanges: documentChanges, in: channel.identifier)
-//                DispatchQueue.main.async {
-//                    self?.viewController?.messagesLoaded()
-//                }
-//            }
-//        }
+        messagesService.subscribeMessagesUpdating(in: channel.identifier) { [weak self] in
+            DispatchQueue.main.async {
+                self?.viewController?.messagesLoaded()
+            }
+            
+        }
     }
     
     func unsubscribeChannel() {
-//        firebaseService.removeListenerMessages()
+        messagesService.removeListenerMessages()
     }
 }
