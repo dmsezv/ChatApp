@@ -11,6 +11,7 @@ protocol ServiceAssemblyProtocol {
     func firebaseMessagesService() -> FirebaseMessagesServiceProtocol
     func channelsService() -> ChannelsServiceProtocol
     func messagesServices() -> MessagesServiceProtocol
+    func userInfoService() -> UserInfoServiceProtocol
 }
 
 class ServiceAssembly: ServiceAssemblyProtocol {
@@ -33,6 +34,10 @@ class ServiceAssembly: ServiceAssemblyProtocol {
             firebaseManager: coreAssembly.firebaseManager(),
             userInfoDataManager: coreAssembly.userInfoDataManager(.gcd)
         )
+    }
+    
+    func userInfoService() -> UserInfoServiceProtocol {
+        return UserInfoService(userInfoManager: coreAssembly.userInfoDataManager(.gcd))
     }
     
     func firebaseMessagesService() -> FirebaseMessagesServiceProtocol {

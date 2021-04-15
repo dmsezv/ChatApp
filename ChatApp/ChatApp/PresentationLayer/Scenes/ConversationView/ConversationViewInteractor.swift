@@ -35,28 +35,7 @@ class ConversationViewInteractor: ConversationViewBusinessLogic {
             return
         }
         
-        if senderName.isEmpty {
-            userInfoGCD.fetchInfo { [weak self] (result) in
-                switch result {
-                case .success(let userInfo):
-                    if let name = userInfo?.name, !name.isEmpty {
-                        self?.senderName = name
-                    } else {
-                        self?.senderName = "Undefined"
-                    }
-                case .failure:
-                    break
-                }
-                
-                self?.sendMessageToChannel(message, channel.identifier)
-            }
-        } else {
-            sendMessageToChannel(message, channel.identifier)
-        }
-    }
-    
-    private func sendMessageToChannel(_ message: String, _ id: String) {
-        messagesService.send(message, to: id)
+        messagesService.send(message, to: channel.identifier)
     }
     
     func listenMessagesChanges() {

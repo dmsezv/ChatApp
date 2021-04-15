@@ -19,7 +19,7 @@ protocol FirebaseManagerProtocol {
 class FirebaseManager: FirebaseManagerProtocol {
     private init() {}
     static let shared = FirebaseManager()
-    
+
     private let channelCollectonId = "channels"
     private let messagesCollectionId = "messages"
     
