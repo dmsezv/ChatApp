@@ -25,6 +25,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         ThemePicker.shared.changeThemeTo(.classic)
         
         configureCoreData()
+        configureRootView()
+    }
+    
+    private func configureRootView() {
+        let applicationAssembly = ApplicationAssembly()
+        
+        guard let conversationListViewController = applicationAssembly
+            .presentationAssembly
+                .conversationListViewController() else { return }
+        
+        let navigationController = applicationAssembly
+            .presentationAssembly
+            .conversationListNavigationController(rootViewController:
+                                                    conversationListViewController)
+        
+        window = UIWindow()
+        window?.rootViewController = navigationController
+        
     }
     
     private func configureCoreData() {

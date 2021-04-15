@@ -20,7 +20,7 @@ class ConversationViewInteractor: ConversationViewBusinessLogic {
     weak var viewController: ConversationViewDisplayLogic?
     var channel: ChannelModel?
     
-    private lazy var firebaseService = FirebaseService.shared
+//    private lazy var firebaseService = FirebaseService.shared
     private lazy var coreDataStack = CoreDataStack.shared
     private lazy var userInfoGCD = UserInfoSaverGCD()
     private lazy var senderId: String = userInfoGCD.fetchSenderId()
@@ -54,10 +54,10 @@ class ConversationViewInteractor: ConversationViewBusinessLogic {
     }
     
     private func sendMessageToChannel(_ message: String, _ id: String) {
-        firebaseService.addDocument(data: ["content": message,
-                                           "created": Timestamp(date: Date()) as? String,
-                                           "senderName": senderName,
-                                           "senderId": senderId], to: id)
+//        firebaseService.addDocument(data: ["content": message,
+//                                           "created": Timestamp(date: Date()) as? String,
+//                                           "senderName": senderName,
+//                                           "senderId": senderId], to: id)
     }
     
     func listenMessagesChanges() {
@@ -65,17 +65,17 @@ class ConversationViewInteractor: ConversationViewBusinessLogic {
             return
         }
         
-        firebaseService.listenChangesMessageList(in: channel.identifier) { [weak self] documentChanges in
-            if let documentChanges = documentChanges {
-                self?.coreDataStack.updateInCoreData(messageListChanges: documentChanges, in: channel.identifier)
-                DispatchQueue.main.async {
-                    self?.viewController?.messagesLoaded()
-                }
-            }
-        }
+//        firebaseService.listenChangesMessageList(in: channel.identifier) { [weak self] documentChanges in
+//            if let documentChanges = documentChanges {
+//                self?.coreDataStack.updateInCoreData(messageListChanges: documentChanges, in: channel.identifier)
+//                DispatchQueue.main.async {
+//                    self?.viewController?.messagesLoaded()
+//                }
+//            }
+//        }
     }
     
     func unsubscribeChannel() {
-        firebaseService.removeListenerMessages()
+//        firebaseService.removeListenerMessages()
     }
 }

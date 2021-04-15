@@ -12,7 +12,7 @@
         <!--Tinkoff Chat-->
         <scene sceneID="Q7k-aU-5mi">
             <objects>
-                <viewController id="7Xq-hJ-Tgi" customClass="ConversationsListViewController" customModule="ChatApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ConversationsListViewController" id="7Xq-hJ-Tgi" customClass="ConversationsListViewController" customModule="ChatApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="rT9-0t-N9Y">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

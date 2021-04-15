@@ -16,11 +16,16 @@ protocol ConversationListRoutingLogic {
 class ConversationListRouter: ConversationListRoutingLogic {
     weak var viewController: ConversationsListViewController?
     
+    let presentationAssembly: PresentationAssemblyProtocol?
+    
+    init(presentationAssembly: PresentationAssemblyProtocol) {
+        self.presentationAssembly = presentationAssembly
+    }
+    
     func routeToProfile() {
-        let SB = UIStoryboard(name: "Profile", bundle: nil)
-        if let destinationVC = SB.instantiateInitialViewController() as? ProfileViewController {
-            destinationVC.delegateViewController = viewController
-            viewController?.present(destinationVC, animated: true)
+        if let profileVC = presentationAssembly?.profileViewController() {
+            profileVC.delegateViewController = viewController
+            viewController?.present(profileVC, animated: true)
         }
     }
     

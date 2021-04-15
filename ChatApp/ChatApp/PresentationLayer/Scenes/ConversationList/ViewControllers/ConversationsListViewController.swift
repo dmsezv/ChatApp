@@ -63,13 +63,13 @@ final class ConversationsListViewController: UIViewController, ConversationsList
     // MARK: - Setup
     
     private func setup() {
-        let viewController = self
-        let router = ConversationListRouter()
-        let interactor = ConversationListInteractor()
-        viewController.router = router
-        viewController.interactor = interactor
-        router.viewController = viewController
-        interactor.viewController = viewController
+//        let viewController = self
+//        let router = ConversationListRouter()
+//        let interactor = ConversationListInteractor()
+//        viewController.router = router
+//        viewController.interactor = interactor
+//        router.viewController = viewController
+//        interactor.viewController = viewController
     }
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
@@ -103,6 +103,7 @@ final class ConversationsListViewController: UIViewController, ConversationsList
     private var channelList: [ChannelDB]? {
         fetchedResultController.fetchedObjects
     }
+    //private var viewModel: ConversationList.ViewModel?
     
     override func viewDidLoad() {
         super.viewDidLoad()

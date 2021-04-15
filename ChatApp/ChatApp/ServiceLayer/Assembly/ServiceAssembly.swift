@@ -7,13 +7,13 @@
 
 import Foundation
 
-protocol IServiceAssembly {
+protocol ServiceAssemblyProtocol {
     func channelRepository() -> ChannelRepositoryProtocol
     func firebaseMessagesService() -> FirebaseMessagesServiceProtocol
     func firebaseChannelsService() -> FirebaseServiceChannelsProtocol
 }
 
-class ServiceAssembly: IServiceAssembly {
+class ServiceAssembly: ServiceAssemblyProtocol {
     private let coreAssembly: CoreAssemblyProtocol
     
     init(coreAssembly: CoreAssemblyProtocol) {

@@ -32,6 +32,7 @@ extension CoreDataStack: CoreDataStackProtocol {
         }
     }
 
+    /*
     // TODO: отрефакторить как следует
     func updateInCoreData(channelListChanges: [DocumentChange]) {
         let entityName = String(describing: ChannelDB.self)
@@ -133,4 +134,5 @@ extension CoreDataStack: CoreDataStackProtocol {
             }
         }
     }
+     */
 }
