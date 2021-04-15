@@ -81,7 +81,8 @@ final class ConversationsListViewController: UIViewController, ConversationsList
     private var channelList: [ChannelDB]? {
         fetchedResultController.fetchedObjects
     }
-    //private var viewModel: ConversationList.ViewModel?
+    
+    private var conversationListViewModel: ConversationList.ViewModel?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -121,10 +122,11 @@ final class ConversationsListViewController: UIViewController, ConversationsList
     }
     
     func updateProfileView() {
-        let name = UserInfoSaverGCD().fetchSenderName()
-        profileView?.lettersNameLabel?.text = String(name.prefix(2)).uppercased()
-        profileView?.lettersNameLabel.textColor = .black
-        profileView?.lettersNameLabel.addCharacterSpacing(kernValue: kernLetterNameValue)
+        if let name = interactor?.fetchSenderName() {
+            profileView?.lettersNameLabel?.text = String(name.prefix(2)).uppercased()
+            profileView?.lettersNameLabel.textColor = .black
+            profileView?.lettersNameLabel.addCharacterSpacing(kernValue: kernLetterNameValue)
+        }
     }
 }
 
@@ -139,6 +141,11 @@ extension ConversationsListViewController: ConversationListDisplayLogic {
     }
     
     func displayError(_ message: String) {
+        if activityIndicator.isAnimating {
+            activityIndicator.stopAnimating()
+            tableView.separatorStyle = .singleLine
+        }
+        
         let alertController = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
         

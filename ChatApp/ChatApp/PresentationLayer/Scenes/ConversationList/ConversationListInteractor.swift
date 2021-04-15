@@ -9,26 +9,23 @@ import Foundation
 import Firebase
 import CoreData
 
-struct Message {
-    let content: String
-    let created: Date
-    let senderId: String
-    let senderName: String
-}
-
 protocol ConversationListBusinessLogic {
     func listenChannelChanges()
     func createChannel(_ name: String?)
     func deleteChannel(_ identifier: String)
+    func fetchSenderName() -> String
 }
 
 class ConversationListInteractor: ConversationListBusinessLogic {
     weak var viewController: ConversationListDisplayLogic?
         
     let channelsService: ChannelsServiceProtocol
+    let userInfoService: UserInfoServiceProtocol
     
-    init(channelsService: ChannelsServiceProtocol) {
+    init(channelsService: ChannelsServiceProtocol,
+         userInfoService: UserInfoServiceProtocol) {
         self.channelsService = channelsService
+        self.userInfoService = userInfoService
     }
     
     func listenChannelChanges() {
@@ -51,5 +48,9 @@ class ConversationListInteractor: ConversationListBusinessLogic {
     
     func deleteChannel(_ identifier: String) {
         channelsService.deleteChannel(identifier)
+    }
+    
+    func fetchSenderName() -> String {
+        userInfoService.senderName
     }
 }

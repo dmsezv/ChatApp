@@ -38,7 +38,10 @@ class PresentationAssembly: PresentationAssemblyProtocol {
         let viewController = UIStoryboard(name: "Conversation", bundle: nil)
             .instantiateViewController(withIdentifier: String(describing: ConversationsListViewController.self)) as? ConversationsListViewController
         let router = ConversationListRouter(presentationAssembly: self)
-        let interactor = ConversationListInteractor(channelsService: serviceAssembly.channelsService())
+        let interactor = ConversationListInteractor(
+            channelsService: serviceAssembly.channelsService(),
+            userInfoService: serviceAssembly.userInfoService()
+        )
         viewController?.router = router
         viewController?.interactor = interactor
         router.viewController = viewController
