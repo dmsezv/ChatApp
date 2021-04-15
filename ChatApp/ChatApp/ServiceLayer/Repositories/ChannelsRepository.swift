@@ -5,9 +5,11 @@
 //  Created by Dmitrii Zverev on 16.04.2021.
 //
 
-import Foundation
+import CoreData
 
 protocol ChannelRepositoryProtocol {
+    func setFetchedResultsController(delegate: NSFetchedResultsControllerDelegate?)
+    func performFetch(_ errorHandler: (Error?) -> Void)
     func object(at indexPath: IndexPath) -> ChannelModel?
     func fetchedObjects() -> [ChannelModel]?
 }

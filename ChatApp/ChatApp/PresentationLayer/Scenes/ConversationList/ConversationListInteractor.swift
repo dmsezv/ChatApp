@@ -14,6 +14,10 @@ protocol ConversationListBusinessLogic {
     func createChannel(_ name: String?)
     func deleteChannel(_ identifier: String)
     func fetchSenderName() -> String
+    
+    func performFetch(delegate: NSFetchedResultsControllerDelegate)
+    func fetchChannels() -> [ChannelModel]?
+    func fetchChannel(at indexPath: IndexPath) -> ChannelModel?
 }
 
 class ConversationListInteractor: ConversationListBusinessLogic {
@@ -55,5 +59,26 @@ class ConversationListInteractor: ConversationListBusinessLogic {
     
     func fetchSenderName() -> String {
         userInfoService.senderName
+        
+    }
+    
+    func performFetch(delegate: NSFetchedResultsControllerDelegate) {
+        channelsRepository.setFetchedResultsController(delegate: delegate)
+        
+        channelsRepository.performFetch { [weak self] error in
+            if let error = error {
+                DispatchQueue.main.async {
+                    self?.viewController?.displayError(error.localizedDescription)
+                }
+            }
+        }
+    }
+    
+    func fetchChannels() -> [ChannelModel]? {
+        channelsRepository.fetchedObjects()
+    }
+    
+    func fetchChannel(at indexPath: IndexPath) -> ChannelModel? {
+        channelsRepository.object(at: indexPath)
     }
 }

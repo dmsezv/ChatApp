@@ -63,38 +63,19 @@ final class ConversationsListViewController: UIViewController, ConversationsList
     // MARK: - View life cycle
     
     private let cellIdentifier = String(describing: ConversationListCell.self)
-    // TODO: по хорошему его нужно перебросить в интерактор, тк он не является view
-    // и оттуда дергать что нужно. Но я не успеваю
-    private lazy var fetchedResultController: NSFetchedResultsController<ChannelDB> = {
-        let request: NSFetchRequest<ChannelDB> = ChannelDB.fetchRequest()
-        request.sortDescriptors = [NSSortDescriptor(key: "lastActivity", ascending: false)]
-        request.resultType = .managedObjectResultType
-        
-        let controller = NSFetchedResultsController(
-            fetchRequest: request,
-            managedObjectContext: CoreDataStack.shared.mainContext,
-            sectionNameKeyPath: nil,
-            cacheName: nil)
-        controller.delegate = self
-        return controller
-    }()
-    private var channelList: [ChannelDB]? {
-        fetchedResultController.fetchedObjects
+    
+    private var channelList: [ChannelModel]? {
+        return interactor?.fetchChannels()
     }
     
     private var conversationListViewModel: ConversationList.ViewModel?
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupView()
-        
-        do {
-            try fetchedResultController.performFetch()
-            interactor?.listenChannelChanges()
-        } catch {
-            printOutput(error.localizedDescription)
-        }
+        interactor?.performFetch(delegate: self)
+        interactor?.listenChannelChanges()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -158,9 +139,8 @@ extension ConversationsListViewController: ConversationListDisplayLogic {
 extension ConversationsListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        
-        guard let channel = ChannelModel
-                .createFrom(fetchedResultController.object(at: indexPath)) else {
+
+        guard let channel = interactor?.fetchChannel(at: indexPath) else {
             return
         }
                 
@@ -206,7 +186,7 @@ extension ConversationsListViewController: UITableViewDelegate, UITableViewDataS
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? ConversationListCell,
-              let channel = ChannelModel.createFrom(fetchedResultController.object(at: indexPath)) else {
+              let channel = interactor?.fetchChannel(at: indexPath) else {
             return UITableViewCell()
         }
         
@@ -221,7 +201,7 @@ extension ConversationsListViewController: UITableViewDelegate, UITableViewDataS
 
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            if let id = fetchedResultController.object(at: indexPath).identifier {
+            if let id = interactor?.fetchChannel(at: indexPath)?.identifier {
                 interactor?.deleteChannel(id)
             }
         }

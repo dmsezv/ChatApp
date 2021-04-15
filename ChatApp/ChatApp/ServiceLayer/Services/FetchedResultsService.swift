@@ -7,10 +7,6 @@
 
 import CoreData
 
-protocol FetchedResultServiceProtocol {
-    
-}
-
 class FetchedResultService<T: NSFetchRequestResult>: NSObject, NSFetchedResultsControllerDelegate {
     private let fetchRequest: NSFetchRequest<T>
     private let coreDataStack: CoreDataStackProtocol
@@ -22,21 +18,24 @@ class FetchedResultService<T: NSFetchRequestResult>: NSObject, NSFetchedResultsC
             sectionNameKeyPath: nil,
             cacheName: nil)
         
-        controller.delegate = self
         return controller
     }()
-    
+        
     init(coreDataStack: CoreDataStackProtocol,
          fetchRequest: NSFetchRequest<T>) {
         self.coreDataStack = coreDataStack
         self.fetchRequest = fetchRequest
     }
     
-    func performFetch(completion: (Error?) -> Void) {
+    func setFetchedResultsController(delegate: NSFetchedResultsControllerDelegate?) {
+        fetchedResultsController.delegate = delegate
+    }
+    
+    func performFetch(_ errorHandler: (Error?) -> Void) {
         do {
             try fetchedResultsController.performFetch()
         } catch {
-            completion(error)
+            errorHandler(error)
         }
     }
     
