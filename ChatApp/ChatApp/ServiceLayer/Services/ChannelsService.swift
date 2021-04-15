@@ -9,7 +9,7 @@ import Foundation
 import Firebase
 
 protocol ChannelsServiceProtocol {
-    func subscribeChannelUpdating(_ eventHandler: @escaping() -> Void)
+    func subscribeChannelsUpdating(_ eventHandler: @escaping() -> Void)
      func createChannel(_ name: String)
      func deleteChannel(_ identifier: String)
 }
@@ -17,12 +17,9 @@ protocol ChannelsServiceProtocol {
 class ChannelsService: ChannelsServiceProtocol {
     private let coreDataStack: CoreDataStackProtocol
     private let firebaseManager: FirebaseManagerProtocol
-    private let userInfoDataManager: UserInfoSaver
     
     init(coreDataStack: CoreDataStackProtocol,
-         firebaseManager: FirebaseManagerProtocol,
-         userInfoDataManager: UserInfoSaver) {
-        self.userInfoDataManager = userInfoDataManager
+         firebaseManager: FirebaseManagerProtocol) {
         self.coreDataStack = coreDataStack
         self.firebaseManager = firebaseManager
     }
@@ -35,7 +32,7 @@ class ChannelsService: ChannelsServiceProtocol {
         firebaseManager.deleteChannel(identifier)
     }
     
-    func subscribeChannelUpdating(_ eventHandler: @escaping() -> Void) {
+    func subscribeChannelsUpdating(_ eventHandler: @escaping() -> Void) {
         firebaseManager.listenChangesChannelList { [weak self] changes in
             guard let changes = changes else { eventHandler(); return }
             

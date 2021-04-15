@@ -32,7 +32,7 @@ class ConversationListInteractor: ConversationListBusinessLogic {
     }
     
     func listenChannelChanges() {
-        channelsService.subscribeChannelUpdating { [weak self] in
+        channelsService.subscribeChannelsUpdating { [weak self] in
             DispatchQueue.main.async {
                 self?.viewController?.channelsLoaded()
             }
