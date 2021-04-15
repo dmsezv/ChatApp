@@ -44,7 +44,7 @@ final class ConversationsListViewController: UIViewController, ConversationsList
             return nil
         }
         
-        let name = UserInfoSaverGCD().fetchSenderName()
+        let name = interactor?.fetchSenderName()
         view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(touchRightBarButton(_:))))
         
         let rightBarButton = UIBarButtonItem(customView: view)

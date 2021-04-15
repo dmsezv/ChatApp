@@ -10,8 +10,8 @@ import Firebase
 
 protocol ChannelsServiceProtocol {
     func subscribeChannelsUpdating(_ eventHandler: @escaping() -> Void)
-     func createChannel(_ name: String)
-     func deleteChannel(_ identifier: String)
+    func createChannel(_ name: String)
+    func deleteChannel(_ identifier: String)
 }
 
 class ChannelsService: ChannelsServiceProtocol {
