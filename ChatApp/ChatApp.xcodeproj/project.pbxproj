@@ -32,6 +32,7 @@
 		4D5CA7162628DEAF003053F8 /* FetchedResultsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5CA7152628DEAF003053F8 /* FetchedResultsService.swift */; };
 		4D5CA7192628E35E003053F8 /* ChannelsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5CA7182628E35E003053F8 /* ChannelsRepository.swift */; };
 		4D5CA71F2628E481003053F8 /* RepositoriesAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5CA71E2628E481003053F8 /* RepositoriesAssembly.swift */; };
+		4D5CA7262628FDBA003053F8 /* MessagesRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5CA7252628FDBA003053F8 /* MessagesRepository.swift */; };
 		4D5E22D12624F2CD0027A1B0 /* CoreAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5E22D02624F2CD0027A1B0 /* CoreAssembly.swift */; };
 		4D5E22D52624F36F0027A1B0 /* CoreDataStackProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5E22D42624F36F0027A1B0 /* CoreDataStackProtocol.swift */; };
 		4D5E22D92624F4630027A1B0 /* ServiceAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5E22D82624F4630027A1B0 /* ServiceAssembly.swift */; };
@@ -105,6 +106,7 @@
 		4D5CA7152628DEAF003053F8 /* FetchedResultsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchedResultsService.swift; sourceTree = "<group>"; };
 		4D5CA7182628E35E003053F8 /* ChannelsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelsRepository.swift; sourceTree = "<group>"; };
 		4D5CA71E2628E481003053F8 /* RepositoriesAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoriesAssembly.swift; sourceTree = "<group>"; };
+		4D5CA7252628FDBA003053F8 /* MessagesRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesRepository.swift; sourceTree = "<group>"; };
 		4D5E22D02624F2CD0027A1B0 /* CoreAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreAssembly.swift; sourceTree = "<group>"; };
 		4D5E22D42624F36F0027A1B0 /* CoreDataStackProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStackProtocol.swift; sourceTree = "<group>"; };
 		4D5E22D82624F4630027A1B0 /* ServiceAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceAssembly.swift; sourceTree = "<group>"; };
@@ -246,6 +248,7 @@
 				4D5E22C72624EF0C0027A1B0 /* CoreLayer */,
 				4DC1199C2602569C0027E4A0 /* ServiceLayer */,
 				4D2AFD6F25E4110900706ACE /* PresentationLayer */,
+				4D5E22C92624EF730027A1B0 /* Models */,
 				4DD6E8DC25DC602100EF5039 /* Resourses */,
 				4DD6E8D525DC5C8700EF5039 /* Extensions */,
 				4DD6E8CC25DC548800EF5039 /* Utils */,
@@ -262,6 +265,7 @@
 			isa = PBXGroup;
 			children = (
 				4D5CA7182628E35E003053F8 /* ChannelsRepository.swift */,
+				4D5CA7252628FDBA003053F8 /* MessagesRepository.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -315,7 +319,6 @@
 		4D79DBC32628BD250086C709 /* FirebaseManager */ = {
 			isa = PBXGroup;
 			children = (
-				4D5E22C92624EF730027A1B0 /* Models */,
 				4D79DBC42628BD480086C709 /* FirebaseManager.swift */,
 			);
 			path = FirebaseManager;
@@ -689,6 +692,7 @@
 				4DC119AA260375BD0027E4A0 /* ProfileInteractor.swift in Sources */,
 				4D92DF6025ED67B90093FA2A /* ConversationsListViewController.swift in Sources */,
 				4D26AEBA25F0437B00C0B8C6 /* Extension+UIColor.swift in Sources */,
+				4D5CA7262628FDBA003053F8 /* MessagesRepository.swift in Sources */,
 				4D49ADBD25D7F7FE000F0BBB /* AppDelegate.swift in Sources */,
 				4DAFEC7725F6497600CE1BEA /* ProfileIconView.swift in Sources */,
 				4D92DF8425EEF1EF0093FA2A /* ConversationViewController.swift in Sources */,

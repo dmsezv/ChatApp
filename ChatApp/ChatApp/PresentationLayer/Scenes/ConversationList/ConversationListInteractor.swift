@@ -5,7 +5,6 @@
 //  Created by Dmitrii Zverev on 22.03.2021.
 //
 
-import Foundation
 import Firebase
 import CoreData
 

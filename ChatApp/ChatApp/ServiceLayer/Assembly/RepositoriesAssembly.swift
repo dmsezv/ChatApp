@@ -9,6 +9,7 @@ import CoreData
 
 protocol RepositoriesAssemblyProtocol {
     func channelRepository() -> ChannelRepositoryProtocol
+    func messageRepository(channelId: String) -> MessageRepositoryProtocol
 }
 
 class RepositoriesAssembly: RepositoriesAssemblyProtocol {
@@ -30,5 +31,16 @@ class RepositoriesAssembly: RepositoriesAssemblyProtocol {
             coreDataStack: coreAssembly.coreDataStack(),
             fetchRequest: request
         )
+    }
+    
+    func messageRepository(channelId: String) -> MessageRepositoryProtocol {
+        let request: NSFetchRequest<MessageDB> = MessageDB.fetchRequest()
+        request.predicate = NSPredicate(format: "channel.identifier == %@", channelId)
+        request.sortDescriptors = [NSSortDescriptor(key: "created", ascending: false)]
+        request.resultType = .managedObjectResultType
+        
+        return MessageRepository(
+            coreDataStack: coreAssembly.coreDataStack(),
+            fetchRequest: request)
     }
 }
