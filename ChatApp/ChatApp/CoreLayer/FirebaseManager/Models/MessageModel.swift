@@ -8,7 +8,7 @@
 import Foundation
 
 struct MessageModel {
-    let identifier: String
+    let identifier: String?
     let content: String
     let created: Date
     let senderId: String

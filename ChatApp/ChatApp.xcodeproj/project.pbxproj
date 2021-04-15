@@ -36,6 +36,8 @@
 		4D5E22DE2624F7030027A1B0 /* ChannelRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5E22DD2624F7030027A1B0 /* ChannelRepository.swift */; };
 		4D79DBBD2628657B0086C709 /* PresentationAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D79DBBC2628657B0086C709 /* PresentationAssembly.swift */; };
 		4D79DBC126286EB30086C709 /* ApplicationAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D79DBC026286EB30086C709 /* ApplicationAssembly.swift */; };
+		4D79DBC52628BD480086C709 /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D79DBC42628BD480086C709 /* FirebaseManager.swift */; };
+		4D79DBC92628BFDB0086C709 /* ChannelsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D79DBC82628BFDB0086C709 /* ChannelsService.swift */; };
 		4D92DF5C25ED658D0093FA2A /* Conversation.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4D92DF5B25ED658D0093FA2A /* Conversation.storyboard */; };
 		4D92DF6025ED67B90093FA2A /* ConversationsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D92DF5F25ED67B90093FA2A /* ConversationsListViewController.swift */; };
 		4D92DF6A25ED74420093FA2A /* ConversationListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D92DF6825ED74420093FA2A /* ConversationListCell.swift */; };
@@ -104,6 +106,8 @@
 		4D5E22DD2624F7030027A1B0 /* ChannelRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelRepository.swift; sourceTree = "<group>"; };
 		4D79DBBC2628657B0086C709 /* PresentationAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentationAssembly.swift; sourceTree = "<group>"; };
 		4D79DBC026286EB30086C709 /* ApplicationAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationAssembly.swift; sourceTree = "<group>"; };
+		4D79DBC42628BD480086C709 /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
+		4D79DBC82628BFDB0086C709 /* ChannelsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelsService.swift; sourceTree = "<group>"; };
 		4D92DF5B25ED658D0093FA2A /* Conversation.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Conversation.storyboard; sourceTree = "<group>"; };
 		4D92DF5F25ED67B90093FA2A /* ConversationsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationsListViewController.swift; sourceTree = "<group>"; };
 		4D92DF6825ED74420093FA2A /* ConversationListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationListCell.swift; sourceTree = "<group>"; };
@@ -251,9 +255,9 @@
 		4D5E22C72624EF0C0027A1B0 /* CoreLayer */ = {
 			isa = PBXGroup;
 			children = (
+				4D79DBC32628BD250086C709 /* FirebaseManager */,
 				4DFB1D0926261F6E00B1C9B2 /* UserInfoData */,
 				4D5E22CF2624F27C0027A1B0 /* Assembly */,
-				4D5E22C92624EF730027A1B0 /* Models */,
 				4D3A37412613BCE400E9CE04 /* CoreData */,
 			);
 			path = CoreLayer;
@@ -299,6 +303,15 @@
 				4D79DBBC2628657B0086C709 /* PresentationAssembly.swift */,
 			);
 			path = Assembly;
+			sourceTree = "<group>";
+		};
+		4D79DBC32628BD250086C709 /* FirebaseManager */ = {
+			isa = PBXGroup;
+			children = (
+				4D5E22C92624EF730027A1B0 /* Models */,
+				4D79DBC42628BD480086C709 /* FirebaseManager.swift */,
+			);
+			path = FirebaseManager;
 			sourceTree = "<group>";
 		};
 		4D92DF6325ED714C0093FA2A /* ConversationList */ = {
@@ -383,6 +396,7 @@
 				4D5E22DC2624F6720027A1B0 /* Repositories */,
 				4D5E22D72624F4430027A1B0 /* Assembly */,
 				4D0F53742616F8BF004DBC5C /* FirebaseService.swift */,
+				4D79DBC82628BFDB0086C709 /* ChannelsService.swift */,
 			);
 			path = ServiceLayer;
 			sourceTree = "<group>";
@@ -663,9 +677,11 @@
 				4D0C0BAD25F96F7B00781A47 /* DayTheme.swift in Sources */,
 				4D0F53752616F8BF004DBC5C /* FirebaseService.swift in Sources */,
 				4D3A37442613BD0400E9CE04 /* Chat.xcdatamodeld in Sources */,
+				4D79DBC52628BD480086C709 /* FirebaseManager.swift in Sources */,
 				4D5E22D52624F36F0027A1B0 /* CoreDataStackProtocol.swift in Sources */,
 				4D0C0BAA25F96F5A00781A47 /* NightTheme.swift in Sources */,
 				4D2AFD7C25E576E500706ACE /* Extension+UILabel.swift in Sources */,
+				4D79DBC92628BFDB0086C709 /* ChannelsService.swift in Sources */,
 				4DD6E8E125DC60EC00EF5039 /* Extension+AppDelegate.swift in Sources */,
 				4D79DBC126286EB30086C709 /* ApplicationAssembly.swift in Sources */,
 				4D1262E72615A416003A6F28 /* MessageDB.swift in Sources */,

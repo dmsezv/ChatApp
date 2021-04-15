@@ -10,6 +10,7 @@ import Foundation
 protocol CoreAssemblyProtocol {
     func coreDataStack() -> CoreDataStackProtocol
     func userInfoDataManager(_ type: UserInfoSaverType) -> UserInfoSaver
+    func firebaseManager() -> FirebaseManagerProtocol
 }
 
 class CoreAssembly: CoreAssemblyProtocol {
@@ -25,5 +26,9 @@ class CoreAssembly: CoreAssemblyProtocol {
             return UserInfoSaverOperation()
         }
         
+    }
+    
+    func firebaseManager() -> FirebaseManagerProtocol {
+        return FirebaseManager.shared
     }
 }
