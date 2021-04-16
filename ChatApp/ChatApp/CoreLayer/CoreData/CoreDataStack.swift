@@ -174,7 +174,6 @@ class CoreDataStack {
 }
 
 // MARK: - Copy Read Update Delete
-// TODO: - add update
 
 extension CoreDataStack {
     func delete(from entity: CoreDataEntityName, in context: NSManagedObjectContext, by predicate: NSPredicate) {

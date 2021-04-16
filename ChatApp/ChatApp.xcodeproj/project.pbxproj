@@ -252,11 +252,10 @@
 				4DD6E8DC25DC602100EF5039 /* Resourses */,
 				4DD6E8D525DC5C8700EF5039 /* Extensions */,
 				4DD6E8CC25DC548800EF5039 /* Utils */,
-				4D49ADBC25D7F7FE000F0BBB /* AppDelegate.swift */,
+				4DBDA5D5262916CB00B0A9B2 /* ApplicationSettings */,
 				4DA1D5A02609287A00ED4910 /* GoogleService-Info.plist */,
 				4D49ADCA25D7F800000F0BBB /* Info.plist */,
 				4DDFFB45260CE0A700F4A66A /* .swiftlint.yml */,
-				4D79DBC026286EB30086C709 /* ApplicationAssembly.swift */,
 			);
 			path = ChatApp;
 			sourceTree = "<group>";
@@ -273,9 +272,9 @@
 		4D5E22C72624EF0C0027A1B0 /* CoreLayer */ = {
 			isa = PBXGroup;
 			children = (
+				4D5E22CF2624F27C0027A1B0 /* Assembly */,
 				4D79DBC32628BD250086C709 /* FirebaseManager */,
 				4DFB1D0926261F6E00B1C9B2 /* UserInfoData */,
-				4D5E22CF2624F27C0027A1B0 /* Assembly */,
 				4D3A37412613BCE400E9CE04 /* CoreData */,
 			);
 			path = CoreLayer;
@@ -403,12 +402,21 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		4DBDA5D5262916CB00B0A9B2 /* ApplicationSettings */ = {
+			isa = PBXGroup;
+			children = (
+				4D49ADBC25D7F7FE000F0BBB /* AppDelegate.swift */,
+				4D79DBC026286EB30086C709 /* ApplicationAssembly.swift */,
+			);
+			path = ApplicationSettings;
+			sourceTree = "<group>";
+		};
 		4DC1199C2602569C0027E4A0 /* ServiceLayer */ = {
 			isa = PBXGroup;
 			children = (
+				4D5E22D72624F4430027A1B0 /* Assembly */,
 				4D5CA71B2628E3AB003053F8 /* Repositories */,
 				4D79DBCD2628C4DB0086C709 /* Services */,
-				4D5E22D72624F4430027A1B0 /* Assembly */,
 			);
 			path = ServiceLayer;
 			sourceTree = "<group>";

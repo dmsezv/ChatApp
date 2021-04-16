@@ -76,7 +76,6 @@ class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // TODO: не успеваю обработать закрытие свайпом, поэтому пока так
         if #available(iOS 13.0, *) {
             self.isModalInPresentation = true
         }

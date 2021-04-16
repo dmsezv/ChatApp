@@ -74,7 +74,7 @@ class PresentationAssembly: PresentationAssemblyProtocol {
         return viewController
     }
     
-    //TODO: setvice theme.shared
+    //TODO: refactor for normal scene
     func themesViewController() -> ThemesViewController? {
         let viewController = UIStoryboard(name: "ThemesSetting", bundle: nil).instantiateInitialViewController() as? ThemesViewController
         viewController?.themePickerDelegate = ThemePicker.shared
