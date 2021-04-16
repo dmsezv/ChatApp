@@ -20,7 +20,7 @@ class FirebaseService {
     
     func listenChannelList(_ completionHandler: @escaping([ChannelModel]?) -> Void) {
         channelReference.addSnapshotListener { snapshot, _ in
-            guard let snapshot = snapshot else { return }
+            guard let snapshot = snapshot else { completionHandler(nil); return }
             let channels = snapshot.documents.compactMap { document -> ChannelModel? in
                 guard let name = document["name"] as? String else { return nil }
                 
@@ -70,6 +70,10 @@ class FirebaseService {
         channelReference.addDocument(data: ["name": name])
     }
     
+    func deleteChannel(_ identifier: String) {
+        channelReference.document(identifier).delete()
+    }
+    
     func addDocument(data: [String: Any], to documentId: String) {
         channelReference.document(documentId)
             .collection(messagesCollectionId)
@@ -78,5 +82,39 @@ class FirebaseService {
     
     func removeListenerMessages() {
         listenerMessages?.remove()
+    }
+    
+    func getChannelList(_ completionHandler: @escaping([ChannelModel]?) -> Void) {
+        channelReference.getDocuments { snapshot, _ in
+            guard let snapshot = snapshot else { completionHandler(nil); return }
+            let channels = snapshot.documents.compactMap { document -> ChannelModel? in
+                guard let name = document["name"] as? String else { return nil }
+                
+                return ChannelModel(
+                    identifier: document.documentID,
+                    name: name,
+                    lastMessage: document["lastMessage"] as? String,
+                    lastActivity: (document["lastActivity"] as? Timestamp)?.dateValue()
+                )
+            }.sorted(by: { (prev, next) -> Bool in
+                prev.lastActivity ?? Date.distantPast > next.lastActivity ?? Date.distantPast
+            })
+            
+            completionHandler(channels)
+        }
+    }
+    
+    func listenChangesChannelList(_ completeHandler: @escaping([DocumentChange]?) -> Void) {
+        channelReference.addSnapshotListener { snapshot, _ in
+            guard let snapshot = snapshot else { completeHandler(nil); return }
+            completeHandler(snapshot.documentChanges)
+        }
+    }
+    
+    func listenChangesMessageList(in identifierChannel: String, _ completeHandler: @escaping([DocumentChange]?) -> Void) {
+        listenerMessages = channelReference.document(identifierChannel).collection(messagesCollectionId).addSnapshotListener { snapshot, _ in
+            guard let snapshot = snapshot else { completeHandler(nil); return }
+            completeHandler(snapshot.documentChanges)
+        }
     }
 }

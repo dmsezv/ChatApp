@@ -5,11 +5,11 @@
 //  Created by Dmitrii Zverev on 01.03.2021.
 //
 
-import Foundation
 import UIKit
+import CoreData
 
 protocol ConversationListDisplayLogic: class {
-    func displayList(_ channels: [ChannelModel])
+    func channelsLoaded()
     func displayError(_ message: String)
 }
 
@@ -84,26 +84,57 @@ final class ConversationsListViewController: UIViewController, ConversationsList
     
     // MARK: - View life cycle
     
-    private var channels: [ChannelModel]?
     private let cellIdentifier = String(describing: ConversationListCell.self)
+    // TODO: по хорошему его нужно перебросить в интерактор, тк он не является view
+    // и оттуда дергать что нужно. Но я не успеваю
+    private lazy var fetchedResultController: NSFetchedResultsController<ChannelDB> = {
+        let request: NSFetchRequest<ChannelDB> = ChannelDB.fetchRequest()
+        request.sortDescriptors = [NSSortDescriptor(key: "lastActivity", ascending: false)]
+        request.resultType = .managedObjectResultType
+        
+        let controller = NSFetchedResultsController(
+            fetchRequest: request,
+            managedObjectContext: CoreDataStack.shared.mainContext,
+            sectionNameKeyPath: nil,
+            cacheName: nil)
+        controller.delegate = self
+        return controller
+    }()
+    private var channelList: [ChannelDB]? {
+        fetchedResultController.fetchedObjects
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupView()
-        interactor?.getChannelList()
+        
+        do {
+            try fetchedResultController.performFetch()
+            interactor?.listenChannelChanges()
+        } catch {
+            printOutput(error.localizedDescription)
+        }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        tableView.reloadData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         updateProfileView()
+        tableView.reloadData()
+
     }
     
     private func setupView() {
         tableView.register(UINib(nibName: cellIdentifier, bundle: nil), forCellReuseIdentifier: cellIdentifier)
         tableView.delegate = self
         tableView.dataSource = self
+        
         tableView.backgroundView = activityIndicator
         tableView.separatorStyle = .none
                 
@@ -121,14 +152,11 @@ final class ConversationsListViewController: UIViewController, ConversationsList
 // MARK: - Display Logic
 
 extension ConversationsListViewController: ConversationListDisplayLogic {
-    func displayList(_ channels: [ChannelModel]) {
+    func channelsLoaded() {
         if activityIndicator.isAnimating {
             activityIndicator.stopAnimating()
             tableView.separatorStyle = .singleLine
         }
-        
-        self.channels = channels
-        tableView.reloadData()
     }
     
     func displayError(_ message: String) {
@@ -145,12 +173,12 @@ extension ConversationsListViewController: UITableViewDelegate, UITableViewDataS
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        guard let channels = channels else {
+        guard let channel = ChannelModel
+                .createFrom(fetchedResultController.object(at: indexPath)) else {
             return
         }
-        
-//        router?.routeToShowChat(title: channels[indexPath.row].name, identifierChannel: channels[indexPath.row].identifier)
-        router?.routeToMessagesIn(channels[indexPath.row])
+                
+        router?.routeToMessagesIn(channel)
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -187,22 +215,71 @@ extension ConversationsListViewController: UITableViewDelegate, UITableViewDataS
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let channels = channels else {
-            return 0
-        }
-        
-        return channels.count
+        return channelList?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? ConversationListCell,
-              let channels = channels else {
+              let channel = ChannelModel.createFrom(fetchedResultController.object(at: indexPath)) else {
             return UITableViewCell()
         }
         
-        cell.configure(with: channels[indexPath.row])
+        cell.configure(with: channel)
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            if let id = fetchedResultController.object(at: indexPath).identifier {
+                interactor?.deleteChannel(id)
+            }
+        }
+    }
+}
+
+// MARK: - NSFetchedResultsControllerDelegate
+
+extension ConversationsListViewController: NSFetchedResultsControllerDelegate {
+    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        tableView.beginUpdates()
+    }
+    
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        tableView.endUpdates()
+    }
+    
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>,
+                    didChange anObject: Any,
+                    at indexPath: IndexPath?,
+                    for type: NSFetchedResultsChangeType,
+                    newIndexPath: IndexPath?) {
+        switch type {
+        case .insert:
+            if let newIndexPath = newIndexPath {
+                tableView.insertRows(at: [newIndexPath], with: .automatic)
+            }
+        case .move:
+            if let indexPath = indexPath,
+               let newIndexPath = newIndexPath {
+                tableView.deleteRows(at: [indexPath], with: .automatic)
+                tableView.insertRows(at: [newIndexPath], with: .automatic)
+            }
+        case .update:
+            if let indexPath = indexPath {
+                tableView.reloadRows(at: [indexPath], with: .automatic)
+            }
+        case .delete:
+            if let indexPath = indexPath {
+                tableView.deleteRows(at: [indexPath], with: .automatic)
+            }
+        @unknown default:
+            break
+        }
     }
 }
 
