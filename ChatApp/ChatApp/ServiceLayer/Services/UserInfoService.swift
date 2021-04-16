@@ -15,6 +15,7 @@ protocol UserInfoServiceProtocol {
                    fail: @escaping(_ message: String) -> Void)
     func saveInfo(_ model: UserInfoModel, _ complete: @escaping () -> Void,
                   fail: @escaping(_ message: String) -> Void)
+    func cancelSaving()
 }
 
 class UserInfoService: UserInfoServiceProtocol {
@@ -71,5 +72,9 @@ class UserInfoService: UserInfoServiceProtocol {
                 fail(message)
             }
         }
+    }
+    
+    func cancelSaving() {
+        userInfoManager.cancelSaving()
     }
 }

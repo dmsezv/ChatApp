@@ -165,8 +165,8 @@
 		4D0C0BA125F96DEF00781A47 /* Theme */ = {
 			isa = PBXGroup;
 			children = (
-				4D0C0BA225F96E8900781A47 /* ThemeProtocol.swift */,
 				4D0C0BB025F96FE100781A47 /* ThemePicker.swift */,
+				4D0C0BA225F96E8900781A47 /* ThemeProtocol.swift */,
 				4D0C0BAF25F96FBE00781A47 /* ThemeTypes */,
 			);
 			path = Theme;

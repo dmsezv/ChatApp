@@ -15,8 +15,6 @@ protocol ProfileBusinessLogic {
 
 class ProfileInteractor: ProfileBusinessLogic {
     weak var viewController: ProfileDisplayLogic?
-    private lazy var userInfoOperation = UserInfoSaverOperation()
-    private lazy var userInfoGCD = UserInfoSaverGCD()
     
     let userInfoService: UserInfoServiceProtocol
     
@@ -49,7 +47,6 @@ class ProfileInteractor: ProfileBusinessLogic {
     }
     
     func cancel() {
-        userInfoOperation.cancelSaving()
-        userInfoGCD.cancelSaving()
+        userInfoService.cancelSaving()
     }
 }
