@@ -13,6 +13,8 @@ protocol UserInfoServiceProtocol {
     
     func fetchInfo(_ complete: @escaping (UserInfoModel?) -> Void,
                    fail: @escaping(_ message: String) -> Void)
+    func saveInfo(_ model: UserInfoModel, _ complete: @escaping () -> Void,
+                  fail: @escaping(_ message: String) -> Void)
 }
 
 class UserInfoService: UserInfoServiceProtocol {
@@ -20,13 +22,14 @@ class UserInfoService: UserInfoServiceProtocol {
     
     init(userInfoManager: UserInfoManagerProtocol) {
         self.userInfoManager = userInfoManager
-        
-        senderId = userInfoManager.fetchSenderId()
-        senderName = userInfoManager.fetchSenderName()
     }
     
-    var senderId: String
-    var senderName: String
+    var senderId: String {
+        userInfoManager.fetchSenderId()
+    }
+    var senderName: String {
+        userInfoManager.fetchSenderName()
+    }
     
     func fetchInfo(_ complete: @escaping (UserInfoModel?) -> Void,
                    fail: @escaping(_ message: String) -> Void) {
@@ -42,6 +45,27 @@ class UserInfoService: UserInfoServiceProtocol {
                     message = "Не удалось декодировать модели"
                 default:
                     message = "Не удалось выгрузить данные"
+                }
+                
+                fail(message)
+            }
+        }
+    }
+    
+    func saveInfo(_ model: UserInfoModel, _ complete: @escaping () -> Void,
+                  fail: @escaping(_ message: String) -> Void) {
+        userInfoManager.saveInfo(model) { (result) in
+            switch result {
+            case .success:
+                complete()
+            case .failure(let error):
+                var message = ""
+                
+                switch error {
+                case .encodingError:
+                    message = "Не удалось кодировать модели"
+                default:
+                    message = "Не удалось сохраненить данные"
                 }
                 
                 fail(message)

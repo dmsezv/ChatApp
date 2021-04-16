@@ -9,7 +9,7 @@ import Foundation
 
 protocol ProfileBusinessLogic {
     func fetchUserInfo()
-    func save(userInfo: UserInfoModel, by type: UserInfoSaverType)
+    func save(userInfo: UserInfoModel)
     func cancel()
 }
 
@@ -36,35 +36,16 @@ class ProfileInteractor: ProfileBusinessLogic {
         }
     }
     
-    func save(userInfo: UserInfoModel, by type: UserInfoSaverType) {
-        var saver: UserInfoManagerProtocol
-        
-        switch type {
-        case .gcd:
-            saver = userInfoGCD
-        case .operation:
-            saver = userInfoOperation
-        }
-        
-        saver.saveInfo(userInfo, complete: { result in
+    func save(userInfo: UserInfoModel) {
+        userInfoService.saveInfo(userInfo) {
             DispatchQueue.main.async {
-                switch result {
-                case .success:
-                    self.viewController?.successSavedUserInfo()
-                case .failure(let error):
-                    var message = ""
-                    
-                    switch error {
-                    case .encodingError:
-                        message = "Не удалось кодировать модели"
-                    default:
-                        message = "Не удалось сохраненить данные"
-                    }
-                    
-                    self.viewController?.errorDisplay(message)
-                }
+                self.viewController?.successSavedUserInfo()
             }
-        })
+        } fail: { message in
+            DispatchQueue.main.async {
+                self.viewController?.errorDisplay(message)
+            }
+        }
     }
     
     func cancel() {

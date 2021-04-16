@@ -199,7 +199,7 @@ extension ProfileViewController {
         interactor?.fetchUserInfo()
     }
     
-    func saveUserInfoBy(_ saverType: UserInfoSaverType) {
+    func saveUserInfo() {
         savingMode(true)
         
         let userInfo = UserInfoModel(
@@ -208,7 +208,7 @@ extension ProfileViewController {
             city: userCityTextField.text,
             avatarData: avatarImageView?.image?.pngData())
         
-        interactor?.save(userInfo: userInfo, by: saverType)
+        interactor?.save(userInfo: userInfo)
     }
 }
 
@@ -356,7 +356,7 @@ extension ProfileViewController {
     }
     
     @objc func touchSaveGCDButton(_ sender: UIButton) {
-        saveUserInfoBy(.gcd)
+        saveUserInfo()
     }
 }
 
