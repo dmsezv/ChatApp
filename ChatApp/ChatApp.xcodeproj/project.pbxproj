@@ -53,6 +53,7 @@
 		4D9E387A262E215300AD5A3A /* AvatarNetworkInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D9E3879262E215300AD5A3A /* AvatarNetworkInteractor.swift */; };
 		4D9E387D262E231600AD5A3A /* AvatarNetwork.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4D9E387C262E231600AD5A3A /* AvatarNetwork.storyboard */; };
 		4D9E3880262E252100AD5A3A /* ProfileViewRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D9E387F262E252100AD5A3A /* ProfileViewRouter.swift */; };
+		4D9E3884262E2ECF00AD5A3A /* AvatarCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D9E3883262E2ECF00AD5A3A /* AvatarCollectionViewCell.swift */; };
 		4DA1D5A12609287A00ED4910 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4DA1D5A02609287A00ED4910 /* GoogleService-Info.plist */; };
 		4DAFEC6D25F6428100CE1BEA /* ThemesSetting.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4DAFEC6C25F6428100CE1BEA /* ThemesSetting.storyboard */; };
 		4DAFEC7225F6448200CE1BEA /* ThemesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DAFEC7125F6448200CE1BEA /* ThemesViewController.swift */; };
@@ -131,6 +132,7 @@
 		4D9E3879262E215300AD5A3A /* AvatarNetworkInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarNetworkInteractor.swift; sourceTree = "<group>"; };
 		4D9E387C262E231600AD5A3A /* AvatarNetwork.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AvatarNetwork.storyboard; sourceTree = "<group>"; };
 		4D9E387F262E252100AD5A3A /* ProfileViewRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewRouter.swift; sourceTree = "<group>"; };
+		4D9E3883262E2ECF00AD5A3A /* AvatarCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarCollectionViewCell.swift; sourceTree = "<group>"; };
 		4DA1D5A02609287A00ED4910 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4DAFEC6C25F6428100CE1BEA /* ThemesSetting.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ThemesSetting.storyboard; sourceTree = "<group>"; };
 		4DAFEC7125F6448200CE1BEA /* ThemesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemesViewController.swift; sourceTree = "<group>"; };
@@ -388,10 +390,19 @@
 		4D9E3873262E208200AD5A3A /* AvatarNetwork */ = {
 			isa = PBXGroup;
 			children = (
+				4D9E3882262E2EAE00AD5A3A /* Cells */,
 				4D9E3874262E209900AD5A3A /* AvatarNetworkViewController.swift */,
 				4D9E3879262E215300AD5A3A /* AvatarNetworkInteractor.swift */,
 			);
 			path = AvatarNetwork;
+			sourceTree = "<group>";
+		};
+		4D9E3882262E2EAE00AD5A3A /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				4D9E3883262E2ECF00AD5A3A /* AvatarCollectionViewCell.swift */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 		4DAFEC6F25F6444300CE1BEA /* ThemeSetting */ = {
@@ -709,6 +720,7 @@
 				4DAFEC8525F6681400CE1BEA /* ChooseThemeButtonView.swift in Sources */,
 				4DC119A52602570A0027E4A0 /* UserInfoManagerProtocol.swift in Sources */,
 				4D5CA7192628E35E003053F8 /* ChannelsRepository.swift in Sources */,
+				4D9E3884262E2ECF00AD5A3A /* AvatarCollectionViewCell.swift in Sources */,
 				4D1262C226151317003A6F28 /* ChannelDB.swift in Sources */,
 				4D0F5378261721FE004DBC5C /* CoreDataStack+SaveModels.swift in Sources */,
 				4D0C0BBD25FA26C000781A47 /* ConversationListNavigationController.swift in Sources */,
