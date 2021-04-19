@@ -16,6 +16,7 @@ protocol ProfileDisplayLogic: class {
 
 class ProfileViewController: UIViewController {
     var interactor: ProfileBusinessLogic?
+    var router: ProfileViewRoutingLogic?
     
     // MARK: - IBOutlets
     
@@ -334,6 +335,10 @@ extension ProfileViewController {
             
             alertController.addAction(UIAlertAction(title: "Сделать фото", style: .default, handler: { _ in
                 self.imagePickerGetAvatarFrom(.camera)
+            }))
+            
+            alertController.addAction(UIAlertAction(title: "Загрузить", style: .default, handler: { _ in
+                self.router?.routeToAvatarNetwork()
             }))
             
             alertController.addAction(UIAlertAction(title: "Отменить", style: .cancel, handler: nil))

@@ -49,6 +49,10 @@
 		4D92DF7125ED7CE60093FA2A /* Extension+Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D92DF7025ED7CE60093FA2A /* Extension+Date.swift */; };
 		4D92DF8425EEF1EF0093FA2A /* ConversationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D92DF8325EEF1EF0093FA2A /* ConversationViewController.swift */; };
 		4D92DF8825EEF2400093FA2A /* MessageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D92DF8725EEF2400093FA2A /* MessageModel.swift */; };
+		4D9E3875262E209900AD5A3A /* AvatarNetworkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D9E3874262E209900AD5A3A /* AvatarNetworkViewController.swift */; };
+		4D9E387A262E215300AD5A3A /* AvatarNetworkInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D9E3879262E215300AD5A3A /* AvatarNetworkInteractor.swift */; };
+		4D9E387D262E231600AD5A3A /* AvatarNetwork.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4D9E387C262E231600AD5A3A /* AvatarNetwork.storyboard */; };
+		4D9E3880262E252100AD5A3A /* ProfileViewRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D9E387F262E252100AD5A3A /* ProfileViewRouter.swift */; };
 		4DA1D5A12609287A00ED4910 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4DA1D5A02609287A00ED4910 /* GoogleService-Info.plist */; };
 		4DAFEC6D25F6428100CE1BEA /* ThemesSetting.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4DAFEC6C25F6428100CE1BEA /* ThemesSetting.storyboard */; };
 		4DAFEC7225F6448200CE1BEA /* ThemesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DAFEC7125F6448200CE1BEA /* ThemesViewController.swift */; };
@@ -123,6 +127,10 @@
 		4D92DF7025ED7CE60093FA2A /* Extension+Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+Date.swift"; sourceTree = "<group>"; };
 		4D92DF8325EEF1EF0093FA2A /* ConversationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationViewController.swift; sourceTree = "<group>"; };
 		4D92DF8725EEF2400093FA2A /* MessageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageModel.swift; sourceTree = "<group>"; };
+		4D9E3874262E209900AD5A3A /* AvatarNetworkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarNetworkViewController.swift; sourceTree = "<group>"; };
+		4D9E3879262E215300AD5A3A /* AvatarNetworkInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarNetworkInteractor.swift; sourceTree = "<group>"; };
+		4D9E387C262E231600AD5A3A /* AvatarNetwork.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AvatarNetwork.storyboard; sourceTree = "<group>"; };
+		4D9E387F262E252100AD5A3A /* ProfileViewRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewRouter.swift; sourceTree = "<group>"; };
 		4DA1D5A02609287A00ED4910 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4DAFEC6C25F6428100CE1BEA /* ThemesSetting.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ThemesSetting.storyboard; sourceTree = "<group>"; };
 		4DAFEC7125F6448200CE1BEA /* ThemesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemesViewController.swift; sourceTree = "<group>"; };
@@ -216,6 +224,7 @@
 		4D3A6ADB2628608100A0B78A /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				4D9E3873262E208200AD5A3A /* AvatarNetwork */,
 				4DAFEC6F25F6444300CE1BEA /* ThemeSetting */,
 				4D92DF8125EEF1AD0093FA2A /* ProfileView */,
 				4D92DF8225EEF1C00093FA2A /* ConversationView */,
@@ -361,6 +370,7 @@
 			children = (
 				4D2AFD7825E41B3200706ACE /* ProfileViewController.swift */,
 				4DC119A9260375BD0027E4A0 /* ProfileInteractor.swift */,
+				4D9E387F262E252100AD5A3A /* ProfileViewRouter.swift */,
 			);
 			path = ProfileView;
 			sourceTree = "<group>";
@@ -373,6 +383,15 @@
 				4DCD0AF725EFB0370096F893 /* Cells */,
 			);
 			path = ConversationView;
+			sourceTree = "<group>";
+		};
+		4D9E3873262E208200AD5A3A /* AvatarNetwork */ = {
+			isa = PBXGroup;
+			children = (
+				4D9E3874262E209900AD5A3A /* AvatarNetworkViewController.swift */,
+				4D9E3879262E215300AD5A3A /* AvatarNetworkInteractor.swift */,
+			);
+			path = AvatarNetwork;
 			sourceTree = "<group>";
 		};
 		4DAFEC6F25F6444300CE1BEA /* ThemeSetting */ = {
@@ -480,6 +499,7 @@
 				4D92DF5B25ED658D0093FA2A /* Conversation.storyboard */,
 				4D49ADC725D7F800000F0BBB /* LaunchScreen.storyboard */,
 				4DAFEC6C25F6428100CE1BEA /* ThemesSetting.storyboard */,
+				4D9E387C262E231600AD5A3A /* AvatarNetwork.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -583,6 +603,7 @@
 				4DAFEC7B25F6498000CE1BEA /* ProfileIconView.xib in Resources */,
 				4DCD0AFB25EFB0530096F893 /* ConversationMessageOutgoingViewCell.xib in Resources */,
 				4DCD0B0325EFBC280096F893 /* ConversationMessageIncomingViewCell.xib in Resources */,
+				4D9E387D262E231600AD5A3A /* AvatarNetwork.storyboard in Resources */,
 				4DAFEC8225F6680400CE1BEA /* ChooseThemeButtonView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -668,8 +689,10 @@
 				4D5E22D52624F36F0027A1B0 /* CoreDataStackProtocol.swift in Sources */,
 				4D0C0BAA25F96F5A00781A47 /* NightTheme.swift in Sources */,
 				4D79DBD02628C4EE0086C709 /* MessagesService.swift in Sources */,
+				4D9E3880262E252100AD5A3A /* ProfileViewRouter.swift in Sources */,
 				4D79DBD32628D1ED0086C709 /* UserInfoService.swift in Sources */,
 				4D2AFD7C25E576E500706ACE /* Extension+UILabel.swift in Sources */,
+				4D9E3875262E209900AD5A3A /* AvatarNetworkViewController.swift in Sources */,
 				4D79DBC92628BFDB0086C709 /* ChannelsService.swift in Sources */,
 				4DD6E8E125DC60EC00EF5039 /* Extension+AppDelegate.swift in Sources */,
 				4D79DBC126286EB30086C709 /* ApplicationAssembly.swift in Sources */,
@@ -701,6 +724,7 @@
 				4D92DF6025ED67B90093FA2A /* ConversationsListViewController.swift in Sources */,
 				4D26AEBA25F0437B00C0B8C6 /* Extension+UIColor.swift in Sources */,
 				4D5CA7262628FDBA003053F8 /* MessagesRepository.swift in Sources */,
+				4D9E387A262E215300AD5A3A /* AvatarNetworkInteractor.swift in Sources */,
 				4D49ADBD25D7F7FE000F0BBB /* AppDelegate.swift in Sources */,
 				4DAFEC7725F6497600CE1BEA /* ProfileIconView.swift in Sources */,
 				4D92DF8425EEF1EF0093FA2A /* ConversationViewController.swift in Sources */,
