@@ -37,6 +37,7 @@ class NetworkManager: NetworkManagerProtocol {
     
     func createUrlRequest(scheme: NetworkManagerScheme, host: String, path: String, queryParams: [String: String]?) -> URLRequest? {
         var urlComponents = URLComponents()
+        urlComponents.scheme = scheme.rawValue
         urlComponents.host = host
         urlComponents.path = path
         

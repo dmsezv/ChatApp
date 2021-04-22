@@ -77,7 +77,15 @@ extension AvatarNetworkViewController: AvatarNetworkViewControllerDisplayLogic {
 
 extension AvatarNetworkViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
+        if let url = urls?[indexPath.row] {
+            interactor?.getImage(by: url, complete: { image in
+                self.delegate?.setAvatar(image)
+                
+                DispatchQueue.main.async {
+                    self.dismiss(animated: true, completion: nil)
+                }
+            })
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

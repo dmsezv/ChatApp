@@ -25,7 +25,9 @@ class AvatarNetworkInteractor: AvatarNetworkBusinessLogic {
     func getUrlsImages() {
         pixabayService.getImagesUrls { [weak self] model in
             if let model = model {
-                
+                DispatchQueue.main.async {
+                    self?.viewController?.displayImages(model.hits!.compactMap { URL(string: $0.previewURL)! })
+                }
             } else {
                 DispatchQueue.main.async {
                     self?.viewController?.displayError("Can't load data")
@@ -36,8 +38,8 @@ class AvatarNetworkInteractor: AvatarNetworkBusinessLogic {
     
     func getImage(by url: URL, complete: @escaping((UIImage) -> Void)) {
         pixabayService.getImageData(by: url) { [weak self] data in
-            if let data = data {
-                
+            if let data = data, let image = UIImage(data: data) {
+                complete(image)
             } else {
                 DispatchQueue.main.async {
                     self?.viewController?.displayError("Can't load images")

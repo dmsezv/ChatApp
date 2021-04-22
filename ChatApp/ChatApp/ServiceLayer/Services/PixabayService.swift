@@ -13,7 +13,6 @@ protocol PixabayServiceProtocol {
 }
 
 struct PixabayApiModel: Codable {
-    let totalHits: Int
     let hits: [HitsApiModel]?
     
     struct HitsApiModel: Codable {
@@ -23,8 +22,9 @@ struct PixabayApiModel: Codable {
     }
 }
 
+// TODO: Не успеваю описать нормально сервис с хорошими колбеками, еррорами итд
 class PixabayService: PixabayServiceProtocol {
-    private let host = "https://pixabay.com/"
+    private let host = "pixabay.com"
     private let path = "/api"
     private let apiKey = "21279061-d8b881ee813547d979885fff1"
     
@@ -57,8 +57,10 @@ class PixabayService: PixabayServiceProtocol {
                 scheme: .HTTPS,
                 host: host,
                 path: path,
-                queryParams: queryParams) else {
-            complete(nil); return
+                queryParams: queryParams)
+        else {
+            complete(nil)
+            return
         }
         
         networkManager.getData(request: request) { result in
@@ -66,7 +68,7 @@ class PixabayService: PixabayServiceProtocol {
             case .success(let data):
                 let model = try? JSONDecoder().decode(PixabayApiModel.self, from: data)
                 complete(model)
-            case .failure:
+            case .failure(let err):
                 complete(nil)
             }
         }

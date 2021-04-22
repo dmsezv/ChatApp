@@ -264,9 +264,11 @@ extension ProfileViewController: ProfileDisplayLogic {
 
 extension ProfileViewController: ProfileViewControllerDelegate {
     func setAvatar(_ image: UIImage) {
-        editingMode(true, setFioFirstResponder: false)
-        initialsLabel.isHidden = true
-        avatarImageView.image = image
+        DispatchQueue.main.async {
+            self.editingMode(true, setFioFirstResponder: false)
+            self.initialsLabel.isHidden = true
+            self.avatarImageView.image = image
+        }
     }
 }
 
