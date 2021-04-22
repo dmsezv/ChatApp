@@ -11,6 +11,7 @@ protocol CoreAssemblyProtocol {
     func coreDataStack() -> CoreDataStackProtocol
     func userInfoDataManager(_ type: UserInfoSaverType) -> UserInfoManagerProtocol
     func firebaseManager() -> FirebaseManagerProtocol
+    func networkManager() -> NetworkManagerProtocol
 }
 
 class CoreAssembly: CoreAssemblyProtocol {
@@ -30,5 +31,9 @@ class CoreAssembly: CoreAssemblyProtocol {
     
     func firebaseManager() -> FirebaseManagerProtocol {
         return FirebaseManager.shared
+    }
+    
+    func networkManager() -> NetworkManagerProtocol {
+        return NetworkManager()
     }
 }

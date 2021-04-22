@@ -54,6 +54,9 @@
 		4D9E387D262E231600AD5A3A /* AvatarNetwork.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4D9E387C262E231600AD5A3A /* AvatarNetwork.storyboard */; };
 		4D9E3880262E252100AD5A3A /* ProfileViewRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D9E387F262E252100AD5A3A /* ProfileViewRouter.swift */; };
 		4D9E3884262E2ECF00AD5A3A /* AvatarCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D9E3883262E2ECF00AD5A3A /* AvatarCollectionViewCell.swift */; };
+		4D9E38902631A1BA00AD5A3A /* PixabayService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D9E388F2631A1BA00AD5A3A /* PixabayService.swift */; };
+		4D9E38932631A77D00AD5A3A /* AvatarNetworkModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D9E38922631A77D00AD5A3A /* AvatarNetworkModel.swift */; };
+		4D9E38992631B9A600AD5A3A /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D9E38982631B9A600AD5A3A /* NetworkManager.swift */; };
 		4DA1D5A12609287A00ED4910 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4DA1D5A02609287A00ED4910 /* GoogleService-Info.plist */; };
 		4DAFEC6D25F6428100CE1BEA /* ThemesSetting.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4DAFEC6C25F6428100CE1BEA /* ThemesSetting.storyboard */; };
 		4DAFEC7225F6448200CE1BEA /* ThemesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DAFEC7125F6448200CE1BEA /* ThemesViewController.swift */; };
@@ -133,6 +136,9 @@
 		4D9E387C262E231600AD5A3A /* AvatarNetwork.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AvatarNetwork.storyboard; sourceTree = "<group>"; };
 		4D9E387F262E252100AD5A3A /* ProfileViewRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewRouter.swift; sourceTree = "<group>"; };
 		4D9E3883262E2ECF00AD5A3A /* AvatarCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarCollectionViewCell.swift; sourceTree = "<group>"; };
+		4D9E388F2631A1BA00AD5A3A /* PixabayService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PixabayService.swift; sourceTree = "<group>"; };
+		4D9E38922631A77D00AD5A3A /* AvatarNetworkModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarNetworkModel.swift; sourceTree = "<group>"; };
+		4D9E38982631B9A600AD5A3A /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		4DA1D5A02609287A00ED4910 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4DAFEC6C25F6428100CE1BEA /* ThemesSetting.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ThemesSetting.storyboard; sourceTree = "<group>"; };
 		4DAFEC7125F6448200CE1BEA /* ThemesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemesViewController.swift; sourceTree = "<group>"; };
@@ -283,6 +289,7 @@
 		4D5E22C72624EF0C0027A1B0 /* CoreLayer */ = {
 			isa = PBXGroup;
 			children = (
+				4D9E38872631686E00AD5A3A /* NetworkManager */,
 				4D5E22CF2624F27C0027A1B0 /* Assembly */,
 				4D79DBC32628BD250086C709 /* FirebaseManager */,
 				4DFB1D0926261F6E00B1C9B2 /* UserInfoData */,
@@ -341,6 +348,7 @@
 				4D79DBCF2628C4EE0086C709 /* MessagesService.swift */,
 				4D79DBD22628D1ED0086C709 /* UserInfoService.swift */,
 				4D5CA7152628DEAF003053F8 /* FetchedResultsService.swift */,
+				4D9E388F2631A1BA00AD5A3A /* PixabayService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -401,8 +409,25 @@
 			isa = PBXGroup;
 			children = (
 				4D9E3883262E2ECF00AD5A3A /* AvatarCollectionViewCell.swift */,
+				4D9E38922631A77D00AD5A3A /* AvatarNetworkModel.swift */,
 			);
 			path = Cells;
+			sourceTree = "<group>";
+		};
+		4D9E38872631686E00AD5A3A /* NetworkManager */ = {
+			isa = PBXGroup;
+			children = (
+				4D9E38972631B5CE00AD5A3A /* New Group */,
+				4D9E38982631B9A600AD5A3A /* NetworkManager.swift */,
+			);
+			path = NetworkManager;
+			sourceTree = "<group>";
+		};
+		4D9E38972631B5CE00AD5A3A /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "New Group";
 			sourceTree = "<group>";
 		};
 		4DAFEC6F25F6444300CE1BEA /* ThemeSetting */ = {
@@ -689,6 +714,7 @@
 				4DCD0AFA25EFB0530096F893 /* ConversationMessageOutgoingViewCell.swift in Sources */,
 				4D0F537B261734A7004DBC5C /* Extension+CoreDataStack.swift in Sources */,
 				4DAFEC7225F6448200CE1BEA /* ThemesViewController.swift in Sources */,
+				4D9E38992631B9A600AD5A3A /* NetworkManager.swift in Sources */,
 				4D3A37472613CD0100E9CE04 /* CoreDataStack.swift in Sources */,
 				4D79DBBD2628657B0086C709 /* PresentationAssembly.swift in Sources */,
 				4D92DF6A25ED74420093FA2A /* ConversationListCell.swift in Sources */,
@@ -709,6 +735,7 @@
 				4D79DBC126286EB30086C709 /* ApplicationAssembly.swift in Sources */,
 				4D1262E72615A416003A6F28 /* MessageDB.swift in Sources */,
 				4D5CA71F2628E481003053F8 /* RepositoriesAssembly.swift in Sources */,
+				4D9E38902631A1BA00AD5A3A /* PixabayService.swift in Sources */,
 				4DAFEC7E25F64C9800CE1BEA /* Extension+UIButton.swift in Sources */,
 				4D0C0BA625F96F4500781A47 /* ClassicTheme.swift in Sources */,
 				4DC119A1260256D40027E4A0 /* UserInfoSaverOperations.swift in Sources */,
@@ -730,6 +757,7 @@
 				4D3A6ADE262860CA00A0B78A /* ConversationListModel.swift in Sources */,
 				4DCD0B0225EFBC280096F893 /* ConversationMessageIncomingViewCell.swift in Sources */,
 				4DD6E8D725DC5CA300EF5039 /* Extension+VC.swift in Sources */,
+				4D9E38932631A77D00AD5A3A /* AvatarNetworkModel.swift in Sources */,
 				4D92DF8825EEF2400093FA2A /* MessageModel.swift in Sources */,
 				4DDED28D260A90D400FF4204 /* ChannelModel.swift in Sources */,
 				4DC119AA260375BD0027E4A0 /* ProfileInteractor.swift in Sources */,

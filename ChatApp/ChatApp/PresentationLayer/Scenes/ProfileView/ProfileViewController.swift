@@ -151,7 +151,7 @@ extension ProfileViewController {
         }
     }
     
-    private func editingMode(_ enabled: Bool) {
+    private func editingMode(_ enabled: Bool, setFioFirstResponder: Bool = true) {
         let isHidden = enabled
         let isEnabled = !enabled
         
@@ -162,7 +162,7 @@ extension ProfileViewController {
         userCityTextField.isEnabled = !isEnabled
         userPositionTextField.isEnabled = !isEnabled
         
-        if enabled {
+        if enabled && setFioFirstResponder {
             userNameTextField.becomeFirstResponder()
         } else {
             userNameTextField.resignFirstResponder()

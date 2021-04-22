@@ -89,7 +89,7 @@ class PresentationAssembly: PresentationAssemblyProtocol {
     
     func avatarNetworkViewController() -> AvatarNetworkViewController? {
         let viewController = UIStoryboard(name: "AvatarNetwork", bundle: nil).instantiateInitialViewController() as? AvatarNetworkViewController
-        let interactor = AvatarNetworkInteractor()
+        let interactor = AvatarNetworkInteractor(pixabayService: serviceAssembly.pixabayService())
         viewController?.interactor = interactor
         interactor.viewController = viewController
         

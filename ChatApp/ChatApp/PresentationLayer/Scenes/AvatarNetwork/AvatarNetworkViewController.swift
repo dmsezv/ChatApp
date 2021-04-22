@@ -8,7 +8,7 @@
 import UIKit
 
 protocol AvatarNetworkViewControllerDisplayLogic: class {
-    
+    func displayImages(_ urls: [URL])
 }
 
 class AvatarNetworkViewController: UIViewController {
@@ -25,16 +25,17 @@ class AvatarNetworkViewController: UIViewController {
     // MARK: - Drawing Constraints
     
     let spacing: CGFloat = 8
-    
-    
+        
     // MARK: - Life Cycle
     
     let avatarCellId = String(describing: AvatarCollectionViewCell.self)
+    var urls: [URL]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupView()
+        interactor?.getUrlsImages()
     }
     
     private func setupView() {
@@ -52,22 +53,30 @@ class AvatarNetworkViewController: UIViewController {
 // MARK: - Display Logic
 
 extension AvatarNetworkViewController: AvatarNetworkViewControllerDisplayLogic {
-    
+    func displayImages(_ urls: [URL]) {
+        self.urls = urls
+        collectionView.reloadData()
+    }
 }
 
 // MARK: - UICollectionViewDelegate, UICollectionViewDataSource
 
 extension AvatarNetworkViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        100
+        urls?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: avatarCellId, for: indexPath) as? AvatarCollectionViewCell else {
+        guard
+            let urls = urls,
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: avatarCellId, for: indexPath) as? AvatarCollectionViewCell else {
             return UICollectionViewCell()
         }
-        
+                
         cell.configure()
+        interactor?.getImage(by: urls[indexPath.row], complete: { image in
+            cell.set(image)
+        })
         
         return cell
     }

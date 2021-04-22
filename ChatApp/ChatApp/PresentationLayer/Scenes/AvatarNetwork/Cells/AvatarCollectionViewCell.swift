@@ -13,7 +13,7 @@ class AvatarCollectionViewCell: UICollectionViewCell {
     
     private lazy var imageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.contentMode = .scaleToFill
+        imageView.contentMode = .scaleAspectFill
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
@@ -38,17 +38,36 @@ class AvatarCollectionViewCell: UICollectionViewCell {
         setupLayout()
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        activityIndicator.startAnimating()
+        imageView.image = nil
+    }
+    
     private func setupLayout() {
+        addSubview(imageView)
         addSubview(activityIndicator)
         
         NSLayoutConstraint.activate([
             activityIndicator.centerXAnchor.constraint(equalTo: centerXAnchor),
-            activityIndicator.centerYAnchor.constraint(equalTo: centerYAnchor)
+            activityIndicator.centerYAnchor.constraint(equalTo: centerYAnchor),
+            
+            imageView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            imageView.topAnchor.constraint(equalTo: topAnchor),
+            imageView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            imageView.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])
     }
     
     func configure() {
-        backgroundColor = .black
+        backgroundColor = .darkGray
         activityIndicator.startAnimating()
+    }
+    
+    func set(_ image: UIImage) {
+        DispatchQueue.main.async {
+            self.imageView.image = image
+            self.activityIndicator.stopAnimating()
+        }
     }
 }

@@ -11,6 +11,7 @@ protocol ServiceAssemblyProtocol {
     func channelsService() -> ChannelsServiceProtocol
     func messagesServices() -> MessagesServiceProtocol
     func userInfoService() -> UserInfoServiceProtocol
+    func pixabayService() -> PixabayServiceProtocol
 }
 
 class ServiceAssembly: ServiceAssemblyProtocol {
@@ -37,5 +38,9 @@ class ServiceAssembly: ServiceAssemblyProtocol {
     
     func userInfoService() -> UserInfoServiceProtocol {
         return UserInfoService(userInfoManager: coreAssembly.userInfoDataManager(.gcd))
+    }
+    
+    func pixabayService() -> PixabayServiceProtocol {
+        return PixabayService(networkManager: coreAssembly.networkManager())
     }
 }
