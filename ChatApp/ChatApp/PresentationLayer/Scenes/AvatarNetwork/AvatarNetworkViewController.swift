@@ -8,7 +8,7 @@
 import UIKit
 
 protocol AvatarNetworkViewControllerDisplayLogic: class {
-    func displayImages(_ urls: [URL])
+    func displayImages(_ ids: [Int])
     func displayError(_ message: String)
     func setAvatar(_ image: UIImage)
 }
@@ -32,7 +32,8 @@ class AvatarNetworkViewController: UIViewController {
     // MARK: - Life Cycle
     
     let avatarCellId = String(describing: AvatarCollectionViewCell.self)
-    var urls: [URL]?
+    // TODO: завести нормальную viewModel не успеваю, нужен еще презентер, пока так
+    var imagesIds: [Int]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,8 +57,8 @@ class AvatarNetworkViewController: UIViewController {
 // MARK: - Display Logic
 
 extension AvatarNetworkViewController: AvatarNetworkViewControllerDisplayLogic {
-    func displayImages(_ urls: [URL]) {
-        self.urls = urls
+    func displayImages(_ ids: [Int]) {
+        self.imagesIds = ids
         collectionView.reloadData()
     }
     
@@ -77,10 +78,10 @@ extension AvatarNetworkViewController: AvatarNetworkViewControllerDisplayLogic {
 
 extension AvatarNetworkViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if let url = urls?[indexPath.row] {
-            interactor?.getImage(by: url, complete: { image in
+        if let id = imagesIds?[indexPath.row] {
+            interactor?.getBigImage(by: id, complete: { image in
                 self.delegate?.setAvatar(image)
-                
+
                 DispatchQueue.main.async {
                     self.dismiss(animated: true, completion: nil)
                 }
@@ -89,22 +90,25 @@ extension AvatarNetworkViewController: UICollectionViewDelegate, UICollectionVie
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        urls?.count ?? 0
+        imagesIds?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard
-            let urls = urls,
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: avatarCellId, for: indexPath) as? AvatarCollectionViewCell else {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: avatarCellId, for: indexPath) as? AvatarCollectionViewCell else {
             return UICollectionViewCell()
         }
                 
         cell.configure()
-        interactor?.getImage(by: urls[indexPath.row], complete: { image in
-            cell.set(image)
-        })
         
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        guard let imagesIds = imagesIds, let cell = cell as? AvatarCollectionViewCell else { return }
+        
+        interactor?.getImage(by: imagesIds[indexPath.row], complete: { image in
+            cell.set(image)
+        })
     }
 }
 
