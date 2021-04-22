@@ -9,11 +9,14 @@ import UIKit
 
 protocol AvatarNetworkViewControllerDisplayLogic: class {
     func displayImages(_ urls: [URL])
+    func displayError(_ message: String)
+    func setAvatar(_ image: UIImage)
 }
 
 class AvatarNetworkViewController: UIViewController {
     
     var interactor: AvatarNetworkInteractor?
+    var delegate: ProfileViewControllerDelegate?
     
     // MARK: - IBOutlets
     
@@ -57,11 +60,26 @@ extension AvatarNetworkViewController: AvatarNetworkViewControllerDisplayLogic {
         self.urls = urls
         collectionView.reloadData()
     }
+    
+    func displayError(_ message: String) {
+        let alertController = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+        
+        present(alertController, animated: true, completion: nil)
+    }
+    
+    func setAvatar(_ image: UIImage) {
+        delegate?.setAvatar(image)
+    }
 }
 
 // MARK: - UICollectionViewDelegate, UICollectionViewDataSource
 
 extension AvatarNetworkViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         urls?.count ?? 0
     }

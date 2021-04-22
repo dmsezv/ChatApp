@@ -23,16 +23,26 @@ class AvatarNetworkInteractor: AvatarNetworkBusinessLogic {
     }
     
     func getUrlsImages() {
-        pixabayService.getImagesUrls { [weak self] urls in
-            DispatchQueue.main.async {
-                self?.viewController?.displayImages(urls)
+        pixabayService.getImagesUrls { [weak self] model in
+            if let model = model {
+                
+            } else {
+                DispatchQueue.main.async {
+                    self?.viewController?.displayError("Can't load data")
+                }
             }
         }
     }
     
     func getImage(by url: URL, complete: @escaping((UIImage) -> Void)) {
-        pixabayService.getImageData(by: url) { data in
-            complete(UIImage(data: data)!)
+        pixabayService.getImageData(by: url) { [weak self] data in
+            if let data = data {
+                
+            } else {
+                DispatchQueue.main.async {
+                    self?.viewController?.displayError("Can't load images")
+                }
+            }
         }
     }
 }

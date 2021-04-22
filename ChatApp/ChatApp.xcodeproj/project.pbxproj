@@ -80,6 +80,8 @@
 		4DDED28D260A90D400FF4204 /* ChannelModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DDED28C260A90D400FF4204 /* ChannelModel.swift */; };
 		4DDED291260A970900FF4204 /* ConversationViewInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DDED290260A970900FF4204 /* ConversationViewInteractor.swift */; };
 		4DDFFB46260CE0A700F4A66A /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 4DDFFB45260CE0A700F4A66A /* .swiftlint.yml */; };
+		4DE8832F2631F9C7008550AE /* NetworkScheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE8832E2631F9C7008550AE /* NetworkScheme.swift */; };
+		4DE883332631FAE7008550AE /* Extension+URLComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE883322631FAE7008550AE /* Extension+URLComponents.swift */; };
 		4DF1C49926092B72005D127C /* ConversationListInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF1C49826092B72005D127C /* ConversationListInteractor.swift */; };
 		C1748107E93706AD35E52E52 /* Pods_ChatApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9B14D5F3D4B14D1C8B676FB /* Pods_ChatApp.framework */; };
 /* End PBXBuildFile section */
@@ -162,6 +164,8 @@
 		4DDED28C260A90D400FF4204 /* ChannelModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelModel.swift; sourceTree = "<group>"; };
 		4DDED290260A970900FF4204 /* ConversationViewInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationViewInteractor.swift; sourceTree = "<group>"; };
 		4DDFFB45260CE0A700F4A66A /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
+		4DE8832E2631F9C7008550AE /* NetworkScheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkScheme.swift; sourceTree = "<group>"; };
+		4DE883322631FAE7008550AE /* Extension+URLComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+URLComponents.swift"; sourceTree = "<group>"; };
 		4DF1C49826092B72005D127C /* ConversationListInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationListInteractor.swift; sourceTree = "<group>"; };
 		A9B14D5F3D4B14D1C8B676FB /* Pods_ChatApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChatApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -417,17 +421,10 @@
 		4D9E38872631686E00AD5A3A /* NetworkManager */ = {
 			isa = PBXGroup;
 			children = (
-				4D9E38972631B5CE00AD5A3A /* New Group */,
 				4D9E38982631B9A600AD5A3A /* NetworkManager.swift */,
+				4DE8832E2631F9C7008550AE /* NetworkScheme.swift */,
 			);
 			path = NetworkManager;
-			sourceTree = "<group>";
-		};
-		4D9E38972631B5CE00AD5A3A /* New Group */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "New Group";
 			sourceTree = "<group>";
 		};
 		4DAFEC6F25F6444300CE1BEA /* ThemeSetting */ = {
@@ -514,6 +511,7 @@
 				4D26AEB925F0437B00C0B8C6 /* Extension+UIColor.swift */,
 				4DAFEC7D25F64C9700CE1BEA /* Extension+UIButton.swift */,
 				4D0F537A261734A7004DBC5C /* Extension+CoreDataStack.swift */,
+				4DE883322631FAE7008550AE /* Extension+URLComponents.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -723,6 +721,7 @@
 				4D0C0BAD25F96F7B00781A47 /* DayTheme.swift in Sources */,
 				4D3A37442613BD0400E9CE04 /* Chat.xcdatamodeld in Sources */,
 				4D79DBC52628BD480086C709 /* FirebaseManager.swift in Sources */,
+				4DE8832F2631F9C7008550AE /* NetworkScheme.swift in Sources */,
 				4D5E22D52624F36F0027A1B0 /* CoreDataStackProtocol.swift in Sources */,
 				4D0C0BAA25F96F5A00781A47 /* NightTheme.swift in Sources */,
 				4D79DBD02628C4EE0086C709 /* MessagesService.swift in Sources */,
@@ -766,6 +765,7 @@
 				4D5CA7262628FDBA003053F8 /* MessagesRepository.swift in Sources */,
 				4D9E387A262E215300AD5A3A /* AvatarNetworkInteractor.swift in Sources */,
 				4D49ADBD25D7F7FE000F0BBB /* AppDelegate.swift in Sources */,
+				4DE883332631FAE7008550AE /* Extension+URLComponents.swift in Sources */,
 				4DAFEC7725F6497600CE1BEA /* ProfileIconView.swift in Sources */,
 				4D92DF8425EEF1EF0093FA2A /* ConversationViewController.swift in Sources */,
 				4D92DF7125ED7CE60093FA2A /* Extension+Date.swift in Sources */,

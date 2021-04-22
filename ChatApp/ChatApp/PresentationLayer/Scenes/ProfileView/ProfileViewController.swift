@@ -14,6 +14,10 @@ protocol ProfileDisplayLogic: class {
     func errorDisplay(_ message: String)
 }
 
+protocol ProfileViewControllerDelegate {
+    func setAvatar(_ image: UIImage)
+}
+
 class ProfileViewController: UIViewController {
     var interactor: ProfileBusinessLogic?
     var router: ProfileViewRoutingLogic?
@@ -253,6 +257,16 @@ extension ProfileViewController: ProfileDisplayLogic {
         savingMode(false)
         
         alertInfo(title: "Ошибка", message)
+    }
+}
+
+// MARK: - Delegate
+
+extension ProfileViewController: ProfileViewControllerDelegate {
+    func setAvatar(_ image: UIImage) {
+        editingMode(true, setFioFirstResponder: false)
+        initialsLabel.isHidden = true
+        avatarImageView.image = image
     }
 }
 

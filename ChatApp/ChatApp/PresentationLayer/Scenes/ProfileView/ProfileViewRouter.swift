@@ -22,6 +22,7 @@ class ProfileViewRouter: ProfileViewRoutingLogic {
     
     func routeToAvatarNetwork() {
         if let avatarNetworkVC = presentationAssembly.avatarNetworkViewController() {
+            avatarNetworkVC.delegate = viewController
             viewController?.present(avatarNetworkVC, animated: true, completion: nil)
         }
     }
