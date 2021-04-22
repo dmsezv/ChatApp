@@ -82,6 +82,7 @@
 		4DDFFB46260CE0A700F4A66A /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 4DDFFB45260CE0A700F4A66A /* .swiftlint.yml */; };
 		4DE8832F2631F9C7008550AE /* NetworkScheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE8832E2631F9C7008550AE /* NetworkScheme.swift */; };
 		4DE883332631FAE7008550AE /* Extension+URLComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE883322631FAE7008550AE /* Extension+URLComponents.swift */; };
+		4DE8833C26322444008550AE /* PixabayApiModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE8833B26322444008550AE /* PixabayApiModel.swift */; };
 		4DF1C49926092B72005D127C /* ConversationListInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF1C49826092B72005D127C /* ConversationListInteractor.swift */; };
 		C1748107E93706AD35E52E52 /* Pods_ChatApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9B14D5F3D4B14D1C8B676FB /* Pods_ChatApp.framework */; };
 /* End PBXBuildFile section */
@@ -166,6 +167,7 @@
 		4DDFFB45260CE0A700F4A66A /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		4DE8832E2631F9C7008550AE /* NetworkScheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkScheme.swift; sourceTree = "<group>"; };
 		4DE883322631FAE7008550AE /* Extension+URLComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+URLComponents.swift"; sourceTree = "<group>"; };
+		4DE8833B26322444008550AE /* PixabayApiModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PixabayApiModel.swift; sourceTree = "<group>"; };
 		4DF1C49826092B72005D127C /* ConversationListInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationListInteractor.swift; sourceTree = "<group>"; };
 		A9B14D5F3D4B14D1C8B676FB /* Pods_ChatApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChatApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -348,11 +350,11 @@
 		4D79DBCD2628C4DB0086C709 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				4DE883392632242C008550AE /* PixabayService */,
 				4D79DBC82628BFDB0086C709 /* ChannelsService.swift */,
 				4D79DBCF2628C4EE0086C709 /* MessagesService.swift */,
 				4D79DBD22628D1ED0086C709 /* UserInfoService.swift */,
 				4D5CA7152628DEAF003053F8 /* FetchedResultsService.swift */,
-				4D9E388F2631A1BA00AD5A3A /* PixabayService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -536,6 +538,23 @@
 				4D9E387C262E231600AD5A3A /* AvatarNetwork.storyboard */,
 			);
 			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		4DE883392632242C008550AE /* PixabayService */ = {
+			isa = PBXGroup;
+			children = (
+				4D9E388F2631A1BA00AD5A3A /* PixabayService.swift */,
+				4DE8833A26322438008550AE /* Models */,
+			);
+			path = PixabayService;
+			sourceTree = "<group>";
+		};
+		4DE8833A26322438008550AE /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				4DE8833B26322444008550AE /* PixabayApiModel.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		4DFB1D0926261F6E00B1C9B2 /* UserInfoData */ = {
@@ -729,6 +748,7 @@
 				4D79DBD32628D1ED0086C709 /* UserInfoService.swift in Sources */,
 				4D2AFD7C25E576E500706ACE /* Extension+UILabel.swift in Sources */,
 				4D9E3875262E209900AD5A3A /* AvatarNetworkViewController.swift in Sources */,
+				4DE8833C26322444008550AE /* PixabayApiModel.swift in Sources */,
 				4D79DBC92628BFDB0086C709 /* ChannelsService.swift in Sources */,
 				4DD6E8E125DC60EC00EF5039 /* Extension+AppDelegate.swift in Sources */,
 				4D79DBC126286EB30086C709 /* ApplicationAssembly.swift in Sources */,

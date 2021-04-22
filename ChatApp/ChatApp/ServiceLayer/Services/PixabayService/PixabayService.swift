@@ -12,16 +12,6 @@ protocol PixabayServiceProtocol {
     func getImageData(by url: URL, complete: @escaping(_ image: Data?) -> Void)
 }
 
-struct PixabayApiModel: Codable {
-    let hits: [HitsApiModel]?
-    
-    struct HitsApiModel: Codable {
-        let id: Int
-        let previewURL: String
-        let largeImageURL: String
-    }
-}
-
 // TODO: Не успеваю описать нормально сервис с хорошими колбеками, еррорами итд
 class PixabayService: PixabayServiceProtocol {
     private let host = "pixabay.com"

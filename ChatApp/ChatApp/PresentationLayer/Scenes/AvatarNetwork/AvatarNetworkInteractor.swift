@@ -67,7 +67,6 @@ class AvatarNetworkInteractor: AvatarNetworkBusinessLogic {
             DispatchQueue.main.async {
                 self.viewController?.displayError("Can't load images")
             }
-            
             return
         }
         
@@ -75,7 +74,6 @@ class AvatarNetworkInteractor: AvatarNetworkBusinessLogic {
             complete(image)
         } else {
             self.pixabayService.getImageData(by: avatar.previewImageUrl) { [weak self] data in
-                
                 if let data = data, let image = UIImage(data: data) {
                     self?.avatarNetworkDataSource.first(where: { $0.id == id })?.image = image
                     
