@@ -25,6 +25,15 @@ class AvatarNetworkViewController: UIViewController {
         dismiss(animated: true, completion: nil)
     }
     
+    // MARK: - Views
+    
+    private lazy var activityIndicator: UIActivityIndicatorView = {
+        let activityIndicator = UIActivityIndicatorView()
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.startAnimating()
+        return activityIndicator
+    }()
+    
     // MARK: - Drawing Constraints
     
     let spacing: CGFloat = 8
@@ -39,7 +48,7 @@ class AvatarNetworkViewController: UIViewController {
         super.viewDidLoad()
         
         setupView()
-        interactor?.getUrlsImages()
+        interactor?.getImagesIds()
     }
     
     private func setupView() {
@@ -51,6 +60,7 @@ class AvatarNetworkViewController: UIViewController {
         layout.minimumLineSpacing = spacing
         layout.minimumInteritemSpacing = spacing
         collectionView.collectionViewLayout = layout
+        collectionView.backgroundView = activityIndicator
     }
 }
 
@@ -58,11 +68,19 @@ class AvatarNetworkViewController: UIViewController {
 
 extension AvatarNetworkViewController: AvatarNetworkViewControllerDisplayLogic {
     func displayImages(_ ids: [Int]) {
+        if activityIndicator.isAnimating {
+            activityIndicator.stopAnimating()
+        }
+        
         self.imagesIds = ids
         collectionView.reloadData()
     }
     
     func displayError(_ message: String) {
+        if activityIndicator.isAnimating {
+            activityIndicator.stopAnimating()
+        }
+        
         let alertController = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
         
@@ -94,21 +112,19 @@ extension AvatarNetworkViewController: UICollectionViewDelegate, UICollectionVie
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: avatarCellId, for: indexPath) as? AvatarCollectionViewCell else {
+        guard let imagesIds = imagesIds, let cell = collectionView.dequeueReusableCell(withReuseIdentifier: avatarCellId, for: indexPath) as? AvatarCollectionViewCell else {
             return UICollectionViewCell()
         }
                 
         cell.configure()
         
-        return cell
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        guard let imagesIds = imagesIds, let cell = cell as? AvatarCollectionViewCell else { return }
+        DispatchQueue.global(qos: .userInitiated).async {
+            self.interactor?.getImage(by: imagesIds[indexPath.row], complete: { image in
+                cell.set(image)
+            })
+        }
         
-        interactor?.getImage(by: imagesIds[indexPath.row], complete: { image in
-            cell.set(image)
-        })
+        return cell
     }
 }
 

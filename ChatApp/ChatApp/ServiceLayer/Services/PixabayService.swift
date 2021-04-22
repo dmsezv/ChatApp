@@ -68,7 +68,7 @@ class PixabayService: PixabayServiceProtocol {
             case .success(let data):
                 let model = try? JSONDecoder().decode(PixabayApiModel.self, from: data)
                 complete(model)
-            case .failure(let err):
+            case .failure:
                 complete(nil)
             }
         }

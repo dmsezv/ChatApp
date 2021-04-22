@@ -22,7 +22,7 @@ class Avatar {
 }
 
 protocol AvatarNetworkBusinessLogic {
-    func getUrlsImages()
+    func getImagesIds()
     func getImage(by id: Int, complete: @escaping((UIImage) -> Void))
     func getBigImage(by id: Int, complete: @escaping((UIImage) -> Void))
 }
@@ -37,7 +37,7 @@ class AvatarNetworkInteractor: AvatarNetworkBusinessLogic {
         self.pixabayService = pixabayService
     }
     
-    func getUrlsImages() {
+    func getImagesIds() {
         pixabayService.getImagesUrls { [weak self] model in
             if let hits = model?.hits {
                 for hit in hits {
@@ -51,7 +51,7 @@ class AvatarNetworkInteractor: AvatarNetworkBusinessLogic {
                 }
                 
                 DispatchQueue.main.async {
-                    // TODO: завести нормальную viewModel не успеваю, пока так
+                    // TODO: завести нормальную viewModel и слой с презентером никак не успеваю, пока так
                     self?.viewController?.displayImages(self?.avatarNetworkDataSource.compactMap { $0.id } ?? [])
                 }
             } else {
@@ -74,10 +74,14 @@ class AvatarNetworkInteractor: AvatarNetworkBusinessLogic {
         if let image = avatar.image {
             complete(image)
         } else {
-            pixabayService.getImageData(by: avatar.previewImageUrl) { [weak self] data in
+            self.pixabayService.getImageData(by: avatar.previewImageUrl) { [weak self] data in
+                
                 if let data = data, let image = UIImage(data: data) {
                     self?.avatarNetworkDataSource.first(where: { $0.id == id })?.image = image
-                    complete(image)
+                    
+                    DispatchQueue.main.async {
+                        complete(image)
+                    }
                 } else {
                     DispatchQueue.main.async {
                         self?.viewController?.displayError("Can't load images")
@@ -97,11 +101,12 @@ class AvatarNetworkInteractor: AvatarNetworkBusinessLogic {
         }
         
         pixabayService.getImageData(by: avatar.fullImageUrl) { [weak self] data in
-            if let data = data, let image = UIImage(data: data) {
-                self?.avatarNetworkDataSource.first(where: { $0.id == id })?.image = image
-                complete(image)
-            } else {
-                DispatchQueue.main.async {
+            DispatchQueue.main.async {
+                if let data = data, let image = UIImage(data: data) {
+                    self?.avatarNetworkDataSource.first(where: { $0.id == id })?.image = image
+                    complete(image)
+                } else {
+                    
                     self?.viewController?.displayError("Can't load images")
                 }
             }
