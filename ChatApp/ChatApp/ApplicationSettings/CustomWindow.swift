@@ -16,6 +16,7 @@ class CustomWindow: UIWindow {
             if touch.phase == .began {
                 print("touch.phase == .began")
                 print("\(touch.location(in: self))")
+                //animate(in: touch.location(in: self))
                 
                 
             }
@@ -24,6 +25,7 @@ class CustomWindow: UIWindow {
             if touch.phase == .ended {
                 print("touch.phase == .ended")
                 print("\(touch.location(in: self))")
+                stop()
             }
         })
         super.sendEvent(event)
@@ -33,8 +35,8 @@ class CustomWindow: UIWindow {
         var emitterCell = CAEmitterCell()
         emitterCell.contents = UIImage(named: "logo-rounded")?.cgImage
         emitterCell.scale = 0.02
-        emitterCell.scaleRange = 0.1
-        emitterCell.birthRate = 5
+        emitterCell.scaleRange = 0.07
+        emitterCell.birthRate = 10
         emitterCell.lifetime = 2
         emitterCell.velocity = -10
         emitterCell.velocityRange = 30
@@ -87,7 +89,29 @@ class CustomWindow: UIWindow {
     
     func animate(in location: CGPoint) {
         let layer1 = emitterLayer
+        layer1.name = "emitterLayer"
         layer1.position = location
+        //emitterLayer.birthRate = 5
+        //emitterLayer.position = location
         layer.addSublayer(layer1)
+    }
+    
+    func stop() {
+        layer.sublayers?.forEach({ (sub) in
+            if sub.name == "emitterLayer" {
+                CATransaction.begin()
+                CATransaction.setAnimationDuration(2)
+                CATransaction.setCompletionBlock {
+                    sub.removeFromSuperlayer()
+                }
+                sub.opacity = 0
+                CATransaction.begin()
+                CATransaction.setAnimationDuration(1)
+                sub.transform = CATransform3DMakeScale(0.5, 0.5, 0.5)
+                CATransaction.commit()
+                CATransaction.commit()
+                return
+            }
+        })
     }
 }
