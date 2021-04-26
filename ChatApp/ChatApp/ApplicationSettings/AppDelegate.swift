@@ -40,7 +40,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             .conversationListNavigationController(rootViewController:
                                                     conversationListViewController)
         
-        window = UIWindow()
+        window = CustomWindow()//UIWindow()
         window?.rootViewController = navigationController
         
     }
