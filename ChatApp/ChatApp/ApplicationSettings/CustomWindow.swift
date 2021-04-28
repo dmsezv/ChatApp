@@ -9,7 +9,7 @@ import UIKit
 
 class CustomWindow: UIWindow {
     override func sendEvent(_ event: UIEvent) {
-        
+        super.sendEvent(event)
         event.allTouches?.forEach({ (touch) in
             animate(in: touch.location(in: self))
 
@@ -28,7 +28,7 @@ class CustomWindow: UIWindow {
                 stop()
             }
         })
-        super.sendEvent(event)
+        
     }
     
     private let emitterCell: CAEmitterCell = {

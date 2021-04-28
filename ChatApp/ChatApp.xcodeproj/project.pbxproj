@@ -36,6 +36,7 @@
 		4D5E22D12624F2CD0027A1B0 /* CoreAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5E22D02624F2CD0027A1B0 /* CoreAssembly.swift */; };
 		4D5E22D52624F36F0027A1B0 /* CoreDataStackProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5E22D42624F36F0027A1B0 /* CoreDataStackProtocol.swift */; };
 		4D5E22D92624F4630027A1B0 /* ServiceAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5E22D82624F4630027A1B0 /* ServiceAssembly.swift */; };
+		4D612FE72638B9DE0070E12C /* ShakeAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D612FE62638B9DE0070E12C /* ShakeAnimation.swift */; };
 		4D79DBBD2628657B0086C709 /* PresentationAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D79DBBC2628657B0086C709 /* PresentationAssembly.swift */; };
 		4D79DBC126286EB30086C709 /* ApplicationAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D79DBC026286EB30086C709 /* ApplicationAssembly.swift */; };
 		4D79DBC52628BD480086C709 /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D79DBC42628BD480086C709 /* FirebaseManager.swift */; };
@@ -49,6 +50,7 @@
 		4D92DF7125ED7CE60093FA2A /* Extension+Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D92DF7025ED7CE60093FA2A /* Extension+Date.swift */; };
 		4D92DF8425EEF1EF0093FA2A /* ConversationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D92DF8325EEF1EF0093FA2A /* ConversationViewController.swift */; };
 		4D92DF8825EEF2400093FA2A /* MessageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D92DF8725EEF2400093FA2A /* MessageModel.swift */; };
+		4D989BA5263A028300D0A4E3 /* ProfileViewControllerTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D989BA4263A028300D0A4E3 /* ProfileViewControllerTransition.swift */; };
 		4D98FE82263714BF007F6CD9 /* CustomWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D98FE81263714BF007F6CD9 /* CustomWindow.swift */; };
 		4D9E3875262E209900AD5A3A /* AvatarNetworkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D9E3874262E209900AD5A3A /* AvatarNetworkViewController.swift */; };
 		4D9E387A262E215300AD5A3A /* AvatarNetworkInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D9E3879262E215300AD5A3A /* AvatarNetworkInteractor.swift */; };
@@ -122,6 +124,7 @@
 		4D5E22D02624F2CD0027A1B0 /* CoreAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreAssembly.swift; sourceTree = "<group>"; };
 		4D5E22D42624F36F0027A1B0 /* CoreDataStackProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStackProtocol.swift; sourceTree = "<group>"; };
 		4D5E22D82624F4630027A1B0 /* ServiceAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceAssembly.swift; sourceTree = "<group>"; };
+		4D612FE62638B9DE0070E12C /* ShakeAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ShakeAnimation.swift; path = ChatApp/CoreLayer/ShakeAnimation.swift; sourceTree = SOURCE_ROOT; };
 		4D79DBBC2628657B0086C709 /* PresentationAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentationAssembly.swift; sourceTree = "<group>"; };
 		4D79DBC026286EB30086C709 /* ApplicationAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationAssembly.swift; sourceTree = "<group>"; };
 		4D79DBC42628BD480086C709 /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
@@ -135,6 +138,7 @@
 		4D92DF7025ED7CE60093FA2A /* Extension+Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+Date.swift"; sourceTree = "<group>"; };
 		4D92DF8325EEF1EF0093FA2A /* ConversationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationViewController.swift; sourceTree = "<group>"; };
 		4D92DF8725EEF2400093FA2A /* MessageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageModel.swift; sourceTree = "<group>"; };
+		4D989BA4263A028300D0A4E3 /* ProfileViewControllerTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewControllerTransition.swift; sourceTree = "<group>"; };
 		4D98FE81263714BF007F6CD9 /* CustomWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomWindow.swift; sourceTree = "<group>"; };
 		4D9E3874262E209900AD5A3A /* AvatarNetworkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarNetworkViewController.swift; sourceTree = "<group>"; };
 		4D9E3879262E215300AD5A3A /* AvatarNetworkInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarNetworkInteractor.swift; sourceTree = "<group>"; };
@@ -218,6 +222,7 @@
 		4D2AFD6F25E4110900706ACE /* PresentationLayer */ = {
 			isa = PBXGroup;
 			children = (
+				4D612FE52638B99A0070E12C /* Animations */,
 				4D79DBBB262865670086C709 /* Assembly */,
 				4D3A6ADB2628608100A0B78A /* Scenes */,
 				4DD6E8DE25DC607F00EF5039 /* Storyboards */,
@@ -331,6 +336,15 @@
 				4D5CA71E2628E481003053F8 /* RepositoriesAssembly.swift */,
 			);
 			path = Assembly;
+			sourceTree = "<group>";
+		};
+		4D612FE52638B99A0070E12C /* Animations */ = {
+			isa = PBXGroup;
+			children = (
+				4D612FE62638B9DE0070E12C /* ShakeAnimation.swift */,
+				4D989BA4263A028300D0A4E3 /* ProfileViewControllerTransition.swift */,
+			);
+			path = Animations;
 			sourceTree = "<group>";
 		};
 		4D79DBBB262865670086C709 /* Assembly */ = {
@@ -750,6 +764,7 @@
 				4D9E3880262E252100AD5A3A /* ProfileViewRouter.swift in Sources */,
 				4D79DBD32628D1ED0086C709 /* UserInfoService.swift in Sources */,
 				4D2AFD7C25E576E500706ACE /* Extension+UILabel.swift in Sources */,
+				4D612FE72638B9DE0070E12C /* ShakeAnimation.swift in Sources */,
 				4D9E3875262E209900AD5A3A /* AvatarNetworkViewController.swift in Sources */,
 				4DE8833C26322444008550AE /* PixabayApiModel.swift in Sources */,
 				4D79DBC92628BFDB0086C709 /* ChannelsService.swift in Sources */,
@@ -783,6 +798,7 @@
 				4D9E38932631A77D00AD5A3A /* AvatarNetworkModel.swift in Sources */,
 				4D92DF8825EEF2400093FA2A /* MessageModel.swift in Sources */,
 				4DDED28D260A90D400FF4204 /* ChannelModel.swift in Sources */,
+				4D989BA5263A028300D0A4E3 /* ProfileViewControllerTransition.swift in Sources */,
 				4DC119AA260375BD0027E4A0 /* ProfileInteractor.swift in Sources */,
 				4D92DF6025ED67B90093FA2A /* ConversationsListViewController.swift in Sources */,
 				4D26AEBA25F0437B00C0B8C6 /* Extension+UIColor.swift in Sources */,

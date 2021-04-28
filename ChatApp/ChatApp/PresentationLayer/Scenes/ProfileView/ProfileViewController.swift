@@ -21,6 +21,7 @@ protocol ProfileViewControllerDelegate {
 class ProfileViewController: UIViewController {
     var interactor: ProfileBusinessLogic?
     var router: ProfileViewRoutingLogic?
+    var delegateViewController: ConversationsListDelegate?
     
     // MARK: - IBOutlets
     
@@ -41,6 +42,7 @@ class ProfileViewController: UIViewController {
     @IBAction func touchButtonClose(_ sender: Any) {
         delegateViewController?.updateProfileView()
         interactor?.cancel()
+        
         dismiss(animated: true, completion: nil)
     }
     
@@ -70,8 +72,8 @@ class ProfileViewController: UIViewController {
 
     // MARK: - Life Cycle
     
-    var delegateViewController: ConversationsListDelegate?
-    
+    lazy var editButtonAnimation = ShakeAnimation(editButton)
+
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
@@ -130,6 +132,8 @@ class ProfileViewController: UIViewController {
         if let viewAvatar = avatarView {
             viewAvatar.layer.cornerRadius = viewAvatar.bounds.width / 2
         }
+            
+        //editButtonAnimation.animateStart()
     }
     
     private func alertInfo(title: String, _ message: String? = nil, _ handler: ((UIAlertAction) -> Void)? = nil) {
@@ -364,6 +368,7 @@ extension ProfileViewController {
     }
     
     @objc func touchEditButton(_ sender: UIButton) {
+        //editButtonAnimation.animateStop()
         editingMode(true)
     }
     

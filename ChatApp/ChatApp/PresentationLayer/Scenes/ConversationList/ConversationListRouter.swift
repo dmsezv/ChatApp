@@ -24,7 +24,12 @@ class ConversationListRouter: ConversationListRoutingLogic {
     
     func routeToProfile() {
         if let profileVC = presentationAssembly.profileViewController(delegate: viewController) {
-            viewController?.present(profileVC, animated: true)
+            
+            let transition = ProfileViewControllerTransition()
+            profileVC.transitioningDelegate = transition
+            profileVC.modalPresentationStyle = .fullScreen
+            
+            viewController?.present(profileVC, animated: true, completion: nil)
         }
     }
     
