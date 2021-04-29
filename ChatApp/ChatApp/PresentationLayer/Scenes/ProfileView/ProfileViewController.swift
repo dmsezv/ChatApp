@@ -83,9 +83,9 @@ class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if #available(iOS 13.0, *) {
-            self.isModalInPresentation = true
-        }
+//        if #available(iOS 13.0, *) {
+//            self.isModalInPresentation = true
+//        }
 
         setupView()
         setupUserInfoState()
@@ -97,6 +97,14 @@ class ProfileViewController: UIViewController {
         let tap = UITapGestureRecognizer(target: self, action: #selector(addAvatar(_ : )))
         avatarView.addGestureRecognizer(tap)
         avatarView.clipsToBounds = true
+        
+        //let blurEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .regular))
+        
+        //blurEffectView.frame = view.bounds
+        //blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        
+        //view.backgroundColor = .clear
+        //view.insertSubview(blurEffectView, at: 0)
         
         setupInitialsLabel()
         setupViewButtons()
