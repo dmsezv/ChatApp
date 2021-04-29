@@ -9,12 +9,15 @@ import UIKit
 
 class ProfileViewControllerTransition: NSObject {
     
+    var isPresenting = true
+    
     // MARK: - Constants
     
     let animationDelay: TimeInterval = 0.0
-    let animationDuration: TimeInterval = 0.6
+    let animationDuration: TimeInterval = 1.0
     let usingSpringWithDamping: CGFloat = 0.49
     let initialSpringVelocity: CGFloat = 0.81
+    let initialPosition = CGPoint(x: 0, y: 0)
 }
 
 extension ProfileViewControllerTransition: UIViewControllerAnimatedTransitioning {
@@ -29,13 +32,16 @@ extension ProfileViewControllerTransition: UIViewControllerAnimatedTransitioning
             let toView = transitionContext.view(forKey: UITransitionContextViewKey.to)
         else { return }
         
-        let offScreenRight = CGAffineTransform(translationX: container.frame.width, y: 0)
-        let offScreenLeft = CGAffineTransform(translationX: -container.frame.width, y: 0)
+        toView.transform = rotatingView()
         
-        toView.transform = offScreenRight
+        toView.layer.anchorPoint = initialPosition
+        fromView.layer.anchorPoint = initialPosition
+        
+        toView.layer.position = initialPosition
+        fromView.layer.position = initialPosition
         
         container.addSubview(toView)
-        container.addSubview(fromView)
+        //container.addSubview(fromView)
         
         let duration = transitionDuration(using: transitionContext)
         
@@ -44,20 +50,30 @@ extension ProfileViewControllerTransition: UIViewControllerAnimatedTransitioning
                        usingSpringWithDamping: usingSpringWithDamping,
                        initialSpringVelocity: initialSpringVelocity,
                        options: []) {
-            fromView.transform = offScreenLeft
+            //fromView.transform = self.rotatingView()
             toView.transform = .identity
         } completion: { _ in
             transitionContext.completeTransition(true)
         }
     }
+    
+    private func rotatingView() -> CGAffineTransform {
+        
+        let offScreenRotateIn = CGAffineTransform(rotationAngle: -CGFloat.pi / 2)
+        let offScreenRotateOut = CGAffineTransform(rotationAngle: CGFloat.pi / 2)
+        
+        return isPresenting ? offScreenRotateIn : offScreenRotateOut
+    }
 }
 
 extension ProfileViewControllerTransition: UIViewControllerTransitioningDelegate {
     func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        self
+        isPresenting = true
+        return self
     }
     
     func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        self
+        isPresenting = false
+        return self
     }
 }
