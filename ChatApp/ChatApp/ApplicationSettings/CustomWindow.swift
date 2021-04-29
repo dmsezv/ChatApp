@@ -8,28 +8,7 @@
 import UIKit
 
 class CustomWindow: UIWindow {
-    override func sendEvent(_ event: UIEvent) {
-        super.sendEvent(event)
-        event.allTouches?.forEach({ (touch) in
-            animate(in: touch.location(in: self))
-
-            if touch.phase == .began {
-                print("touch.phase == .began")
-                print("\(touch.location(in: self))")
-                //animate(in: touch.location(in: self))
-                
-                
-            }
-            
-            
-            if touch.phase == .ended {
-                print("touch.phase == .ended")
-                print("\(touch.location(in: self))")
-                stop()
-            }
-        })
-        
-    }
+    private let emmitetLayerName = "emitterLayer"
     
     private let emitterCell: CAEmitterCell = {
         var emitterCell = CAEmitterCell()
@@ -51,64 +30,42 @@ class CustomWindow: UIWindow {
         emitterLayer.emitterCells = [emitterCell]
         return emitterLayer
     }
-     
-//    let image = UIImage(named: "logo")!.cgImage
-//
-//    var emitterLayer: CAEmitterLayer {
-//        let emitterLayer = CAEmitterLayer()
-//        emitterLayer.emitterPosition = CGPoint(x: 512, y: 512)
-//        emitterLayer.emitterCells = [fireworkCell]
-//        return emitterLayer
-//    }
-//
-//    var fireworkCell: CAEmitterCell {
-//        let fireworkCell = CAEmitterCell()
-//        fireworkCell.color = UIColor.red.cgColor
-//        fireworkCell.birthRate = 3
-//        fireworkCell.lifetime = 10
-//        fireworkCell.velocity = 100
-//        fireworkCell.scale = 0.05
-//        fireworkCell.emissionLongitude = -CGFloat.pi * 0.5
-//        fireworkCell.emissionRange = -CGFloat.pi * 0.25
-//        fireworkCell.contents = image
-//        fireworkCell.emitterCells = [trailCell]
-//        return fireworkCell
-//    }
-//
-//    var trailCell: CAEmitterCell {
-//        let trailCell = CAEmitterCell()
-//        trailCell.yAcceleration = 20
-//        trailCell.birthRate = 10
-//        trailCell.lifetime = 3
-//        trailCell.contents = image
-//        return trailCell
-//    }
+    
+    override func sendEvent(_ event: UIEvent) {
+        super.sendEvent(event)
+        event.allTouches?.forEach({ (touch) in
+            animate(in: touch.location(in: self))
+
+            if touch.phase == .ended {
+                stopAnimate()
+            }
+        })
+    }
         
-    
-    
-    
     func animate(in location: CGPoint) {
-        let layer1 = emitterLayer
-        layer1.name = "emitterLayer"
-        layer1.position = location
-        //emitterLayer.birthRate = 5
-        //emitterLayer.position = location
-        layer.addSublayer(layer1)
+        let animateLayer = emitterLayer
+        animateLayer.name = emmitetLayerName
+        animateLayer.position = location
+        layer.addSublayer(animateLayer)
     }
     
-    func stop() {
+    func stopAnimate() {
         layer.sublayers?.forEach({ (sub) in
-            if sub.name == "emitterLayer" {
+            if sub.name == emmitetLayerName {
                 CATransaction.begin()
-                CATransaction.setAnimationDuration(2)
-                CATransaction.setCompletionBlock {
-                    sub.removeFromSuperlayer()
-                }
-                sub.opacity = 0
-                CATransaction.begin()
-                CATransaction.setAnimationDuration(1)
-                sub.transform = CATransform3DMakeScale(0.5, 0.5, 0.5)
-                CATransaction.commit()
+                
+                    CATransaction.setAnimationDuration(2)
+                    CATransaction.setCompletionBlock {
+                        sub.removeFromSuperlayer()
+                    }
+                    sub.opacity = 0
+                    
+                    CATransaction.begin()
+                    
+                        CATransaction.setAnimationDuration(1)
+                        sub.transform = CATransform3DMakeScale(0.5, 0.5, 0.5)
+                    
+                    CATransaction.commit()
                 CATransaction.commit()
                 return
             }
