@@ -12,11 +12,9 @@ extension UIView {
             UIView.animate(withDuration: duration / 2, animations: {
                 view.transform = .init(scaleX: 0.98, y: 0.98)
             }, completion: { _  in
-                UIView.animate(withDuration: duration / 2, animations:  {
+                UIView.animate(withDuration: duration / 2, animations: {
                     view.transform = .identity
-                }) { _ in
-                    complete()
-                }
+                }, completion: { _ in complete() })
             })
         }
 }

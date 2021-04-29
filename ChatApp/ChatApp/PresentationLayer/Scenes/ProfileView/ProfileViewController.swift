@@ -180,11 +180,6 @@ extension ProfileViewController {
             userNameTextField.resignFirstResponder()
         }
         
-//        saveGCDButton.isHidden = !isHidden
-//        saveGCDButton.isEnabled = !isEnabled
-//        cancelButton.isHidden = !isHidden
-//        cancelButton.isEnabled = !isEnabled
-        
         UIView.animate(withDuration: 0.2) {
             self.saveGCDButton.alpha = !isHidden ? 0 : 1
             self.cancelButton.alpha = !isHidden ? 0 : 1
