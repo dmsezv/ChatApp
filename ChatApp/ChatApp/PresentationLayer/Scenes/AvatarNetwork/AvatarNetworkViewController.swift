@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol AvatarNetworkViewControllerDisplayLogic: class {
+protocol AvatarNetworkViewControllerDisplayLogic: AnyObject {
     func displayImages(_ ids: [Int])
     func displayError(_ message: String)
     func setAvatar(_ image: UIImage)

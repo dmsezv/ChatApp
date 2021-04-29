@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol ProfileDisplayLogic: class {
+protocol ProfileDisplayLogic: AnyObject {
     // TODO: нужно завести норм модель и viewModel
     func successFetch(_ userInfo: UserInfoModel?)
     func successSavedUserInfo()
@@ -72,7 +72,9 @@ class ProfileViewController: UIViewController {
 
     // MARK: - Life Cycle
     
-    lazy var editButtonAnimation = ShakeAnimation(editButton)
+    lazy var editButtonAnimation: ShakeAnimationProtocol = {
+        ShakeAnimation(editButton)
+    }()
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
@@ -83,10 +85,6 @@ class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        if #available(iOS 13.0, *) {
-//            self.isModalInPresentation = true
-//        }
-
         setupView()
         setupUserInfoState()
     }
@@ -140,8 +138,6 @@ class ProfileViewController: UIViewController {
         if let viewAvatar = avatarView {
             viewAvatar.layer.cornerRadius = viewAvatar.bounds.width / 2
         }
-            
-        //editButtonAnimation.animateStart()
     }
     
     private func alertInfo(title: String, _ message: String? = nil, _ handler: ((UIAlertAction) -> Void)? = nil) {

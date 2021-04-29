@@ -7,7 +7,13 @@
 
 import UIKit
 
-class ShakeAnimation: NSObject, CAAnimationDelegate {
+protocol ShakeAnimationProtocol {
+    var isAnimating: Bool { get set }
+    
+    func animateStart()
+    func animateStop()
+}
+class ShakeAnimation: NSObject, CAAnimationDelegate, ShakeAnimationProtocol {
     private let view: UIView
     private var startPosition: CGPoint = .zero
     

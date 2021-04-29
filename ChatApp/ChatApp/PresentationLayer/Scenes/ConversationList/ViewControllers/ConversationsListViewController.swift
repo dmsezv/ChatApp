@@ -8,7 +8,7 @@
 import UIKit
 import CoreData
 
-protocol ConversationListDisplayLogic: class {
+protocol ConversationListDisplayLogic: AnyObject {
     func channelsLoaded()
     func displayError(_ message: String)
 }
