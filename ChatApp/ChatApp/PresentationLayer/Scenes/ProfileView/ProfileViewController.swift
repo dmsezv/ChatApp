@@ -72,6 +72,7 @@ class ProfileViewController: UIViewController {
 
     // MARK: - Life Cycle
     
+    var editingModeState: Bool = false
     lazy var editButtonAnimation: ShakeAnimationProtocol = {
         ShakeAnimation(editButton)
     }()
@@ -93,16 +94,9 @@ class ProfileViewController: UIViewController {
         hideKeyboardWhenTapAround()
                 
         let tap = UITapGestureRecognizer(target: self, action: #selector(addAvatar(_ : )))
+        avatarView.isUserInteractionEnabled = editingModeState
         avatarView.addGestureRecognizer(tap)
         avatarView.clipsToBounds = true
-        
-        //let blurEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .regular))
-        
-        //blurEffectView.frame = view.bounds
-        //blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        
-        //view.backgroundColor = .clear
-        //view.insertSubview(blurEffectView, at: 0)
         
         setupInitialsLabel()
         setupViewButtons()
@@ -164,11 +158,17 @@ extension ProfileViewController {
     }
     
     private func editingMode(_ enabled: Bool, setFioFirstResponder: Bool = true) {
+        editingModeState = enabled
+        avatarView.isUserInteractionEnabled = editingModeState
+        
+        DispatchQueue.main.async {
+            self.editingModeState ?
+                self.editButtonAnimation.animateStart() :
+                self.editButtonAnimation.animateStop()
+        }
+        
         let isHidden = enabled
         let isEnabled = !enabled
-        
-//        editButton.isHidden = isHidden
-//        editButton.isEnabled = isEnabled
         
         userNameTextField.isEnabled = !isEnabled
         userCityTextField.isEnabled = !isEnabled
@@ -372,14 +372,7 @@ extension ProfileViewController {
     }
     
     @objc func touchEditButton(_ sender: UIButton) {
-        DispatchQueue.main.async {
-            print("ANIM: \(self.editButtonAnimation.isAnimating)")
-            self.editButtonAnimation.isAnimating ?
-                self.editButtonAnimation.animateStop() :
-                self.editButtonAnimation.animateStart()
-        }
-        
-        editingMode(true)
+        editingMode(!editingModeState, setFioFirstResponder: false)
     }
     
     @objc func touchCancelButton(_ sender: UIButton) {
