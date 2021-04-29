@@ -11,12 +11,16 @@ class ShakeAnimation: NSObject, CAAnimationDelegate {
     private let view: UIView
     private var startPosition: CGPoint = .zero
     
+    public var isAnimating: Bool
+    
     init(_ view: UIView) {
         self.view = view
+        self.isAnimating = false
     }
     
     func animateStart() {
         startPosition = view.layer.position
+        isAnimating = true
         
         view.layer.anchorPoint = CGPoint(x: 0.5, y: 0.5)
                     
@@ -47,6 +51,8 @@ class ShakeAnimation: NSObject, CAAnimationDelegate {
     }
     
     func animateStop() {
+        isAnimating = false
+        
         let rotationAnim = CABasicAnimation(keyPath: "transform.rotation.z")
         rotationAnim.fromValue = view.layer.presentation()?.value(forKey: "transform.rotation.z")
         rotationAnim.toValue = 0
@@ -61,11 +67,5 @@ class ShakeAnimation: NSObject, CAAnimationDelegate {
         group.delegate = self
         
         view.layer.add(group, forKey: "shakeAnimation")
-    }
-    
-    func animationDidStop(_ anim: CAAnimation, finished flag: Bool) {
-        if flag {
-            
-        }
     }
 }

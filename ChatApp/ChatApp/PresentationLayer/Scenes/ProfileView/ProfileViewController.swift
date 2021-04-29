@@ -171,8 +171,8 @@ extension ProfileViewController {
         let isHidden = enabled
         let isEnabled = !enabled
         
-        editButton.isHidden = isHidden
-        editButton.isEnabled = isEnabled
+//        editButton.isHidden = isHidden
+//        editButton.isEnabled = isEnabled
         
         userNameTextField.isEnabled = !isEnabled
         userCityTextField.isEnabled = !isEnabled
@@ -376,7 +376,13 @@ extension ProfileViewController {
     }
     
     @objc func touchEditButton(_ sender: UIButton) {
-        //editButtonAnimation.animateStop()
+        DispatchQueue.main.async {
+            print("ANIM: \(self.editButtonAnimation.isAnimating)")
+            self.editButtonAnimation.isAnimating ?
+                self.editButtonAnimation.animateStop() :
+                self.editButtonAnimation.animateStart()
+        }
+        
         editingMode(true)
     }
     
