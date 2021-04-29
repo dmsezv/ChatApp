@@ -180,9 +180,16 @@ extension ProfileViewController {
             userNameTextField.resignFirstResponder()
         }
         
-        saveGCDButton.isHidden = !isHidden
+//        saveGCDButton.isHidden = !isHidden
+//        saveGCDButton.isEnabled = !isEnabled
+//        cancelButton.isHidden = !isHidden
+//        cancelButton.isEnabled = !isEnabled
+        
+        UIView.animate(withDuration: 0.2) {
+            self.saveGCDButton.alpha = !isHidden ? 0 : 1
+            self.cancelButton.alpha = !isHidden ? 0 : 1
+        }
         saveGCDButton.isEnabled = !isEnabled
-        cancelButton.isHidden = !isHidden
         cancelButton.isEnabled = !isEnabled
     }
     
@@ -239,8 +246,8 @@ extension ProfileViewController: ProfileDisplayLogic {
     }
     
     func successFetch(_ userInfo: UserInfoModel?) {
-        editingMode(false)
         savingMode(false)
+        editingMode(false)
         fetchDataMode(false)
         
         if let userInfo = userInfo {
@@ -376,15 +383,19 @@ extension ProfileViewController {
     }
     
     @objc func touchCancelButton(_ sender: UIButton) {
-        editingMode(false)
-        savingMode(false)
-        
-        interactor?.cancel()
-        setupUserInfoState()
+        UIView.animateScale(sender) {
+            self.editingMode(false)
+            self.savingMode(false)
+            
+            self.interactor?.cancel()
+            self.setupUserInfoState()
+        }
     }
     
     @objc func touchSaveGCDButton(_ sender: UIButton) {
-        saveUserInfo()
+        UIView.animateScale(sender) {
+            self.saveUserInfo()
+        }
     }
 }
 

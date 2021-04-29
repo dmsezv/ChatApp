@@ -8,7 +8,7 @@
 import UIKit
 
 protocol ShakeAnimationProtocol {
-    var isAnimating: Bool { get set }
+    var isAnimating: Bool { get }
     
     func animateStart()
     func animateStop()
@@ -57,6 +57,7 @@ class ShakeAnimation: NSObject, CAAnimationDelegate, ShakeAnimationProtocol {
     }
     
     func animateStop() {
+        if !isAnimating { return }
         isAnimating = false
         
         let rotationAnim = CABasicAnimation(keyPath: "transform.rotation.z")
