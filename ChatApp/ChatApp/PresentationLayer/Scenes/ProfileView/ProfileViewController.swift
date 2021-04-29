@@ -206,6 +206,7 @@ extension ProfileViewController {
 extension ProfileViewController {
     func setupUserInfoState() {
         // TODO: нужно придумать логику состояний VC
+        // обязательно переделать!!!
         editingMode(false)
         savingMode(false)
         fetchDataMode(true)
@@ -241,6 +242,8 @@ extension ProfileViewController: ProfileDisplayLogic {
     }
     
     func successFetch(_ userInfo: UserInfoModel?) {
+        // TODO: нужно придумать логику состояний VC
+        // обязательно переделать!!!
         savingMode(false)
         editingMode(false)
         fetchDataMode(false)
@@ -262,6 +265,8 @@ extension ProfileViewController: ProfileDisplayLogic {
     }
     
     func errorDisplay(_ message: String) {
+        // TODO: нужно придумать логику состояний VC
+        // обязательно переделать!!!
         fetchDataMode(false)
         editingMode(false)
         savingMode(false)
