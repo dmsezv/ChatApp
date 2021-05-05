@@ -17,6 +17,7 @@
 		4D0F537B261734A7004DBC5C /* Extension+CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D0F537A261734A7004DBC5C /* Extension+CoreDataStack.swift */; };
 		4D1262C226151317003A6F28 /* ChannelDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D1262C126151317003A6F28 /* ChannelDB.swift */; };
 		4D1262E72615A416003A6F28 /* MessageDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D1262E62615A416003A6F28 /* MessageDB.swift */; };
+		4D1A4B5E26427D92000ADEA9 /* CoreDataStackMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D1A4B5D26427D92000ADEA9 /* CoreDataStackMock.swift */; };
 		4D2237102603E72700DA1E1D /* UserInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D22370F2603E72700DA1E1D /* UserInfoModel.swift */; };
 		4D26AEBA25F0437B00C0B8C6 /* Extension+UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D26AEB925F0437B00C0B8C6 /* Extension+UIColor.swift */; };
 		4D2AFD7425E4198100706ACE /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4D2AFD7325E4198100706ACE /* Colors.xcassets */; };
@@ -119,6 +120,7 @@
 		4D0F537A261734A7004DBC5C /* Extension+CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+CoreDataStack.swift"; sourceTree = "<group>"; };
 		4D1262C126151317003A6F28 /* ChannelDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelDB.swift; sourceTree = "<group>"; };
 		4D1262E62615A416003A6F28 /* MessageDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageDB.swift; sourceTree = "<group>"; };
+		4D1A4B5D26427D92000ADEA9 /* CoreDataStackMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStackMock.swift; sourceTree = "<group>"; };
 		4D22370F2603E72700DA1E1D /* UserInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoModel.swift; sourceTree = "<group>"; };
 		4D26AEB925F0437B00C0B8C6 /* Extension+UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIColor.swift"; sourceTree = "<group>"; };
 		4D2AFD7325E4198100706ACE /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
@@ -504,6 +506,7 @@
 			isa = PBXGroup;
 			children = (
 				4DAF03052641D40600DBCDA4 /* FirebaseManagerMock.swift */,
+				4D1A4B5D26427D92000ADEA9 /* CoreDataStackMock.swift */,
 			);
 			path = Mocks;
 			sourceTree = "<group>";
@@ -949,6 +952,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4DAF03062641D40600DBCDA4 /* FirebaseManagerMock.swift in Sources */,
+				4D1A4B5E26427D92000ADEA9 /* CoreDataStackMock.swift in Sources */,
 				4DAF02F52641CE5700DBCDA4 /* ChatAppTests.swift in Sources */,
 				4DAF03002641D09A00DBCDA4 /* CreateChannelTest.swift in Sources */,
 			);

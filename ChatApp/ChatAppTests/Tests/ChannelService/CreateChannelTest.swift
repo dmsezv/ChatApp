@@ -7,6 +7,8 @@
 
 import XCTest
 
+@testable import ChatApp
+
 class CreateChannelTest: XCTestCase {
 
     override func setUpWithError() throws {
@@ -19,10 +21,16 @@ class CreateChannelTest: XCTestCase {
 
     func testCreateChannel() throws {
         // Arrange
+        let firebaseManager = FirebaseManagerMock()
+        let coreDataStack = CoreDataStackMock()
+        let channelService = ChannelsService(coreDataStack: coreDataStack, firebaseManager: firebaseManager)
+        let channelName = "TestChannel"
         
         // Act
+        channelService.createChannel(channelName)
         
         // Assert
-        XCTAssertEqual(1, 2)
+        XCTAssertEqual(firebaseManager.createChannelCallCount, 1)
+        XCTAssertEqual(firebaseManager.createChannelName, channelName)
     }
 }
