@@ -28,7 +28,7 @@ class ChannelsServiceTests: XCTestCase {
         XCTAssertEqual(firebaseManager.createChannelName, channelName)
     }
 
-    func testDeleteChannel() {
+    func testDeleteChannel() throws {
         // Arrange
         let firebaseManager = FirebaseManagerMock()
         let coreDataStack = CoreDataStackMock()
@@ -45,7 +45,7 @@ class ChannelsServiceTests: XCTestCase {
         XCTAssertEqual(firebaseManager.deleteChannelIdentifier, channelIdentifier)
     }
 
-    func testSubscribeChannelsUpdating() {
+    func testSubscribeChannelsUpdating() throws {
         // Arrange
         let firebaseManager = FirebaseManagerMock()
         firebaseManager.documentChanges = [DocumentChange]()

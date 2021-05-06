@@ -27,7 +27,7 @@ class UserInfoServiceTests: XCTestCase {
             userModelResult = userInfoModel
             expectation.fulfill()
         } fail: { _ in
-            XCTFail("UserInfoService fetch model is fail")
+            XCTFail("UserInfoService fetchInfo is fail")
         }
 
         waitForExpectations(timeout: 5, handler: nil)
@@ -39,5 +39,29 @@ class UserInfoServiceTests: XCTestCase {
         XCTAssertEqual(userInfoModel.city, userModelResult?.city)
         XCTAssertEqual(userInfoModel.avatarData, userModelResult?.avatarData)
         XCTAssertEqual(userInfoSaver.fetchInfoCallCount, 1)
+    }
+
+    func testSaveInfo() throws {
+        // Arrange
+        let userInfoSaver = UserInfoSaverGCDMock()
+        let userInfoModel: UserInfoModel = UserInfoModel(
+            name: "Dmitrii Zverev",
+            position: "iOS Dev",
+            city: "Moscow")
+        let userInfoService = UserInfoService(userInfoManager: userInfoSaver)
+
+        // Act
+        userInfoService.saveInfo(userInfoModel) {}
+            fail: { _ in
+                XCTFail("UserInfoService saveInfo is fail")
+            }
+
+        // Assert
+        XCTAssertNotNil(userInfoSaver.userInfoModel)
+        XCTAssertEqual(userInfoSaver.userInfoModel?.name, userInfoModel.name)
+        XCTAssertEqual(userInfoSaver.userInfoModel?.position, userInfoModel.position)
+        XCTAssertEqual(userInfoSaver.userInfoModel?.city, userInfoModel.city)
+        XCTAssertEqual(userInfoSaver.userInfoModel?.avatarData, userInfoModel.avatarData)
+        XCTAssertEqual(userInfoSaver.saveInfoCallCount, 1)
     }
 }
