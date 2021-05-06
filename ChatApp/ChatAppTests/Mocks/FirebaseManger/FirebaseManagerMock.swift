@@ -13,10 +13,13 @@ class FirebaseManagerMock: FirebaseManagerProtocol {
     // MARK: - Public
 
     var documentChanges: [DocumentChange]?
-    var channelName: String?
-    var channelId: String?
-    var messageDocumentId: String?
-    var messageData: [String: Any]?
+
+    // MARK: - Private
+
+    private(set) var channelName: String?
+    private(set) var channelId: String?
+    private(set) var messageDocumentId: String?
+    private(set) var messageData: [String: Any]?
 
     // MARK: - Counters
 

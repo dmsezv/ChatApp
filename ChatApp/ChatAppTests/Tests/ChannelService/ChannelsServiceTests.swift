@@ -15,26 +15,24 @@ class ChannelsServiceTests: XCTestCase {
         // Arrange
         let firebaseManager = FirebaseManagerMock()
         let coreDataStack = CoreDataStackMock()
-        let channelService = ChannelsService(
-            coreDataStack: coreDataStack,
-            firebaseManager: firebaseManager)
+        let channelService = ChannelsService(coreDataStack: coreDataStack,
+                                             firebaseManager: firebaseManager)
         let channelName = "TestChannel"
 
         // Act
         channelService.createChannel(channelName)
 
         // Assert
-        XCTAssertEqual(firebaseManager.createChannelCallCount, 1)
         XCTAssertEqual(firebaseManager.channelName, channelName)
+        XCTAssertEqual(firebaseManager.createChannelCallCount, 1)
     }
 
     func testDeleteChannel() throws {
         // Arrange
         let firebaseManager = FirebaseManagerMock()
         let coreDataStack = CoreDataStackMock()
-        let channelService = ChannelsService(
-            coreDataStack: coreDataStack,
-            firebaseManager: firebaseManager)
+        let channelService = ChannelsService(coreDataStack: coreDataStack,
+                                             firebaseManager: firebaseManager)
         let channelIdentifier = "test-channel-identifier"
 
         // Act

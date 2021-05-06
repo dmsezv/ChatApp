@@ -16,7 +16,6 @@ class MessagesServiceTests: XCTestCase {
         let firebaseManager = FirebaseManagerMock()
         let coreDataStack = CoreDataStackMock()
         let userInfoSaver = UserInfoSaverGCDMock()
-
         let messageService = MessagesService(coreDataStack: coreDataStack,
                                              firebaseManager: firebaseManager,
                                              userInfoDataManager: userInfoSaver)
@@ -28,6 +27,7 @@ class MessagesServiceTests: XCTestCase {
 
         // Assert
         XCTAssertEqual(firebaseManager.messageDocumentId, documentId)
+        XCTAssertNotNil(firebaseManager.messageData)
         XCTAssertEqual(firebaseManager.messageData?["content"] as? String, message)
         XCTAssertEqual(firebaseManager.messageData?["senderId"] as? String, userInfoSaver.senderId)
         XCTAssertEqual(firebaseManager.messageData?["senderName"] as? String, userInfoSaver.senderName)
