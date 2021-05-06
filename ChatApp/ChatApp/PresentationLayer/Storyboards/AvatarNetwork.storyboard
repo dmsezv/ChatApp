@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="yMW-iq-4Gy">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="collection view cell content view" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Avatar Network View Controller-->
+        <scene sceneID="Y5K-MV-R0f">
+            <objects>
+                <viewController storyboardIdentifier="AvatarNetworkViewController" id="yMW-iq-4Gy" customClass="AvatarNetworkViewController" customModule="ChatApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Cp4-tC-DAV">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="k1V-M5-qAg">
+                                <rect key="frame" x="0.0" y="112" width="414" height="784"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="tYp-Fs-Viu">
+                                    <size key="itemSize" width="128" height="128"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="AvatarCollectionViewCell" id="po5-LH-LqG" customClass="AvatarCollectionViewCell" customModule="ChatApp" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="vwN-Nn-RBt">
+                                            <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </collectionViewCellContentView>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="isv-Rv-yoa">
+                                <rect key="frame" x="0.0" y="62" width="414" height="32"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1jc-Wz-fEz">
+                                        <rect key="frame" x="364" y="0.0" width="32" height="32"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="32" id="DbS-xp-Dp1"/>
+                                            <constraint firstAttribute="height" constant="32" id="Dv2-i0-dm8"/>
+                                        </constraints>
+                                        <state key="normal" image="buttonClose"/>
+                                        <connections>
+                                            <action selector="touchButtonClose:" destination="yMW-iq-4Gy" eventType="touchUpInside" id="Jat-Xg-Wnf"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="1jc-Wz-fEz" firstAttribute="centerY" secondItem="isv-Rv-yoa" secondAttribute="centerY" id="CNJ-ho-FeY"/>
+                                    <constraint firstAttribute="height" secondItem="1jc-Wz-fEz" secondAttribute="height" id="H5k-5d-tDk"/>
+                                    <constraint firstAttribute="trailing" secondItem="1jc-Wz-fEz" secondAttribute="trailing" constant="18" id="TJv-RN-RnB"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="0CD-05-vdR"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="isv-Rv-yoa" firstAttribute="top" secondItem="0CD-05-vdR" secondAttribute="top" constant="18" id="Hbb-xY-kkv"/>
+                            <constraint firstAttribute="bottom" secondItem="k1V-M5-qAg" secondAttribute="bottom" id="IzG-S6-fSd"/>
+                            <constraint firstItem="0CD-05-vdR" firstAttribute="trailing" secondItem="k1V-M5-qAg" secondAttribute="trailing" id="Lyz-zm-KKP"/>
+                            <constraint firstItem="k1V-M5-qAg" firstAttribute="top" secondItem="isv-Rv-yoa" secondAttribute="bottom" constant="18" id="Rwn-TD-fh0"/>
+                            <constraint firstItem="0CD-05-vdR" firstAttribute="trailing" secondItem="isv-Rv-yoa" secondAttribute="trailing" id="fnC-l5-1tb"/>
+                            <constraint firstItem="isv-Rv-yoa" firstAttribute="leading" secondItem="0CD-05-vdR" secondAttribute="leading" id="hvp-ZZ-IqV"/>
+                            <constraint firstItem="k1V-M5-qAg" firstAttribute="leading" secondItem="0CD-05-vdR" secondAttribute="leading" id="sDi-KK-2eo"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="collectionView" destination="k1V-M5-qAg" id="zZ7-ep-MvS"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="BiH-WX-Uj2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="182.60869565217394" y="93.75"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="buttonClose" width="42" height="42"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

@@ -13,6 +13,7 @@ protocol PresentationAssemblyProtocol {
     func conversationListNavigationController(rootViewController: ConversationsListViewController) -> ConversationListNavigationController
     func profileViewController(delegate: ConversationsListDelegate?) -> ProfileViewController?
     func themesViewController() -> ThemesViewController?
+    func avatarNetworkViewController() -> AvatarNetworkViewController?
 }
 
 class PresentationAssembly: PresentationAssemblyProtocol {
@@ -65,9 +66,12 @@ class PresentationAssembly: PresentationAssemblyProtocol {
     func profileViewController(delegate: ConversationsListDelegate?) -> ProfileViewController? {
         let viewController = UIStoryboard(name: "Profile", bundle: nil).instantiateInitialViewController() as? ProfileViewController
         viewController?.delegateViewController = delegate
+        let router = ProfileViewRouter(presentationAssembly: self)
         let interactor = ProfileInteractor(
             userInfoService: serviceAssembly.userInfoService()
         )
+        viewController?.router = router
+        router.viewController = viewController
         viewController?.interactor = interactor
         interactor.viewController = viewController
         
@@ -79,6 +83,15 @@ class PresentationAssembly: PresentationAssemblyProtocol {
         let viewController = UIStoryboard(name: "ThemesSetting", bundle: nil).instantiateInitialViewController() as? ThemesViewController
         viewController?.themePickerDelegate = ThemePicker.shared
         viewController?.themePickerCallback = ThemePicker.shared.callbackChangeTheme
+        
+        return viewController
+    }
+    
+    func avatarNetworkViewController() -> AvatarNetworkViewController? {
+        let viewController = UIStoryboard(name: "AvatarNetwork", bundle: nil).instantiateInitialViewController() as? AvatarNetworkViewController
+        let interactor = AvatarNetworkInteractor(pixabayService: serviceAssembly.pixabayService())
+        viewController?.interactor = interactor
+        interactor.viewController = viewController
         
         return viewController
     }

@@ -49,6 +49,14 @@
 		4D92DF7125ED7CE60093FA2A /* Extension+Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D92DF7025ED7CE60093FA2A /* Extension+Date.swift */; };
 		4D92DF8425EEF1EF0093FA2A /* ConversationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D92DF8325EEF1EF0093FA2A /* ConversationViewController.swift */; };
 		4D92DF8825EEF2400093FA2A /* MessageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D92DF8725EEF2400093FA2A /* MessageModel.swift */; };
+		4D9E3875262E209900AD5A3A /* AvatarNetworkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D9E3874262E209900AD5A3A /* AvatarNetworkViewController.swift */; };
+		4D9E387A262E215300AD5A3A /* AvatarNetworkInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D9E3879262E215300AD5A3A /* AvatarNetworkInteractor.swift */; };
+		4D9E387D262E231600AD5A3A /* AvatarNetwork.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4D9E387C262E231600AD5A3A /* AvatarNetwork.storyboard */; };
+		4D9E3880262E252100AD5A3A /* ProfileViewRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D9E387F262E252100AD5A3A /* ProfileViewRouter.swift */; };
+		4D9E3884262E2ECF00AD5A3A /* AvatarCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D9E3883262E2ECF00AD5A3A /* AvatarCollectionViewCell.swift */; };
+		4D9E38902631A1BA00AD5A3A /* PixabayService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D9E388F2631A1BA00AD5A3A /* PixabayService.swift */; };
+		4D9E38932631A77D00AD5A3A /* AvatarNetworkModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D9E38922631A77D00AD5A3A /* AvatarNetworkModel.swift */; };
+		4D9E38992631B9A600AD5A3A /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D9E38982631B9A600AD5A3A /* NetworkManager.swift */; };
 		4DA1D5A12609287A00ED4910 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4DA1D5A02609287A00ED4910 /* GoogleService-Info.plist */; };
 		4DAFEC6D25F6428100CE1BEA /* ThemesSetting.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4DAFEC6C25F6428100CE1BEA /* ThemesSetting.storyboard */; };
 		4DAFEC7225F6448200CE1BEA /* ThemesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DAFEC7125F6448200CE1BEA /* ThemesViewController.swift */; };
@@ -72,6 +80,9 @@
 		4DDED28D260A90D400FF4204 /* ChannelModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DDED28C260A90D400FF4204 /* ChannelModel.swift */; };
 		4DDED291260A970900FF4204 /* ConversationViewInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DDED290260A970900FF4204 /* ConversationViewInteractor.swift */; };
 		4DDFFB46260CE0A700F4A66A /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 4DDFFB45260CE0A700F4A66A /* .swiftlint.yml */; };
+		4DE8832F2631F9C7008550AE /* NetworkScheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE8832E2631F9C7008550AE /* NetworkScheme.swift */; };
+		4DE883332631FAE7008550AE /* Extension+URLComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE883322631FAE7008550AE /* Extension+URLComponents.swift */; };
+		4DE8833C26322444008550AE /* PixabayApiModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE8833B26322444008550AE /* PixabayApiModel.swift */; };
 		4DF1C49926092B72005D127C /* ConversationListInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF1C49826092B72005D127C /* ConversationListInteractor.swift */; };
 		C1748107E93706AD35E52E52 /* Pods_ChatApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9B14D5F3D4B14D1C8B676FB /* Pods_ChatApp.framework */; };
 /* End PBXBuildFile section */
@@ -123,6 +134,14 @@
 		4D92DF7025ED7CE60093FA2A /* Extension+Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+Date.swift"; sourceTree = "<group>"; };
 		4D92DF8325EEF1EF0093FA2A /* ConversationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationViewController.swift; sourceTree = "<group>"; };
 		4D92DF8725EEF2400093FA2A /* MessageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageModel.swift; sourceTree = "<group>"; };
+		4D9E3874262E209900AD5A3A /* AvatarNetworkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarNetworkViewController.swift; sourceTree = "<group>"; };
+		4D9E3879262E215300AD5A3A /* AvatarNetworkInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarNetworkInteractor.swift; sourceTree = "<group>"; };
+		4D9E387C262E231600AD5A3A /* AvatarNetwork.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AvatarNetwork.storyboard; sourceTree = "<group>"; };
+		4D9E387F262E252100AD5A3A /* ProfileViewRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewRouter.swift; sourceTree = "<group>"; };
+		4D9E3883262E2ECF00AD5A3A /* AvatarCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarCollectionViewCell.swift; sourceTree = "<group>"; };
+		4D9E388F2631A1BA00AD5A3A /* PixabayService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PixabayService.swift; sourceTree = "<group>"; };
+		4D9E38922631A77D00AD5A3A /* AvatarNetworkModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarNetworkModel.swift; sourceTree = "<group>"; };
+		4D9E38982631B9A600AD5A3A /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		4DA1D5A02609287A00ED4910 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4DAFEC6C25F6428100CE1BEA /* ThemesSetting.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ThemesSetting.storyboard; sourceTree = "<group>"; };
 		4DAFEC7125F6448200CE1BEA /* ThemesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemesViewController.swift; sourceTree = "<group>"; };
@@ -146,6 +165,9 @@
 		4DDED28C260A90D400FF4204 /* ChannelModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelModel.swift; sourceTree = "<group>"; };
 		4DDED290260A970900FF4204 /* ConversationViewInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationViewInteractor.swift; sourceTree = "<group>"; };
 		4DDFFB45260CE0A700F4A66A /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
+		4DE8832E2631F9C7008550AE /* NetworkScheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkScheme.swift; sourceTree = "<group>"; };
+		4DE883322631FAE7008550AE /* Extension+URLComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+URLComponents.swift"; sourceTree = "<group>"; };
+		4DE8833B26322444008550AE /* PixabayApiModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PixabayApiModel.swift; sourceTree = "<group>"; };
 		4DF1C49826092B72005D127C /* ConversationListInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationListInteractor.swift; sourceTree = "<group>"; };
 		A9B14D5F3D4B14D1C8B676FB /* Pods_ChatApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChatApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -216,6 +238,7 @@
 		4D3A6ADB2628608100A0B78A /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				4D9E3873262E208200AD5A3A /* AvatarNetwork */,
 				4DAFEC6F25F6444300CE1BEA /* ThemeSetting */,
 				4D92DF8125EEF1AD0093FA2A /* ProfileView */,
 				4D92DF8225EEF1C00093FA2A /* ConversationView */,
@@ -272,6 +295,7 @@
 		4D5E22C72624EF0C0027A1B0 /* CoreLayer */ = {
 			isa = PBXGroup;
 			children = (
+				4D9E38872631686E00AD5A3A /* NetworkManager */,
 				4D5E22CF2624F27C0027A1B0 /* Assembly */,
 				4D79DBC32628BD250086C709 /* FirebaseManager */,
 				4DFB1D0926261F6E00B1C9B2 /* UserInfoData */,
@@ -326,6 +350,7 @@
 		4D79DBCD2628C4DB0086C709 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				4DE883392632242C008550AE /* PixabayService */,
 				4D79DBC82628BFDB0086C709 /* ChannelsService.swift */,
 				4D79DBCF2628C4EE0086C709 /* MessagesService.swift */,
 				4D79DBD22628D1ED0086C709 /* UserInfoService.swift */,
@@ -361,6 +386,7 @@
 			children = (
 				4D2AFD7825E41B3200706ACE /* ProfileViewController.swift */,
 				4DC119A9260375BD0027E4A0 /* ProfileInteractor.swift */,
+				4D9E387F262E252100AD5A3A /* ProfileViewRouter.swift */,
 			);
 			path = ProfileView;
 			sourceTree = "<group>";
@@ -373,6 +399,34 @@
 				4DCD0AF725EFB0370096F893 /* Cells */,
 			);
 			path = ConversationView;
+			sourceTree = "<group>";
+		};
+		4D9E3873262E208200AD5A3A /* AvatarNetwork */ = {
+			isa = PBXGroup;
+			children = (
+				4D9E3882262E2EAE00AD5A3A /* Cells */,
+				4D9E3874262E209900AD5A3A /* AvatarNetworkViewController.swift */,
+				4D9E3879262E215300AD5A3A /* AvatarNetworkInteractor.swift */,
+			);
+			path = AvatarNetwork;
+			sourceTree = "<group>";
+		};
+		4D9E3882262E2EAE00AD5A3A /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				4D9E3883262E2ECF00AD5A3A /* AvatarCollectionViewCell.swift */,
+				4D9E38922631A77D00AD5A3A /* AvatarNetworkModel.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		4D9E38872631686E00AD5A3A /* NetworkManager */ = {
+			isa = PBXGroup;
+			children = (
+				4D9E38982631B9A600AD5A3A /* NetworkManager.swift */,
+				4DE8832E2631F9C7008550AE /* NetworkScheme.swift */,
+			);
+			path = NetworkManager;
 			sourceTree = "<group>";
 		};
 		4DAFEC6F25F6444300CE1BEA /* ThemeSetting */ = {
@@ -459,6 +513,7 @@
 				4D26AEB925F0437B00C0B8C6 /* Extension+UIColor.swift */,
 				4DAFEC7D25F64C9700CE1BEA /* Extension+UIButton.swift */,
 				4D0F537A261734A7004DBC5C /* Extension+CoreDataStack.swift */,
+				4DE883322631FAE7008550AE /* Extension+URLComponents.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -480,8 +535,26 @@
 				4D92DF5B25ED658D0093FA2A /* Conversation.storyboard */,
 				4D49ADC725D7F800000F0BBB /* LaunchScreen.storyboard */,
 				4DAFEC6C25F6428100CE1BEA /* ThemesSetting.storyboard */,
+				4D9E387C262E231600AD5A3A /* AvatarNetwork.storyboard */,
 			);
 			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		4DE883392632242C008550AE /* PixabayService */ = {
+			isa = PBXGroup;
+			children = (
+				4D9E388F2631A1BA00AD5A3A /* PixabayService.swift */,
+				4DE8833A26322438008550AE /* Models */,
+			);
+			path = PixabayService;
+			sourceTree = "<group>";
+		};
+		4DE8833A26322438008550AE /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				4DE8833B26322444008550AE /* PixabayApiModel.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		4DFB1D0926261F6E00B1C9B2 /* UserInfoData */ = {
@@ -583,6 +656,7 @@
 				4DAFEC7B25F6498000CE1BEA /* ProfileIconView.xib in Resources */,
 				4DCD0AFB25EFB0530096F893 /* ConversationMessageOutgoingViewCell.xib in Resources */,
 				4DCD0B0325EFBC280096F893 /* ConversationMessageIncomingViewCell.xib in Resources */,
+				4D9E387D262E231600AD5A3A /* AvatarNetwork.storyboard in Resources */,
 				4DAFEC8225F6680400CE1BEA /* ChooseThemeButtonView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -657,6 +731,7 @@
 				4DCD0AFA25EFB0530096F893 /* ConversationMessageOutgoingViewCell.swift in Sources */,
 				4D0F537B261734A7004DBC5C /* Extension+CoreDataStack.swift in Sources */,
 				4DAFEC7225F6448200CE1BEA /* ThemesViewController.swift in Sources */,
+				4D9E38992631B9A600AD5A3A /* NetworkManager.swift in Sources */,
 				4D3A37472613CD0100E9CE04 /* CoreDataStack.swift in Sources */,
 				4D79DBBD2628657B0086C709 /* PresentationAssembly.swift in Sources */,
 				4D92DF6A25ED74420093FA2A /* ConversationListCell.swift in Sources */,
@@ -665,16 +740,21 @@
 				4D0C0BAD25F96F7B00781A47 /* DayTheme.swift in Sources */,
 				4D3A37442613BD0400E9CE04 /* Chat.xcdatamodeld in Sources */,
 				4D79DBC52628BD480086C709 /* FirebaseManager.swift in Sources */,
+				4DE8832F2631F9C7008550AE /* NetworkScheme.swift in Sources */,
 				4D5E22D52624F36F0027A1B0 /* CoreDataStackProtocol.swift in Sources */,
 				4D0C0BAA25F96F5A00781A47 /* NightTheme.swift in Sources */,
 				4D79DBD02628C4EE0086C709 /* MessagesService.swift in Sources */,
+				4D9E3880262E252100AD5A3A /* ProfileViewRouter.swift in Sources */,
 				4D79DBD32628D1ED0086C709 /* UserInfoService.swift in Sources */,
 				4D2AFD7C25E576E500706ACE /* Extension+UILabel.swift in Sources */,
+				4D9E3875262E209900AD5A3A /* AvatarNetworkViewController.swift in Sources */,
+				4DE8833C26322444008550AE /* PixabayApiModel.swift in Sources */,
 				4D79DBC92628BFDB0086C709 /* ChannelsService.swift in Sources */,
 				4DD6E8E125DC60EC00EF5039 /* Extension+AppDelegate.swift in Sources */,
 				4D79DBC126286EB30086C709 /* ApplicationAssembly.swift in Sources */,
 				4D1262E72615A416003A6F28 /* MessageDB.swift in Sources */,
 				4D5CA71F2628E481003053F8 /* RepositoriesAssembly.swift in Sources */,
+				4D9E38902631A1BA00AD5A3A /* PixabayService.swift in Sources */,
 				4DAFEC7E25F64C9800CE1BEA /* Extension+UIButton.swift in Sources */,
 				4D0C0BA625F96F4500781A47 /* ClassicTheme.swift in Sources */,
 				4DC119A1260256D40027E4A0 /* UserInfoSaverOperations.swift in Sources */,
@@ -686,6 +766,7 @@
 				4DAFEC8525F6681400CE1BEA /* ChooseThemeButtonView.swift in Sources */,
 				4DC119A52602570A0027E4A0 /* UserInfoManagerProtocol.swift in Sources */,
 				4D5CA7192628E35E003053F8 /* ChannelsRepository.swift in Sources */,
+				4D9E3884262E2ECF00AD5A3A /* AvatarCollectionViewCell.swift in Sources */,
 				4D1262C226151317003A6F28 /* ChannelDB.swift in Sources */,
 				4D0F5378261721FE004DBC5C /* CoreDataStack+SaveModels.swift in Sources */,
 				4D0C0BBD25FA26C000781A47 /* ConversationListNavigationController.swift in Sources */,
@@ -695,13 +776,16 @@
 				4D3A6ADE262860CA00A0B78A /* ConversationListModel.swift in Sources */,
 				4DCD0B0225EFBC280096F893 /* ConversationMessageIncomingViewCell.swift in Sources */,
 				4DD6E8D725DC5CA300EF5039 /* Extension+VC.swift in Sources */,
+				4D9E38932631A77D00AD5A3A /* AvatarNetworkModel.swift in Sources */,
 				4D92DF8825EEF2400093FA2A /* MessageModel.swift in Sources */,
 				4DDED28D260A90D400FF4204 /* ChannelModel.swift in Sources */,
 				4DC119AA260375BD0027E4A0 /* ProfileInteractor.swift in Sources */,
 				4D92DF6025ED67B90093FA2A /* ConversationsListViewController.swift in Sources */,
 				4D26AEBA25F0437B00C0B8C6 /* Extension+UIColor.swift in Sources */,
 				4D5CA7262628FDBA003053F8 /* MessagesRepository.swift in Sources */,
+				4D9E387A262E215300AD5A3A /* AvatarNetworkInteractor.swift in Sources */,
 				4D49ADBD25D7F7FE000F0BBB /* AppDelegate.swift in Sources */,
+				4DE883332631FAE7008550AE /* Extension+URLComponents.swift in Sources */,
 				4DAFEC7725F6497600CE1BEA /* ProfileIconView.swift in Sources */,
 				4D92DF8425EEF1EF0093FA2A /* ConversationViewController.swift in Sources */,
 				4D92DF7125ED7CE60093FA2A /* Extension+Date.swift in Sources */,

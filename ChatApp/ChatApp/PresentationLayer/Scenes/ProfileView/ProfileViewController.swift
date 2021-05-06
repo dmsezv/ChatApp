@@ -14,8 +14,13 @@ protocol ProfileDisplayLogic: class {
     func errorDisplay(_ message: String)
 }
 
+protocol ProfileViewControllerDelegate {
+    func setAvatar(_ image: UIImage)
+}
+
 class ProfileViewController: UIViewController {
     var interactor: ProfileBusinessLogic?
+    var router: ProfileViewRoutingLogic?
     
     // MARK: - IBOutlets
     
@@ -150,7 +155,7 @@ extension ProfileViewController {
         }
     }
     
-    private func editingMode(_ enabled: Bool) {
+    private func editingMode(_ enabled: Bool, setFioFirstResponder: Bool = true) {
         let isHidden = enabled
         let isEnabled = !enabled
         
@@ -161,7 +166,7 @@ extension ProfileViewController {
         userCityTextField.isEnabled = !isEnabled
         userPositionTextField.isEnabled = !isEnabled
         
-        if enabled {
+        if enabled && setFioFirstResponder {
             userNameTextField.becomeFirstResponder()
         } else {
             userNameTextField.resignFirstResponder()
@@ -255,6 +260,18 @@ extension ProfileViewController: ProfileDisplayLogic {
     }
 }
 
+// MARK: - Delegate
+
+extension ProfileViewController: ProfileViewControllerDelegate {
+    func setAvatar(_ image: UIImage) {
+        DispatchQueue.main.async {
+            self.editingMode(true, setFioFirstResponder: false)
+            self.initialsLabel.isHidden = true
+            self.avatarImageView.image = image
+        }
+    }
+}
+
 // MARK: - UIImage Picker
 
 extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
@@ -334,6 +351,10 @@ extension ProfileViewController {
             
             alertController.addAction(UIAlertAction(title: "Сделать фото", style: .default, handler: { _ in
                 self.imagePickerGetAvatarFrom(.camera)
+            }))
+            
+            alertController.addAction(UIAlertAction(title: "Загрузить", style: .default, handler: { _ in
+                self.router?.routeToAvatarNetwork()
             }))
             
             alertController.addAction(UIAlertAction(title: "Отменить", style: .cancel, handler: nil))
