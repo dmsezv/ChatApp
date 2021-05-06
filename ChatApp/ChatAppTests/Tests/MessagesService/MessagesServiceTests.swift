@@ -35,4 +35,20 @@ class MessagesServiceTests: XCTestCase {
         XCTAssertEqual(firebaseManager.addMessageData?["senderName"] as? String, userInfoSaver.senderName)
         XCTAssertEqual(firebaseManager.addMessageCallCount, 1)
     }
+
+    func testRemoveListenerMessages() throws {
+        // Arrange
+        let firebaseManager = FirebaseManagerMock()
+        let coreDataStack = CoreDataStackMock()
+        let userInfoSaver = UserInfoSaverGCDMock()
+        let messageService = MessagesService(coreDataStack: coreDataStack,
+                                             firebaseManager: firebaseManager,
+                                             userInfoDataManager: userInfoSaver)
+
+        // Act
+        messageService.removeListenerMessages()
+
+        // Assert
+        XCTAssertEqual(firebaseManager.removeListenerMessagesCallCount, 1)
+    }
 }
