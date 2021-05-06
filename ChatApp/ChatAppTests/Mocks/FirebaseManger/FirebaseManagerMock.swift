@@ -12,6 +12,8 @@ class FirebaseManagerMock: FirebaseManagerProtocol {
     var documentChanges: [DocumentChange]?
     var createChannelName: String?
     var deleteChannelIdentifier: String?
+    var messageDocumentId: String?
+    var addMessageData: [String: Any]?
 
     // Counters
 
@@ -21,7 +23,6 @@ class FirebaseManagerMock: FirebaseManagerProtocol {
     var listenChangesMessageListCallCount = 0
     var addMessageCallCount = 0
     var removeListenerMessagesCallCount = 0
-    
 
     func listenChangesChannelList(_ completeHandler: @escaping ([DocumentChange]?) -> Void) {
         listenChangesChannelListCallCount += 1
@@ -45,6 +46,8 @@ class FirebaseManagerMock: FirebaseManagerProtocol {
     }
 
     func addMessage(data: [String: Any], to documentId: String) {
+        addMessageData = data
+        messageDocumentId = documentId
         addMessageCallCount += 1
     }
 

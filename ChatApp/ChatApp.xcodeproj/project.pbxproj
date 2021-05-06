@@ -45,6 +45,7 @@
 		4D79DBC92628BFDB0086C709 /* ChannelsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D79DBC82628BFDB0086C709 /* ChannelsService.swift */; };
 		4D79DBD02628C4EE0086C709 /* MessagesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D79DBCF2628C4EE0086C709 /* MessagesService.swift */; };
 		4D79DBD32628D1ED0086C709 /* UserInfoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D79DBD22628D1ED0086C709 /* UserInfoService.swift */; };
+		4D7FBF27264469E600DEC952 /* MessagesServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D7FBF26264469E600DEC952 /* MessagesServiceTests.swift */; };
 		4D92DF5C25ED658D0093FA2A /* Conversation.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4D92DF5B25ED658D0093FA2A /* Conversation.storyboard */; };
 		4D92DF6025ED67B90093FA2A /* ConversationsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D92DF5F25ED67B90093FA2A /* ConversationsListViewController.swift */; };
 		4D92DF6A25ED74420093FA2A /* ConversationListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D92DF6825ED74420093FA2A /* ConversationListCell.swift */; };
@@ -161,6 +162,7 @@
 		4D79DBC82628BFDB0086C709 /* ChannelsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelsService.swift; sourceTree = "<group>"; };
 		4D79DBCF2628C4EE0086C709 /* MessagesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesService.swift; sourceTree = "<group>"; };
 		4D79DBD22628D1ED0086C709 /* UserInfoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoService.swift; sourceTree = "<group>"; };
+		4D7FBF26264469E600DEC952 /* MessagesServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesServiceTests.swift; sourceTree = "<group>"; };
 		4D92DF5B25ED658D0093FA2A /* Conversation.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Conversation.storyboard; sourceTree = "<group>"; };
 		4D92DF5F25ED67B90093FA2A /* ConversationsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationsListViewController.swift; sourceTree = "<group>"; };
 		4D92DF6825ED74420093FA2A /* ConversationListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationListCell.swift; sourceTree = "<group>"; };
@@ -452,6 +454,14 @@
 			path = Services;
 			sourceTree = "<group>";
 		};
+		4D7FBF25264469AB00DEC952 /* MessagesService */ = {
+			isa = PBXGroup;
+			children = (
+				4D7FBF26264469E600DEC952 /* MessagesServiceTests.swift */,
+			);
+			path = MessagesService;
+			sourceTree = "<group>";
+		};
 		4D92DF6325ED714C0093FA2A /* ConversationList */ = {
 			isa = PBXGroup;
 			children = (
@@ -568,6 +578,7 @@
 			isa = PBXGroup;
 			children = (
 				4D94F02C2643CE8500E2DFDB /* UserInfoService */,
+				4D7FBF25264469AB00DEC952 /* MessagesService */,
 				4DAF02FE2641D05E00DBCDA4 /* ChannelService */,
 			);
 			path = Tests;
@@ -1062,6 +1073,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4DAF03062641D40600DBCDA4 /* FirebaseManagerMock.swift in Sources */,
+				4D7FBF27264469E600DEC952 /* MessagesServiceTests.swift in Sources */,
 				4D1A4B5E26427D92000ADEA9 /* CoreDataStackMock.swift in Sources */,
 				4D94F0302643D23500E2DFDB /* UserInfoSaverGCDMock.swift in Sources */,
 				4D94F02B2643BBA400E2DFDB /* ChannelsServiceTests.swift in Sources */,
