@@ -30,9 +30,9 @@ class MessagesServiceTests: XCTestCase {
 
         // Assert
         XCTAssertEqual(firebaseManager.messageDocumentId, documentId)
-        XCTAssertEqual(firebaseManager.addMessageData?["content"] as? String, message)
-        XCTAssertEqual(firebaseManager.addMessageData?["senderId"] as? String, userInfoSaver.senderId)
-        XCTAssertEqual(firebaseManager.addMessageData?["senderName"] as? String, userInfoSaver.senderName)
+        XCTAssertEqual(firebaseManager.messageData?["content"] as? String, message)
+        XCTAssertEqual(firebaseManager.messageData?["senderId"] as? String, userInfoSaver.senderId)
+        XCTAssertEqual(firebaseManager.messageData?["senderName"] as? String, userInfoSaver.senderName)
         XCTAssertEqual(firebaseManager.addMessageCallCount, 1)
     }
 
@@ -50,5 +50,29 @@ class MessagesServiceTests: XCTestCase {
 
         // Assert
         XCTAssertEqual(firebaseManager.removeListenerMessagesCallCount, 1)
+    }
+
+    func testSubscribeMessagesUpdating() throws {
+        // Arrange
+        let firebaseManager = FirebaseManagerMock()
+        firebaseManager.documentChanges = [DocumentChange]()
+        let coreDataStack = CoreDataStackMock()
+        let userInfoSaver = UserInfoSaverGCDMock()
+        let messageService = MessagesService(coreDataStack: coreDataStack,
+                                             firebaseManager: firebaseManager,
+                                             userInfoDataManager: userInfoSaver)
+        let channelId = "test channel id"
+        let expectation = expectation(description: "subscribeMessagesUpdating")
+
+        // Act
+        messageService.subscribeMessagesUpdating(in: channelId) {
+            expectation.fulfill()
+        }
+        waitForExpectations(timeout: 5, handler: nil)
+
+        // Assert
+        XCTAssertEqual(firebaseManager.channelId, channelId)
+        XCTAssertEqual(firebaseManager.listenChangesMessageListCallCount, 1)
+        XCTAssertEqual(coreDataStack.performSaveCallCount, 1)
     }
 }

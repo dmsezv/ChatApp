@@ -25,7 +25,7 @@ class ChannelsServiceTests: XCTestCase {
 
         // Assert
         XCTAssertEqual(firebaseManager.createChannelCallCount, 1)
-        XCTAssertEqual(firebaseManager.createChannelName, channelName)
+        XCTAssertEqual(firebaseManager.channelName, channelName)
     }
 
     func testDeleteChannel() throws {
@@ -42,7 +42,7 @@ class ChannelsServiceTests: XCTestCase {
 
         // Assert
         XCTAssertEqual(firebaseManager.deleteChannelCallCount, 1)
-        XCTAssertEqual(firebaseManager.deleteChannelIdentifier, channelIdentifier)
+        XCTAssertEqual(firebaseManager.channelId, channelIdentifier)
     }
 
     func testSubscribeChannelsUpdating() throws {

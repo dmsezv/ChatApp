@@ -10,10 +10,10 @@ import Firebase
 
 class FirebaseManagerMock: FirebaseManagerProtocol {
     var documentChanges: [DocumentChange]?
-    var createChannelName: String?
-    var deleteChannelIdentifier: String?
+    var channelName: String?
+    var channelId: String?
     var messageDocumentId: String?
-    var addMessageData: [String: Any]?
+    var messageData: [String: Any]?
 
     // Counters
 
@@ -30,23 +30,24 @@ class FirebaseManagerMock: FirebaseManagerProtocol {
     }
 
     func createChannel(_ name: String) {
-        createChannelName = name
+        channelName = name
         createChannelCallCount += 1
     }
 
     func deleteChannel(_ identifier: String) {
-        deleteChannelIdentifier = identifier
+        channelId = identifier
         deleteChannelCallCount += 1
     }
 
     func listenChangesMessageList(in identifierChannel: String,
                                   _ completeHandler: @escaping ([DocumentChange]?) -> Void) {
+        channelId = identifierChannel
         listenChangesMessageListCallCount += 1
         completeHandler(documentChanges)
     }
 
     func addMessage(data: [String: Any], to documentId: String) {
-        addMessageData = data
+        messageData = data
         messageDocumentId = documentId
         addMessageCallCount += 1
     }
