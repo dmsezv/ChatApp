@@ -9,13 +9,16 @@
 import Firebase
 
 class FirebaseManagerMock: FirebaseManagerProtocol {
+
+    // MARK: - Public
+
     var documentChanges: [DocumentChange]?
     var channelName: String?
     var channelId: String?
     var messageDocumentId: String?
     var messageData: [String: Any]?
 
-    // Counters
+    // MARK: - Counters
 
     private(set) var listenChangesChannelListCallCount = 0
     private(set) var createChannelCallCount = 0

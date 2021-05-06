@@ -10,9 +10,12 @@ import Foundation
 import CoreData
 
 class CoreDataStackMock: CoreDataStackProtocol {
-    var deleteEntityName: CoreDataEntityName?
 
-    // Counters
+    // MARK: - Private
+
+    private(set) var entityName: CoreDataEntityName?
+
+    // MARK: - Counters
 
     private(set) var performSaveCallCount = 0
     private(set) var deleteCallCount = 0
@@ -26,7 +29,7 @@ class CoreDataStackMock: CoreDataStackProtocol {
     }
 
     func delete(from entity: CoreDataEntityName, in context: NSManagedObjectContext, by predicate: NSPredicate) {
-        deleteEntityName = entity
+        entityName = entity
         deleteCallCount += 1
     }
 

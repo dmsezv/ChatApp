@@ -9,13 +9,19 @@
 import Foundation
 
 class UserInfoSaverGCDMock: UserInfoManagerProtocol {
-    var userInfoModel: UserInfoModel?
-    var testData: Data?
-    var userInfoSaverError: UserInfoSaverError?
-    var senderId: String?
-    var senderName: String?
 
-    // Counters
+    // MARK: - Public
+
+    var userInfoModel: UserInfoModel?
+    var userInfoSaverError: UserInfoSaverError?
+
+    // MARK: - Private
+
+    private(set) var testData: Data?
+    private(set) var senderId: String = "test sender id"
+    private(set) var senderName: String = "Dmitrii Zverev"
+
+    // MARK: - Counters
 
     private(set) var saveInfoCallCount = 0
     private(set) var fetchInfoCallCount = 0
@@ -48,11 +54,11 @@ class UserInfoSaverGCDMock: UserInfoManagerProtocol {
 
     func fetchSenderId() -> String {
         fetchSenderIdCallCount += 1
-        return senderId ?? "incorrect sender id"
+        return senderId
     }
 
     func fetchSenderName() -> String {
         fetchSenderNameCallCount += 1
-        return senderName ?? "incorrect sender name"
+        return senderName
     }
 }

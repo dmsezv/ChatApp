@@ -16,8 +16,6 @@ class MessagesServiceTests: XCTestCase {
         let firebaseManager = FirebaseManagerMock()
         let coreDataStack = CoreDataStackMock()
         let userInfoSaver = UserInfoSaverGCDMock()
-        userInfoSaver.senderName = "Dmitrii Zverev"
-        userInfoSaver.senderId = "test sender id"
 
         let messageService = MessagesService(coreDataStack: coreDataStack,
                                              firebaseManager: firebaseManager,

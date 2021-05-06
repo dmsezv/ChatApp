@@ -49,12 +49,15 @@ class UserInfoServiceTests: XCTestCase {
             position: "iOS Dev",
             city: "Moscow")
         let userInfoService = UserInfoService(userInfoManager: userInfoSaver)
+        let expectation = expectation(description: "saveInfo")
 
         // Act
-        userInfoService.saveInfo(userInfoModel) {}
-            fail: { _ in
-                XCTFail("UserInfoService saveInfo is fail")
-            }
+        userInfoService.saveInfo(userInfoModel) {
+            expectation.fulfill()
+        } fail: { _ in
+            XCTFail("UserInfoService saveInfo is fail")
+        }
+        waitForExpectations(timeout: 5, handler: nil)
 
         // Assert
         XCTAssertNotNil(userInfoSaver.userInfoModel)
@@ -68,7 +71,6 @@ class UserInfoServiceTests: XCTestCase {
     func testFetchSenderName() throws {
         // Arrange
         let userInfoSaver = UserInfoSaverGCDMock()
-        userInfoSaver.senderName = "Dmitrii Zverev"
         let userInfoService = UserInfoService(userInfoManager: userInfoSaver)
         var fetchedSenderName: String?
 
@@ -77,14 +79,12 @@ class UserInfoServiceTests: XCTestCase {
 
         // Assert
         XCTAssertNotNil(fetchedSenderName)
-        XCTAssertEqual(userInfoSaver.senderName, fetchedSenderName)
         XCTAssertEqual(userInfoSaver.fetchSenderNameCallCount, 1)
     }
 
     func testFetchSenderId() throws {
         // Arrange
         let userInfoSaver = UserInfoSaverGCDMock()
-        userInfoSaver.senderId = "test sender id"
         let userInfoService = UserInfoService(userInfoManager: userInfoSaver)
         var fetchedSenderId: String?
 
@@ -93,7 +93,6 @@ class UserInfoServiceTests: XCTestCase {
 
         // Assert
         XCTAssertNotNil(fetchedSenderId)
-        XCTAssertEqual(userInfoSaver.senderId, fetchedSenderId)
         XCTAssertEqual(userInfoSaver.fetchSenderIdCallCount, 1)
     }
 }
