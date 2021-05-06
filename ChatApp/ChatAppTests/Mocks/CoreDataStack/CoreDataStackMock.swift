@@ -14,9 +14,9 @@ class CoreDataStackMock: CoreDataStackProtocol {
 
     // Counters
 
-    var performSaveCallCount = 0
-    var deleteCallCount = 0
-    var readCallCount = 0
+    private(set) var performSaveCallCount = 0
+    private(set) var deleteCallCount = 0
+    private(set) var readCallCount = 0
 
     var mainContext: NSManagedObjectContext = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
 

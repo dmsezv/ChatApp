@@ -17,11 +17,11 @@ class UserInfoSaverGCDMock: UserInfoManagerProtocol {
 
     // Counters
 
-    var saveInfoCallCount = 0
-    var fetchInfoCallCount = 0
-    var cancelSavingCallCount = 0
-    var fetchSenderIdCallCount = 0
-    var fetchSenderNameCallCount = 0
+    private(set) var saveInfoCallCount = 0
+    private(set) var fetchInfoCallCount = 0
+    private(set) var cancelSavingCallCount = 0
+    private(set) var fetchSenderIdCallCount = 0
+    private(set) var fetchSenderNameCallCount = 0
 
     func saveInfo(_ model: UserInfoModel, complete: @escaping (Result<Void, UserInfoSaverError>) -> Void) {
         userInfoModel = model
