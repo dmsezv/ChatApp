@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol ProfileDisplayLogic: class {
+protocol ProfileDisplayLogic: AnyObject {
     // TODO: нужно завести норм модель и viewModel
     func successFetch(_ userInfo: UserInfoModel?)
     func successSavedUserInfo()
@@ -21,6 +21,7 @@ protocol ProfileViewControllerDelegate {
 class ProfileViewController: UIViewController {
     var interactor: ProfileBusinessLogic?
     var router: ProfileViewRoutingLogic?
+    var delegateViewController: ConversationsListDelegate?
     
     // MARK: - IBOutlets
     
@@ -41,6 +42,7 @@ class ProfileViewController: UIViewController {
     @IBAction func touchButtonClose(_ sender: Any) {
         delegateViewController?.updateProfileView()
         interactor?.cancel()
+        
         dismiss(animated: true, completion: nil)
     }
     
@@ -70,8 +72,11 @@ class ProfileViewController: UIViewController {
 
     // MARK: - Life Cycle
     
-    var delegateViewController: ConversationsListDelegate?
-    
+    var editingModeState: Bool = false
+    lazy var editButtonAnimation: ShakeAnimationProtocol = {
+        ShakeAnimation(editButton)
+    }()
+
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
@@ -81,10 +86,6 @@ class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if #available(iOS 13.0, *) {
-            self.isModalInPresentation = true
-        }
-
         setupView()
         setupUserInfoState()
     }
@@ -93,6 +94,7 @@ class ProfileViewController: UIViewController {
         hideKeyboardWhenTapAround()
                 
         let tap = UITapGestureRecognizer(target: self, action: #selector(addAvatar(_ : )))
+        avatarView.isUserInteractionEnabled = editingModeState
         avatarView.addGestureRecognizer(tap)
         avatarView.clipsToBounds = true
         
@@ -156,11 +158,17 @@ extension ProfileViewController {
     }
     
     private func editingMode(_ enabled: Bool, setFioFirstResponder: Bool = true) {
+        editingModeState = enabled
+        avatarView.isUserInteractionEnabled = editingModeState
+        
+        DispatchQueue.main.async {
+            self.editingModeState ?
+                self.editButtonAnimation.animateStart() :
+                self.editButtonAnimation.animateStop()
+        }
+        
         let isHidden = enabled
         let isEnabled = !enabled
-        
-        editButton.isHidden = isHidden
-        editButton.isEnabled = isEnabled
         
         userNameTextField.isEnabled = !isEnabled
         userCityTextField.isEnabled = !isEnabled
@@ -172,9 +180,11 @@ extension ProfileViewController {
             userNameTextField.resignFirstResponder()
         }
         
-        saveGCDButton.isHidden = !isHidden
+        UIView.animate(withDuration: 0.2) {
+            self.saveGCDButton.alpha = !isHidden ? 0 : 1
+            self.cancelButton.alpha = !isHidden ? 0 : 1
+        }
         saveGCDButton.isEnabled = !isEnabled
-        cancelButton.isHidden = !isHidden
         cancelButton.isEnabled = !isEnabled
     }
     
@@ -196,6 +206,7 @@ extension ProfileViewController {
 extension ProfileViewController {
     func setupUserInfoState() {
         // TODO: нужно придумать логику состояний VC
+        // обязательно переделать!!!
         editingMode(false)
         savingMode(false)
         fetchDataMode(true)
@@ -231,8 +242,10 @@ extension ProfileViewController: ProfileDisplayLogic {
     }
     
     func successFetch(_ userInfo: UserInfoModel?) {
-        editingMode(false)
+        // TODO: нужно придумать логику состояний VC
+        // обязательно переделать!!!
         savingMode(false)
+        editingMode(false)
         fetchDataMode(false)
         
         if let userInfo = userInfo {
@@ -252,6 +265,8 @@ extension ProfileViewController: ProfileDisplayLogic {
     }
     
     func errorDisplay(_ message: String) {
+        // TODO: нужно придумать логику состояний VC
+        // обязательно переделать!!!
         fetchDataMode(false)
         editingMode(false)
         savingMode(false)
@@ -364,19 +379,23 @@ extension ProfileViewController {
     }
     
     @objc func touchEditButton(_ sender: UIButton) {
-        editingMode(true)
+        editingMode(!editingModeState, setFioFirstResponder: false)
     }
     
     @objc func touchCancelButton(_ sender: UIButton) {
-        editingMode(false)
-        savingMode(false)
-        
-        interactor?.cancel()
-        setupUserInfoState()
+        UIView.animateScale(sender) {
+            self.editingMode(false)
+            self.savingMode(false)
+            
+            self.interactor?.cancel()
+            self.setupUserInfoState()
+        }
     }
     
     @objc func touchSaveGCDButton(_ sender: UIButton) {
-        saveUserInfo()
+        UIView.animateScale(sender) {
+            self.saveUserInfo()
+        }
     }
 }
 

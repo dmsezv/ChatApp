@@ -8,7 +8,7 @@
 import UIKit
 import CoreData
 
-protocol ConversationListDisplayLogic: class {
+protocol ConversationListDisplayLogic: AnyObject {
     func channelsLoaded()
     func displayError(_ message: String)
 }
@@ -36,6 +36,11 @@ final class ConversationsListViewController: UIViewController, ConversationsList
     private let titleLabelPaddingX: CGFloat = 10
     private let titleLabelPaddingY: CGFloat = 0
     private let titleLableFontSize: CGFloat = 15
+//    private let animationDelay: TimeInterval = 0.0
+//    private let animationDuration: TimeInterval = 1.0
+//    private let usingSpringWithDamping: CGFloat = 0.49
+//    private let initialSpringVelocity: CGFloat = 0.81
+//    private let initialPosition = CGPoint(x: 0, y: 0)
     
     // MARK: - Views
     
@@ -62,7 +67,12 @@ final class ConversationsListViewController: UIViewController, ConversationsList
     
     // MARK: - View life cycle
     
+    lazy var managerTransition: UIViewControllerTransitioningDelegate = {
+        ManagerViewControllerTransition()
+    }()
+    
     private let cellIdentifier = String(describing: ConversationListCell.self)
+    private var isPresenting = true
     
     private var channelList: [ChannelModel]? {
         return interactor?.fetchChannels()

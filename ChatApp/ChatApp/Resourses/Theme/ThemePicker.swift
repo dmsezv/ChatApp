@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol ThemePickerDelegate: class {
+protocol ThemePickerDelegate: AnyObject {
     func changeThemeTo(_ type: ThemePicker.ThemeType)
 }
 
