@@ -51,6 +51,7 @@
 		4D92DF7125ED7CE60093FA2A /* Extension+Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D92DF7025ED7CE60093FA2A /* Extension+Date.swift */; };
 		4D92DF8425EEF1EF0093FA2A /* ConversationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D92DF8325EEF1EF0093FA2A /* ConversationViewController.swift */; };
 		4D92DF8825EEF2400093FA2A /* MessageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D92DF8725EEF2400093FA2A /* MessageModel.swift */; };
+		4D94F02B2643BBA400E2DFDB /* ChannelsServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D94F02A2643BBA400E2DFDB /* ChannelsServiceTests.swift */; };
 		4D989BA5263A028300D0A4E3 /* ManagerViewControllerTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D989BA4263A028300D0A4E3 /* ManagerViewControllerTransition.swift */; };
 		4D98FE82263714BF007F6CD9 /* CustomWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D98FE81263714BF007F6CD9 /* CustomWindow.swift */; };
 		4D9E3875262E209900AD5A3A /* AvatarNetworkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D9E3874262E209900AD5A3A /* AvatarNetworkViewController.swift */; };
@@ -62,7 +63,6 @@
 		4D9E38932631A77D00AD5A3A /* AvatarNetworkModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D9E38922631A77D00AD5A3A /* AvatarNetworkModel.swift */; };
 		4D9E38992631B9A600AD5A3A /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D9E38982631B9A600AD5A3A /* NetworkManager.swift */; };
 		4DA1D5A12609287A00ED4910 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4DA1D5A02609287A00ED4910 /* GoogleService-Info.plist */; };
-		4DAF02F52641CE5700DBCDA4 /* ChatAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DAF02F42641CE5700DBCDA4 /* ChatAppTests.swift */; };
 		4DAF03002641D09A00DBCDA4 /* CreateChannelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DAF02FF2641D09A00DBCDA4 /* CreateChannelTest.swift */; };
 		4DAF03062641D40600DBCDA4 /* FirebaseManagerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DAF03052641D40600DBCDA4 /* FirebaseManagerMock.swift */; };
 		4DAFEC6D25F6428100CE1BEA /* ThemesSetting.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4DAFEC6C25F6428100CE1BEA /* ThemesSetting.storyboard */; };
@@ -91,6 +91,7 @@
 		4DE8832F2631F9C7008550AE /* NetworkScheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE8832E2631F9C7008550AE /* NetworkScheme.swift */; };
 		4DE883332631FAE7008550AE /* Extension+URLComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE883322631FAE7008550AE /* Extension+URLComponents.swift */; };
 		4DE8833C26322444008550AE /* PixabayApiModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE8833B26322444008550AE /* PixabayApiModel.swift */; };
+		4DED2BDF2642BD8200A17814 /* SubscribeChannelsUpdatingTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DED2BDE2642BD8200A17814 /* SubscribeChannelsUpdatingTest.swift */; };
 		4DF1C49926092B72005D127C /* ConversationListInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF1C49826092B72005D127C /* ConversationListInteractor.swift */; };
 		C1748107E93706AD35E52E52 /* Pods_ChatApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9B14D5F3D4B14D1C8B676FB /* Pods_ChatApp.framework */; };
 		D75A038EB62864EE43D5208D /* Pods_ChatAppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C161796518C56A582A13819D /* Pods_ChatAppTests.framework */; };
@@ -156,6 +157,7 @@
 		4D92DF7025ED7CE60093FA2A /* Extension+Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+Date.swift"; sourceTree = "<group>"; };
 		4D92DF8325EEF1EF0093FA2A /* ConversationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationViewController.swift; sourceTree = "<group>"; };
 		4D92DF8725EEF2400093FA2A /* MessageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageModel.swift; sourceTree = "<group>"; };
+		4D94F02A2643BBA400E2DFDB /* ChannelsServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelsServiceTests.swift; sourceTree = "<group>"; };
 		4D989BA4263A028300D0A4E3 /* ManagerViewControllerTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerViewControllerTransition.swift; sourceTree = "<group>"; };
 		4D98FE81263714BF007F6CD9 /* CustomWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomWindow.swift; sourceTree = "<group>"; };
 		4D9E3874262E209900AD5A3A /* AvatarNetworkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarNetworkViewController.swift; sourceTree = "<group>"; };
@@ -168,7 +170,6 @@
 		4D9E38982631B9A600AD5A3A /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		4DA1D5A02609287A00ED4910 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4DAF02F22641CE5700DBCDA4 /* ChatAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ChatAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		4DAF02F42641CE5700DBCDA4 /* ChatAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatAppTests.swift; sourceTree = "<group>"; };
 		4DAF02F62641CE5700DBCDA4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4DAF02FF2641D09A00DBCDA4 /* CreateChannelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateChannelTest.swift; sourceTree = "<group>"; };
 		4DAF03052641D40600DBCDA4 /* FirebaseManagerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManagerMock.swift; sourceTree = "<group>"; };
@@ -198,6 +199,7 @@
 		4DE8832E2631F9C7008550AE /* NetworkScheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkScheme.swift; sourceTree = "<group>"; };
 		4DE883322631FAE7008550AE /* Extension+URLComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+URLComponents.swift"; sourceTree = "<group>"; };
 		4DE8833B26322444008550AE /* PixabayApiModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PixabayApiModel.swift; sourceTree = "<group>"; };
+		4DED2BDE2642BD8200A17814 /* SubscribeChannelsUpdatingTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscribeChannelsUpdatingTest.swift; sourceTree = "<group>"; };
 		4DF1C49826092B72005D127C /* ConversationListInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationListInteractor.swift; sourceTree = "<group>"; };
 		5626A5C7773A071F2E505D16 /* Pods-ChatApp-ChatAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChatApp-ChatAppTests.release.xcconfig"; path = "Target Support Files/Pods-ChatApp-ChatAppTests/Pods-ChatApp-ChatAppTests.release.xcconfig"; sourceTree = "<group>"; };
 		6491627F0747503D4FE7F6B1 /* Pods-ChatAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChatAppTests.release.xcconfig"; path = "Target Support Files/Pods-ChatAppTests/Pods-ChatAppTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -488,7 +490,6 @@
 			children = (
 				4DAF02FD2641CF2C00DBCDA4 /* Mocks */,
 				4DAF02FC2641CF2500DBCDA4 /* Tests */,
-				4DAF02F42641CE5700DBCDA4 /* ChatAppTests.swift */,
 				4DAF02F62641CE5700DBCDA4 /* Info.plist */,
 			);
 			path = ChatAppTests;
@@ -515,6 +516,8 @@
 			isa = PBXGroup;
 			children = (
 				4DAF02FF2641D09A00DBCDA4 /* CreateChannelTest.swift */,
+				4DED2BDE2642BD8200A17814 /* SubscribeChannelsUpdatingTest.swift */,
+				4D94F02A2643BBA400E2DFDB /* ChannelsServiceTests.swift */,
 			);
 			path = ChannelService;
 			sourceTree = "<group>";
@@ -951,9 +954,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4DED2BDF2642BD8200A17814 /* SubscribeChannelsUpdatingTest.swift in Sources */,
 				4DAF03062641D40600DBCDA4 /* FirebaseManagerMock.swift in Sources */,
 				4D1A4B5E26427D92000ADEA9 /* CoreDataStackMock.swift in Sources */,
-				4DAF02F52641CE5700DBCDA4 /* ChatAppTests.swift in Sources */,
+				4D94F02B2643BBA400E2DFDB /* ChannelsServiceTests.swift in Sources */,
 				4DAF03002641D09A00DBCDA4 /* CreateChannelTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
