@@ -5,10 +5,9 @@
 //  Created by Dmitrii Zverev on 05.05.2021.
 //
 
+@testable import ChatApp
 import Foundation
 import CoreData
-
-@testable import ChatApp
 
 class CoreDataStackMock: CoreDataStackProtocol {
     var deleteEntityName: CoreDataEntityName?

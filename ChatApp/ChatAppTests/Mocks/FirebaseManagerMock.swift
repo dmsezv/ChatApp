@@ -21,6 +21,7 @@ class FirebaseManagerMock: FirebaseManagerProtocol {
     var listenChangesMessageListCallCount = 0
     var addMessageCallCount = 0
     var removeListenerMessagesCallCount = 0
+    
 
     func listenChangesChannelList(_ completeHandler: @escaping ([DocumentChange]?) -> Void) {
         listenChangesChannelListCallCount += 1

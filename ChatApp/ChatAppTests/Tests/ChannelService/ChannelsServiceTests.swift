@@ -7,6 +7,7 @@
 
 @testable import ChatApp
 import XCTest
+import Firebase
 
 class ChannelsServiceTests: XCTestCase {
 
@@ -47,7 +48,7 @@ class ChannelsServiceTests: XCTestCase {
     func testSubscribeChannelsUpdating() {
         // Arrange
         let firebaseManager = FirebaseManagerMock()
-        firebaseManager.documentChanges = []
+        firebaseManager.documentChanges = [DocumentChange]()
         let coreDataStack = CoreDataStackMock()
         let channelService = ChannelsService(
             coreDataStack: coreDataStack,
