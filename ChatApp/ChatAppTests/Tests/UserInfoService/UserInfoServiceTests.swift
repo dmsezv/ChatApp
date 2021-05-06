@@ -64,4 +64,36 @@ class UserInfoServiceTests: XCTestCase {
         XCTAssertEqual(userInfoSaver.userInfoModel?.avatarData, userInfoModel.avatarData)
         XCTAssertEqual(userInfoSaver.saveInfoCallCount, 1)
     }
+
+    func testFetchSenderName() throws {
+        // Arrange
+        let userInfoSaver = UserInfoSaverGCDMock()
+        userInfoSaver.senderName = "Dmitrii Zverev"
+        let userInfoService = UserInfoService(userInfoManager: userInfoSaver)
+        var fetchedSenderName: String?
+
+        // Act
+        fetchedSenderName = userInfoService.senderName
+
+        // Assert
+        XCTAssertNotNil(fetchedSenderName)
+        XCTAssertEqual(userInfoSaver.senderName, fetchedSenderName)
+        XCTAssertEqual(userInfoSaver.fetchSenderNameCallCount, 1)
+    }
+
+    func testFetchSenderId() throws {
+        // Arrange
+        let userInfoSaver = UserInfoSaverGCDMock()
+        userInfoSaver.senderId = "test sender id"
+        let userInfoService = UserInfoService(userInfoManager: userInfoSaver)
+        var fetchedSenderId: String?
+
+        // Act
+        fetchedSenderId = userInfoService.senderId
+
+        // Assert
+        XCTAssertNotNil(fetchedSenderId)
+        XCTAssertEqual(userInfoSaver.senderId, fetchedSenderId)
+        XCTAssertEqual(userInfoSaver.fetchSenderIdCallCount, 1)
+    }
 }

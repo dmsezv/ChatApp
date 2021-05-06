@@ -465,6 +465,30 @@
 			path = UserInfoService;
 			sourceTree = "<group>";
 		};
+		4D94F031264405C700E2DFDB /* FirebaseManger */ = {
+			isa = PBXGroup;
+			children = (
+				4DAF03052641D40600DBCDA4 /* FirebaseManagerMock.swift */,
+			);
+			path = FirebaseManger;
+			sourceTree = "<group>";
+		};
+		4D94F032264405D600E2DFDB /* CoreDataStack */ = {
+			isa = PBXGroup;
+			children = (
+				4D1A4B5D26427D92000ADEA9 /* CoreDataStackMock.swift */,
+			);
+			path = CoreDataStack;
+			sourceTree = "<group>";
+		};
+		4D94F033264405E000E2DFDB /* UserInfoSaver */ = {
+			isa = PBXGroup;
+			children = (
+				4D94F02F2643D23500E2DFDB /* UserInfoSaverGCDMock.swift */,
+			);
+			path = UserInfoSaver;
+			sourceTree = "<group>";
+		};
 		4D9E3873262E208200AD5A3A /* AvatarNetwork */ = {
 			isa = PBXGroup;
 			children = (
@@ -515,9 +539,9 @@
 		4DAF02FD2641CF2C00DBCDA4 /* Mocks */ = {
 			isa = PBXGroup;
 			children = (
-				4DAF03052641D40600DBCDA4 /* FirebaseManagerMock.swift */,
-				4D1A4B5D26427D92000ADEA9 /* CoreDataStackMock.swift */,
-				4D94F02F2643D23500E2DFDB /* UserInfoSaverGCDMock.swift */,
+				4D94F033264405E000E2DFDB /* UserInfoSaver */,
+				4D94F032264405D600E2DFDB /* CoreDataStack */,
+				4D94F031264405C700E2DFDB /* FirebaseManger */,
 			);
 			path = Mocks;
 			sourceTree = "<group>";

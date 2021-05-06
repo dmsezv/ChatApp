@@ -20,6 +20,8 @@ class UserInfoSaverGCDMock: UserInfoManagerProtocol {
     var saveInfoCallCount = 0
     var fetchInfoCallCount = 0
     var cancelSavingCallCount = 0
+    var fetchSenderIdCallCount = 0
+    var fetchSenderNameCallCount = 0
 
     func saveInfo(_ model: UserInfoModel, complete: @escaping (Result<Void, UserInfoSaverError>) -> Void) {
         userInfoModel = model
@@ -45,10 +47,12 @@ class UserInfoSaverGCDMock: UserInfoManagerProtocol {
     }
 
     func fetchSenderId() -> String {
+        fetchSenderIdCallCount += 1
         return senderId ?? "incorrect sender id"
     }
 
     func fetchSenderName() -> String {
+        fetchSenderNameCallCount += 1
         return senderName ?? "incorrect sender name"
     }
 }
