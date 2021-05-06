@@ -48,7 +48,8 @@ final class ConversationsListViewController: UIViewController, ConversationsList
         guard  let view = ProfileIconView.instanceFromNib() else {
             return nil
         }
-        
+        view.isAccessibilityElement = true
+        view.accessibilityIdentifier = "profileIconView"
         let name = interactor?.fetchSenderName()
         view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(touchRightBarButton(_:))))
         

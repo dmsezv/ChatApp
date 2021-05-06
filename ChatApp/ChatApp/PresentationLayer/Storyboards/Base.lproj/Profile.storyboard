@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina6_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -79,16 +79,19 @@
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="ФИО" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Z4g-UX-9Fy">
                                 <rect key="frame" x="94" y="296" width="202" height="24.666666666666686"/>
+                                <accessibility key="accessibilityConfiguration" identifier="userNameTextField"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Должность" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9Op-SG-4d3">
                                 <rect key="frame" x="94" y="352.66666666666669" width="202" height="19.666666666666686"/>
+                                <accessibility key="accessibilityConfiguration" identifier="userPositionTextField"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Город" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Kl4-3y-Ucw">
                                 <rect key="frame" x="94" y="380.33333333333331" width="202" height="19.666666666666686"/>
+                                <accessibility key="accessibilityConfiguration" identifier="userCityTextField"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
@@ -99,7 +102,7 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nGN-nz-ISt">
                                 <rect key="frame" x="276" y="244" width="30" height="30"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="30" id="hTU-Yk-WNW"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="30" id="hTU-Yk-WNW"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                 <state key="normal" title="Edit">
@@ -110,6 +113,7 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="nGN-nz-ISt" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="276" id="1ag-Eo-gH7"/>
                             <constraint firstItem="Z4g-UX-9Fy" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Ceh-PO-MUC"/>
                             <constraint firstItem="URJ-u1-9Jf" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="55" id="DaC-pG-bUr"/>
                             <constraint firstItem="9Op-SG-4d3" firstAttribute="top" secondItem="Z4g-UX-9Fy" secondAttribute="bottom" constant="32" id="Eqx-fv-YMs"/>
@@ -123,7 +127,7 @@
                             <constraint firstItem="9Op-SG-4d3" firstAttribute="width" secondItem="Z4g-UX-9Fy" secondAttribute="width" id="Yb7-bu-xOZ"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="jee-Nk-L91" secondAttribute="trailing" constant="55" id="dAg-aZ-ya9"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Gdr-9n-Uhq" secondAttribute="trailing" id="ed2-4P-EsZ"/>
-                            <constraint firstItem="nGN-nz-ISt" firstAttribute="trailing" secondItem="1aV-tZ-eHb" secondAttribute="trailing" constant="10" id="erV-Ka-nfV"/>
+                            <constraint firstItem="nGN-nz-ISt" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="1aV-tZ-eHb" secondAttribute="trailing" id="erV-Ka-nfV"/>
                             <constraint firstItem="URJ-u1-9Jf" firstAttribute="top" secondItem="Gdr-9n-Uhq" secondAttribute="bottom" constant="20" id="gRq-IA-7MM"/>
                             <constraint firstItem="Z4g-UX-9Fy" firstAttribute="width" secondItem="1aV-tZ-eHb" secondAttribute="width" id="gZZ-Z4-ye8"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="1aV-tZ-eHb" secondAttribute="trailing" constant="94" id="igs-tP-CCc"/>

@@ -10,6 +10,7 @@ import UIKit
 class ProfileIconView: UIView {
     
     @IBOutlet weak var lettersNameLabel: UILabel!
+
     
     override func layoutSubviews() {
         super.layoutSubviews()
