@@ -24,13 +24,13 @@
 
 desc "Hello World!"
 lane :hello_world do |options|
-  puts "I'm here!"
+  puts "Hello"
 end
 
 desc "Build and run tests"
 lane :build_and_run_tests do |options|
   scan(
-    #clean: true,
+    clean: false,
     devices: ["iPhone 12"]
   )
 
