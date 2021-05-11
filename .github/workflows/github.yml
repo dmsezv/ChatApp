@@ -1,0 +1,17 @@
+name: CI
+on: [push]
+jobs: 
+  build:
+    runs-on: macOS-latest
+    steps: 
+    - uses: actions/checkout@v1
+    - uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: 2.6
+        bundler-cache: true
+    - name: Build and run tests
+      env:
+        SECRETS_URL: ${{ secrets.SECRETS_URL }}
+      working-directory: ./ChatApp
+      run: |
+        bundle exec faslane hello_world
