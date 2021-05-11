@@ -27,6 +27,7 @@ lane :hello_world do |options|
   discord_notifier(
     webhook_url: ENV["SECRETS_URL"],
     title: "build and tests",
+    description: "test"
     fields:[
         {
           name: "Author:", 
