@@ -13,4 +13,4 @@ jobs:
       env:
         SECRETS_URL: ${{ secrets.SECRETS_URL }}
       run: |
-        bundle exec faslane build_and_run_tests
+        bundle exec faslane hello_world
