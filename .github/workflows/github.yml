@@ -15,4 +15,3 @@ jobs:
         SECRETS_URL: ${{ secrets.SECRETS_URL }}
       run: |
         bundle exec faslane hello_world
-      working-directory: ./ChatApp
