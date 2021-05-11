@@ -1,10 +1,5 @@
 name: CI
 on: [push]
-
-defaults: 
-  run:
-    working-directory: ./ChatApp
-
 jobs: 
   build:
     runs-on: macOS-latest
@@ -14,7 +9,9 @@ jobs:
       with:
         ruby-version: 2.6
         bundler-cache: true
+        working-directory: ./ChatApp
     - name: Build and run tests
+      working-directory: ./ChatApp
       env:
         SECRETS_URL: ${{ secrets.SECRETS_URL }}
       run: |
