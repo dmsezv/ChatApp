@@ -11,7 +11,7 @@ jobs:
         bundler-cache: true
         working-directory: ./ChatApp
     - name: Build and run tests
-      working-directory: ./ChatApp
+      working-directory: ChatApp
       env:
         SECRETS_URL: ${{ secrets.SECRETS_URL }}
       run: |
