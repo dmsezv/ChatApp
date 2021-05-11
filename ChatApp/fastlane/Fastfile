@@ -24,7 +24,16 @@
 
 desc "Hello World!"
 lane :hello_world do |options|
-  puts "Hello"
+  discord_notifier(
+    webhook_url: ENV["SECRETS_URL"],
+    title: "build and tests",
+    fields:[
+        {
+          name: "Author:", 
+          value: "Dmitrii Zverev"
+        }
+      ]
+  )
 end
 
 desc "Build and run tests"
