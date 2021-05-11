@@ -1,5 +1,8 @@
 name: CI
 on: [push]
+defaults:
+  run:
+    working-directory: ./ChatApp
 jobs: 
   build:
     runs-on: macOS-latest
@@ -15,4 +18,3 @@ jobs:
         SECRETS_URL: ${{ secrets.SECRETS_URL }}
       run: |
         bundle exec faslane hello_world
-      working-directory: ./ChatApp
