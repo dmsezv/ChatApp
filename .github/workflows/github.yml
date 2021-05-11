@@ -1,8 +1,5 @@
 name: CI
 on: [push]
-defaults:
-  run:
-    working-directory: ./ChatApp
 jobs: 
   build:
     runs-on: macOS-latest
