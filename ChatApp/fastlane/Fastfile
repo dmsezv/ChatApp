@@ -27,10 +27,10 @@ lane :hello_world do |options|
   discord_notifier(
     webhook_url: ENV["SECRETS_URL"],
     title: "build and tests",
-    description: "test"
+    description: "test",
     fields:[
         {
-          name: "Author:", 
+          name: "Author", 
           value: "Dmitrii Zverev"
         }
       ]
