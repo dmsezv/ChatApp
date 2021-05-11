@@ -9,6 +9,7 @@ jobs:
       with:
         ruby-version: 2.6
         bundler-cache: true
+        subdirectory: 'ChatApp'
     - name: Build and run tests
       env:
         SECRETS_URL: ${{ secrets.SECRETS_URL }}
