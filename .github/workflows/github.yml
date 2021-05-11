@@ -12,6 +12,5 @@ jobs:
     - name: Build and run tests
       env:
         SECRETS_URL: ${{ secrets.SECRETS_URL }}
-      working-directory: ChatApp/ChatApp
       run: |
         bundle exec faslane hello_world
