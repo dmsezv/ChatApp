@@ -90,7 +90,6 @@
 		4DD98FCD263B028600470117 /* Extension+UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD98FCC263B028600470117 /* Extension+UIView.swift */; };
 		4DDED28D260A90D400FF4204 /* ChannelModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DDED28C260A90D400FF4204 /* ChannelModel.swift */; };
 		4DDED291260A970900FF4204 /* ConversationViewInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DDED290260A970900FF4204 /* ConversationViewInteractor.swift */; };
-		4DDFFB46260CE0A700F4A66A /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 4DDFFB45260CE0A700F4A66A /* .swiftlint.yml */; };
 		4DE8832F2631F9C7008550AE /* NetworkScheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE8832E2631F9C7008550AE /* NetworkScheme.swift */; };
 		4DE883332631FAE7008550AE /* Extension+URLComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE883322631FAE7008550AE /* Extension+URLComponents.swift */; };
 		4DE8833C26322444008550AE /* PixabayApiModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE8833B26322444008550AE /* PixabayApiModel.swift */; };
@@ -878,7 +877,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4DDFFB46260CE0A700F4A66A /* .swiftlint.yml in Resources */,
 				4DAFEC6D25F6428100CE1BEA /* ThemesSetting.storyboard in Resources */,
 				4D92DF6B25ED74420093FA2A /* ConversationListCell.xib in Resources */,
 				4D49ADC925D7F800000F0BBB /* LaunchScreen.storyboard in Resources */,

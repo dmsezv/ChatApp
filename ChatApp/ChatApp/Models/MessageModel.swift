@@ -16,7 +16,7 @@ struct MessageModel {
     var isIncoming: Bool {
         senderId != UserInfoSaverGCD().fetchSenderId()
     }
-    
+
     static func createFrom(_ messageDB: MessageDB) -> MessageModel? {
         guard
             let idntf = messageDB.identifier,
