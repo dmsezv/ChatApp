@@ -1123,7 +1123,7 @@
 				DEVELOPMENT_TEAM = 64MBB6D8RY;
 				HEADER_SEARCH_PATHS = "${PODS_ROOT}/Firebase/CoreOnly/Sources";
 				INFOPLIST_FILE = ChatAppUITests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1144,7 +1144,7 @@
 				DEVELOPMENT_TEAM = 64MBB6D8RY;
 				HEADER_SEARCH_PATHS = "${PODS_ROOT}/Firebase/CoreOnly/Sources";
 				INFOPLIST_FILE = ChatAppUITests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1325,7 +1325,7 @@
 				DEVELOPMENT_TEAM = 64MBB6D8RY;
 				HEADER_SEARCH_PATHS = "${PODS_ROOT}/Firebase/CoreOnly/Sources";
 				INFOPLIST_FILE = ChatAppTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1348,7 +1348,7 @@
 				DEVELOPMENT_TEAM = 64MBB6D8RY;
 				HEADER_SEARCH_PATHS = "${PODS_ROOT}/Firebase/Core/Sources";
 				INFOPLIST_FILE = ChatAppTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

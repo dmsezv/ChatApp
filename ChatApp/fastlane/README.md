@@ -20,11 +20,11 @@ or alternatively using `brew install fastlane`
 fastlane build_for_testing
 ```
 Build For Testing
-### run_tests
+### run_testing
 ```
-fastlane run_tests
+fastlane run_testing
 ```
-Run Tests
+Run Testing
 ### send_notification
 ```
 fastlane send_notification

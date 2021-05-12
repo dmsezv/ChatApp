@@ -25,14 +25,13 @@
 desc "Build For Testing"
 lane :build_for_testing do |options|
   scan(
-    clean: true,
-    devices: ["iPhone 12"]
+    clean: true
   )
 end
 
 desc "Run Testing"
 lane :run_testing do |options|
-  scan(devices: ["iPhone 12"])
+  scan()
 end
 
 desc "Send notification"
@@ -54,7 +53,7 @@ end
 
 desc "Start lanes"
 lane :start_lanes do |options|
-  run_testing
+  build_for_testing
   send_notification(
     title: "Tests For ChatApp",
     description: "Tests Complited Successfull",
