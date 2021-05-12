@@ -60,11 +60,11 @@ class MessagesServiceTests: XCTestCase {
                                              firebaseManager: firebaseManager,
                                              userInfoDataManager: userInfoSaver)
         let channelId = "test channel id"
-        let expectation = expectation(description: "subscribeMessagesUpdating")
+        let expect = expectation(description: "subscribeMessagesUpdating")
 
         // Act
         messageService.subscribeMessagesUpdating(in: channelId) {
-            expectation.fulfill()
+            expect.fulfill()
         }
         waitForExpectations(timeout: 5, handler: nil)
 

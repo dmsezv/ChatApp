@@ -208,7 +208,6 @@
 		4DD98FCC263B028600470117 /* Extension+UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIView.swift"; sourceTree = "<group>"; };
 		4DDED28C260A90D400FF4204 /* ChannelModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelModel.swift; sourceTree = "<group>"; };
 		4DDED290260A970900FF4204 /* ConversationViewInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationViewInteractor.swift; sourceTree = "<group>"; };
-		4DDFFB45260CE0A700F4A66A /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		4DE8832E2631F9C7008550AE /* NetworkScheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkScheme.swift; sourceTree = "<group>"; };
 		4DE883322631FAE7008550AE /* Extension+URLComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+URLComponents.swift"; sourceTree = "<group>"; };
 		4DE8833B26322444008550AE /* PixabayApiModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PixabayApiModel.swift; sourceTree = "<group>"; };
@@ -363,7 +362,6 @@
 				4DBDA5D5262916CB00B0A9B2 /* ApplicationSettings */,
 				4DA1D5A02609287A00ED4910 /* GoogleService-Info.plist */,
 				4D49ADCA25D7F800000F0BBB /* Info.plist */,
-				4DDFFB45260CE0A700F4A66A /* .swiftlint.yml */,
 			);
 			path = ChatApp;
 			sourceTree = "<group>";
