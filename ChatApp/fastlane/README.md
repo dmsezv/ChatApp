@@ -15,16 +15,26 @@ Install _fastlane_ using
 or alternatively using `brew install fastlane`
 
 # Available Actions
-### hello_world
+### build_for_testing
 ```
-fastlane hello_world
+fastlane build_for_testing
 ```
-Hello World!
-### build_and_run_tests
+Build For Testing
+### run_tests
 ```
-fastlane build_and_run_tests
+fastlane run_tests
 ```
-Build and run tests
+Run Tests
+### send_notification
+```
+fastlane send_notification
+```
+Send notification
+### start_lanes
+```
+fastlane start_lanes
+```
+Start lanes
 
 ----
 

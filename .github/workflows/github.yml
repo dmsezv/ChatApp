@@ -13,6 +13,6 @@ jobs:
     - name: Build and run tests
       working-directory: ./ChatApp
       env:
-        SECRETS_URL: ${{ secrets.SECRETS_URL }}
+        SECRETS_URL: ${{ secrets.WEBHOOK_URL }}
       run: |
-        bundle exec fastlane hello_world
+        bundle exec fastlane start_lanes
