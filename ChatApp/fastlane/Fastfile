@@ -22,53 +22,51 @@
 #   end
 # end
 
-platform :ios do
-  desc "Build For Testing"
-  lane :build_for_testing do |options|
-    scan(
-      clean: true,
-      build_for_testing: true
-    )
-  end
+desc "Build For Testing"
+lane :build_for_testing do |options|
+  scan(
+    clean: true,
+    build_for_testing: true
+  )
+end
 
-  desc "Run Testing"
-  lane :run_testing do |options|
-    scan(
-      derived_data_path: "DerivedData/",
-      test_without_building: true
-    )
-  end
+desc "Run Testing"
+lane :run_testing do |options|
+  scan(
+    derived_data_path: "DerivedData/",
+    test_without_building: true
+  )
+end
 
-  desc "Send notification"
-  lane :send_notification do |options|
-    discord_notifier(
-      webhook_url: ENV["WEBHOOK_URL"],
-      title: options[:title],
-      description: options[:description],
-      image_url: "https://avatars.githubusercontent.com/u/16801169?s=400&u=4003152c12b1a3e6f4c0b0b57d2021f157c386fc&v=4",
-      success: options[:success],
-      fields:[
-        {
-          name: "Author", 
-          value: "Dmitrii Zverev"
-        }
-      ]
-    )
-  end
+desc "Send notification"
+lane :send_notification do |options|
+  discord_notifier(
+    webhook_url: ENV["WEBHOOK_URL"],
+    title: options[:title],
+    description: options[:description],
+    image_url: "https://avatars.githubusercontent.com/u/16801169?s=400&u=4003152c12b1a3e6f4c0b0b57d2021f157c386fc&v=4",
+    success: options[:success],
+    fields:[
+      {
+        name: "Author", 
+        value: "Dmitrii Zverev"
+      }
+    ]
+  )
+end
 
-  desc "Start lanes"
-  lane :start_lanes do |options|
-    build_for_testing
-    run_testing
+desc "Start lanes"
+lane :start_lanes do |options|
+  build_for_testing
+  run_testing
+  send_notification(
+    title: "Tests For ChatApp",
+    description: "Tests Complited Successfull",
+    success: true
+  ) rescue 
     send_notification(
       title: "Tests For ChatApp",
-      description: "Tests Complited Successfull",
-      success: true
-    ) rescue 
-      send_notification(
-        title: "Tests For ChatApp",
-        description: "Tests Complited Failture",
-        success: false
-      )
-  end
+      description: "Tests Complited Failture",
+      success: false
+    )
 end
