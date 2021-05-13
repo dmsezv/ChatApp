@@ -141,7 +141,9 @@
 		4D3A37432613BD0400E9CE04 /* Chat.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Chat.xcdatamodel; sourceTree = "<group>"; };
 		4D3A37462613CD0100E9CE04 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		4D3A6ADD262860CA00A0B78A /* ConversationListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationListModel.swift; sourceTree = "<group>"; };
-		4D3DA62F264D68B8006318C8 /* chatapp.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = chatapp.xcconfig; sourceTree = "<group>"; };
+		4D3DA638264DA014006318C8 /* Config.debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.debug.xcconfig; sourceTree = "<group>"; };
+		4D3DA639264DA02B006318C8 /* Config.release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.release.xcconfig; sourceTree = "<group>"; };
+		4D3DA63D264DAA13006318C8 /* chatapp.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = chatapp.xcconfig; sourceTree = "<group>"; };
 		4D49ADB925D7F7FE000F0BBB /* ChatApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChatApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4D49ADBC25D7F7FE000F0BBB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4D49ADC325D7F7FE000F0BBB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Profile.storyboard; sourceTree = "<group>"; };
@@ -328,10 +330,19 @@
 			path = Scenes;
 			sourceTree = "<group>";
 		};
+		4D3DA637264D9FF5006318C8 /* Configurations */ = {
+			isa = PBXGroup;
+			children = (
+				4D3DA63D264DAA13006318C8 /* chatapp.xcconfig */,
+				4D3DA638264DA014006318C8 /* Config.debug.xcconfig */,
+				4D3DA639264DA02B006318C8 /* Config.release.xcconfig */,
+			);
+			path = Configurations;
+			sourceTree = "<group>";
+		};
 		4D49ADB025D7F7FE000F0BBB = {
 			isa = PBXGroup;
 			children = (
-				4D3DA62F264D68B8006318C8 /* chatapp.xcconfig */,
 				4D49ADBB25D7F7FE000F0BBB /* ChatApp */,
 				4DAF02F32641CE5700DBCDA4 /* ChatAppTests */,
 				4D14A282264426F100DFED4E /* ChatAppUITests */,
@@ -354,6 +365,7 @@
 		4D49ADBB25D7F7FE000F0BBB /* ChatApp */ = {
 			isa = PBXGroup;
 			children = (
+				4D3DA637264D9FF5006318C8 /* Configurations */,
 				4D5E22C72624EF0C0027A1B0 /* CoreLayer */,
 				4DC1199C2602569C0027E4A0 /* ServiceLayer */,
 				4D2AFD6F25E4110900706ACE /* PresentationLayer */,
@@ -1274,7 +1286,7 @@
 		};
 		4D49ADCE25D7F800000F0BBB /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2564AB60618C44764AF29F84 /* Pods-ChatApp.debug.xcconfig */;
+			baseConfigurationReference = 4D3DA638264DA014006318C8 /* Config.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1295,7 +1307,7 @@
 		};
 		4D49ADCF25D7F800000F0BBB /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1CD14A20B20C7265BB5F00B5 /* Pods-ChatApp.release.xcconfig */;
+			baseConfigurationReference = 4D3DA639264DA02B006318C8 /* Config.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

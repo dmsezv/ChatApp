@@ -28,7 +28,7 @@
 	<string>$(PIXABAY_API_KEY)</string>
 	<key>PIXABAY_PATH_API</key>
 	<string>$(PIXABAY_PATH_API)</string>
-	<key>PixabayHost</key>
+	<key>PIXABAY_HOST</key>
 	<string>$(PIXABAY_HOST)</string>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>

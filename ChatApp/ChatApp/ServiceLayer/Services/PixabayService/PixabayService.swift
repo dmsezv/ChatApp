@@ -14,9 +14,9 @@ protocol PixabayServiceProtocol {
 
 // TODO: Не успеваю описать нормально сервис с хорошими колбеками, еррорами итд
 class PixabayService: PixabayServiceProtocol {
-    private let host = Bundle.main.infoDictionary?["PIXABAY_HOST"] as? String
-    private let path = Bundle.main.infoDictionary?["PIXABAY_PATH_API"] as? String
-    private let apiKey = Bundle.main.infoDictionary?["PIXABAY_API_KEY"] as? String
+    private var host: String? { Bundle.main.object(forInfoDictionaryKey: "PIXABAY_HOST") as? String }
+    private var path: String? { Bundle.main.object(forInfoDictionaryKey: "PIXABAY_PATH_API") as? String }
+    private var apiKey: String? { Bundle.main.object(forInfoDictionaryKey: "PIXABAY_API_KEY") as? String }
     
     private let networkManager: NetworkManagerProtocol
     
