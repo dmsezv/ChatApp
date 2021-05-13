@@ -22,6 +22,7 @@
 #   end
 # end
 
+
 desc "Build For Testing"
 lane :run_build_for_testing do |options|
   scan(
@@ -66,6 +67,14 @@ lane :start_lanes do |options|
     send_notification(
       title: "Tests For ChatApp",
       description: "Tests Complited Failture",
+      success: false
+    )
+end
+
+error do |lane, exception, options|
+  send_notification(
+      title: "Tests For ChatApp",
+      description: exception.to_s,
       success: false
     )
 end
