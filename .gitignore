@@ -7,7 +7,9 @@
 .DS_Store
 .AppleDouble
 .LSOverride
-project.xcconfig
+
+# Configs
+chatapp.xcconfig
 
 # Icon must end with two \r
 Icon

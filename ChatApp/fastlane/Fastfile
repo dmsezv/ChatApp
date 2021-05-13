@@ -23,7 +23,7 @@
 # end
 
 desc "Build For Testing"
-lane :build_for_testing do |options|
+lane :run_build_for_testing do |options|
   scan(
     clean: true,
     build_for_testing: true
@@ -56,7 +56,7 @@ end
 
 desc "Start lanes"
 lane :start_lanes do |options|
-  build_for_testing
+  run_build_for_testing
   run_testing
   send_notification(
     title: "Tests For ChatApp",

@@ -14,9 +14,9 @@ protocol PixabayServiceProtocol {
 
 // TODO: Не успеваю описать нормально сервис с хорошими колбеками, еррорами итд
 class PixabayService: PixabayServiceProtocol {
-    private let host = "pixabay.com"
-    private let path = "/api"
-    private let apiKey = "21279061-d8b881ee813547d979885fff1"
+    private let host = Bundle.main.infoDictionary?["PIXABAY_HOST"] as? String
+    private let path = Bundle.main.infoDictionary?["PIXABAY_PATH_API"] as? String
+    private let apiKey = Bundle.main.infoDictionary?["PIXABAY_API_KEY"] as? String
     
     private let networkManager: NetworkManagerProtocol
     
@@ -36,6 +36,13 @@ class PixabayService: PixabayServiceProtocol {
     }
     
     func getImagesUrls(complete: @escaping (PixabayApiModel?) -> Void) {
+        guard let host = host,
+              let path = path,
+              let apiKey = apiKey else {
+            complete(nil)
+            return
+        }
+
         let queryParams: [String: String] = [
             "key": apiKey,
             "q": "animals",

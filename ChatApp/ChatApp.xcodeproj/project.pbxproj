@@ -141,6 +141,7 @@
 		4D3A37432613BD0400E9CE04 /* Chat.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Chat.xcdatamodel; sourceTree = "<group>"; };
 		4D3A37462613CD0100E9CE04 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		4D3A6ADD262860CA00A0B78A /* ConversationListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationListModel.swift; sourceTree = "<group>"; };
+		4D3DA62F264D68B8006318C8 /* chatapp.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = chatapp.xcconfig; sourceTree = "<group>"; };
 		4D49ADB925D7F7FE000F0BBB /* ChatApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChatApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4D49ADBC25D7F7FE000F0BBB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4D49ADC325D7F7FE000F0BBB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Profile.storyboard; sourceTree = "<group>"; };
@@ -330,6 +331,7 @@
 		4D49ADB025D7F7FE000F0BBB = {
 			isa = PBXGroup;
 			children = (
+				4D3DA62F264D68B8006318C8 /* chatapp.xcconfig */,
 				4D49ADBB25D7F7FE000F0BBB /* ChatApp */,
 				4DAF02F32641CE5700DBCDA4 /* ChatAppTests */,
 				4D14A282264426F100DFED4E /* ChatAppUITests */,
