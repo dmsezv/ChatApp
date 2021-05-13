@@ -18,7 +18,6 @@
 		4D1262C226151317003A6F28 /* ChannelDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D1262C126151317003A6F28 /* ChannelDB.swift */; };
 		4D1262E72615A416003A6F28 /* MessageDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D1262E62615A416003A6F28 /* MessageDB.swift */; };
 		4D14A28C264428A600DFED4E /* ProfileViewUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D14A28B264428A600DFED4E /* ProfileViewUITests.swift */; };
-		4D1A39ED264D1F9800B38623 /* project.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 4D1A39EC264D1F9800B38623 /* project.xcconfig */; };
 		4D1A4B5E26427D92000ADEA9 /* CoreDataStackMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D1A4B5D26427D92000ADEA9 /* CoreDataStackMock.swift */; };
 		4D2237102603E72700DA1E1D /* UserInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D22370F2603E72700DA1E1D /* UserInfoModel.swift */; };
 		4D26AEBA25F0437B00C0B8C6 /* Extension+UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D26AEB925F0437B00C0B8C6 /* Extension+UIColor.swift */; };
@@ -133,7 +132,6 @@
 		4D14A281264426F100DFED4E /* ChatAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ChatAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4D14A285264426F100DFED4E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4D14A28B264428A600DFED4E /* ProfileViewUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewUITests.swift; sourceTree = "<group>"; };
-		4D1A39EC264D1F9800B38623 /* project.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = project.xcconfig; sourceTree = "<group>"; };
 		4D1A4B5D26427D92000ADEA9 /* CoreDataStackMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStackMock.swift; sourceTree = "<group>"; };
 		4D22370F2603E72700DA1E1D /* UserInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoModel.swift; sourceTree = "<group>"; };
 		4D26AEB925F0437B00C0B8C6 /* Extension+UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIColor.swift"; sourceTree = "<group>"; };
@@ -634,7 +632,6 @@
 				4D49ADBC25D7F7FE000F0BBB /* AppDelegate.swift */,
 				4D79DBC026286EB30086C709 /* ApplicationAssembly.swift */,
 				4D98FE81263714BF007F6CD9 /* CustomWindow.swift */,
-				4D1A39EC264D1F9800B38623 /* project.xcconfig */,
 			);
 			path = ApplicationSettings;
 			sourceTree = "<group>";
@@ -884,7 +881,6 @@
 				4D2AFD7425E4198100706ACE /* Colors.xcassets in Resources */,
 				4D92DF5C25ED658D0093FA2A /* Conversation.storyboard in Resources */,
 				4DA1D5A12609287A00ED4910 /* GoogleService-Info.plist in Resources */,
-				4D1A39ED264D1F9800B38623 /* project.xcconfig in Resources */,
 				4D49ADC625D7F800000F0BBB /* Assets.xcassets in Resources */,
 				4D49ADC425D7F7FE000F0BBB /* Profile.storyboard in Resources */,
 				4DAFEC7B25F6498000CE1BEA /* ProfileIconView.xib in Resources */,

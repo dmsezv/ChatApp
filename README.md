@@ -2,8 +2,9 @@
 
 
 # ChatApp
-## A demo project for iOS Fintech Tinkoff (iOS Developer, spring 2021)
+A demo project for iOS Fintech Tinkoff (iOS Developer, spring 2021)
 
+![](preview/prev.gif)
 
 ### Features:
 - Create/Delete channels for chatting with other users
