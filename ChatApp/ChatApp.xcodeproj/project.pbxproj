@@ -135,7 +135,7 @@
 		4D1A4B5D26427D92000ADEA9 /* CoreDataStackMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStackMock.swift; sourceTree = "<group>"; };
 		4D22370F2603E72700DA1E1D /* UserInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoModel.swift; sourceTree = "<group>"; };
 		4D26AEB925F0437B00C0B8C6 /* Extension+UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIColor.swift"; sourceTree = "<group>"; };
-		4D28F371264DC4FF00582E15 /* privateConfig.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = privateConfig.xcconfig; sourceTree = "<group>"; };
+		4D28F373264DC83D00582E15 /* privateConfig.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = privateConfig.xcconfig; sourceTree = "<group>"; };
 		4D2AFD7325E4198100706ACE /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		4D2AFD7825E41B3200706ACE /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		4D2AFD7B25E576E500706ACE /* Extension+UILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UILabel.swift"; sourceTree = "<group>"; };
@@ -333,7 +333,7 @@
 		4D3DA637264D9FF5006318C8 /* Configurations */ = {
 			isa = PBXGroup;
 			children = (
-				4D28F371264DC4FF00582E15 /* privateConfig.xcconfig */,
+				4D28F373264DC83D00582E15 /* privateConfig.xcconfig */,
 				4D3DA646264DC06A006318C8 /* Config.debug.xcconfig */,
 				4D3DA645264DC06A006318C8 /* Config.release.xcconfig */,
 			);
