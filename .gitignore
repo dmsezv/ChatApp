@@ -8,9 +8,14 @@
 .AppleDouble
 .LSOverride
 
+# Configs
+privateConfig.xcconfig
+
 # Icon must end with two \r
 Icon
 
+# Fastlane
+*.env
 
 # Thumbnails
 ._*

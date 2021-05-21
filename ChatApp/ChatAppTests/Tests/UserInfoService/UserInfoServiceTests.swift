@@ -14,11 +14,11 @@ class UserInfoServiceTests: XCTestCase {
         // Arrange
         let userInfoSaver = UserInfoSaverGCDMock()
         let userInfoService = UserInfoService(userInfoManager: userInfoSaver)
-        let expectation = expectation(description: "fetchInfo")
+        let expect = expectation(description: "fetchInfo")
 
         // Act
         userInfoService.fetchInfo { _ in
-            expectation.fulfill()
+            expect.fulfill()
         } fail: { _ in
             XCTFail("UserInfoService fetchInfo is fail")
         }
@@ -36,11 +36,11 @@ class UserInfoServiceTests: XCTestCase {
             position: "iOS Dev",
             city: "Moscow")
         let userInfoService = UserInfoService(userInfoManager: userInfoSaver)
-        let expectation = expectation(description: "saveInfo")
+        let expect = expectation(description: "saveInfo")
 
         // Act
         userInfoService.saveInfo(userInfoModel) {
-            expectation.fulfill()
+            expect.fulfill()
         } fail: { _ in
             XCTFail("UserInfoService saveInfo is fail")
         }

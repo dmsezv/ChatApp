@@ -1,0 +1,18 @@
+name: Build
+on: [push]
+jobs: 
+  build:
+    runs-on: macOS-latest
+    steps: 
+    - uses: actions/checkout@v1
+    - uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: 2.6
+        bundler-cache: true
+        working-directory: ./ChatApp
+    - name: Build and run tests
+      working-directory: ./ChatApp
+      env:
+        WEBHOOK_URL: ${{ secrets.WEBHOOK_URL }}
+      run: |
+        bundle exec fastlane start_lanes

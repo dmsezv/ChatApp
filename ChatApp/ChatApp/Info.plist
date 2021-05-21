@@ -24,6 +24,10 @@
 	<string>ChatApp wants to use your camera</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>ChatApp wants to use your photos</string>
+	<key>PIXABAY_API_KEY</key>
+	<string>$(PIXABAY_API_KEY)</string>
+	<key>PIXABAY_HOST</key>
+	<string>$(PIXABAY_HOST)</string>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 	<key>UILaunchStoryboardName</key>

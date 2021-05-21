@@ -1,5 +1,30 @@
+[![Build Status](https://github.com/dmsezv/ChatApp/actions/workflows/github.yml/badge.svg?branch=continuous-integration)](https://github.com/dmsezv/ChatApp/actions/workflows/github.yml)
+
+
 # ChatApp
+A demo project for iOS Fintech Tinkoff (iOS Developer, spring 2021)
 
-A demo project for fintech tinkoff (iOS Developer, spring 2021)
+![](preview/prev.gif)
 
-- for disable print logs in debug output, remove flag DEBUG_PRINT_ENABLE from active compilation conditions
+### Features:
+- Create/Delete channels for chatting with other users
+- Automatic saving of conversations in the device memory
+- Different application themes
+- Downloading avatars from pixabay service
+
+### Course program:
+- Intro
+- UIKit
+- UITableView, Navigation
+- Memory Management, Closures
+- Multithreading
+- Firebase
+- Core Data
+- FetchRequest, FetchedResultsController
+- Architecture
+- Network
+- Animations
+- Enterprise
+- Testing
+- Continuous integration
+

@@ -51,11 +51,11 @@ class ChannelsServiceTests: XCTestCase {
         let channelService = ChannelsService(
             coreDataStack: coreDataStack,
             firebaseManager: firebaseManager)
-        let expectation = expectation(description: "subscribeChannelsUpdating")
+        let expect = expectation(description: "subscribeChannelsUpdating")
 
         // Act
         channelService.subscribeChannelsUpdating {
-            expectation.fulfill()
+            expect.fulfill()
         }
         waitForExpectations(timeout: 5, handler: nil)
 
